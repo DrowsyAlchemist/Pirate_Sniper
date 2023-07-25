@@ -6,8 +6,9 @@ public class InputController
     private Quaternion _initialRotation;
     private PointerMoveArea _pointerMoveArea;
     private ShootingButton _shootingButton;
+    private bool _isScopeMode;
 
-    private float _currentSensitivity;
+    private float CurrentSensitivity => _isScopeMode ? Settings.ShootingSettings.ScopeSensitivity : Settings.ShootingSettings.BaseSensitivity;
 
     public InputController(Camera camera, PointerMoveArea pointerMoveArea, ShootingButton shootingButton)
     {
@@ -20,8 +21,6 @@ public class InputController
         _shootingButton = shootingButton;
         _shootingButton.PointerDown += Scope;
         _shootingButton.PointerUp += Shoot;
-
-        _currentSensitivity = Settings.ShootingSettings.BaseSensitivity;
     }
 
     ~InputController()
@@ -39,7 +38,7 @@ public class InputController
         cameraAngles.x -= (cameraEulers.x > 180) ? 360 : 0;
         cameraAngles.y -= (cameraEulers.y > 180) ? 360 : 0;
 
-        float targetXAngle = cameraAngles.x + Time.deltaTime * _currentSensitivity * -1 * Input.GetAxis("Mouse Y");
+        float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
 
         if (targetXAngle > Settings.CameraSettings.XMaxRotation)
             targetXAngle = Settings.CameraSettings.XMaxRotation;
@@ -47,7 +46,7 @@ public class InputController
         if (targetXAngle < Settings.CameraSettings.XMinRotation)
             targetXAngle = Settings.CameraSettings.XMinRotation;
 
-        float targetYAngle = cameraAngles.y + Time.deltaTime * _currentSensitivity * Input.GetAxis("Mouse X");
+        float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
 
         if (targetYAngle > Settings.CameraSettings.YMaxRotation)
             targetYAngle = Settings.CameraSettings.YMaxRotation;
@@ -65,13 +64,13 @@ public class InputController
     private void Scope()
     {
         _camera.fieldOfView = Settings.ShootingSettings.ScopeFieldOfView;
-        _currentSensitivity = Settings.ShootingSettings.ScopeSensitivity;
+        _isScopeMode = true;
     }
 
     private void Unscope()
     {
         _camera.fieldOfView = Settings.ShootingSettings.BaseFieldOfView;
-        _currentSensitivity = Settings.ShootingSettings.BaseSensitivity;
+        _isScopeMode = false;
     }
 
     private void Shoot()

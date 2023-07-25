@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad1371ebb50189479f2b98dd8086cfd, type: 3}
   m_Name: ShootingSettings
   m_EditorClassIdentifier: 
-  _baseSensitivity: 200
-  _baseFieldOfView: 60
+  _baseSensitivity: 51.580013
   _scopeRelativeSensitivity: 0.5
+  _maxSensitivity: 500
+  _baseFieldOfView: 60
   _scopeFieldOfView: 35
