@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
     [SerializeField] private CameraSettings _cameraSettings;
     [SerializeField] private LeaderboardSettings _leaderboardSettings;
 
+    public const float Epsilon = 0.5f;
     private static Settings _instance;
 
     private void Awake()

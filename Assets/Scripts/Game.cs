@@ -1,4 +1,3 @@
-using Agava.WebUtility;
 using Agava.YandexGames;
 using System.Collections;
 using UnityEngine;
@@ -6,15 +5,11 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
-    [SerializeField] private PointerMoveArea _pointerMoveArea;
-    [SerializeField] private ShootingButton _pcShootingButton;
-    [SerializeField] private ShootingButton _mobileShootingButton;
+    [SerializeField ]private InputController _inputController;
 
     [SerializeField] private OpenMenuButton _menuButton;
-    [SerializeField] private Camera _camera;
 
     private static Game _instance;
-    private InputController _inputController;
 
     private void Awake()
     {
@@ -43,9 +38,7 @@ public class Game : MonoBehaviour
 #else
         bool isMobile = Device.IsMobile; 
 #endif
-        _mobileShootingButton.gameObject.SetActive(isMobile);
-        var shootingButton = isMobile ? _mobileShootingButton : _pcShootingButton;
-        _inputController = new InputController(_camera, _pointerMoveArea, shootingButton);
+        _inputController.Init(isMobile);
         _menuButton.Init(isMobile);
     }
 }

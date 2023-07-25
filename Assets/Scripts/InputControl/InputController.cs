@@ -1,33 +1,46 @@
+using System.Collections;
 using UnityEngine;
 
-public class InputController
+public class InputController : MonoBehaviour
 {
-    private Camera _camera;
+    [SerializeField] private Camera _camera;
+    [SerializeField] private PointerMoveArea _pointerMoveArea;
+
+    [SerializeField] private PointerDownArea _pcPointerDownArea;
+    [SerializeField] private PointerDownArea _mobilePointerDownArea;
+
+    [SerializeField] private PcPointerUpArea _pcPointerUpArea;
+    [SerializeField] private MobilePointerUpArea _mobilePointerUpArea;
+
+    private IPointerDownArea _pointerDownArea;
+    private IPointerUpArea _pointerUpArea;
+
     private Quaternion _initialRotation;
-    private PointerMoveArea _pointerMoveArea;
-    private ShootingButton _shootingButton;
+    private bool _isMobile;
     private bool _isScopeMode;
+    private Coroutine _coroutine;
 
     private float CurrentSensitivity => _isScopeMode ? Settings.ShootingSettings.ScopeSensitivity : Settings.ShootingSettings.BaseSensitivity;
 
-    public InputController(Camera camera, PointerMoveArea pointerMoveArea, ShootingButton shootingButton)
+    public void Init(bool isMobile)
     {
-        _camera = camera;
+        _isMobile = isMobile;
+        _mobilePointerDownArea.SetActive(isMobile);
         _initialRotation = _camera.transform.rotation;
 
-        _pointerMoveArea = pointerMoveArea;
-        _pointerMoveArea.PointerMove += OnPointerMove;
+        _pointerDownArea = isMobile ? _mobilePointerDownArea : _pcPointerDownArea;
+        _pointerUpArea = isMobile ? _mobilePointerUpArea : _pcPointerUpArea;
 
-        _shootingButton = shootingButton;
-        _shootingButton.PointerDown += Scope;
-        _shootingButton.PointerUp += Shoot;
+        _pointerDownArea.PointerDown += Scope;
+        _pointerUpArea.PointerUp += Shoot;
+        _pointerMoveArea.PointerMove += OnPointerMove;
     }
 
-    ~InputController()
+    private void OnDestroy()
     {
         _pointerMoveArea.PointerMove -= OnPointerMove;
-        _shootingButton.PointerDown -= Scope;
-        _shootingButton.PointerUp -= Shoot;
+        _pointerDownArea.PointerDown -= Scope;
+        _pointerUpArea.PointerUp -= Shoot;
     }
 
     public void OnPointerMove()
@@ -63,14 +76,39 @@ public class InputController
 
     private void Scope()
     {
-        _camera.fieldOfView = Settings.ShootingSettings.ScopeFieldOfView;
         _isScopeMode = true;
+
+        if (_isMobile)
+        {
+            _pointerUpArea.CheckForMouseUp();
+            _pointerDownArea.SetActive(false);
+        }
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = StartCoroutine(SetFieldOfView(Settings.ShootingSettings.ScopeFieldOfView));
     }
 
     private void Unscope()
     {
-        _camera.fieldOfView = Settings.ShootingSettings.BaseFieldOfView;
         _isScopeMode = false;
+
+        if (_isMobile)
+            _pointerDownArea.SetActive(true);
+
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = StartCoroutine(SetFieldOfView(Settings.ShootingSettings.BaseFieldOfView));
+    }
+
+    private IEnumerator SetFieldOfView(float value)
+    {
+        while (Mathf.Abs(_camera.fieldOfView - value) > Settings.Epsilon)
+        {
+            _camera.fieldOfView = Mathf.Lerp(_camera.fieldOfView, value, Settings.ShootingSettings.ScopeSpeed);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     private void Shoot()

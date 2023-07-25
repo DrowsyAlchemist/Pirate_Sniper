@@ -2,14 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ShootingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class PcPointerUpArea : MonoBehaviour, IPointerUpHandler, IPointerUpArea
 {
-    public event Action PointerDown;
     public event Action PointerUp;
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void CheckForMouseUp()
     {
-        PointerDown?.Invoke();
     }
 
     public void OnPointerUp(PointerEventData eventData)
