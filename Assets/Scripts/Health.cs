@@ -1,12 +1,13 @@
 using System;
 
-public class Health
+public class Health : IReadonlyHealth
 {
     private readonly int _maxHealth;
     private int _currentHealth;
 
     public int MaxHealth => _maxHealth;
     public int CurrentHealth => _currentHealth;
+    public bool IsAlive => _currentHealth > 0;
 
     public event Action<int> HealthChanged;
     public event Action Dead;
@@ -22,13 +23,16 @@ public class Health
         if (damage < 0)
             throw new ArgumentOutOfRangeException();
 
-        _currentHealth -= damage;
-
-        if (_currentHealth <= 0)
+        if (IsAlive)
         {
-            _currentHealth = 0;
-            Dead?.Invoke();
+            _currentHealth -= damage;
+
+            if (IsAlive == false)
+            {
+                _currentHealth = 0;
+                Dead?.Invoke();
+            }
+            HealthChanged?.Invoke(_currentHealth);
         }
-        HealthChanged?.Invoke(_currentHealth);
     }
 }

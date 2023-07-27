@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class EnemyAnimator : MonoBehaviour
+public class CharacterAnimator : MonoBehaviour
 {
     private const string IdleAnimation = "Idle";
     private const string DeadAnimation = "Dead";

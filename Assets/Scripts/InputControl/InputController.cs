@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class InputController : MonoBehaviour
     private bool _isMobile;
     private bool _isScopeMode;
     private Coroutine _coroutine;
+
+    public event Action<RaycastHit> Shooted;
 
     private float CurrentSensitivity => _isScopeMode ? Settings.ShootingSettings.ScopeSensitivity : Settings.ShootingSettings.BaseSensitivity;
 
@@ -117,8 +120,7 @@ public class InputController : MonoBehaviour
         Ray ray = _camera.ViewportPointToRay(camera—enter);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
+        Shooted?.Invoke(hit);
         Unscope();
-
-        Debug.Log("Shoot! Hit: " + hit.collider.gameObject.name);
     }
 }

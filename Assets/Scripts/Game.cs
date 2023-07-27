@@ -5,11 +5,13 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
-    [SerializeField ]private InputController _inputController;
-
+    [SerializeField] private InputController _inputController;
     [SerializeField] private OpenMenuButton _menuButton;
 
+    [SerializeField] private Location _testLocation;
+
     private static Game _instance;
+    private Player _player;
 
     private void Awake()
     {
@@ -31,7 +33,15 @@ public class Game : MonoBehaviour
         Init();
     }
 
+
     private void Init()
+    {
+        InitInputController();
+        _player = new Player(_inputController, 100, 50);
+        InitLevel();
+    }
+
+    private void InitInputController()
     {
 #if UNITY_EDITOR
         bool isMobile = _useMobileControlInEditor;
@@ -40,5 +50,11 @@ public class Game : MonoBehaviour
 #endif
         _inputController.Init(isMobile);
         _menuButton.Init(isMobile);
+    }
+
+    private void InitLevel()
+    {
+        var level = Instantiate(_testLocation.Levels[0]);
+        level.Init();
     }
 }
