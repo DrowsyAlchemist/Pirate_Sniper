@@ -8,7 +8,8 @@ public class Game : MonoBehaviour
     [SerializeField] private InputController _inputController;
     [SerializeField] private OpenMenuButton _menuButton;
 
-    [SerializeField] private Location _testLocation;
+    [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private LevelsMenu _levelsMenu;
 
     private static Game _instance;
     private Player _player;
@@ -38,7 +39,7 @@ public class Game : MonoBehaviour
     {
         InitInputController();
         _player = new Player(_inputController, 100, 50);
-        InitLevel();
+        _levelsMenu.LevelClicked += LoadLevel;
     }
 
     private void InitInputController()
@@ -52,9 +53,10 @@ public class Game : MonoBehaviour
         _menuButton.Init(isMobile);
     }
 
-    private void InitLevel()
+    private void LoadLevel(Level levelTemplate)
     {
-        var level = Instantiate(_testLocation.Levels[0]);
+        var level = Instantiate(levelTemplate);
         level.Init();
+        _mainMenu.Close();
     }
 }

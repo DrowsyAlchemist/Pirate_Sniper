@@ -8,23 +8,19 @@ public class UIButton : MonoBehaviour
 {
     private Button _button;
     private UnityAction _onClick;
-    private bool _isInitialized;
-
-    protected void Awake()
-    {
-        _button = GetComponent<Button>();
-    }
 
     protected void OnDestroy()
     {
-        if (_isInitialized)
+        if (_button != null)
             _button.RemoveListener(_onClick);
     }
 
-    protected void SetOnClickAction(UnityAction onClick)
+    public void SetOnClickAction(UnityAction onClick)
     {
+        if (_button == null)
+            _button = GetComponent<Button>();
+
         _onClick = onClick;
         _button.AddListener(_onClick);
-        _isInitialized = true;
     }
 }
