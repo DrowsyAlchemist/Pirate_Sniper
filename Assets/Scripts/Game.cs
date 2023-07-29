@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,13 +7,17 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
     [SerializeField] private InputController _inputController;
-    [SerializeField] private OpenMenuButton _menuButton;
+    [SerializeField] private HomeButton _menuButton;
 
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private LevelsMenu _levelsMenu;
+    [SerializeField] private LevelOverWindow _levelOverWindow;
 
     private static Game _instance;
     private Player _player;
+    private SaveSystem _saveSystem;
+
+    public LevelInfo CurrentLevelInfo { get; private set; }
 
     private void Awake()
     {
@@ -40,6 +45,9 @@ public class Game : MonoBehaviour
         InitInputController();
         _player = new Player(_inputController, 100, 50);
         _levelsMenu.LevelClicked += LoadLevel;
+        _levelOverWindow.Init(this);
+        _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
+        _saveSystem = new SaveSystem();
     }
 
     private void InitInputController()
@@ -57,6 +65,19 @@ public class Game : MonoBehaviour
     {
         var level = Instantiate(levelTemplate);
         level.Init();
+        level.Completed += OnLevelCompleted;
+        CurrentLevelInfo = new LevelInfo(level);
         _mainMenu.Close();
+    }
+
+    private void OnLevelCompleted()
+    {
+        _levelOverWindow.Appear();
+    }
+
+    private void OnBackToMenuButtonClick()
+    {
+        _mainMenu.Open();
+        Destroy(CurrentLevelInfo.Level);
     }
 }

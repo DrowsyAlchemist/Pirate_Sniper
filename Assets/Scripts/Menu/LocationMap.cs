@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class LocationMap : MonoBehaviour
         }
     }
 
+    public event Action<Location> LocationChosen;
+
     private void Awake()
     {
         foreach (var locationButton in _locationButtons)
@@ -34,6 +37,6 @@ public class LocationMap : MonoBehaviour
 
     private void OnLocationButtonClick(Location location)
     {
-        _mainMenu.OpenLevels(location);
+        LocationChosen?.Invoke(location);
     }
 }

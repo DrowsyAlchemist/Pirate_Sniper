@@ -1,9 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private LocationMap _locationMap;
     [SerializeField] private AdditionalMenu _additionalMenu;
+
+    private void Awake()
+    {
+        _additionalMenu.Init(_locationMap);
+    }
 
     public void Open()
     {
@@ -12,12 +18,16 @@ public class MainMenu : MonoBehaviour
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        StartCoroutine(CloseWithDelay());
     }
 
-    public void OpenLevels(Location location)
+    private IEnumerator CloseWithDelay()
     {
-        _additionalMenu.Appear();
-        _additionalMenu.OpenLevels(location);
+        _additionalMenu.Disappear();
+
+        while (_additionalMenu.IsPlaying)
+            yield return null;
+
+        gameObject.SetActive(false);
     }
 }

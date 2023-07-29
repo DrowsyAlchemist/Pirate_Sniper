@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OpenMenuButton : MonoBehaviour
+public class HomeButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private MainMenu _mainMenu;

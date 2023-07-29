@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelsMenu : MonoBehaviour
+public class LevelsMenu : Window
 {
     [SerializeField] private RectTransform _container;
     [SerializeField] private LevelRenderer _levelRendererTemplate;

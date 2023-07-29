@@ -1,17 +1,21 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class Window : MonoBehaviour
+public class AnimatedWindow : MonoBehaviour
 {
     private const string AppearAnimation = "Appear";
     private const string DisappearAnimation = "Disappear";
+
     private Animator _animator;
 
-    public void Appear()
+    public bool IsPlaying { get; private set; }
+
+    public virtual void Appear()
     {
         if (_animator == null)
             Init();
 
+        IsPlaying = true;
         _animator.Play(AppearAnimation);
     }
 
@@ -20,7 +24,13 @@ public class Window : MonoBehaviour
         if (_animator == null)
             Init();
 
+        IsPlaying = true;
         _animator.Play(DisappearAnimation);
+    }
+
+    private void SetNotPlaying()
+    {
+        IsPlaying = false;
     }
 
     private void Init()
