@@ -48,6 +48,9 @@ public class Game : MonoBehaviour
         _levelOverWindow.Init(this);
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _saveSystem = new SaveSystem();
+        _saveSystem.SaveLevel(0, 0, 123);
+        _saveSystem.SaveLevel(0, 1, 1223);
+        _saveSystem.Save();
     }
 
     private void InitInputController()

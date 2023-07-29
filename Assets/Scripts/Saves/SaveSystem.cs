@@ -13,10 +13,34 @@ public class SaveSystem
     private readonly StringBuilder _stringBuilder;
     private SaveData _saves;
 
+    public int PlayerHealth => _saves.PlayerMaxHealth;
+    public int PlayerDamage => _saves.PlayerDamage;
+
     public SaveSystem()
     {
         _stringBuilder = new();
-        Load();
+        LoadSaves(out _saves);
+    }
+
+    public void SetPlayerHealth(int value)
+    {
+        _saves.PlayerMaxHealth = (value > 0) ? value : throw new ArgumentOutOfRangeException();
+    }
+
+    public void SetPlayerDamage(int value)
+    {
+        _saves.PlayerDamage = (value > 0) ? value : throw new ArgumentOutOfRangeException();
+    }
+
+    public int GetLevelScore(int locationIndex, int levelIndex)
+    {
+        switch (locationIndex)
+        {
+            case 0:
+                return int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]);
+            default:
+                throw new NotImplementedException();
+        }
     }
 
     public void SaveLevel(int locationNumber, int levelIndex, int score)
@@ -32,7 +56,7 @@ public class SaveSystem
         Save();
     }
 
-    public void Save()
+    private void Save()
     {
 #if UNITY_EDITOR
         PlayerPrefs.SetString(SavesName, JsonUtility.ToJson(_saves));
@@ -41,32 +65,22 @@ public class SaveSystem
         PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(_saves));
     }
 
-    private void Load()
+    private void LoadSaves(out SaveData saves)
     {
+        string jsonData;
 #if UNITY_EDITOR
-        _saves = JsonUtility.FromJson<SaveData>(PlayerPrefs.GetString(SavesName));
-        _saves ??= new(_stringBuilder);
-        Debug.Log(_saves.ZeroLocation);
-        return;
+        jsonData = PlayerPrefs.GetString(SavesName);
+        SetSaves(out saves, jsonData);
 #endif
-        PlayerAccount.GetCloudSaveData((result) =>
-        {
-            _saves = JsonUtility.FromJson<SaveData>(result);
-            _saves ??= new(_stringBuilder);
-            Debug.Log(_saves.ZeroLocation);
-        });
+        PlayerAccount.GetCloudSaveData((result) => jsonData = result);
+        SetSaves(out saves, jsonData);
     }
 
-    public int GetLevelScore(int locationIndex, int levelIndex)
+    private void SetSaves(out SaveData saves, string jsonData)
     {
-        switch (locationIndex)
-        {
-            case 0:
-                return int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]);
-            default:
-                throw new NotImplementedException();
-        }
+        saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder);
     }
+
     private string ReplaceScore(string locationString, int levelIndex, int score)
     {
         string[] locationLevelsScores = SplitLocationString(locationString);
@@ -101,6 +115,9 @@ public class SaveSystem
 
         public SaveData(StringBuilder stringBuilder)
         {
+            PlayerMaxHealth = Settings.PlayerSettings.InitialHealth;
+            PlayerDamage = Settings.PlayerSettings.InitialDamage;
+
             stringBuilder.Clear();
 
             for (int i = 0; i < MaxLevelsCount; i++)
