@@ -9,7 +9,10 @@ public class Level : MonoBehaviour
     public int EnemiesCount => _enemies.Length;
     public int EnemiesLeft { get; private set; }
     public bool IsCompleted { get; private set; }
+    public Location Location => LocationsStorage.GetLocation(this);
+    public int IndexInLocation => LocationsStorage.GetLocation(this).GetLevelIndex(this);
     public int Stars { get; private set; }
+    public int Score => Game.GetLevelScore(this);
 
     public IEnumerable<EnemyBody> Enemies => _enemies;
 

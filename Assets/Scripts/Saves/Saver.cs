@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using UnityEngine;
 
-public class SaveSystem
+public class Saver
 {
     private const string SavesName = "Saves";
     private const int DefaultScore = 0;
@@ -16,7 +16,7 @@ public class SaveSystem
     public int PlayerHealth => _saves.PlayerMaxHealth;
     public int PlayerDamage => _saves.PlayerDamage;
 
-    public SaveSystem()
+    public Saver()
     {
         _stringBuilder = new();
         LoadSaves(out _saves);
@@ -41,6 +41,12 @@ public class SaveSystem
             default:
                 throw new NotImplementedException();
         }
+    }
+
+    public int GetLevelScore(Level level)
+    {
+        Location location = LocationsStorage.GetLocation(level);
+        return GetLevelScore(LocationsStorage.GetLocationIndex(level), location.GetLevelIndex(level));
     }
 
     public void SaveLevel(int locationNumber, int levelIndex, int score)
@@ -71,6 +77,7 @@ public class SaveSystem
 #if UNITY_EDITOR
         jsonData = PlayerPrefs.GetString(SavesName);
         SetSaves(out saves, jsonData);
+        return;
 #endif
         PlayerAccount.GetCloudSaveData((result) => jsonData = result);
         SetSaves(out saves, jsonData);

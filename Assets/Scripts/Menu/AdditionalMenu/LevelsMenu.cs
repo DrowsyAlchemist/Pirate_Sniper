@@ -7,9 +7,16 @@ public class LevelsMenu : Window
     [SerializeField] private RectTransform _container;
     [SerializeField] private LevelRenderer _levelRendererTemplate;
 
+    private Saver _saver;
+
     public event Action<Level> LevelClicked;
 
     private List<LevelRenderer> _levelRenderers = new();
+
+    public void Init(Saver saver)
+    {
+        _saver = saver;
+    }
 
     private void OnDestroy()
     {

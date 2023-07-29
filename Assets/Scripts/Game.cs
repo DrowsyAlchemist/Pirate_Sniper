@@ -1,5 +1,4 @@
 using Agava.YandexGames;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,7 +14,8 @@ public class Game : MonoBehaviour
 
     private static Game _instance;
     private Player _player;
-    private SaveSystem _saveSystem;
+    private Saver _saver;
+    private Level _currentLevel;
 
     public LevelInfo CurrentLevelInfo { get; private set; }
 
@@ -47,10 +47,15 @@ public class Game : MonoBehaviour
         _levelsMenu.LevelClicked += LoadLevel;
         _levelOverWindow.Init(this);
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
-        _saveSystem = new SaveSystem();
-        _saveSystem.SaveLevel(0, 0, 123);
-        _saveSystem.SaveLevel(0, 1, 1223);
-        _saveSystem.Save();
+        _saver = new Saver();
+        _levelsMenu.Init(_saver);
+        _saver.SaveLevel(0, 0, 123);
+        _saver.SaveLevel(0, 1, 1223);
+    }
+
+    public static int GetLevelScore(Level level)
+    {
+        return _instance._saver.GetLevelScore(level);
     }
 
     private void InitInputController()
@@ -66,6 +71,7 @@ public class Game : MonoBehaviour
 
     private void LoadLevel(Level levelTemplate)
     {
+        _currentLevel = levelTemplate;
         var level = Instantiate(levelTemplate);
         level.Init();
         level.Completed += OnLevelCompleted;
@@ -82,5 +88,7 @@ public class Game : MonoBehaviour
     {
         _mainMenu.Open();
         Destroy(CurrentLevelInfo.Level);
+        Location location = LocationsStorage.GetLocation(_currentLevel);
+        _saver.SaveLevel(location.Index, location.GetLevelIndex(_currentLevel), 98);
     }
 }
