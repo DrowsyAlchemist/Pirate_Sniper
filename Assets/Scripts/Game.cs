@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,8 +17,7 @@ public class Game : MonoBehaviour
     private Player _player;
     private Saver _saver;
     private Level _currentLevel;
-
-    public LevelInfo CurrentLevelInfo { get; private set; }
+    private LevelInfo _currentLevelInfo;
 
     private void Awake()
     {
@@ -47,6 +47,7 @@ public class Game : MonoBehaviour
         _levelsMenu.LevelClicked += LoadLevel;
         _levelOverWindow.Init(this);
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
+        _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
         _saver = new Saver();
         _levelsMenu.Init(_saver);
         _saver.SaveLevel(0, 0, 123);
@@ -72,23 +73,27 @@ public class Game : MonoBehaviour
     private void LoadLevel(Level levelTemplate)
     {
         _currentLevel = levelTemplate;
-        var level = Instantiate(levelTemplate);
-        level.Init();
-        level.Completed += OnLevelCompleted;
-        CurrentLevelInfo = new LevelInfo(level);
+        _currentLevelInfo = new(Instantiate(levelTemplate));
+        _currentLevelInfo.Completed += OnLevelCompleted;
         _mainMenu.Close();
     }
 
     private void OnLevelCompleted()
     {
-        _levelOverWindow.Appear();
+        _currentLevelInfo.Completed -= OnLevelCompleted;
+        _levelOverWindow.Appear(_currentLevelInfo);
     }
 
     private void OnBackToMenuButtonClick()
     {
         _mainMenu.Open();
-        Destroy(CurrentLevelInfo.Level);
-        Location location = LocationsStorage.GetLocation(_currentLevel);
-        _saver.SaveLevel(location.Index, location.GetLevelIndex(_currentLevel), 98);
+        _saver.SaveLevel(_currentLevel.Location.Index, _currentLevel.IndexInLocation, 98);
+        Destroy(_currentLevelInfo.LevelInstance.gameObject);
+    }
+
+
+    private void OnNextLevelButtonClick()
+    {
+        throw new NotImplementedException();
     }
 }

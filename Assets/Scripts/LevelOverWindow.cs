@@ -15,16 +15,18 @@ public class LevelOverWindow : AnimatedWindow
     private Game _game;
 
     public event Action MenuButtonClicked;
+    public event Action NextLevelButtonClicked;
 
     public void Init(Game game)
     {
         _game = game;
         _menuButton.SetOnClickAction(() => StartCoroutine(OnMenuButtonClick()));
+        _nextLevelButton.SetOnClickAction(() => NextLevelButtonClicked?.Invoke());
     }
 
-    public override void Appear()
+    public void Appear(LevelInfo levelInfo)
     {
-        Render(_game.CurrentLevelInfo);
+        Render(levelInfo);
         base.Appear();
     }
 
