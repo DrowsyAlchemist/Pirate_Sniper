@@ -11,16 +11,19 @@ public class LevelOverWindow : AnimatedWindow
     [SerializeField] private TMP_Text _headshotsText;
     [SerializeField] private TMP_Text _accuracyText;
 
-    [SerializeField] private UIButton _menuButton;
     [SerializeField] private UIButton _nextLevelButton;
+    [SerializeField] private UIButton _restartButton;
+    [SerializeField] private UIButton _menuButton;
 
-    public event Action MenuButtonClicked;
     public event Action NextLevelButtonClicked;
+    public event Action RestartButtonClicked;
+    public event Action MenuButtonClicked;
 
     public void Init()
     {
-        _menuButton.SetOnClickAction(() => StartCoroutine(OnMenuButtonClick()));
-        _nextLevelButton.SetOnClickAction(() => StartCoroutine(OnNextLevelButtonClick()));
+        _nextLevelButton.SetOnClickAction(OnNextLevelButtonClick);
+        _restartButton.SetOnClickAction(OnRestartButtonClick);
+        _menuButton.SetOnClickAction(OnMenuButtonClick);
     }
 
     public void Appear(LevelObserver levelObserver)
@@ -38,23 +41,28 @@ public class LevelOverWindow : AnimatedWindow
         _accuracyText.text = (int)(levelObserver.Accuracy * 100) + " %";
     }
 
-    private IEnumerator OnMenuButtonClick()
+    private void OnNextLevelButtonClick()
     {
-        base.Disappear();
-
-        while (IsPlaying)
-            yield return null;
-
-        MenuButtonClicked?.Invoke();
+        StartCoroutine(DoActionAfterDisappear(() => NextLevelButtonClicked?.Invoke()));
     }
 
-    private IEnumerator OnNextLevelButtonClick()
+    private void OnRestartButtonClick()
+    {
+        StartCoroutine(DoActionAfterDisappear(() => RestartButtonClicked?.Invoke()));
+    }
+
+    private void OnMenuButtonClick()
+    {
+        StartCoroutine(DoActionAfterDisappear(() => MenuButtonClicked?.Invoke()));
+    }
+
+    private IEnumerator DoActionAfterDisappear(Action action)
     {
         base.Disappear();
 
         while (IsPlaying)
             yield return null;
 
-        NextLevelButtonClicked?.Invoke();
+        action();
     }
 }

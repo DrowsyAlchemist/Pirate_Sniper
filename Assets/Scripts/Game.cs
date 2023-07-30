@@ -43,8 +43,9 @@ public class Game : MonoBehaviour
     private void OnDestroy()
     {
         _levelsMenu.LevelClicked -= LoadLevel;
-        _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _levelOverWindow.NextLevelButtonClicked -= OnNextLevelButtonClick;
+        _levelOverWindow.RestartButtonClicked -= OnRestartButtonClick;
+        _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _levelObserver.Completed -= OnLevelCompleted;
     }
 
@@ -55,8 +56,9 @@ public class Game : MonoBehaviour
         _player = new Player(_inputController, 100, 50);
         _levelsMenu.LevelClicked += LoadLevel;
         _levelOverWindow.Init();
-        _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
+        _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
+        _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _saver = new Saver();
         _levelsMenu.Init(_saver);
         _levelObserver = new(_player);
@@ -102,13 +104,6 @@ public class Game : MonoBehaviour
             _saver.SaveLevel(_currentLevel, _levelObserver.Score);
     }
 
-    private void OnBackToMenuButtonClick()
-    {
-        _mainMenu.Open();
-        Destroy(_levelObserver.LevelInstance.gameObject);
-    }
-
-
     private void OnNextLevelButtonClick()
     {
         Location currentLocation = _currentLevel.Location;
@@ -124,5 +119,16 @@ public class Game : MonoBehaviour
             Location nextLocation = LocationsStorage.GetLocationByIndex(nextLocationIndex);
             LoadLevel(nextLocation.GetLevelByIndex(0));
         }
+    }
+
+    private void OnRestartButtonClick()
+    {
+        LoadLevel(_currentLevel);
+    }
+
+    private void OnBackToMenuButtonClick()
+    {
+        _mainMenu.Open();
+        Destroy(_levelObserver.LevelInstance.gameObject);
     }
 }
