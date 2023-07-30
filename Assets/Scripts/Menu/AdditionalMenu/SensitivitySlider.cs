@@ -17,11 +17,11 @@ public class SensitivitySlider : MonoBehaviour
 
     private void OnEnable()
     {
-        _slider.value = Settings.ShootingSettings.BaseSensitivity / Settings.ShootingSettings.MaxSensitivity;
+        _slider.value = Settings.Shooting.BaseSensitivity / Settings.Shooting.MaxSensitivity;
     }
 
     private void OnValueChanged(float value)
     {
-        Settings.ShootingSettings.SetSensitivity(value * Settings.ShootingSettings.MaxSensitivity);
+        Settings.Shooting.SetSensitivity(value * Settings.Shooting.MaxSensitivity);
     }
 }

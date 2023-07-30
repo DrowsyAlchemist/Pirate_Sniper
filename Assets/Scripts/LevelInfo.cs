@@ -2,36 +2,103 @@ using System;
 
 public class LevelInfo
 {
-    private readonly Level _levelInstance;
-
-    public int _score;
-    public int _stars;
-    public float _time;
+    private Level _levelInstance;
+    private readonly Stopwatch _stopwatch;
+    private readonly Player _player;
 
     public Level LevelInstance => _levelInstance;
+    public int EnemiesCount => _levelInstance.Enemies.Count;
     public int EnemiesLeft { get; private set; }
-    public int Score => _score;
-    public int Stars => _stars;
-    public float Time => _time;
+
+    public int ShotsCount { get; private set; }
+    public int HeadShots { get; private set; }
+    public float CompleteTime { get; private set; }
+    public int Score { get; private set; }
+    public int Stars { get; private set; }
+    public float Accuracy => (float)EnemiesCount / ShotsCount;
+
+    public event Action EnemyDead;
     public event Action Completed;
 
-    public LevelInfo(Level levelInstance)
+    public LevelInfo(Player player)
     {
+        _stopwatch = new();
+        _player = player;
+        _player.Shooted += OnShooted;
+    }
+
+    ~LevelInfo()
+    {
+        _player.Shooted -= OnShooted;
+    }
+
+    public void SetLevel(Level levelInstance)
+    {
+        Clear();
         _levelInstance = levelInstance;
 
         foreach (var enemyBody in levelInstance.Enemies)
         {
             enemyBody.Init();
             enemyBody.Enemy.ReadonlyHealth.Dead += OnEnemyDead;
+            enemyBody.HeadShot += OnHeadShot;
         }
         EnemiesLeft = levelInstance.Enemies.Count;
+    }
+
+    public void Start()
+    {
+        if (Score > 0)
+            throw new InvalidOperationException("You should clear before start");
+
+        _stopwatch.Reset();
+        _stopwatch.Start();
+    }
+
+    private void Stop()
+    {
+        _stopwatch.Stop();
+        CompleteTime = _stopwatch.ElapsedTime;
+        Score = ScoreCalculator.Calculate(this);
+        Stars = Settings.Score.GetStars(Score);
+        Completed?.Invoke();
+    }
+
+    private void Clear()
+    {
+        if (_levelInstance != null)
+        {
+            foreach (var enemyBody in _levelInstance.Enemies)
+            {
+                enemyBody.Enemy.ReadonlyHealth.Dead -= OnEnemyDead;
+                enemyBody.HeadShot -= OnHeadShot;
+            }
+        }
+        _levelInstance = null;
+        ShotsCount = 0;
+        HeadShots = 0;
+        CompleteTime = 0;
+        Stars = 0;
+        Score = 0;
     }
 
     private void OnEnemyDead()
     {
         EnemiesLeft--;
+        EnemyDead?.Invoke();
 
         if (EnemiesLeft == 0)
-            Completed?.Invoke();
+            Stop();
+    }
+
+    private void OnShooted()
+    {
+        ShotsCount++;
+    }
+
+
+    private void OnHeadShot()
+    {
+        HeadShots++;
     }
 }

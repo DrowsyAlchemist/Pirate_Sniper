@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyBody : MonoBehaviour
@@ -8,6 +9,8 @@ public class EnemyBody : MonoBehaviour
     private Enemy _enemy;
 
     public Enemy Enemy => _enemy;
+
+    public event Action HeadShot;
 
     public void Init()
     {

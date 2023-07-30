@@ -49,4 +49,12 @@ public class Location : ScriptableObject
 
         throw new InvalidOperationException("There are no such level in the location");
     }
+
+    public Level GetLevelByIndex(int index)
+    {
+        if (index < 0 || index >= _levels.Length)
+            throw new ArgumentOutOfRangeException("index");
+
+        return _levels[index];
+    }
 }

@@ -41,4 +41,12 @@ public class LocationsStorage : MonoBehaviour
 
         throw new InvalidOperationException("There are no such level in the storage");
     }
+
+    public static Location GetLocationByIndex(int index)
+    {
+        if (index < 0 || index >= _instance._locations.Length)
+            throw new ArgumentOutOfRangeException("index");
+
+        return _instance._locations[index];
+    }
 }

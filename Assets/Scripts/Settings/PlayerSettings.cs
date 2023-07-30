@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ShootingSettings", menuName = "Settings/Shooting")]
+[CreateAssetMenu(fileName = "Player", menuName = "Settings/Player")]
 public class PlayerSettings : ScriptableObject
 {
     [SerializeField] private int _initialHealth = 100;

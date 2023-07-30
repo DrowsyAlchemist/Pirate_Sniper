@@ -21,7 +21,7 @@ public class LevelRenderer : MonoBehaviour
     {
         _level = level;
         _number.text = (level.IndexInLocation + 1).ToString();
-        _stars.text = level.Score + " / 3";
+        _stars.text = level.Stars + " / 3";
     }
 
     private void OnButtonClick()

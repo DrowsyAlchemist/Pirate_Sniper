@@ -7,16 +7,18 @@ public class Player : Creature
 
     private InputController _inputController;
 
+    public event Action Shooted;
+
     public Player(InputController inputController, int maxHealth, int damage) : base(maxHealth)
     {
         _inputController = inputController;
-        inputController.Shooted += DoDamage;
+        inputController.Shooted += OnShooted;
         _initialDamage = damage;
     }
 
     ~Player()
     {
-        _inputController.Shooted -= DoDamage;
+        _inputController.Shooted -= OnShooted;
     }
 
     public void ApplyDamage(int damage)
@@ -27,8 +29,10 @@ public class Player : Creature
         Health.TakeDamage(damage);
     }
 
-    private void DoDamage(RaycastHit hit)
+    private void OnShooted(RaycastHit hit)
     {
+        Shooted?.Invoke();
+
         if (hit.collider.TryGetComponent(out EnemyBody enemyBody))
             enemyBody.Enemy.ApplyDamage(_initialDamage);
     }

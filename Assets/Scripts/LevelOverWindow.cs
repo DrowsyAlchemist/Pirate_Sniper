@@ -8,20 +8,19 @@ public class LevelOverWindow : AnimatedWindow
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _starsText;
     [SerializeField] private TMP_Text _timeText;
+    [SerializeField] private TMP_Text _headshotsText;
+    [SerializeField] private TMP_Text _accuracyText;
 
     [SerializeField] private UIButton _menuButton;
     [SerializeField] private UIButton _nextLevelButton;
 
-    private Game _game;
-
     public event Action MenuButtonClicked;
     public event Action NextLevelButtonClicked;
 
-    public void Init(Game game)
+    public void Init()
     {
-        _game = game;
         _menuButton.SetOnClickAction(() => StartCoroutine(OnMenuButtonClick()));
-        _nextLevelButton.SetOnClickAction(() => NextLevelButtonClicked?.Invoke());
+        _nextLevelButton.SetOnClickAction(() => StartCoroutine(OnNextLevelButtonClick()));
     }
 
     public void Appear(LevelInfo levelInfo)
@@ -33,8 +32,10 @@ public class LevelOverWindow : AnimatedWindow
     private void Render(LevelInfo levelInfo)
     {
         _scoreText.text = levelInfo.Score.ToString();
-        _starsText.text = levelInfo._stars + " / 3";
-        _timeText.text = levelInfo.Time.ToString();
+        _starsText.text = levelInfo.Stars + " / 3";
+        _timeText.text = levelInfo.CompleteTime.ToString();
+        _headshotsText.text = levelInfo.HeadShots.ToString();
+        _accuracyText.text = (int)(levelInfo.Accuracy * 100) + " %";
     }
 
     private IEnumerator OnMenuButtonClick()
@@ -45,5 +46,15 @@ public class LevelOverWindow : AnimatedWindow
             yield return null;
 
         MenuButtonClicked?.Invoke();
+    }
+
+    private IEnumerator OnNextLevelButtonClick()
+    {
+        base.Disappear();
+
+        while (IsPlaying)
+            yield return null;
+
+        NextLevelButtonClicked?.Invoke();
     }
 }

@@ -18,7 +18,8 @@ public class MainMenu : MonoBehaviour
 
     public void Close()
     {
-        StartCoroutine(CloseWithDelay());
+        if (gameObject.activeSelf)
+            StartCoroutine(CloseWithDelay());
     }
 
     private IEnumerator CloseWithDelay()

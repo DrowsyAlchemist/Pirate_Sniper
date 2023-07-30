@@ -23,7 +23,7 @@ public class InputController : MonoBehaviour
 
     public event Action<RaycastHit> Shooted;
 
-    private float CurrentSensitivity => _isScopeMode ? Settings.ShootingSettings.ScopeSensitivity : Settings.ShootingSettings.BaseSensitivity;
+    private float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
 
     public void Init(bool isMobile)
     {
@@ -56,19 +56,19 @@ public class InputController : MonoBehaviour
 
         float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
 
-        if (targetXAngle > Settings.CameraSettings.XMaxRotation)
-            targetXAngle = Settings.CameraSettings.XMaxRotation;
+        if (targetXAngle > Settings.Camera.XMaxRotation)
+            targetXAngle = Settings.Camera.XMaxRotation;
 
-        if (targetXAngle < Settings.CameraSettings.XMinRotation)
-            targetXAngle = Settings.CameraSettings.XMinRotation;
+        if (targetXAngle < Settings.Camera.XMinRotation)
+            targetXAngle = Settings.Camera.XMinRotation;
 
         float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
 
-        if (targetYAngle > Settings.CameraSettings.YMaxRotation)
-            targetYAngle = Settings.CameraSettings.YMaxRotation;
+        if (targetYAngle > Settings.Camera.YMaxRotation)
+            targetYAngle = Settings.Camera.YMaxRotation;
 
-        if (targetYAngle < Settings.CameraSettings.YMinRotation)
-            targetYAngle = Settings.CameraSettings.YMinRotation;
+        if (targetYAngle < Settings.Camera.YMinRotation)
+            targetYAngle = Settings.Camera.YMinRotation;
 
         targetXAngle += (cameraEulers.x < 0) ? 360 : 0;
         targetYAngle -= (cameraEulers.y < 0) ? 360 : 0;
@@ -89,7 +89,7 @@ public class InputController : MonoBehaviour
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
-        _coroutine = StartCoroutine(SetFieldOfView(Settings.ShootingSettings.ScopeFieldOfView));
+        _coroutine = StartCoroutine(SetFieldOfView(Settings.Shooting.ScopeFieldOfView));
     }
 
     private void Unscope()
@@ -102,14 +102,14 @@ public class InputController : MonoBehaviour
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
-        _coroutine = StartCoroutine(SetFieldOfView(Settings.ShootingSettings.BaseFieldOfView));
+        _coroutine = StartCoroutine(SetFieldOfView(Settings.Shooting.BaseFieldOfView));
     }
 
     private IEnumerator SetFieldOfView(float value)
     {
         while (Mathf.Abs(_camera.fieldOfView - value) > Settings.Epsilon)
         {
-            _camera.fieldOfView = Mathf.Lerp(_camera.fieldOfView, value, Settings.ShootingSettings.ScopeSpeed);
+            _camera.fieldOfView = Mathf.Lerp(_camera.fieldOfView, value, Settings.Shooting.ScopeSpeed);
             yield return new WaitForFixedUpdate();
         }
     }

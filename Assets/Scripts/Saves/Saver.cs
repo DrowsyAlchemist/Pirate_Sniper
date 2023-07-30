@@ -22,6 +22,12 @@ public class Saver
         LoadSaves(out _saves);
     }
 
+    public void RemoveSaves()
+    {
+        _saves = new(_stringBuilder);
+        Save();
+    }
+
     public void SetPlayerHealth(int value)
     {
         _saves.PlayerMaxHealth = (value > 0) ? value : throw new ArgumentOutOfRangeException();
@@ -47,6 +53,11 @@ public class Saver
     {
         Location location = LocationsStorage.GetLocation(level);
         return GetLevelScore(LocationsStorage.GetLocationIndex(level), location.GetLevelIndex(level));
+    }
+
+    public void SaveLevel(Level level, int score)
+    {
+        SaveLevel(level.Location.Index, level.IndexInLocation, score);
     }
 
     public void SaveLevel(int locationNumber, int levelIndex, int score)
@@ -110,7 +121,6 @@ public class Saver
         return locationString.Split(Devider);
     }
 
-
     [Serializable]
     private class SaveData
     {
@@ -122,8 +132,8 @@ public class Saver
 
         public SaveData(StringBuilder stringBuilder)
         {
-            PlayerMaxHealth = Settings.PlayerSettings.InitialHealth;
-            PlayerDamage = Settings.PlayerSettings.InitialDamage;
+            PlayerMaxHealth = Settings.Player.InitialHealth;
+            PlayerDamage = Settings.Player.InitialDamage;
 
             stringBuilder.Clear();
 
