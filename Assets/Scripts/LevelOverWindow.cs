@@ -23,19 +23,19 @@ public class LevelOverWindow : AnimatedWindow
         _nextLevelButton.SetOnClickAction(() => StartCoroutine(OnNextLevelButtonClick()));
     }
 
-    public void Appear(LevelInfo levelInfo)
+    public void Appear(LevelObserver levelObserver)
     {
-        Render(levelInfo);
+        Render(levelObserver);
         base.Appear();
     }
 
-    private void Render(LevelInfo levelInfo)
+    private void Render(LevelObserver levelObserver)
     {
-        _scoreText.text = levelInfo.Score.ToString();
-        _starsText.text = levelInfo.Stars + " / 3";
-        _timeText.text = levelInfo.CompleteTime.ToString();
-        _headshotsText.text = levelInfo.HeadShots.ToString();
-        _accuracyText.text = (int)(levelInfo.Accuracy * 100) + " %";
+        _scoreText.text = levelObserver.Score.ToString();
+        _starsText.text = levelObserver.Stars + " / 3";
+        _timeText.text = levelObserver.CompleteTime.ToString();
+        _headshotsText.text = levelObserver.HeadShots.ToString();
+        _accuracyText.text = (int)(levelObserver.Accuracy * 100) + " %";
     }
 
     private IEnumerator OnMenuButtonClick()

@@ -2,11 +2,11 @@ using System;
 
 public static class ScoreCalculator
 {
-    public static int Calculate(LevelInfo levelInfo)
+    public static int Calculate(LevelObserver levelObserver)
     {
-        float completeTimeScore = CalculateCompleteTimeScore(levelInfo.CompleteTime, levelInfo.EnemiesCount);
-        float accuracyScore = CalculateAccuracyScore(levelInfo.Accuracy);
-        float headshotsScore = CalculateHeadshotsScore(levelInfo.HeadShots, levelInfo.ShotsCount);
+        float completeTimeScore = CalculateCompleteTimeScore(levelObserver.CompleteTime, levelObserver.EnemiesCount);
+        float accuracyScore = CalculateAccuracyScore(levelObserver.Accuracy);
+        float headshotsScore = CalculateHeadshotsScore(levelObserver.HeadShots, levelObserver.ShotsCount);
         return (int)(completeTimeScore + accuracyScore + headshotsScore);
     }
 

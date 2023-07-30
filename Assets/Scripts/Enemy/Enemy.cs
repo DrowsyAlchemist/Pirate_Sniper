@@ -1,25 +1,26 @@
 using System;
-using UnityEngine;
 
 public class Enemy : Creature
 {
-    private EnemySettings _settings;
+    private readonly EnemyPreset _preset;
 
-    public Enemy(int maxHealth) : base(maxHealth)
+    public event Action<int> Headshot;
+
+    public Enemy(EnemyPreset preset) : base(preset.Health)
     {
+        _preset = preset;
         Health.Dead += OnDead;
     }
 
-    public void ApplyDamage(int damage)
+    public void ApplyHeadshot(int damage)
     {
-        if (damage < 0)
-            throw new ArgumentOutOfRangeException();
-
-        Health.TakeDamage(damage);
+        int increasedDamage = (int)(_preset.HeadshotDamageModifier * damage);
+        Headshot?.Invoke(increasedDamage);
+        base.ApplyDamage(increasedDamage);
     }
 
     private void OnDead()
     {
-        
+
     }
 }

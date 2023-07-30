@@ -21,19 +21,11 @@ public class Player : Creature
         _inputController.Shooted -= OnShooted;
     }
 
-    public void ApplyDamage(int damage)
-    {
-        if (damage < 0)
-            throw new ArgumentOutOfRangeException();
-
-        Health.TakeDamage(damage);
-    }
-
     private void OnShooted(RaycastHit hit)
     {
         Shooted?.Invoke();
 
-        if (hit.collider.TryGetComponent(out EnemyBody enemyBody))
-            enemyBody.Enemy.ApplyDamage(_initialDamage);
+        if (hit.collider.TryGetComponent(out IApplyDamage target))
+            target.ApplyDamage(_initialDamage);
     }
 }

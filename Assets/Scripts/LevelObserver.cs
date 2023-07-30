@@ -1,6 +1,6 @@
 using System;
 
-public class LevelInfo
+public class LevelObserver
 {
     private Level _levelInstance;
     private readonly Stopwatch _stopwatch;
@@ -17,17 +17,18 @@ public class LevelInfo
     public int Stars { get; private set; }
     public float Accuracy => (float)EnemiesCount / ShotsCount;
 
+    public event Action EnemyHeadshot;
     public event Action EnemyDead;
     public event Action Completed;
 
-    public LevelInfo(Player player)
+    public LevelObserver(Player player)
     {
         _stopwatch = new();
         _player = player;
         _player.Shooted += OnShooted;
     }
 
-    ~LevelInfo()
+    ~LevelObserver()
     {
         _player.Shooted -= OnShooted;
     }
@@ -41,7 +42,7 @@ public class LevelInfo
         {
             enemyBody.Init();
             enemyBody.Enemy.ReadonlyHealth.Dead += OnEnemyDead;
-            enemyBody.HeadShot += OnHeadShot;
+            enemyBody.Enemy.Headshot += OnHeadShot;
         }
         EnemiesLeft = levelInstance.Enemies.Count;
     }
@@ -71,7 +72,7 @@ public class LevelInfo
             foreach (var enemyBody in _levelInstance.Enemies)
             {
                 enemyBody.Enemy.ReadonlyHealth.Dead -= OnEnemyDead;
-                enemyBody.HeadShot -= OnHeadShot;
+                enemyBody.Enemy.Headshot -= OnHeadShot;
             }
         }
         _levelInstance = null;
@@ -97,8 +98,9 @@ public class LevelInfo
     }
 
 
-    private void OnHeadShot()
+    private void OnHeadShot(int _)
     {
         HeadShots++;
+        EnemyHeadshot?.Invoke();
     }
 }

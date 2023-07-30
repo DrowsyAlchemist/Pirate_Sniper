@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
     private Player _player;
     private Saver _saver;
     private Level _currentLevel;
-    private LevelInfo _currentLevelInfo;
+    private LevelObserver _levelObserver;
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class Game : MonoBehaviour
         _levelsMenu.LevelClicked -= LoadLevel;
         _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _levelOverWindow.NextLevelButtonClicked -= OnNextLevelButtonClick;
-        _currentLevelInfo.Completed -= OnLevelCompleted;
+        _levelObserver.Completed -= OnLevelCompleted;
     }
 
 
@@ -59,9 +59,9 @@ public class Game : MonoBehaviour
         _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
         _saver = new Saver();
         _levelsMenu.Init(_saver);
-        _currentLevelInfo = new(_player);
-        _currentLevelInfo.Completed += OnLevelCompleted;
-        _levelInfoRenderer.Init(_currentLevelInfo);
+        _levelObserver = new(_player);
+        _levelObserver.Completed += OnLevelCompleted;
+        _levelInfoRenderer.Init(_levelObserver);
     }
 
     public void RemoveSaves()
@@ -88,24 +88,24 @@ public class Game : MonoBehaviour
     private void LoadLevel(Level levelTemplate)
     {
         _currentLevel = levelTemplate;
-        _currentLevelInfo.SetLevel(Instantiate(levelTemplate));
-        _currentLevelInfo.Start();
+        _levelObserver.SetLevel(Instantiate(levelTemplate));
+        _levelObserver.Start();
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
     }
 
     private void OnLevelCompleted()
     {
-        _levelOverWindow.Appear(_currentLevelInfo);
+        _levelOverWindow.Appear(_levelObserver);
 
-        if (_currentLevelInfo.Score > _saver.GetLevelScore(_currentLevel))
-            _saver.SaveLevel(_currentLevel, _currentLevelInfo.Score);
+        if (_levelObserver.Score > _saver.GetLevelScore(_currentLevel))
+            _saver.SaveLevel(_currentLevel, _levelObserver.Score);
     }
 
     private void OnBackToMenuButtonClick()
     {
         _mainMenu.Open();
-        Destroy(_currentLevelInfo.LevelInstance.gameObject);
+        Destroy(_levelObserver.LevelInstance.gameObject);
     }
 
 

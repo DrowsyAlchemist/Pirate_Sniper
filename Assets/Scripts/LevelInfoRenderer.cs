@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,17 +5,17 @@ public class LevelInfoRenderer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _enemiesText;
 
-    private LevelInfo _levelInfo;
+    private LevelObserver _levelObserver;
 
-    public void Init(LevelInfo levelInfo)
+    public void Init(LevelObserver levelObserver)
     {
-        _levelInfo = levelInfo;
-        _levelInfo.EnemyDead += OnEnemyDead;
+        _levelObserver = levelObserver;
+        _levelObserver.EnemyDead += OnEnemyDead;
     }
 
     private void OnDestroy()
     {
-        _levelInfo.EnemyDead -= OnEnemyDead;
+        _levelObserver.EnemyDead -= OnEnemyDead;
     }
 
     public void ResetInfo()
@@ -28,6 +25,6 @@ public class LevelInfoRenderer : MonoBehaviour
 
     private void OnEnemyDead()
     {
-        _enemiesText.text = _levelInfo.EnemiesLeft + " / " + _levelInfo.EnemiesCount;
+        _enemiesText.text = _levelObserver.EnemiesLeft + " / " + _levelObserver.EnemiesCount;
     }
 }
