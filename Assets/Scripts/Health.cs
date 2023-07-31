@@ -2,7 +2,7 @@ using System;
 
 public class Health : IReadonlyHealth
 {
-    private readonly int _maxHealth;
+    private int _maxHealth;
     private int _currentHealth;
 
     public int MaxHealth => _maxHealth;
@@ -14,8 +14,14 @@ public class Health : IReadonlyHealth
 
     public Health(int maxHealth)
     {
+        Reset(maxHealth);
+    }
+
+    public void Reset(int maxHealth)
+    {
         _maxHealth = maxHealth;
         _currentHealth = maxHealth;
+        HealthChanged?.Invoke(_currentHealth);
     }
 
     public void TakeDamage(int damage)

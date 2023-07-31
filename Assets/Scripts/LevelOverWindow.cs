@@ -10,6 +10,7 @@ public class LevelOverWindow : AnimatedWindow
     [SerializeField] private TMP_Text _timeText;
     [SerializeField] private TMP_Text _headshotsText;
     [SerializeField] private TMP_Text _accuracyText;
+    [SerializeField] private TMP_Text _moneyText;
 
     [SerializeField] private UIButton _nextLevelButton;
     [SerializeField] private UIButton _restartButton;
@@ -39,6 +40,7 @@ public class LevelOverWindow : AnimatedWindow
         _timeText.text = levelObserver.CompleteTime.ToString();
         _headshotsText.text = levelObserver.HeadShots.ToString();
         _accuracyText.text = (int)(levelObserver.Accuracy * 100) + " %";
+        _moneyText.text = "+ " + levelObserver.Money.ToString();
     }
 
     private void OnNextLevelButtonClick()

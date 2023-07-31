@@ -6,9 +6,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private LocationMap _locationMap;
     [SerializeField] private AdditionalMenu _additionalMenu;
 
-    private void Awake()
+    public void Init(Player player)
     {
-        _additionalMenu.Init(_locationMap);
+        _additionalMenu.Init(player, _locationMap);
     }
 
     public void Open()

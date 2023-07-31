@@ -11,6 +11,7 @@ public abstract class Creature : IApplyDamage
         Health = new Health(maxHealth);
     }
 
+
     public virtual void ApplyDamage(int damage)
     {
         if (damage < 0)

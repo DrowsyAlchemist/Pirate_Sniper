@@ -1,19 +1,29 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : Creature
+public class Player : IApplyDamage
 {
-    private int _initialDamage;
+    private readonly Saver _saver;
+    private readonly InputController _inputController;
+    private Health _health;
+    private Wallet _wallet;
 
-    private InputController _inputController;
+    public int MaxHealth => _saver.PlayerHealth;
+    public int Damage => _saver.PlayerDamage;
+    public IReadonlyHealth Health => _health;
+    public Wallet Wallet => _wallet;
+
 
     public event Action Shooted;
 
-    public Player(InputController inputController, int maxHealth, int damage) : base(maxHealth)
+    public Player(InputController inputController, Saver saver)
     {
+        _saver = saver;
+        _health = new(MaxHealth);
+        _wallet = new(saver);
         _inputController = inputController;
         inputController.Shooted += OnShooted;
-        _initialDamage = damage;
     }
 
     ~Player()
@@ -21,11 +31,40 @@ public class Player : Creature
         _inputController.Shooted -= OnShooted;
     }
 
+    public void Reset()
+    {
+        _health.Reset(_saver.PlayerHealth);
+    }
+
+    public void SetMaxHealth(int value)
+    {
+        if (value <= 0)
+            throw new ArgumentOutOfRangeException();
+
+        _saver.SetPlayerHealth(value);
+    }
+
+    public void SetDamage(int value)
+    {
+        if (value <= 0)
+            throw new ArgumentOutOfRangeException();
+
+        _saver.SetPlayerDamage(value);
+    }
+
     private void OnShooted(RaycastHit hit)
     {
         Shooted?.Invoke();
 
         if (hit.collider.TryGetComponent(out IApplyDamage target))
-            target.ApplyDamage(_initialDamage);
+            target.ApplyDamage(Damage);
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        if (damage < 0)
+            throw new ArgumentOutOfRangeException();
+
+        _health.TakeDamage(damage);
     }
 }

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3d3f57d26910409715337c718e55f, type: 3}
-  m_Name: PlayerSettings
+  m_Script: {fileID: 11500000, guid: cae9d57365f1bda4ca5fe16fa19e3d28, type: 3}
+  m_Name: MoneySettings
   m_EditorClassIdentifier: 
-  _initialHealth: 100
-  _initialDamage: 50
+  _moneyForEachEnemy: 50
+  _moneyForHeadshot: 20

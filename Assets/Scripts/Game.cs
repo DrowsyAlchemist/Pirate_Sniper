@@ -1,3 +1,4 @@
+using Agava.WebUtility;
 using Agava.YandexGames;
 using System;
 using System.Collections;
@@ -53,13 +54,14 @@ public class Game : MonoBehaviour
     private void Init()
     {
         InitInputController();
-        _player = new Player(_inputController, 100, 50);
         _levelsMenu.LevelClicked += LoadLevel;
         _levelOverWindow.Init();
         _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _saver = new Saver();
+        _player = new Player(_inputController, _saver);
+        _mainMenu.Init(_player);
         _levelsMenu.Init(_saver);
         _levelObserver = new(_player);
         _levelObserver.Completed += OnLevelCompleted;
@@ -89,6 +91,7 @@ public class Game : MonoBehaviour
 
     private void LoadLevel(Level levelTemplate)
     {
+        _player.Reset();
         _currentLevel = levelTemplate;
         _levelObserver.SetLevel(Instantiate(levelTemplate));
         _levelObserver.Start();
@@ -99,6 +102,7 @@ public class Game : MonoBehaviour
     private void OnLevelCompleted()
     {
         _levelOverWindow.Appear(_levelObserver);
+        _player.Wallet.Add(_levelObserver.Money);
 
         if (_levelObserver.Score > _saver.GetLevelScore(_currentLevel))
             _saver.SaveLevel(_currentLevel, _levelObserver.Score);

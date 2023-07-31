@@ -15,6 +15,7 @@ public class LevelObserver
     public float CompleteTime { get; private set; }
     public int Score { get; private set; }
     public int Stars { get; private set; }
+    public int Money { get; private set; }
     public float Accuracy => (float)EnemiesCount / ShotsCount;
 
     public event Action EnemyHeadshot;
@@ -62,6 +63,7 @@ public class LevelObserver
         CompleteTime = _stopwatch.ElapsedTime;
         Score = ScoreCalculator.Calculate(this);
         Stars = Settings.Score.GetStars(Score);
+        Money = MoneyCalculator.Calculate(this);
         Completed?.Invoke();
     }
 
@@ -81,6 +83,7 @@ public class LevelObserver
         CompleteTime = 0;
         Stars = 0;
         Score = 0;
+        Money = 0;
     }
 
     private void OnEnemyDead()

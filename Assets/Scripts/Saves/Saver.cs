@@ -13,6 +13,7 @@ public class Saver
     private readonly StringBuilder _stringBuilder;
     private SaveData _saves;
 
+    public int PlayerMoney => _saves.PlayerMoney;
     public int PlayerHealth => _saves.PlayerMaxHealth;
     public int PlayerDamage => _saves.PlayerDamage;
 
@@ -28,14 +29,22 @@ public class Saver
         Save();
     }
 
+    public void SetPlayerMoney(int value)
+    {
+        _saves.PlayerMoney = (value >= 0) ? value : throw new ArgumentOutOfRangeException();
+        Save();
+    }
+
     public void SetPlayerHealth(int value)
     {
         _saves.PlayerMaxHealth = (value > 0) ? value : throw new ArgumentOutOfRangeException();
+        Save();
     }
 
     public void SetPlayerDamage(int value)
     {
         _saves.PlayerDamage = (value > 0) ? value : throw new ArgumentOutOfRangeException();
+        Save();
     }
 
     public int GetLevelScore(int locationIndex, int levelIndex)
@@ -58,6 +67,7 @@ public class Saver
     public void SaveLevel(Level level, int score)
     {
         SaveLevel(level.Location.Index, level.IndexInLocation, score);
+        Save();
     }
 
     public void SaveLevel(int locationNumber, int levelIndex, int score)
@@ -84,7 +94,7 @@ public class Saver
 
     private void LoadSaves(out SaveData saves)
     {
-        string jsonData;
+        string jsonData = null;
 #if UNITY_EDITOR
         jsonData = PlayerPrefs.GetString(SavesName);
         SetSaves(out saves, jsonData);
@@ -124,6 +134,7 @@ public class Saver
     [Serializable]
     private class SaveData
     {
+        public int PlayerMoney;
         public int PlayerMaxHealth;
         public int PlayerDamage;
 
@@ -132,8 +143,8 @@ public class Saver
 
         public SaveData(StringBuilder stringBuilder)
         {
-            PlayerMaxHealth = Settings.Player.InitialHealth;
-            PlayerDamage = Settings.Player.InitialDamage;
+            PlayerMaxHealth = Settings.Characteristics.Health.DefaultValue;
+            PlayerDamage = Settings.Characteristics.Damage.DefaultValue;
 
             stringBuilder.Clear();
 

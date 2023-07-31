@@ -12,12 +12,14 @@ public class AdditionalMenu : AnimatedWindow
 
     private LocationMap _locationMap;
 
-    public void Init(LocationMap locationMap)
+    public void Init(Player player, LocationMap locationMap)
     {
         gameObject.SetActive(true);
         _locationMap = locationMap;
         _locationMap.LocationChosen += OpenLevels;
         _closeButton.SetOnClickAction(base.Disappear);
+
+        _characteristicsMenu.Init(player);
     }
 
     private void OnDestroy()
