@@ -2,19 +2,19 @@ using System;
 
 public class Enemy : Creature
 {
-    private readonly EnemyPreset _preset;
+    public readonly EnemyPreset Preset;
 
     public event Action<int> Headshot;
 
     public Enemy(EnemyPreset preset) : base(preset.Health)
     {
-        _preset = preset;
+        Preset = preset;
         Health.Dead += OnDead;
     }
 
     public void ApplyHeadshot(int damage)
     {
-        int increasedDamage = (int)(_preset.HeadshotDamageModifier * damage);
+        int increasedDamage = (int)(Preset.HeadshotDamageModifier * damage);
         Headshot?.Invoke(increasedDamage);
         base.ApplyDamage(increasedDamage);
     }
