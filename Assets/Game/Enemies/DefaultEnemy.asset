@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _damage: 50
+  _secondsBetweenShots: 3
+  _accuracyInPercents: 70
   _headshotDamageModifier: 2
