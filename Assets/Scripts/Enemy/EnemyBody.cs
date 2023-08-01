@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EnemyBody : MonoBehaviour,IApplyDamage
+public class EnemyBody : MonoBehaviour, IApplyDamage
 {
     [SerializeField] private EnemyPreset _preset;
     [SerializeField] private CharacterAnimator _animator;
@@ -11,9 +11,9 @@ public class EnemyBody : MonoBehaviour,IApplyDamage
 
     public Enemy Enemy => _enemy;
 
-    public void Init()
+    public void Init(Player player)
     {
-        _enemy = new Enemy(_preset);
+        _enemy = new Enemy(_preset, player);
         _enemy.ReadonlyHealth.Dead += OnDead;
         _head.Damaged += OnHeadshot;
     }

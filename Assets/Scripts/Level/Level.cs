@@ -36,7 +36,7 @@ public class Level : MonoBehaviour
         _saver = saver;
 
         _levelObserver = new(_player);
-        _levelInfoRenderer.Init(_levelObserver);
+        _levelInfoRenderer.Init(_player, _levelObserver);
         _levelOverWindow.Init();
 
         _levelsMenu.LevelClicked += LoadLevel;

@@ -1,15 +1,19 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyBody))]
 public abstract class EnemyState : MonoBehaviour
 {
     [SerializeField] private EnemyTransition[] _transitions;
 
-    protected Player Player { get; private set; }
-    protected Enemy Enemy { get; private set; }
+    private EnemyBody _enemyBody;
+
+    protected Enemy Enemy => _enemyBody.Enemy;
+    protected Player Player => Enemy.Target;
 
     private void Awake()
     {
         enabled = false;
+        _enemyBody = GetComponent<EnemyBody>();
     }
 
     public void Enter()
