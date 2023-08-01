@@ -13,6 +13,8 @@ public class InputController : MonoBehaviour
     [SerializeField] private PcPointerUpArea _pcPointerUpArea;
     [SerializeField] private MobilePointerUpArea _mobilePointerUpArea;
 
+    [SerializeField] private HomeButton _homeButton;
+
     private IPointerDownArea _pointerDownArea;
     private IPointerUpArea _pointerUpArea;
 
@@ -33,6 +35,7 @@ public class InputController : MonoBehaviour
 
         _pointerDownArea = isMobile ? _mobilePointerDownArea : _pcPointerDownArea;
         _pointerUpArea = isMobile ? _mobilePointerUpArea : _pcPointerUpArea;
+        _homeButton.Init(isMobile);
 
         _pointerDownArea.PointerDown += Scope;
         _pointerUpArea.PointerUp += Shoot;

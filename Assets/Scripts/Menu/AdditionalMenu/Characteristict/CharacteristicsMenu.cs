@@ -1,3 +1,5 @@
+using Agava.YandexGames;
+using System;
 using UnityEngine;
 
 public class CharacteristicsMenu : MoneyRenderer
@@ -36,24 +38,51 @@ public class CharacteristicsMenu : MoneyRenderer
 
     private void OnHealthButtonClick()
     {
-        if (_player.Wallet.CanGive(NextHealthLevel.Cost))
-        {
-            _player.Wallet.Give(NextHealthLevel.Cost);
-            _player.SetMaxHealth(NextHealthLevel.Value);
-            _healthRenderer.Render();
-            RenderNextHealthLevel();
-        }
+        if (NextHealthLevel.Cost <= 0)
+            RewardForAd(IncreaseHealth);
+        else if (TryGetMoney(NextHealthLevel.Cost))
+            IncreaseHealth();
     }
 
     private void OnDamageButtonClick()
     {
-        if (_player.Wallet.CanGive(NextDamageLevel.Cost))
+        if (NextDamageLevel.Cost <= 0)
+            RewardForAd(IncreaseDamage);
+        else if (TryGetMoney(NextDamageLevel.Cost))
+            IncreaseDamage();
+    }
+
+    private void IncreaseHealth()
+    {
+        _player.SetMaxHealth(NextHealthLevel.Value);
+        _healthRenderer.Render();
+        RenderNextHealthLevel();
+    }
+
+    private void IncreaseDamage()
+    {
+        _player.SetDamage(NextDamageLevel.Value);
+        _damageRenderer.Render();
+        RenderNextDamageLevel();
+    }
+
+    private void RewardForAd(Action reward)
+    {
+#if UNITY_EDITOR
+        reward();
+        return;
+#endif
+        VideoAd.Show(onRewardedCallback: reward);
+    }
+
+    private bool TryGetMoney(int money)
+    {
+        if (_player.Wallet.CanGive(money))
         {
-            _player.Wallet.Give(NextDamageLevel.Cost);
-            _player.SetDamage(NextDamageLevel.Value);
-            _damageRenderer.Render();
-            RenderNextDamageLevel();
+            _player.Wallet.Give(money);
+            return true;
         }
+        return false;
     }
 
     private void RenderNextHealthLevel()

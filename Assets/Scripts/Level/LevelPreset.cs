@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class LevelPreset : MonoBehaviour
 {
     [SerializeField] private EnemyBody[] _enemies;
 
@@ -9,7 +9,7 @@ public class Level : MonoBehaviour
     public Location Location => LocationsStorage.GetLocation(this);
     public int IndexInLocation => LocationsStorage.GetLocation(this).GetLevelIndex(this);
     public int Stars => Settings.Score.GetStars(Score);
-    public int Score => Game.GetLevelScore(this);
+    public int Score => Level.GetLevelScore(this);
 
     public IReadOnlyCollection<EnemyBody> Enemies => _enemies;
 }

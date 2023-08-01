@@ -8,11 +8,11 @@ public class Location : ScriptableObject
     [SerializeField] private string _lable;
     [SerializeField] private Sprite _sprite;
     [SerializeField] private int _requiredStars;
-    [SerializeField] private Level[] _levels;
+    [SerializeField] private LevelPreset[] _levels;
 
     public string Lable => _lable;
     public Sprite Sprite => _sprite;
-    public IReadOnlyList<Level> Levels => _levels;
+    public IReadOnlyList<LevelPreset> Levels => _levels;
     public int RequiredStars => _requiredStars;
     public int Index => LocationsStorage.GetIndex(this);
 
@@ -20,8 +20,8 @@ public class Location : ScriptableObject
     {
         get
         {
-            foreach (var level in _levels)
-                if (level.IsCompleted == false)
+            foreach (var levelPreset in _levels)
+                if (levelPreset.IsCompleted == false)
                     return false;
 
             return true;
@@ -34,14 +34,14 @@ public class Location : ScriptableObject
         {
             int stars = 0;
 
-            foreach (var level in _levels)
-                stars += level.Stars;
+            foreach (var levelPreset in _levels)
+                stars += levelPreset.Stars;
 
             return stars;
         }
     }
 
-    public int GetLevelIndex(Level level)
+    public int GetLevelIndex(LevelPreset level)
     {
         for (int i = 0; i < _levels.Length; i++)
             if (_levels[i] == level)
@@ -50,7 +50,7 @@ public class Location : ScriptableObject
         throw new InvalidOperationException("There are no such level in the location");
     }
 
-    public Level GetLevelByIndex(int index)
+    public LevelPreset GetLevelByIndex(int index)
     {
         if (index < 0 || index >= _levels.Length)
             throw new ArgumentOutOfRangeException("index");

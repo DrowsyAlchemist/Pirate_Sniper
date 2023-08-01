@@ -27,12 +27,12 @@ public class LocationsStorage : MonoBehaviour
         throw new InvalidOperationException("There are no such location in the storage");
     }
 
-    public static Location GetLocation(Level level)
+    public static Location GetLocation(LevelPreset level)
     {
         return _instance._locations[GetLocationIndex(level)];
     }
 
-    public static int GetLocationIndex(Level level)
+    public static int GetLocationIndex(LevelPreset level)
     {
         for (int i = 0; i < _instance._locations.Length; i++)
             foreach (var lvl in _instance._locations[i].Levels)

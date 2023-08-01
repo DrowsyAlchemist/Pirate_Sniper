@@ -8,18 +8,18 @@ public class LevelRenderer : MonoBehaviour
     [SerializeField] private TMP_Text _number;
     [SerializeField] private TMP_Text _stars;
 
-    private Level _level;
+    private LevelPreset _level;
 
-    public event Action<Level> Clicked;
+    public event Action<LevelPreset> Clicked;
 
     private void Awake()
     {
         _button.SetOnClickAction(OnButtonClick);
     }
 
-    public void Render(Level level)
+    public void Render(LevelPreset level)
     {
-        _level = level;
+        _level = level ?? throw new ArgumentNullException();
         _number.text = (level.IndexInLocation + 1).ToString();
         _stars.text = level.Stars + " / 3";
     }

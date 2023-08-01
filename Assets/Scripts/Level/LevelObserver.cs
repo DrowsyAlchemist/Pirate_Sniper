@@ -2,11 +2,11 @@ using System;
 
 public class LevelObserver
 {
-    private Level _levelInstance;
+    private LevelPreset _levelInstance;
     private readonly Stopwatch _stopwatch;
     private readonly Player _player;
 
-    public Level LevelInstance => _levelInstance;
+    public LevelPreset LevelInstance => _levelInstance;
     public int EnemiesCount => _levelInstance.Enemies.Count;
     public int EnemiesLeft { get; private set; }
 
@@ -34,7 +34,7 @@ public class LevelObserver
         _player.Shooted -= OnShooted;
     }
 
-    public void SetLevel(Level levelInstance)
+    public void SetLevel(LevelPreset levelInstance)
     {
         Clear();
         _levelInstance = levelInstance;

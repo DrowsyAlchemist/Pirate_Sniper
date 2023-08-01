@@ -58,13 +58,13 @@ public class Saver
         }
     }
 
-    public int GetLevelScore(Level level)
+    public int GetLevelScore(LevelPreset level)
     {
         Location location = LocationsStorage.GetLocation(level);
         return GetLevelScore(LocationsStorage.GetLocationIndex(level), location.GetLevelIndex(level));
     }
 
-    public void SaveLevel(Level level, int score)
+    public void SaveLevel(LevelPreset level, int score)
     {
         SaveLevel(level.Location.Index, level.IndexInLocation, score);
         Save();

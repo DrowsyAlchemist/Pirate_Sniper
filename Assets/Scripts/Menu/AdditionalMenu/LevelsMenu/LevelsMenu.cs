@@ -7,16 +7,9 @@ public class LevelsMenu : Window
     [SerializeField] private RectTransform _container;
     [SerializeField] private LevelRenderer _levelRendererTemplate;
 
-    private Saver _saver;
-
-    public event Action<Level> LevelClicked;
+    public event Action<LevelPreset> LevelClicked;
 
     private List<LevelRenderer> _levelRenderers = new();
-
-    public void Init(Saver saver)
-    {
-        _saver = saver;
-    }
 
     private void OnDestroy()
     {
@@ -41,7 +34,7 @@ public class LevelsMenu : Window
             _levelRenderers[i].Deactivate();
     }
 
-    private void OnLevelClick(Level level)
+    private void OnLevelClick(LevelPreset level)
     {
         LevelClicked?.Invoke(level);
     }
