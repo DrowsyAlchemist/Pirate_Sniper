@@ -9,6 +9,7 @@ public class Settings : MonoBehaviour
     [SerializeField] private ScoreSettings _score;
     [SerializeField] private MoneySettings _money;
     [SerializeField] private LeaderboardSettings _leaderboard;
+    [SerializeField] private SoundSettings _sound;
 
     [SerializeField] private PlayerCharacteristics _characteristics;
 
@@ -29,6 +30,7 @@ public class Settings : MonoBehaviour
     public static ScoreSettings Score => _instance._score;
     public static MoneySettings Money => _instance._money;
     public static LeaderboardSettings Leaderboard => _instance._leaderboard;
+    public static SoundSettings Sound => _instance._sound;
     public static PlayerCharacteristics Characteristics => _instance._characteristics;
 
     [Serializable]

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f1934f902b94942b5c5cde328ae424, type: 3}
+  m_Name: SoundSettings
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 24100000, guid: 639a688cbdc6ad9449d3a928dc440a2b, type: 2}
+  _masterVolumeName: MasterVolume
+  _generalVolumeName: GeneralVolume
+  _musicVolumeName: MusicVolume
+  _effectsVolumeName: EffectsVolume
+  _uiVolumeName: UIVolume
+  _maxValue: 0
+  _minValue: -40
+  _onSprite: {fileID: 21300000, guid: a63a928ea7cb832458f4a167837c50cf, type: 3}
+  _offSprite: {fileID: 21300000, guid: 6c837df8434edbc499ed30003e7e973a, type: 3}

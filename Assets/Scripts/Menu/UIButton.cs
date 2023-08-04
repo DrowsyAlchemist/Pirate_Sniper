@@ -11,7 +11,10 @@ public class UIButton : MonoBehaviour
     protected void OnDestroy()
     {
         if (_button != null)
+        {
             _button.RemoveListener(_onClick);
+            OnButtonDestroy();
+        }
     }
 
     public void SetOnClickAction(UnityAction onClick)
@@ -26,5 +29,9 @@ public class UIButton : MonoBehaviour
     public void SetInteractable(bool value)
     {
         _button.interactable = value;
+    }
+
+    protected virtual void OnButtonDestroy()
+    {
     }
 }
