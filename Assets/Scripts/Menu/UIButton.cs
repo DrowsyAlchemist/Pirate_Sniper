@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -22,5 +21,10 @@ public class UIButton : MonoBehaviour
 
         _onClick = onClick;
         _button.AddListener(_onClick);
+    }
+
+    public void SetInteractable(bool value)
+    {
+        _button.interactable = value;
     }
 }

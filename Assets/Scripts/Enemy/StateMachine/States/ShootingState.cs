@@ -6,12 +6,14 @@ public class ShootingState : EnemyState
 
     private Timer _timer;
 
+    public float SecondsBetweenShots => Random.Range(Enemy.Preset.MinSecondsBetweenShots, Enemy.Preset.MaxSecondsBetweenShots);
+
     private void OnEnable()
     {
         if (_timer == null)
             Init();
 
-        _timer.Start(Enemy.Preset.SecondsBetweenShots);
+        _timer.Start(SecondsBetweenShots);
     }
 
     private void OnDisable()
@@ -37,6 +39,6 @@ public class ShootingState : EnemyState
             Player.ApplyDamage(Enemy.Preset.Damage);
 
         _shotEffect.Play();
-        _timer.Start(Enemy.Preset.SecondsBetweenShots);
+        _timer.Start(SecondsBetweenShots);
     }
 }

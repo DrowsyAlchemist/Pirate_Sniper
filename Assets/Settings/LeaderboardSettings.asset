@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c2566e18dc46a408122962956cb5ec, type: 3}
+  m_Name: LeaderboardSettings
+  m_EditorClassIdentifier: 
+  _leaderboardName: PiratesLeaderboard
+  _topPlayersCount: 5
+  _competingPlayersCount: 5
+  _includeSelf: 1
+  _profilePictureSize: 1
+  _defaultName: "\u0418\u043D\u043A\u043E\u0433\u043D\u0438\u0442\u043E"
+  _defaultAvatar: {fileID: 21300000, guid: 88214a3a666014e50aa619bf5a0c5aee, type: 3}

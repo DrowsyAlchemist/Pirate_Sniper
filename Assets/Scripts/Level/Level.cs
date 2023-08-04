@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -53,6 +54,15 @@ public class Level : MonoBehaviour
 
     private void LoadLevel(LevelPreset levelTemplate)
     {
+#if !UNITY_EDITOR
+        if (_currentLevel != null && IsLevelCompleted(_currentLevel))
+            InterstitialAd.Show();
+        else
+            VideoAd.Show();
+#endif
+        if (_levelObserver.LevelInstance != null)
+            Destroy(_levelObserver.LevelInstance.gameObject);
+
         _player.Reset();
         _currentLevel = levelTemplate;
         _levelObserver.SetLevel(Instantiate(levelTemplate));
@@ -61,13 +71,21 @@ public class Level : MonoBehaviour
         _levelInfoRenderer.ResetInfo();
     }
 
-    private void OnLevelCompleted()
+    private bool IsLevelCompleted(LevelPreset level)
     {
-        _levelOverWindow.Appear(_levelObserver);
-        _player.Wallet.Add(_levelObserver.Money);
+        return GetLevelScore(level) > 0;
+    }
 
-        if (_levelObserver.Score > _saver.GetLevelScore(_currentLevel))
-            _saver.SaveLevel(_currentLevel, _levelObserver.Score);
+    private void OnLevelCompleted(bool isWon)
+    {
+        if (isWon)
+        {
+            _player.Wallet.Add(_levelObserver.Money);
+
+            if (_levelObserver.Score > _saver.GetLevelScore(_currentLevel))
+                _saver.SaveLevel(_currentLevel, _levelObserver.Score);
+        }
+        _levelOverWindow.Appear(_levelObserver);
     }
 
     private void OnNextLevelButtonClick()
@@ -95,6 +113,5 @@ public class Level : MonoBehaviour
     private void OnBackToMenuButtonClick()
     {
         _mainMenu.Open();
-        Destroy(_levelObserver.LevelInstance.gameObject);
     }
 }

@@ -17,21 +17,24 @@ public class LevelObserver
     public int Stars { get; private set; }
     public int Money { get; private set; }
     public float Accuracy => (float)EnemiesCount / ShotsCount;
+    public bool IsWon { get; private set; }
 
     public event Action EnemyHeadshot;
     public event Action EnemyDead;
-    public event Action Completed;
+    public event Action<bool> Completed;
 
     public LevelObserver(Player player)
     {
         _stopwatch = new();
         _player = player;
         _player.Shooted += OnShooted;
+        _player.Health.Dead += OnPlayerDead;
     }
 
     ~LevelObserver()
     {
         _player.Shooted -= OnShooted;
+        _player.Health.Dead -= OnPlayerDead;
     }
 
     public void SetLevel(LevelPreset levelInstance)
@@ -51,20 +54,25 @@ public class LevelObserver
     public void Start()
     {
         if (Score > 0)
-            throw new InvalidOperationException("You should clear before start");
+            throw new InvalidOperationException("You should Set Level before start");
 
         _stopwatch.Reset();
         _stopwatch.Start();
     }
 
-    private void Stop()
+    private void Complete(bool isWon)
     {
         _stopwatch.Stop();
-        CompleteTime = _stopwatch.ElapsedTime;
-        Score = ScoreCalculator.Calculate(this);
-        Stars = Settings.Score.GetStars(Score);
-        Money = MoneyCalculator.Calculate(this);
-        Completed?.Invoke();
+
+        if (isWon)
+        {
+            CompleteTime = _stopwatch.ElapsedTime;
+            Score = ScoreCalculator.Calculate(this);
+            Stars = Settings.Score.GetStars(Score);
+            Money = MoneyCalculator.Calculate(this);
+        }
+        IsWon = isWon;
+        Completed?.Invoke(isWon);
     }
 
     private void Clear()
@@ -84,6 +92,7 @@ public class LevelObserver
         Stars = 0;
         Score = 0;
         Money = 0;
+        IsWon = false;
     }
 
     private void OnEnemyDead()
@@ -92,7 +101,12 @@ public class LevelObserver
         EnemyDead?.Invoke();
 
         if (EnemiesLeft == 0)
-            Stop();
+            Complete(isWon: true);
+    }
+
+    private void OnPlayerDead()
+    {
+        Complete(isWon: false);
     }
 
     private void OnShooted()

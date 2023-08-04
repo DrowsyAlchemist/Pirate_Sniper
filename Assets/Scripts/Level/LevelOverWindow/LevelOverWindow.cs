@@ -1,20 +1,11 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class LevelOverWindow : AnimatedWindow
 {
-    [SerializeField] private TMP_Text _scoreText;
-    [SerializeField] private TMP_Text _starsText;
-    [SerializeField] private TMP_Text _timeText;
-    [SerializeField] private TMP_Text _headshotsText;
-    [SerializeField] private TMP_Text _accuracyText;
-    [SerializeField] private TMP_Text _moneyText;
-
-    [SerializeField] private UIButton _nextLevelButton;
-    [SerializeField] private UIButton _restartButton;
-    [SerializeField] private UIButton _menuButton;
+    [SerializeField] private LevelOverPanel _losePanel;
+    [SerializeField] private WinPanel _winPanel;
 
     public event Action NextLevelButtonClicked;
     public event Action RestartButtonClicked;
@@ -22,9 +13,8 @@ public class LevelOverWindow : AnimatedWindow
 
     public void Init()
     {
-        _nextLevelButton.SetOnClickAction(OnNextLevelButtonClick);
-        _restartButton.SetOnClickAction(OnRestartButtonClick);
-        _menuButton.SetOnClickAction(OnMenuButtonClick);
+        InitLevelOverPanel(_losePanel);
+        InitLevelOverPanel(_winPanel);
     }
 
     public void Appear(LevelObserver levelObserver)
@@ -33,14 +23,21 @@ public class LevelOverWindow : AnimatedWindow
         base.Appear();
     }
 
+    private void InitLevelOverPanel(LevelOverPanel panel)
+    {
+        panel.Init();
+        panel.NextLevelButtonClicked += OnNextLevelButtonClick;
+        panel.RestartButtonClicked += OnRestartButtonClick;
+        panel.MenuButtonClicked += OnMenuButtonClick;
+        panel.Close();
+    }
+
     private void Render(LevelObserver levelObserver)
     {
-        _scoreText.text = levelObserver.Score.ToString();
-        _starsText.text = levelObserver.Stars + " / 3";
-        _timeText.text = levelObserver.CompleteTime.ToString();
-        _headshotsText.text = levelObserver.HeadShots.ToString();
-        _accuracyText.text = (int)(levelObserver.Accuracy * 100) + " %";
-        _moneyText.text = "+ " + levelObserver.Money.ToString();
+        if (levelObserver.IsWon)
+            _winPanel.Open(levelObserver);
+        else
+            _losePanel.Open();
     }
 
     private void OnNextLevelButtonClick()
@@ -65,6 +62,8 @@ public class LevelOverWindow : AnimatedWindow
         while (IsPlaying)
             yield return null;
 
+        _losePanel.Close();
+        _winPanel.Close();
         action();
     }
 }
