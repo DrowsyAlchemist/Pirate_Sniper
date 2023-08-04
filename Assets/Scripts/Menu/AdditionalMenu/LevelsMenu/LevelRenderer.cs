@@ -6,7 +6,8 @@ public class LevelRenderer : MonoBehaviour
 {
     [SerializeField] private UIButton _button;
     [SerializeField] private TMP_Text _number;
-    [SerializeField] private TMP_Text _stars;
+
+    [SerializeField] private RectTransform[] _stars;
 
     private LevelPreset _level;
 
@@ -21,7 +22,14 @@ public class LevelRenderer : MonoBehaviour
     {
         _level = level ?? throw new ArgumentNullException();
         _number.text = (level.IndexInLocation + 1).ToString();
-        _stars.text = level.Stars + " / 3";
+
+        int i = 0;
+
+        for (; i < level.Stars; i++)
+            _stars[i].Activate();
+
+        for (; i < _stars.Length; i++)
+            _stars[i].Deactivate();
     }
 
     private void OnButtonClick()
