@@ -31,6 +31,7 @@ public class Game : MonoBehaviour
         _saver = new Saver();
         _player = new Player(_inputController, _saver);
         _mainMenu.Init(_player);
+        _mainMenu.Open();
         _level.Init(_player, _saver);
     }
 

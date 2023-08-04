@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+        Sound.SetBackgroundMusic(Settings.Sound.MenuMusic);
     }
 
     public void Close()

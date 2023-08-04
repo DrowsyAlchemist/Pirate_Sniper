@@ -16,6 +16,9 @@ public class SoundSettings : ScriptableObject
     [SerializeField] private Sprite _onSprite;
     [SerializeField] private Sprite _offSprite;
 
+    [SerializeField] private AudioClip _menuMusic;
+    [SerializeField] private AudioClip _buttleMusic;
+
     public AudioMixer Mixer => _mixer;
     public string MasterVolumeName => _masterVolumeName;
     public string GeneralVolumeName => _generalVolumeName;
@@ -26,4 +29,6 @@ public class SoundSettings : ScriptableObject
     public float MinValue => _minValue;
     public Sprite OnSprite => _onSprite;
     public Sprite OffSprite => _offSprite;
+    public AudioClip MenuMusic => _menuMusic;
+    public AudioClip ButtleMusic => _buttleMusic;
 }

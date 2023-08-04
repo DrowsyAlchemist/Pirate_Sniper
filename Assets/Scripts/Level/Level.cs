@@ -69,6 +69,7 @@ public class Level : MonoBehaviour
         _levelObserver.Start();
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
+        Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
     }
 
     private bool IsLevelCompleted(LevelPreset level)

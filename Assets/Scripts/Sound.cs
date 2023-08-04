@@ -4,6 +4,8 @@ using System;
 
 public class Sound : MonoBehaviour
 {
+    [SerializeField] private AudioSource _backgroundMusic;
+
     private static Sound _instance;
     public static bool IsOn { get; private set; }
     protected static SoundSettings SoundSettings => Settings.Sound;
@@ -48,6 +50,12 @@ public class Sound : MonoBehaviour
         _instance.TurnSoundOff();
         IsOn = false;
         ConditionChanged?.Invoke(false);
+    }
+
+    public static void SetBackgroundMusic(AudioClip clip)
+    {
+        _instance._backgroundMusic.clip = clip;
+        _instance._backgroundMusic.Play();
     }
 
     public static void SetGeneralVolume(float normalizedValue)
