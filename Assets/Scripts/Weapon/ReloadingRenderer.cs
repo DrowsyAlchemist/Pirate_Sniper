@@ -31,7 +31,6 @@ public class ReloadingRenderer : MonoBehaviour
     {
         while (weapon.IsReady == false)
         {
-            Debug.Log(weapon.SecondsBeforeReadyLeft);
             _slider.value = 1 - weapon.SecondsBeforeReadyLeft / weapon.Info.SecondsBetweenShots;
             yield return null;
         }
