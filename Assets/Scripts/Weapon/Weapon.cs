@@ -14,6 +14,8 @@ public class Weapon : MonoBehaviour
     public bool IsReady => (_animator.IsPlaying == false) && (SecondsBeforeReadyLeft < Settings.Epsilon);
     public float SecondsBeforeReadyLeft => _info.SecondsBetweenShots - _timer.ElapsedTime;
 
+    public event Action Shooted;
+
     public void Init()
     {
         _animator = GetComponent<WeaponAnimator>();
@@ -33,5 +35,7 @@ public class Weapon : MonoBehaviour
 
         if (hit.collider.TryGetComponent(out IApplyDamage target))
             target.ApplyDamage(_info.Damage + playerDamage);
+
+        Shooted?.Invoke();
     }
 }
