@@ -15,6 +15,7 @@ public class LevelOverWindow : AnimatedWindow
     {
         InitLevelOverPanel(_losePanel);
         InitLevelOverPanel(_winPanel);
+        gameObject.SetActive(true);
     }
 
     public void Appear(LevelObserver levelObserver)

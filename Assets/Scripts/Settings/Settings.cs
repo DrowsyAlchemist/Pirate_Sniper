@@ -13,7 +13,7 @@ public class Settings : MonoBehaviour
 
     [SerializeField] private PlayerCharacteristics _characteristics;
 
-    public const float Epsilon = 0.5f;
+    public const float Epsilon = 0.01f;
     private static Settings _instance;
 
     private void Awake()

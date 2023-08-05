@@ -8,6 +8,8 @@ public class Timer
     private float _elapsedTime;
     private Coroutine _coroutine;
 
+    public float ElapsedTime => _elapsedTime;
+
     public event Action WentOff;
 
     public void Start(float time)
@@ -32,6 +34,7 @@ public class Timer
             _elapsedTime += Time.deltaTime;
             yield return null;
         }
+        _elapsedTime = _time;
         WentOff?.Invoke();
     }
 }

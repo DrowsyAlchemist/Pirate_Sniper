@@ -110,7 +110,7 @@ public class InputController : MonoBehaviour
 
     private IEnumerator SetFieldOfView(float value)
     {
-        while (Mathf.Abs(_camera.fieldOfView - value) > Settings.Epsilon)
+        while (Mathf.Abs(_camera.fieldOfView - value) > Settings.Camera.FieldOfViewEpsilon)
         {
             _camera.fieldOfView = Mathf.Lerp(_camera.fieldOfView, value, Settings.Shooting.ScopeSpeed);
             yield return new WaitForFixedUpdate();
@@ -121,8 +121,7 @@ public class InputController : MonoBehaviour
     {
         Vector3 camera—enter = new Vector3(0.5f, 0.5f, 0);
         Ray ray = _camera.ViewportPointToRay(camera—enter);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
+        Physics.Raycast(ray, out RaycastHit hit);
         Shooted?.Invoke(hit);
         Unscope();
     }

@@ -28,7 +28,7 @@ public class AnimatedWindow : MonoBehaviour
         _animator.Play(DisappearAnimation);
     }
 
-    private void SetNotPlaying()
+    private void OnAnimatorStopPlaying()
     {
         IsPlaying = false;
     }

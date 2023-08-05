@@ -13,6 +13,7 @@ public class Player : IApplyDamage
     public int Damage => _saver.PlayerDamage;
     public IReadonlyHealth Health => _health;
     public Wallet Wallet => _wallet;
+    public Weapon Weapon { get; private set; }
 
 
     public event Action Shooted;
@@ -52,12 +53,18 @@ public class Player : IApplyDamage
         _saver.SetPlayerDamage(value);
     }
 
+    public void SetWeapon(Weapon weapon)
+    {
+        Weapon = weapon;
+    }
+
     private void OnShooted(RaycastHit hit)
     {
-        Shooted?.Invoke();
-
-        if (hit.collider.TryGetComponent(out IApplyDamage target))
-            target.ApplyDamage(Damage);
+        if (Weapon.IsReady)
+        {
+            Shooted?.Invoke();
+            Weapon.Shoot(hit, Damage);
+        }
     }
 
     public void ApplyDamage(int damage)

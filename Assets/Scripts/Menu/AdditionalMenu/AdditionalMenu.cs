@@ -20,6 +20,7 @@ public class AdditionalMenu : AnimatedWindow
         _closeButton.SetOnClickAction(base.Disappear);
 
         _characteristicsMenu.Init(player);
+        _storeMenu.Init(player);
     }
 
     private void OnDestroy()
