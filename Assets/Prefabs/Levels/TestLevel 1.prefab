@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a006679fb5edee43af5607c5f72abdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: Level2
   _enemies:
   - {fileID: 4825692695560270838}
   - {fileID: 8887280903800608474}

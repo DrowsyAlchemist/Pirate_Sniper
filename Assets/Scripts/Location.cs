@@ -44,7 +44,7 @@ public class Location : ScriptableObject
     public int GetLevelIndex(LevelPreset level)
     {
         for (int i = 0; i < _levels.Length; i++)
-            if (_levels[i] == level)
+            if (_levels[i].Equals(level))
                 return i;
 
         throw new InvalidOperationException("There are no such level in the location");

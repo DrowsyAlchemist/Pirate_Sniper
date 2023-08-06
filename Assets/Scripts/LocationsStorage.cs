@@ -36,7 +36,7 @@ public class LocationsStorage : MonoBehaviour
     {
         for (int i = 0; i < _instance._locations.Length; i++)
             foreach (var lvl in _instance._locations[i].Levels)
-                if (lvl == level)
+                if (lvl.Equals(level))
                     return i;
 
         throw new InvalidOperationException("There are no such level in the storage");
