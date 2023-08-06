@@ -47,6 +47,28 @@ public class Saver
         Save();
     }
 
+    public void SaveWeaponAccuired(Weapon weapon)
+    {
+        _saves.Weapons += weapon.Info.Id;
+        Save();
+    }
+
+    public void SetCurrentWeapon(Weapon weapon)
+    {
+        _saves.CurrentWeapon = weapon.Info.Id;
+        Save();
+    }
+
+    public string GetCurrentWeapon()
+    {
+        return _saves.CurrentWeapon;
+    }
+
+    public bool GetWeaponAccuired(Weapon weapon)
+    {
+        return _saves.Weapons.Contains(weapon.Info.Id);
+    }
+
     public int GetLevelScore(int locationIndex, int levelIndex)
     {
         switch (locationIndex)
@@ -141,6 +163,9 @@ public class Saver
         public string ZeroLocation;
         public string FirstLocation;
 
+        public string CurrentWeapon;
+        public string Weapons;
+
         public SaveData(StringBuilder stringBuilder)
         {
             PlayerMaxHealth = Settings.Characteristics.Health.DefaultValue;
@@ -154,6 +179,8 @@ public class Saver
             string defaultString = stringBuilder.ToString();
             ZeroLocation = defaultString;
             FirstLocation = defaultString;
+            CurrentWeapon = Settings.Shooting.DefaultWeapon.Info.Id;
+            Weapons = CurrentWeapon;
         }
     }
 }

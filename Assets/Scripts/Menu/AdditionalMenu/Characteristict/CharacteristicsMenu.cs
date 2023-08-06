@@ -7,8 +7,8 @@ public class CharacteristicsMenu : MoneyRenderer
     [SerializeField] private PlayerMaxHealthRenderer _healthRenderer;
     [SerializeField] private PlayerDamageRenderer _damageRenderer;
 
-    [SerializeField] private IncreaseCharacteristicPanel _healthPanel;
-    [SerializeField] private IncreaseCharacteristicPanel _damagePanel;
+    [SerializeField] private WareRenderer _healthPanel;
+    [SerializeField] private WareRenderer _damagePanel;
 
     private Player _player;
 
@@ -36,19 +36,19 @@ public class CharacteristicsMenu : MoneyRenderer
         RenderNextDamageLevel();
     }
 
-    private void OnHealthButtonClick()
+    private void OnHealthButtonClick(WareRenderer _)
     {
         if (NextHealthLevel.Cost <= 0)
-            RewardForAd(IncreaseHealth);
-        else if (TryGetMoney(NextHealthLevel.Cost))
+            Advertising.RewardForAd(IncreaseHealth);
+        else if (_player.Wallet.TryGiveMoney(NextHealthLevel.Cost))
             IncreaseHealth();
     }
 
-    private void OnDamageButtonClick()
+    private void OnDamageButtonClick(WareRenderer _)
     {
         if (NextDamageLevel.Cost <= 0)
-            RewardForAd(IncreaseDamage);
-        else if (TryGetMoney(NextDamageLevel.Cost))
+            Advertising.RewardForAd(IncreaseDamage);
+        else if (_player.Wallet.TryGiveMoney(NextDamageLevel.Cost))
             IncreaseDamage();
     }
 
@@ -66,31 +66,12 @@ public class CharacteristicsMenu : MoneyRenderer
         RenderNextDamageLevel();
     }
 
-    private void RewardForAd(Action reward)
-    {
-#if UNITY_EDITOR
-        reward();
-        return;
-#endif
-        VideoAd.Show(onRewardedCallback: reward);
-    }
-
-    private bool TryGetMoney(int money)
-    {
-        if (_player.Wallet.CanGive(money))
-        {
-            _player.Wallet.Give(money);
-            return true;
-        }
-        return false;
-    }
-
     private void RenderNextHealthLevel()
     {
         if (HasHealthNextLevel)
             _healthPanel.Render(NextHealthLevel.Cost);
         else
-            _healthPanel.Deactivate();
+            _healthPanel.DeactivateBuyButton();
     }
 
     private void RenderNextDamageLevel()
@@ -98,6 +79,6 @@ public class CharacteristicsMenu : MoneyRenderer
         if (HasDamageNextLevel)
             _damagePanel.Render(NextDamageLevel.Cost);
         else
-            _damagePanel.Deactivate();
+            _damagePanel.DeactivateBuyButton();
     }
 }

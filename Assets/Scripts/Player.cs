@@ -15,7 +15,6 @@ public class Player : IApplyDamage
     public Wallet Wallet => _wallet;
     public Weapon Weapon { get; private set; }
 
-
     public event Action Shooted;
 
     public Player(InputController inputController, Saver saver)
@@ -56,11 +55,12 @@ public class Player : IApplyDamage
     public void SetWeapon(Weapon weapon)
     {
         Weapon = weapon;
+        _saver.SetCurrentWeapon(weapon);
     }
 
     private void OnShooted(RaycastHit hit)
     {
-        if (Weapon.IsReady)
+        if (Weapon.IsReady && _health.IsAlive)
         {
             Shooted?.Invoke();
             Weapon.Shoot(hit, Damage);

@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShootingSettings", menuName = "Settings/Shooting")]
 public class ShootingSettings : ScriptableObject
 {
+    [SerializeField] private Weapon _defaultWeapon;
     [SerializeField] private float _baseSensitivity = 200;
     [SerializeField] private float _maxSensitivity = 500;
     [SerializeField, Range(0, 1)] private float _scopeRelativeSensitivity = 0.5f;
@@ -12,7 +13,7 @@ public class ShootingSettings : ScriptableObject
 
     [SerializeField, Range(0.01f, 1)] private float _scopeSpeed;
 
-
+    public Weapon DefaultWeapon => _defaultWeapon;
     public float BaseSensitivity => _baseSensitivity;
     public float ScopeSensitivity => _baseSensitivity * _scopeRelativeSensitivity;
     public float MaxSensitivity => _maxSensitivity;

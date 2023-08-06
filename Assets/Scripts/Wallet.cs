@@ -15,6 +15,16 @@ public class Wallet
         MoneyValueChanged?.Invoke(Money);
     }
 
+    public bool TryGiveMoney(int money)
+    {
+        if (CanGive(money))
+        {
+            Give(money);
+            return true;
+        }
+        return false;
+    }
+
     public bool CanGive(int money)
     {
         if (money < 0)

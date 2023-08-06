@@ -2,14 +2,14 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class IncreaseCharacteristicPanel : MonoBehaviour
+public class WareRenderer : MonoBehaviour
 {
     [SerializeField] private UIButton _buyButton;
     [SerializeField] private RectTransform _adPanel;
     [SerializeField] private RectTransform _moneyPanel;
     [SerializeField] private TMP_Text _costText;
 
-    public event Action BuyButtonClicked;
+    public event Action<WareRenderer> BuyButtonClicked;
 
     private void Awake()
     {
@@ -23,13 +23,13 @@ public class IncreaseCharacteristicPanel : MonoBehaviour
         _costText.text = cost.ToString();
     }
 
-    public void Deactivate()
+    public void DeactivateBuyButton()
     {
         _buyButton.gameObject.SetActive(false);
     }
 
     private void OnBuyButtonClick()
     {
-        BuyButtonClicked?.Invoke();
+        BuyButtonClicked?.Invoke(this);
     }
 }

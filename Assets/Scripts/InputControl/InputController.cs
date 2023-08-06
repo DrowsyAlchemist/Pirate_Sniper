@@ -23,6 +23,8 @@ public class InputController : MonoBehaviour
     private bool _isScopeMode;
     private Coroutine _coroutine;
 
+    public event Action Scoped;
+    public event Action Unscoped;
     public event Action<RaycastHit> Shooted;
 
     private float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
@@ -93,6 +95,7 @@ public class InputController : MonoBehaviour
             StopCoroutine(_coroutine);
 
         _coroutine = StartCoroutine(SetFieldOfView(Settings.Shooting.ScopeFieldOfView));
+        Scoped?.Invoke();
     }
 
     private void Unscope()
@@ -106,6 +109,7 @@ public class InputController : MonoBehaviour
             StopCoroutine(_coroutine);
 
         _coroutine = StartCoroutine(SetFieldOfView(Settings.Shooting.BaseFieldOfView));
+        Unscoped?.Invoke();
     }
 
     private IEnumerator SetFieldOfView(float value)

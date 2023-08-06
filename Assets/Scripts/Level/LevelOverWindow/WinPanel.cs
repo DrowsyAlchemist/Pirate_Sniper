@@ -23,7 +23,7 @@ public class WinPanel : LevelOverPanel
         _timeText.text = Math.Round(levelObserver.CompleteTime, 2).ToString();
         _headshotsText.text = levelObserver.HeadShots.ToString();
         _accuracyText.text = (int)(levelObserver.Accuracy * 100) + " %";
-        _moneyText.text = "+ " + levelObserver.Money.ToString();
+        _moneyText.text = "+" + levelObserver.Money.ToString();
 
         int i = 0;
 

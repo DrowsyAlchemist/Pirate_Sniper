@@ -266,7 +266,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.6
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.6
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8529730907810067551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd4d05e79d00f2e4eb1942a7abf4d379, type: 3}
+  m_Script: {fileID: 11500000, guid: 85f24ab798060744f9ba241ad6b888ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _buyButton: {fileID: 8549375320727491704}

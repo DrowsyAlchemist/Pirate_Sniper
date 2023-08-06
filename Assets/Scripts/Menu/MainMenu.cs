@@ -6,9 +6,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private LocationMap _locationMap;
     [SerializeField] private AdditionalMenu _additionalMenu;
 
-    public void Init(Player player)
+    public void Init(Player player, Saver saver)
     {
-        _additionalMenu.Init(player, _locationMap);
+        _additionalMenu.Init(player, saver, _locationMap);
     }
 
     public void Open()

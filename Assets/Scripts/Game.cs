@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
     [SerializeField] private InputController _inputController;
+    [SerializeField] private ShootingPoint _shootingPoint;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Level _level;
 
@@ -30,8 +31,9 @@ public class Game : MonoBehaviour
         InitInputController();
         _saver = new Saver();
         _player = new Player(_inputController, _saver);
-        _mainMenu.Init(_player);
+        _mainMenu.Init(_player, _saver);
         _mainMenu.Open();
+        _shootingPoint.Init(_player, _inputController);
         _level.Init(_player, _saver);
     }
 

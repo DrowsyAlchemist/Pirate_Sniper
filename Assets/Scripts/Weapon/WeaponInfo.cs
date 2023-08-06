@@ -6,6 +6,7 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] private string _id;
     [SerializeField] private string _lable;
     [SerializeField] private Sprite _sprite;
+    [SerializeField] private int _cost;
 
     [SerializeField] private int _damage;
     [SerializeField] private float _secondsBetweenShots;
@@ -13,6 +14,7 @@ public class WeaponInfo : ScriptableObject
     public string Id => _id;
     public string Lable => _lable;
     public Sprite Sprite => _sprite;
+    public int Cost => _cost;
     public int Damage => _damage;
     public float SecondsBetweenShots => _secondsBetweenShots;
 }

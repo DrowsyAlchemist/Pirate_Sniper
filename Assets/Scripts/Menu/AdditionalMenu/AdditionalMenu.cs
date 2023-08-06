@@ -12,7 +12,7 @@ public class AdditionalMenu : AnimatedWindow
 
     private LocationMap _locationMap;
 
-    public void Init(Player player, LocationMap locationMap)
+    public void Init(Player player, Saver saver, LocationMap locationMap)
     {
         gameObject.SetActive(true);
         _locationMap = locationMap;
@@ -20,7 +20,7 @@ public class AdditionalMenu : AnimatedWindow
         _closeButton.SetOnClickAction(base.Disappear);
 
         _characteristicsMenu.Init(player);
-        _storeMenu.Init(player);
+        _storeMenu.Init(player.Wallet, saver);
     }
 
     private void OnDestroy()
