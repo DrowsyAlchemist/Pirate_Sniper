@@ -57,7 +57,13 @@ public class LevelObserver
             throw new InvalidOperationException("You should Set Level before start");
 
         _stopwatch.Reset();
+        _player.Shooted += StartStopwatch;
+    }
+
+    private void StartStopwatch()
+    {
         _stopwatch.Start();
+        _player.Shooted -= StartStopwatch;
     }
 
     private void Complete(bool isWon)

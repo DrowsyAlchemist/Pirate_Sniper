@@ -35,6 +35,9 @@ public class ShootingState : EnemyState
 
     private void OnTimerWentOff()
     {
+        if (enabled == false)
+            return;
+
         if (Random.Range(0, 100) < Enemy.Preset.AccuracyInPercents)
             Player.ApplyDamage(Enemy.Preset.Damage);
 

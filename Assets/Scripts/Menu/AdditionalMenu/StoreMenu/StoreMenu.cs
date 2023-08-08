@@ -64,10 +64,10 @@ public class StoreMenu : MoneyRenderer
 
     private void OpenCharacters()
     {
-       // _weaponsPanel.Deactivate();
-       // _weaponsButton.SetInteractable(true);
-       // _charactersButtton.SetInteractable(false);
-       // _charactersPanel.Activate();
+        _weaponsPanel.Deactivate();
+        _weaponsButton.SetInteractable(true);
+        _charactersButtton.SetInteractable(false);
+        _charactersPanel.Activate();
     }
 
     public void OpenWeapons()

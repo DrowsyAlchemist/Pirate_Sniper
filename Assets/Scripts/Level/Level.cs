@@ -55,10 +55,7 @@ public class Level : MonoBehaviour
     private void LoadLevel(LevelPreset levelTemplate)
     {
 #if !UNITY_EDITOR
-        if (_currentLevel != null && IsLevelCompleted(_currentLevel))
-            InterstitialAd.Show();
-        else
-            VideoAd.Show();
+        InterstitialAd.Show();
 #endif
         if (_levelObserver.LevelInstance != null)
             Destroy(_levelObserver.LevelInstance.gameObject);
@@ -70,11 +67,6 @@ public class Level : MonoBehaviour
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
-    }
-
-    private bool IsLevelCompleted(LevelPreset level)
-    {
-        return GetLevelScore(level) > 0;
     }
 
     private void OnLevelCompleted(bool isWon)
@@ -108,7 +100,13 @@ public class Level : MonoBehaviour
 
     private void OnRestartButtonClick()
     {
+#if UNITY_EDITOR
         LoadLevel(_currentLevel);
+        return;
+#endif
+        VideoAd.Show(
+            onRewardedCallback: () => LoadLevel(_currentLevel),
+            onErrorCallback: (_) => LoadLevel(_currentLevel));
     }
 
     private void OnBackToMenuButtonClick()
