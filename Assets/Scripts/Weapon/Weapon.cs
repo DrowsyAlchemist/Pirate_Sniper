@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     private Timer _timer;
 
     public WeaponInfo Info => _info;
-    public bool IsReady => (_animator.IsPlaying == false) && (SecondsBeforeReadyLeft < Settings.Epsilon);
+    public bool IsReady => SecondsBeforeReadyLeft < Settings.Epsilon;
     public float SecondsBeforeReadyLeft => _info.SecondsBetweenShots - _timer.ElapsedTime;
 
     public event Action Shooted;
@@ -28,6 +28,9 @@ public class Weapon : MonoBehaviour
     {
         if (IsReady == false)
             throw new InvalidOperationException();
+
+        if (_animator.IsPlaying)
+            throw new InvalidOperationException("Animator is still playing");
 
         _shotEffect.Play();
         _animator.PlayShot();

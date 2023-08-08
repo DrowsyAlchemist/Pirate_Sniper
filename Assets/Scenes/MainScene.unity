@@ -2383,7 +2383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dbe0f41c9eaa4449fa10554d9eb37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useMobileControlInEditor: 1
+  _useMobileControlInEditor: 0
   _inputController: {fileID: 1269375120}
   _shootingPoint: {fileID: 538781365}
   _mainMenu: {fileID: 1278136988}
@@ -6177,7 +6177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1052139067
 RectTransform:
   m_ObjectHideFlags: 0

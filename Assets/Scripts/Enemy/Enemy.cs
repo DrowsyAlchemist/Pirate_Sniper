@@ -1,29 +1,35 @@
 using System;
 
-public class Enemy : Creature
+public class Enemy
 {
     public readonly EnemyPreset Preset;
+    private readonly Health _health;
 
     public Player Target { get; private set; }
+    public IReadonlyHealth ReadonlyHealth => _health;
 
     public event Action<int> Headshot;
 
-    public Enemy(EnemyPreset preset, Player player) : base(preset.Health)
+    public Enemy(EnemyPreset preset, Player player)
     {
+        _health = new(preset.Health);
         Preset = preset;
-        Health.Dead += OnDead;
         Target = player;
     }
 
-    public void ApplyHeadshot(int damage)
+    public virtual void ApplyDamage(int damage)
+    {
+        if (damage < 0)
+            throw new ArgumentOutOfRangeException();
+
+        _health.TakeDamage(damage);
+    }
+
+    public int ApplyHeadshot(int damage)
     {
         int increasedDamage = (int)(Preset.HeadshotDamageModifier * damage);
         Headshot?.Invoke(increasedDamage);
-        base.ApplyDamage(increasedDamage);
-    }
-
-    private void OnDead()
-    {
-
+        ApplyDamage(increasedDamage);
+        return increasedDamage;
     }
 }
