@@ -45,7 +45,7 @@ public class LevelObserver
         foreach (var enemyBody in levelInstance.Enemies)
         {
             enemyBody.Init(_player);
-            enemyBody.Enemy.ReadonlyHealth.Dead += OnEnemyDead;
+            enemyBody.Enemy.Dead += OnEnemyDead;
             enemyBody.Enemy.Headshot += OnHeadShot;
         }
         EnemiesLeft = levelInstance.Enemies.Count;
@@ -66,7 +66,7 @@ public class LevelObserver
         {
             foreach (var enemyBody in _levelInstance.Enemies)
             {
-                enemyBody.Enemy.ReadonlyHealth.Dead -= OnEnemyDead;
+                enemyBody.Enemy.Dead -= OnEnemyDead;
                 enemyBody.Enemy.Headshot -= OnHeadShot;
             }
         }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ShootingState : EnemyState
 {
+    [SerializeField] private AudioSource _shootSound;
     [SerializeField] private ParticleSystem _shotEffect;
 
     private Timer _timer;
@@ -13,6 +14,7 @@ public class ShootingState : EnemyState
         if (_timer == null)
             Init();
 
+        Enemy.Animator.PlayAim();
         _timer.Start(SecondsBetweenShots);
     }
 
@@ -42,6 +44,8 @@ public class ShootingState : EnemyState
             Player.ApplyDamage(Enemy.Preset.Damage);
 
         _shotEffect.Play();
+        _shootSound.Play();
+        Enemy.Animator.PlayShoot();
         _timer.Start(SecondsBetweenShots);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingPoint : MonoBehaviour
 {
-    [SerializeField] private float _initialXPosition;
+    [SerializeField] private float _unscopeXPosition;
     [SerializeField] private float _scopeXPosition;
     [SerializeField, Range(0, 0.1f)] private float _positionChangeSpeed;
     [SerializeField] private WeaponsStore _weaponsStore;
@@ -13,6 +13,7 @@ public class ShootingPoint : MonoBehaviour
     public Player _player;
     private Weapon _currentWeapon;
     private InputController _inputController;
+    private Coroutine _coroutine;
 
     public Weapon CurrentWeapon => _currentWeapon;
 
@@ -55,20 +56,26 @@ public class ShootingPoint : MonoBehaviour
 
     private void OnScope()
     {
-        Settings.CoroutineObject.StartCoroutine(ChangeXPosition(_scopeXPosition));
+        if (_coroutine != null)
+            Settings.CoroutineObject.StopCoroutine(_coroutine);
+
+        _coroutine = Settings.CoroutineObject.StartCoroutine(ChangeXPosition(_scopeXPosition));
     }
 
     private void OnUnscope()
     {
-        Settings.CoroutineObject.StartCoroutine(ChangeXPosition(_initialXPosition));
+        if (_coroutine != null)
+            Settings.CoroutineObject.StopCoroutine(_coroutine);
+
+        _coroutine = Settings.CoroutineObject.StartCoroutine(ChangeXPosition(_unscopeXPosition));
     }
 
     private IEnumerator ChangeXPosition(float targetPosition)
     {
-        while (Mathf.Abs(transform.position.x - targetPosition) > Settings.Epsilon)
+        while (Mathf.Abs(transform.localPosition.x - targetPosition) > Settings.Epsilon)
         {
-            float targetX = Mathf.Lerp(transform.position.x, targetPosition, _positionChangeSpeed);
-            transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
+            float targetX = Mathf.Lerp(transform.localPosition.x, targetPosition, _positionChangeSpeed);
+            transform.localPosition = new Vector3(targetX, transform.localPosition.y, transform.localPosition.z);
             yield return null;
         }
     }

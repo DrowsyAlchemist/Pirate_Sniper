@@ -94,7 +94,10 @@ public class Level : MonoBehaviour
             else
                 Advertising.RewardForVideo(() => LoadLevel(nextLevel));
         }
-        throw new InvalidOperationException();
+        else
+        {
+            throw new InvalidOperationException();
+        }
     }
 
     private void OnRestartButtonClick()

@@ -4,7 +4,6 @@ using UnityEngine;
 public class WeaponInfo : ScriptableObject
 {
     [SerializeField] private string _id;
-    [SerializeField] private string _lable;
     [SerializeField] private Sprite _sprite;
     [SerializeField] private AudioClip _shootClip;
     [SerializeField] private int _cost;
@@ -13,7 +12,6 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] private float _secondsBetweenShots;
 
     public string Id => _id;
-    public string Lable => _lable;
     public Sprite Sprite => _sprite;
     public AudioClip ShootClip => _shootClip;
     public int Cost => _cost;

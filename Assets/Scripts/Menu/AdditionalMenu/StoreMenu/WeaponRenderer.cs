@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class WeaponRenderer : WareRenderer
 {
     [SerializeField] private Image _image;
-    [SerializeField] private TMP_Text _lable;
     [SerializeField] private TMP_Text _damageText;
     [SerializeField] private TMP_Text _reloadTimeText;
 
@@ -25,7 +24,6 @@ public class WeaponRenderer : WareRenderer
     {
         base.Render(weapon.Info.Cost);
         Weapon = weapon;
-        _lable.text = weapon.Info.Lable;
         _image.sprite = weapon.Info.Sprite;
         _damageText.text = weapon.Info.Damage.ToString();
         _reloadTimeText.text = weapon.Info.SecondsBetweenShots.ToString();
