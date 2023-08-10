@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HomeButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
-    [SerializeField] private MainMenu _mainMenu;
 
     private bool _isMobile;
+
+    public Action Clicked;
 
     private void OnDestroy()
     {
@@ -33,6 +35,6 @@ public class HomeButton : MonoBehaviour
 
     private void OnButtonClick()
     {
-        _mainMenu.Open();
+        Clicked?.Invoke();
     }
 }

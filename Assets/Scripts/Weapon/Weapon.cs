@@ -36,8 +36,9 @@ public class Weapon : MonoBehaviour
         _animator.PlayShot();
         _timer.Start(_info.SecondsBetweenShots);
 
-        if (hit.collider.TryGetComponent(out IApplyDamage target))
-            target.ApplyDamage(_info.Damage + playerDamage);
+        if (hit.collider != null)
+            if (hit.collider.TryGetComponent(out IApplyDamage target))
+                target.ApplyDamage(_info.Damage + playerDamage);
 
         Shooted?.Invoke();
     }

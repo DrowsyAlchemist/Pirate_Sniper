@@ -11,10 +11,10 @@ public class WinPanel : LevelOverPanel
     [SerializeField] private TMP_Text _moneyText;
     [SerializeField] private RectTransform[] _stars;
 
-    public void Open(LevelObserver levelObserver)
+    public override void Open(LevelObserver levelObserver)
     {
         Render(levelObserver);
-        base.Open();
+        base.Open(levelObserver);
     }
 
     public void Render(LevelObserver levelObserver)

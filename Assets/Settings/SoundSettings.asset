@@ -22,5 +22,5 @@ MonoBehaviour:
   _minValue: -40
   _onSprite: {fileID: 21300000, guid: a63a928ea7cb832458f4a167837c50cf, type: 3}
   _offSprite: {fileID: 21300000, guid: 6c837df8434edbc499ed30003e7e973a, type: 3}
-  _menuMusic: {fileID: 8300000, guid: 9d98899e9ab8f4714b1e7addcde43896, type: 3}
-  _buttleMusic: {fileID: 8300000, guid: 5f9266304278b434895ef779bb40a8f6, type: 3}
+  _menuMusic: {fileID: 8300000, guid: e918531f885aa51428e4d8c445b30c0b, type: 3}
+  _buttleMusic: {fileID: 8300000, guid: 3de2099a05d34254f992a49e3c872e6e, type: 3}

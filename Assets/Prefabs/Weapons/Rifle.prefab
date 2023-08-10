@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: f1eedd1913033104fbdc18fb75fe7198, type: 2}
   _shotEffect: {fileID: 3132172091952693852}
+  _shootSound: {fileID: 0}
 --- !u!1 &5014009142762386378
 GameObject:
   m_ObjectHideFlags: 0

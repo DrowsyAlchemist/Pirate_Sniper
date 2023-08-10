@@ -1,4 +1,4 @@
-using Agava.YandexGames;
+using System;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -7,6 +7,7 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelsMenu _levelsMenu;
     [SerializeField] private LevelOverWindow _levelOverWindow;
     [SerializeField] private LevelInfoRenderer _levelInfoRenderer;
+    [SerializeField] private HomeButton _homeButton;
 
     private static Level _instance;
     private LevelPreset _currentLevel;
@@ -29,6 +30,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.RestartButtonClicked -= OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _levelObserver.Completed -= OnLevelCompleted;
+        _homeButton.Clicked -= OnBackToMenuButtonClick;
     }
 
     public void Init(Player player, Saver saver)
@@ -45,6 +47,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _levelObserver.Completed += OnLevelCompleted;
+        _homeButton.Clicked += OnBackToMenuButtonClick;
     }
 
     public static int GetLevelScore(LevelPreset levelPreset)
@@ -54,9 +57,6 @@ public class Level : MonoBehaviour
 
     private void LoadLevel(LevelPreset levelTemplate)
     {
-#if !UNITY_EDITOR
-        InterstitialAd.Show();
-#endif
         if (_levelObserver.LevelInstance != null)
             Destroy(_levelObserver.LevelInstance.gameObject);
 
@@ -67,6 +67,10 @@ public class Level : MonoBehaviour
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
+#if UNITY_EDITOR
+        return;
+#endif
+        Advertising.ShowInter();
     }
 
     private void OnLevelCompleted(bool isWon)
@@ -83,34 +87,26 @@ public class Level : MonoBehaviour
 
     private void OnNextLevelButtonClick()
     {
-        Location currentLocation = _currentLevel.Location;
-        int nextLevelIndex = _currentLevel.IndexInLocation + 1;
-
-        if (nextLevelIndex < currentLocation.Levels.Count)
+        if (_currentLevel.TryGetNextLevel(out LevelPreset nextLevel))
         {
-            LoadLevel(currentLocation.GetLevelByIndex(nextLevelIndex));
+            if (_currentLevel.Score > 0)
+                LoadLevel(nextLevel);
+            else
+                Advertising.RewardForVideo(() => LoadLevel(nextLevel));
         }
-        else
-        {
-            int nextLocationIndex = currentLocation.Index + 1;
-            Location nextLocation = LocationsStorage.GetLocationByIndex(nextLocationIndex);
-            LoadLevel(nextLocation.GetLevelByIndex(0));
-        }
+        throw new InvalidOperationException();
     }
 
     private void OnRestartButtonClick()
     {
-#if UNITY_EDITOR
-        LoadLevel(_currentLevel);
-        return;
-#endif
-        VideoAd.Show(
-            onRewardedCallback: () => LoadLevel(_currentLevel),
-            onErrorCallback: (_) => LoadLevel(_currentLevel));
+        Advertising.RewardForVideo(reward: () => LoadLevel(_currentLevel));
     }
 
     private void OnBackToMenuButtonClick()
     {
+        var levelInstance = _levelObserver.LevelInstance;
+        _levelObserver.Clear();
+        Destroy(levelInstance.gameObject);
         _mainMenu.Open();
     }
 }

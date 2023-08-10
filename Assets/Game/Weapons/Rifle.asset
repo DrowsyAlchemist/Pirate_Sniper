@@ -15,6 +15,7 @@ MonoBehaviour:
   _id: Rifle
   _lable: "\u0412\u0438\u043D\u0442\u043E\u0432\u043A\u0430"
   _sprite: {fileID: 21300000, guid: da54be19a0f7d6949a267cdd08f0abff, type: 3}
+  _shootClip: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
   _cost: 50
   _damage: 50
   _secondsBetweenShots: 2

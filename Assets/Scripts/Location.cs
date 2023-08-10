@@ -57,4 +57,23 @@ public class Location : ScriptableObject
 
         return _levels[index];
     }
+
+    public Location GetPreviousLocation()
+    {
+        if (Index == 0)
+            throw new InvalidOperationException();
+
+        return LocationsStorage.GetLocationByIndex(Index - 1);
+    }
+
+    public bool TryGetNextLocation(out Location nextLocation)
+    {
+        nextLocation = null;
+
+        if (LocationsStorage.Locations.Count >= Index + 1)
+            return false;
+
+        nextLocation = LocationsStorage.GetLocationByIndex(Index + 1);
+        return true;
+    }
 }

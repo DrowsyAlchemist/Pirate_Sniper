@@ -39,7 +39,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void OnHealthButtonClick(WareRenderer _)
     {
         if (NextHealthLevel.Cost <= 0)
-            Advertising.RewardForAd(IncreaseHealth);
+            Advertising.RewardForVideo(IncreaseHealth);
         else if (_player.Wallet.TryGiveMoney(NextHealthLevel.Cost))
             IncreaseHealth();
     }
@@ -47,7 +47,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void OnDamageButtonClick(WareRenderer _)
     {
         if (NextDamageLevel.Cost <= 0)
-            Advertising.RewardForAd(IncreaseDamage);
+            Advertising.RewardForVideo(IncreaseDamage);
         else if (_player.Wallet.TryGiveMoney(NextDamageLevel.Cost))
             IncreaseDamage();
     }

@@ -60,6 +60,26 @@ public class LevelObserver
         _player.Shooted += StartStopwatch;
     }
 
+    public void Clear()
+    {
+        if (_levelInstance != null)
+        {
+            foreach (var enemyBody in _levelInstance.Enemies)
+            {
+                enemyBody.Enemy.ReadonlyHealth.Dead -= OnEnemyDead;
+                enemyBody.Enemy.Headshot -= OnHeadShot;
+            }
+        }
+        _levelInstance = null;
+        ShotsCount = 0;
+        HeadShots = 0;
+        CompleteTime = 0;
+        Stars = 0;
+        Score = 0;
+        Money = 0;
+        IsWon = false;
+    }
+
     private void StartStopwatch()
     {
         _stopwatch.Start();
@@ -79,26 +99,6 @@ public class LevelObserver
         }
         IsWon = isWon;
         Completed?.Invoke(isWon);
-    }
-
-    private void Clear()
-    {
-        if (_levelInstance != null)
-        {
-            foreach (var enemyBody in _levelInstance.Enemies)
-            {
-                enemyBody.Enemy.ReadonlyHealth.Dead -= OnEnemyDead;
-                enemyBody.Enemy.Headshot -= OnHeadShot;
-            }
-        }
-        _levelInstance = null;
-        ShotsCount = 0;
-        HeadShots = 0;
-        CompleteTime = 0;
-        Stars = 0;
-        Score = 0;
-        Money = 0;
-        IsWon = false;
     }
 
     private void OnEnemyDead()

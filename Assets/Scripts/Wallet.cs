@@ -39,6 +39,7 @@ public class Wallet
             throw new InvalidOperationException();
 
         SetMoney(Money - money);
+        Sound.PlayBuy();
     }
 
     public void Add(int money)

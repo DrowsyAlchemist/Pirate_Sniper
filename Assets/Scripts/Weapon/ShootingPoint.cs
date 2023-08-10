@@ -7,7 +7,8 @@ public class ShootingPoint : MonoBehaviour
     [SerializeField] private float _initialXPosition;
     [SerializeField] private float _scopeXPosition;
     [SerializeField, Range(0, 0.1f)] private float _positionChangeSpeed;
-    [SerializeField] private StoreMenu _weaponsStore;
+    [SerializeField] private WeaponsStore _weaponsStore;
+    [SerializeField] private AudioSource _shootSound;
 
     public Player _player;
     private Weapon _currentWeapon;
@@ -47,6 +48,8 @@ public class ShootingPoint : MonoBehaviour
 
     private void OnShooted()
     {
+        _shootSound.clip = _currentWeapon.Info.ShootClip;
+        _shootSound.Play();
         Shooted?.Invoke();
     }
 

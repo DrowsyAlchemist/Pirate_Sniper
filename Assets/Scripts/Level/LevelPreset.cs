@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,5 +22,34 @@ public class LevelPreset : MonoBehaviour
             return _id.Equals(levelPreset.Id);
         else
             return false;
+    }
+
+    public LevelPreset GetPreviousLevel()
+    {
+        if (IndexInLocation == 0)
+        {
+            if (Location.Index == 0)
+                return null;
+            else
+                return Location.GetPreviousLocation().Levels[^1];
+        }
+        return Location.Levels[IndexInLocation - 1];
+    }
+
+    public bool TryGetNextLevel(out LevelPreset nextLevel)
+    {
+        nextLevel = null;
+
+        if (IndexInLocation == Location.Levels.Count - 1)
+        {
+            if (Location.TryGetNextLocation(out Location nextLocation))
+            {
+                nextLevel = nextLocation.Levels[0];
+                return true;
+            }
+            return false;
+        }
+        nextLevel = Location.Levels[IndexInLocation + 1];
+        return true;
     }
 }

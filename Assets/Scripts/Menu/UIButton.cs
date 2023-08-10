@@ -28,6 +28,9 @@ public class UIButton : MonoBehaviour
 
     public void SetInteractable(bool value)
     {
+        if (_button == null)
+            _button = GetComponent<Button>();
+
         _button.interactable = value;
     }
 

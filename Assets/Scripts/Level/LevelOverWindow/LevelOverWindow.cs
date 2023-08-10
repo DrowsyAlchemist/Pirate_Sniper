@@ -38,7 +38,7 @@ public class LevelOverWindow : AnimatedWindow
         if (levelObserver.IsWon)
             _winPanel.Open(levelObserver);
         else
-            _losePanel.Open();
+            _losePanel.Open(levelObserver);
     }
 
     private void OnNextLevelButtonClick()

@@ -5,9 +5,13 @@ using System;
 public class Sound : MonoBehaviour
 {
     [SerializeField] private AudioSource _backgroundMusic;
+    [SerializeField] private AudioSource _clickSound;
+    [SerializeField] private AudioSource _buySound;
 
     private static Sound _instance;
+
     public static bool IsOn { get; private set; }
+    public static AudioSource BackgroundMusic => _instance._backgroundMusic;
     protected static SoundSettings SoundSettings => Settings.Sound;
 
     public static event Action<bool> ConditionChanged;
@@ -76,6 +80,16 @@ public class Sound : MonoBehaviour
     public static void SetUIVolume(float normalizedValue)
     {
         SetVolume(SoundSettings.UIVolumeName, normalizedValue);
+    }
+
+    public static void PlayClick()
+    {
+        _instance._clickSound.Play();
+    }
+
+    public static void PlayBuy()
+    {
+        _instance._buySound.Play();
     }
 
     private void OnBackgroundChanged(bool isOut)

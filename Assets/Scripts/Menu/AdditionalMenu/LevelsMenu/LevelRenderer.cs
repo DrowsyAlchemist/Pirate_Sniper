@@ -6,6 +6,7 @@ public class LevelRenderer : MonoBehaviour
 {
     [SerializeField] private UIButton _button;
     [SerializeField] private TMP_Text _number;
+    [SerializeField] private RectTransform _lockedPanel;
 
     [SerializeField] private RectTransform[] _stars;
 
@@ -23,9 +24,18 @@ public class LevelRenderer : MonoBehaviour
         _level = level ?? throw new ArgumentNullException();
         _number.text = (level.IndexInLocation + 1).ToString();
 
+        var previousLevel = level.GetPreviousLevel();
+        bool isLocked = (previousLevel != null) && (previousLevel.Score == 0);
+        _lockedPanel.gameObject.SetActive(isLocked);
+        _button.SetInteractable(isLocked == false);
+        RenderStars();
+    }
+
+    private void RenderStars()
+    {
         int i = 0;
 
-        for (; i < level.Stars; i++)
+        for (; i < _level.Stars; i++)
             _stars[i].Activate();
 
         for (; i < _stars.Length; i++)

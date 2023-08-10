@@ -25,11 +25,11 @@ public class ShootingSettings : ScriptableObject
 
     public void SetSensitivity(float value)
     {
-        _baseSensitivity = Mathf.Clamp01(value) * _maxSensitivity;
+        _baseSensitivity = Mathf.Clamp(value, Settings.Epsilon, 1) * _maxSensitivity;
     }
 
     public void SetScopeSensitivity(float value)
     {
-        _scopeRelativeSensitivity = Mathf.Clamp01(value);
+        _scopeRelativeSensitivity = Mathf.Clamp(value, Settings.Epsilon, 1);
     }
 }
