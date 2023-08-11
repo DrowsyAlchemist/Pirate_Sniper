@@ -9,12 +9,18 @@ public class ShootingState : EnemyState
 
     public float SecondsBetweenShots => Random.Range(Enemy.Preset.MinSecondsBetweenShots, Enemy.Preset.MaxSecondsBetweenShots);
 
+    private void Start()
+    {
+        Enemy.Animator.Shooted += OnAnimatorShoot;
+    }
+
     private void OnEnable()
     {
         if (_timer == null)
             Init();
 
-        Enemy.Animator.PlayAim();
+        Enemy.Animator.PlayReload();
+        Enemy.Animator.PlayShoot();
         _timer.Start(SecondsBetweenShots);
     }
 
@@ -27,6 +33,8 @@ public class ShootingState : EnemyState
     {
         if (_timer != null)
             _timer.WentOff -= OnTimerWentOff;
+
+        Enemy.Animator.Shooted -= OnAnimatorShoot;
     }
 
     private void Init()
@@ -40,12 +48,16 @@ public class ShootingState : EnemyState
         if (enabled == false)
             return;
 
-        if (Random.Range(0, 100) < Enemy.Preset.AccuracyInPercents)
-            Player.ApplyDamage(Enemy.Preset.Damage);
+        Enemy.Animator.PlayShoot();
+    }
 
+    private void OnAnimatorShoot()
+    {
         _shotEffect.Play();
         _shootSound.Play();
-        Enemy.Animator.PlayShoot();
         _timer.Start(SecondsBetweenShots);
+
+        if (Random.Range(0, 100) < Enemy.Preset.AccuracyInPercents)
+            Player.ApplyDamage(Enemy.Preset.Damage);
     }
 }

@@ -6,20 +6,27 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     private const string IdleAnimation = "Idle";
+    private const string WalkAnimation = "Walk";
+    private const string ReloadAnimation = "Reload";
     private const string ShootAnimation = "Shoot";
-    private const string AimAnimation = "Aim";
     private const string DeathAnimation = "Death";
 
+    public event Action Shooted;
     public event Action DeathFinished;
+
+    public void PlayWalk()
+    {
+        _animator.Play(WalkAnimation);
+    }
+
+    public void PlayReload()
+    {
+        _animator.SetTrigger(ReloadAnimation);
+    }
 
     public void PlayShoot()
     {
-        _animator.Play(ShootAnimation);
-    }
-
-    public void PlayAim()
-    {
-        _animator.Play(AimAnimation);
+        _animator.SetTrigger(ShootAnimation);
     }
 
     public void PlayDeath()
@@ -30,5 +37,10 @@ public class EnemyAnimator : MonoBehaviour
     private void OnDeathAnimationFinished()
     {
         DeathFinished?.Invoke();
+    }
+
+    private void OnAnimatorShooted()
+    {
+        Shooted?.Invoke();
     }
 }
