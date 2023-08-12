@@ -1,17 +1,8 @@
 public class DeadTransition : EnemyTransition
 {
-    private void Start()
+    private void Update()
     {
-        Enemy.ReadonlyHealth.Dead += OnDead;
-    }
-
-    private void OnDestroy()
-    {
-        Enemy.ReadonlyHealth.Dead -= OnDead;
-    }
-
-    private void OnDead()
-    {
-        NeedTransit = true;
+        if (Enemy.ReadonlyHealth.IsAlive == false)
+            NeedTransit = true;
     }
 }

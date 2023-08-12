@@ -19,7 +19,6 @@ public class ShootingState : EnemyState
         if (_timer == null)
             Init();
 
-        Enemy.Animator.PlayReload();
         Enemy.Animator.PlayShoot();
         _timer.Start(SecondsBetweenShots);
     }

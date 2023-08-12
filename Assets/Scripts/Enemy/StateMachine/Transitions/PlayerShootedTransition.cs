@@ -2,7 +2,7 @@ public class PlayerShootedTransition : EnemyTransition
 {
     private void Start()
     {
-        Player.Shooted += OnPlayerShooted;    
+        Player.Shooted += OnPlayerShooted;
     }
 
     private void OnDestroy()
