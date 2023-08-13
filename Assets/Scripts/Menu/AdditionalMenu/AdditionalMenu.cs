@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class AdditionalMenu : AnimatedWindow
@@ -12,12 +14,14 @@ public class AdditionalMenu : AnimatedWindow
 
     private LocationMap _locationMap;
 
+    public event Action ForceClosed;
+
     public void Init(Player player, Saver saver, LocationMap locationMap)
     {
         gameObject.SetActive(true);
         _locationMap = locationMap;
         _locationMap.LocationChosen += OpenLevels;
-        _closeButton.SetOnClickAction(base.Disappear);
+        _closeButton.SetOnClickAction(Disappear);
 
         _characteristicsMenu.Init(player);
         _storeMenu.Init(player.Wallet, saver);
@@ -58,6 +62,22 @@ public class AdditionalMenu : AnimatedWindow
     {
         OpenCleared();
         _settingsMenu.Open();
+    }
+
+    public override void Disappear()
+    {
+        base.Disappear();
+
+        if (Time.timeScale < Settings.Epsilon)
+            Settings.CoroutineObject.StartCoroutine(ForseClose());
+    }
+
+    private IEnumerator ForseClose()
+    {
+        while (IsPlaying)
+            yield return null;
+
+        ForceClosed?.Invoke();
     }
 
     private void OpenCleared()

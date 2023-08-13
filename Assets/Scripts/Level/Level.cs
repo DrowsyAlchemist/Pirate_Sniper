@@ -6,8 +6,9 @@ public class Level : MonoBehaviour
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private LevelsMenu _levelsMenu;
     [SerializeField] private LevelOverWindow _levelOverWindow;
+    [SerializeField] private PauseWindow _pauseWindow;
     [SerializeField] private LevelInfoRenderer _levelInfoRenderer;
-    [SerializeField] private HomeButton _homeButton;
+    [SerializeField] private PauseButton _pauseButton;
 
     private static Level _instance;
     private LevelPreset _currentLevel;
@@ -30,7 +31,9 @@ public class Level : MonoBehaviour
         _levelOverWindow.RestartButtonClicked -= OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _levelObserver.Completed -= OnLevelCompleted;
-        _homeButton.Clicked -= OnBackToMenuButtonClick;
+        _pauseButton.Clicked -= OnBackToMenuButtonClick;
+        _pauseWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
+        _pauseWindow.SettingsButtonClicked -= OnSettingsButtonClick;
     }
 
     public void Init(Player player, Saver saver)
@@ -41,13 +44,16 @@ public class Level : MonoBehaviour
         _levelObserver = new(_player);
         _levelInfoRenderer.Init(_player, _levelObserver);
         _levelOverWindow.Init();
+        _pauseWindow.Init();
 
         _levelsMenu.LevelClicked += LoadLevel;
         _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _levelObserver.Completed += OnLevelCompleted;
-        _homeButton.Clicked += OnBackToMenuButtonClick;
+        _pauseButton.Clicked += OnPauseButtonClick;
+        _pauseWindow.MenuButtonClicked += OnBackToMenuButtonClick;
+        _pauseWindow.SettingsButtonClicked += OnSettingsButtonClick;
     }
 
     public static int GetLevelScore(LevelPreset levelPreset)
@@ -111,5 +117,15 @@ public class Level : MonoBehaviour
         _levelObserver.Clear();
         Destroy(levelInstance.gameObject);
         _mainMenu.Open();
+    }
+
+    private void OnPauseButtonClick()
+    {
+        _pauseWindow.Open();
+    }
+
+    private void OnSettingsButtonClick()
+    {
+        _mainMenu.OpenSettings();
     }
 }

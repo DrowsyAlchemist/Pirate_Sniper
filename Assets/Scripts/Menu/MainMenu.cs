@@ -9,6 +9,12 @@ public class MainMenu : MonoBehaviour
     public void Init(Player player, Saver saver)
     {
         _additionalMenu.Init(player, saver, _locationMap);
+        _additionalMenu.ForceClosed += OnAdditionalMenuForceClosed;
+    }
+
+    private void OnDestroy()
+    {
+        _additionalMenu.ForceClosed -= OnAdditionalMenuForceClosed;
     }
 
     public void Open()
@@ -23,6 +29,13 @@ public class MainMenu : MonoBehaviour
             StartCoroutine(CloseWithDelay());
     }
 
+    public void OpenSettings()
+    {
+        gameObject.SetActive(true);
+        _additionalMenu.Appear();
+        _additionalMenu.OpenSettings();
+    }
+
     private IEnumerator CloseWithDelay()
     {
         _additionalMenu.Disappear();
@@ -30,6 +43,11 @@ public class MainMenu : MonoBehaviour
         while (_additionalMenu.IsPlaying)
             yield return null;
 
+        gameObject.SetActive(false);
+    }
+
+    private void OnAdditionalMenuForceClosed()
+    {
         gameObject.SetActive(false);
     }
 }

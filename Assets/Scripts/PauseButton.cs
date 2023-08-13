@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HomeButton : MonoBehaviour
+public class PauseButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
 

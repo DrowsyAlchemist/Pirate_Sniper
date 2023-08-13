@@ -19,7 +19,7 @@ public class AnimatedWindow : MonoBehaviour
         _animator.Play(AppearAnimation);
     }
 
-    public void Disappear()
+    public virtual void Disappear()
     {
         if (_animator == null)
             Init();
