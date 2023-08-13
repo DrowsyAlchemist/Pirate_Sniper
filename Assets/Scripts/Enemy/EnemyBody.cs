@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class EnemyBody : MonoBehaviour, IApplyDamage
+public class EnemyBody : MonoBehaviour
 {
     [SerializeField] private EnemyPreset _preset;
-    [SerializeField] private EnemyHead _head;
+    [SerializeField] private EnemyHead _headCollider;
+    [SerializeField] private EnemyBodyCollider[] _bodyColliders;
     [SerializeField] private DamageRenderer _damageRenderer;
     [SerializeField] private EnemyAnimator _animator;
 
@@ -12,15 +13,21 @@ public class EnemyBody : MonoBehaviour, IApplyDamage
     public void Init(Player player)
     {
         Enemy = new Enemy(_preset, player, _animator);
-        _head.Damaged += OnHeadshot;
+        _headCollider.Damaged += OnHeadshot;
+
+        foreach (var collider in _bodyColliders)
+            collider.Damaged += OnBodyShot;
     }
 
     private void OnDestroy()
     {
-        _head.Damaged -= OnHeadshot;
+        _headCollider.Damaged -= OnHeadshot;
+
+        foreach (var collider in _bodyColliders)
+            collider.Damaged -= OnBodyShot;
     }
 
-    public void ApplyDamage(int damage)
+    public void OnBodyShot(int damage)
     {
         Enemy.ApplyDamage(damage);
         _damageRenderer.Show(damage, isHeadshot: false);

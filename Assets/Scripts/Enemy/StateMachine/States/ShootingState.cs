@@ -19,8 +19,8 @@ public class ShootingState : EnemyState
         if (_timer == null)
             Init();
 
+        Enemy.Animator.PlayReact();
         Enemy.Animator.PlayShoot();
-        _timer.Start(SecondsBetweenShots);
     }
 
     private void OnDisable()

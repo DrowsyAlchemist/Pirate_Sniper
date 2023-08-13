@@ -49,13 +49,13 @@ public class Saver
 
     public void SaveWeaponAccuired(Weapon weapon)
     {
-        _saves.Weapons += weapon.Info.Id;
+        _saves.Weapons += weapon.Id;
         Save();
     }
 
     public void SetCurrentWeapon(Weapon weapon)
     {
-        _saves.CurrentWeapon = weapon.Info.Id;
+        _saves.CurrentWeapon = weapon.Id;
         Save();
     }
 
@@ -66,7 +66,7 @@ public class Saver
 
     public bool GetWeaponAccuired(Weapon weapon)
     {
-        return _saves.Weapons.Contains(weapon.Info.Id);
+        return _saves.Weapons.Contains(weapon.Id);
     }
 
     public int GetLevelScore(int locationIndex, int levelIndex)
@@ -179,7 +179,7 @@ public class Saver
             string defaultString = stringBuilder.ToString();
             ZeroLocation = defaultString;
             FirstLocation = defaultString;
-            CurrentWeapon = Settings.Shooting.DefaultWeapon.Info.Id;
+            CurrentWeapon = Settings.Shooting.DefaultWeapon.Id;
             Weapons = CurrentWeapon;
         }
     }

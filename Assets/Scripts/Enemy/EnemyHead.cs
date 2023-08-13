@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class EnemyHead : MonoBehaviour, IApplyDamage
 {
     public event Action<int> Damaged;

@@ -41,7 +41,7 @@ public class ShootingPoint : MonoBehaviour
             _currentWeapon.Shooted -= OnShooted;
             Destroy(_currentWeapon.gameObject);
         }
-        _currentWeapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity, transform);
+        _currentWeapon = Instantiate(weaponPrefab, transform.position + weaponPrefab.transform.localPosition, Quaternion.identity, transform);
         _currentWeapon.Init();
         _currentWeapon.Shooted += OnShooted;
         _player.SetWeapon(_currentWeapon);
@@ -49,7 +49,7 @@ public class ShootingPoint : MonoBehaviour
 
     private void OnShooted()
     {
-        _shootSound.clip = _currentWeapon.Info.ShootClip;
+        _shootSound.clip = _currentWeapon.ShootClip;
         _shootSound.Play();
         Shooted?.Invoke();
     }

@@ -22,11 +22,11 @@ public class WeaponRenderer : WareRenderer
 
     public void Render(Weapon weapon)
     {
-        base.Render(weapon.Info.Cost);
+        base.Render(weapon.Cost);
         Weapon = weapon;
-        _image.sprite = weapon.Info.Sprite;
-        _damageText.text = weapon.Info.Damage.ToString();
-        _reloadTimeText.text = weapon.Info.SecondsBetweenShots.ToString();
+        _image.sprite = weapon.Sprite;
+        _damageText.text = weapon.Damage.ToString();
+        _reloadTimeText.text = weapon.SecondsBetweenShots.ToString();
     }
 
     public void SetChooseButtonActive(bool isActive)

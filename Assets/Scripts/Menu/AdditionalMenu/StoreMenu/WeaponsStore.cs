@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponsStore : MonoBehaviour
 {
     [SerializeField] private ShootingPoint _shootingPoint;
-    [SerializeField] private Weapon[] _weapons;
+    [SerializeField] private WeaponsStorage _weaponStorage;
     [SerializeField] private WeaponRenderer _weaponWareTemplate;
     [SerializeField] private RectTransform _container;
 
@@ -14,12 +14,14 @@ public class WeaponsStore : MonoBehaviour
     private Wallet _wallet;
     private Saver _saver;
 
+    public IReadOnlyList<Weapon> Weapons => _weaponStorage.Weapons;
+
     public Weapon CurrentWeapon
     {
         get
         {
-            foreach (var weapon in _weapons)
-                if (weapon.Info.Id.Equals(_saver.GetCurrentWeapon()))
+            foreach (var weapon in Weapons)
+                if (weapon.Id.Equals(_saver.GetCurrentWeapon()))
                     return weapon;
 
             throw new InvalidOperationException();
@@ -43,7 +45,7 @@ public class WeaponsStore : MonoBehaviour
 
     public void RenderWeapons()
     {
-        for (int i = 0; i < _weapons.Length; i++)
+        for (int i = 0; i < Weapons.Count; i++)
         {
             if (_wares.Count <= i)
             {
@@ -52,12 +54,12 @@ public class WeaponsStore : MonoBehaviour
                 weaponWare.ChooseButtonClicked += OnChooseButtonClick;
                 _wares.Add(weaponWare);
             }
-            _wares[i].Render(_weapons[i]);
+            _wares[i].Render(Weapons[i]);
 
-            if (_saver.GetWeaponAccuired(_weapons[i]))
+            if (_saver.GetWeaponAccuired(Weapons[i]))
             {
                 _wares[i].DeactivateBuyButton();
-                bool isCurrentWeapon = _saver.GetCurrentWeapon().Equals(_weapons[i].Info.Id);
+                bool isCurrentWeapon = _saver.GetCurrentWeapon().Equals(Weapons[i].Id);
                 _wares[i].SetChooseButtonActive(isCurrentWeapon == false);
             }
             else
@@ -71,9 +73,9 @@ public class WeaponsStore : MonoBehaviour
     {
         var weaponRenderer = wareRenderer as WeaponRenderer;
 
-        if (weaponRenderer.Weapon.Info.Cost <= 0)
+        if (weaponRenderer.Weapon.Cost <= 0)
             Advertising.RewardForVideo(() => AccuireWeapon(weaponRenderer));
-        else if (_wallet.TryGiveMoney(weaponRenderer.Weapon.Info.Cost))
+        else if (_wallet.TryGiveMoney(weaponRenderer.Weapon.Cost))
             AccuireWeapon(weaponRenderer);
     }
 

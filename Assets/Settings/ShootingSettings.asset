@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad1371ebb50189479f2b98dd8086cfd, type: 3}
   m_Name: ShootingSettings
   m_EditorClassIdentifier: 
-  _defaultWeapon: {fileID: 4128068241677800194, guid: 6d4f54ee7c45feb4ca60b90ac2cdc3b2, type: 3}
+  _defaultWeapon: {fileID: 6449318882780059414, guid: 91e8400b75b38e54daefee673186d7dc, type: 3}
   _baseSensitivity: 427.57358
   _maxSensitivity: 500
   _scopeRelativeSensitivity: 0.62932146

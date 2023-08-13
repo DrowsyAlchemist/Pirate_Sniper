@@ -1,27 +1,38 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(WeaponAnimator))]
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private WeaponInfo _info;
+    [SerializeField] private WeaponAnimator _animator;
     [SerializeField] private ParticleSystem _shotEffect;
 
-    private WeaponAnimator _animator;
+    [SerializeField] private string _id;
+    [SerializeField] private Sprite _sprite;
+    [SerializeField] private AudioClip _shootClip;
+    [SerializeField] private int _cost;
+
+    [SerializeField] private int _damage;
+    [SerializeField] private float _secondsBetweenShots;
+
+    public string Id => _id;
+    public Sprite Sprite => _sprite;
+    public AudioClip ShootClip => _shootClip;
+    public int Cost => _cost;
+    public int Damage => _damage;
+    public float SecondsBetweenShots => _secondsBetweenShots;
+
     private Timer _timer;
 
-    public WeaponInfo Info => _info;
     public bool IsReady => SecondsBeforeReadyLeft < Settings.Epsilon;
-    public float SecondsBeforeReadyLeft => _info.SecondsBetweenShots - _timer.ElapsedTime;
+    public float SecondsBeforeReadyLeft => SecondsBetweenShots - _timer.ElapsedTime;
 
     public event Action Shooted;
 
     public void Init()
     {
-        _animator = GetComponent<WeaponAnimator>();
         _shotEffect.Play();
         _timer = new Timer();
-        _timer.Start(_info.SecondsBetweenShots);
+        _timer.Start(SecondsBetweenShots);
     }
 
     public void Shoot(RaycastHit hit, int playerDamage)
@@ -34,11 +45,11 @@ public class Weapon : MonoBehaviour
 
         _shotEffect.Play();
         _animator.PlayShot();
-        _timer.Start(_info.SecondsBetweenShots);
+        _timer.Start(SecondsBetweenShots);
 
         if (hit.collider != null)
             if (hit.collider.TryGetComponent(out IApplyDamage target))
-                target.ApplyDamage(_info.Damage + playerDamage);
+                target.ApplyDamage(Damage + playerDamage);
 
         Shooted?.Invoke();
     }

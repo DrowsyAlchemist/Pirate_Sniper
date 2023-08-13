@@ -66,9 +66,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da54be19a0f7d6949a267cdd08f0abff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ebea9328c2bf80b419af6f433be1f2c1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -518,8 +518,7 @@ MonoBehaviour:
   _adPanel: {fileID: 2621502858636594322}
   _moneyPanel: {fileID: 8403040453926816142}
   _costText: {fileID: 7623021810120016697}
-  _image: {fileID: 1739907113607938504}
-  _lable: {fileID: 0}
+  _image: {fileID: 1391102163007725472}
   _damageText: {fileID: 8648980634978872720}
   _reloadTimeText: {fileID: 1199093727904689386}
   _chooseButton: {fileID: 7642369204424692510}

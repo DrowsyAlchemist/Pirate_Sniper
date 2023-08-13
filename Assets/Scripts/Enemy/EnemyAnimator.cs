@@ -7,7 +7,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private const string IdleAnimation = "Idle";
     private const string WalkAnimation = "Walk";
-    private const string ReloadAnimation = "Reload";
+    private const string ReactAnimation = "React";
     private const string ShootAnimation = "Shoot";
     private const string DeathAnimation = "Death";
 
@@ -16,12 +16,12 @@ public class EnemyAnimator : MonoBehaviour
 
     public void PlayWalk()
     {
-        _animator.Play(WalkAnimation);
+       throw new NotImplementedException();
     }
 
-    public void PlayReload()
+    public void PlayReact()
     {
-        _animator.SetTrigger(ReloadAnimation);
+        _animator.SetTrigger(ReactAnimation);
     }
 
     public void PlayShoot()
@@ -31,6 +31,7 @@ public class EnemyAnimator : MonoBehaviour
 
     public void PlayDeath()
     {
+        _animator.ResetTrigger(ReactAnimation);
         _animator.ResetTrigger(ShootAnimation);
         _animator.SetTrigger(DeathAnimation);
     }
