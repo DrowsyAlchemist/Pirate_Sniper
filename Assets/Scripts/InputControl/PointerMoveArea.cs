@@ -6,8 +6,15 @@ public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler
 {
     public event Action PointerMove;
 
+    private void Update()
+    {
+        if (InputController.IsMobile == false)
+            PointerMove?.Invoke();
+    }
+
     public void OnPointerMove(PointerEventData eventData)
     {
-        PointerMove?.Invoke();
+        if (InputController.IsMobile)
+            PointerMove?.Invoke();
     }
 }

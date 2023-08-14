@@ -6,7 +6,7 @@ public class ShootingPoint : MonoBehaviour
 {
     [SerializeField] private float _unscopeXPosition;
     [SerializeField] private float _scopeXPosition;
-    [SerializeField, Range(0, 0.1f)] private float _positionChangeSpeed;
+    [SerializeField, Range(0, 0.5f)] private float _positionChangeSpeed;
     [SerializeField] private WeaponsStore _weaponsStore;
     [SerializeField] private AudioSource _shootSound;
 
@@ -76,7 +76,7 @@ public class ShootingPoint : MonoBehaviour
         {
             float targetX = Mathf.Lerp(transform.localPosition.x, targetPosition, _positionChangeSpeed);
             transform.localPosition = new Vector3(targetX, transform.localPosition.y, transform.localPosition.z);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 }

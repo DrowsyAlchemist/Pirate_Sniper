@@ -27,11 +27,15 @@ public class Level : MonoBehaviour
     private void OnDestroy()
     {
         _levelsMenu.LevelClicked -= LoadLevel;
+
         _levelOverWindow.NextLevelButtonClicked -= OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked -= OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
+
         _levelObserver.Completed -= OnLevelCompleted;
         _pauseButton.Clicked -= OnBackToMenuButtonClick;
+
+        _pauseWindow.ResumeButtonClick -= OnResumeButtonClick;
         _pauseWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _pauseWindow.SettingsButtonClicked -= OnSettingsButtonClick;
     }
@@ -52,6 +56,8 @@ public class Level : MonoBehaviour
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _levelObserver.Completed += OnLevelCompleted;
         _pauseButton.Clicked += OnPauseButtonClick;
+
+        _pauseWindow.ResumeButtonClick += OnResumeButtonClick;
         _pauseWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _pauseWindow.SettingsButtonClicked += OnSettingsButtonClick;
     }
@@ -73,6 +79,7 @@ public class Level : MonoBehaviour
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
+        InputController.SetMode(InputMode.Game);
 #if UNITY_EDITOR
         return;
 #endif
@@ -89,6 +96,7 @@ public class Level : MonoBehaviour
                 _saver.SaveLevel(_currentLevel, _levelObserver.Score);
         }
         _levelOverWindow.Appear(_levelObserver);
+        InputController.SetMode(InputMode.UI);
     }
 
     private void OnNextLevelButtonClick()
@@ -116,16 +124,28 @@ public class Level : MonoBehaviour
         var levelInstance = _levelObserver.LevelInstance;
         _levelObserver.Clear();
         Destroy(levelInstance.gameObject);
+        Time.timeScale = 1;
+        _pauseWindow.Close();
         _mainMenu.Open();
+        InputController.SetMode(InputMode.UI);
     }
 
     private void OnPauseButtonClick()
     {
         _pauseWindow.Open();
+        Time.timeScale = 0;
+        InputController.SetMode(InputMode.UI);
     }
 
     private void OnSettingsButtonClick()
     {
         _mainMenu.OpenSettings();
+    }
+
+    private void OnResumeButtonClick()
+    {
+        _pauseWindow.Close();
+        Time.timeScale = 1;
+        InputController.SetMode(InputMode.Game);
     }
 }

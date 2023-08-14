@@ -6,20 +6,13 @@ public class InputController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private PointerMoveArea _pointerMoveArea;
-
-    [SerializeField] private PointerDownArea _pcPointerDownArea;
-    [SerializeField] private PointerDownArea _mobilePointerDownArea;
-
-    [SerializeField] private PcPointerUpArea _pcPointerUpArea;
-    [SerializeField] private MobilePointerUpArea _mobilePointerUpArea;
+    [SerializeField] private PointerDownArea _pointerDownArea;
+    [SerializeField] private PointerUpArea _pointerUpArea;
 
     [SerializeField] private PauseButton _pauseButton;
 
-    private IPointerDownArea _pointerDownArea;
-    private IPointerUpArea _pointerUpArea;
-
+    private static InputController _instance;
     private Quaternion _initialRotation;
-    private bool _isMobile;
     private bool _isScopeMode;
     private Coroutine _coroutine;
 
@@ -27,18 +20,46 @@ public class InputController : MonoBehaviour
     public event Action Unscoped;
     public event Action<RaycastHit> Shooted;
 
+    public static bool IsMobile { get; private set; }
     private float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
+
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+    public static void SetMode(InputMode mode)
+    {
+        if (IsMobile)
+            return;
+
+        if (mode == InputMode.UI)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            _instance._pointerMoveArea.enabled = false;
+            _instance._pointerUpArea.enabled = false;
+            _instance._pointerDownArea.enabled = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            _instance._pointerMoveArea.enabled = true;
+            _instance._pointerUpArea.enabled = true;
+            _instance._pointerDownArea.enabled = true;
+        }
+    }
 
     public void Init(bool isMobile)
     {
-        _isMobile = isMobile;
-        _mobilePointerDownArea.SetActive(isMobile);
+        IsMobile = isMobile;
+        SetMode(InputMode.UI);
         _initialRotation = _camera.transform.rotation;
-
-        _pointerDownArea = isMobile ? _mobilePointerDownArea : _pcPointerDownArea;
-        _pointerUpArea = isMobile ? _mobilePointerUpArea : _pcPointerUpArea;
         _pauseButton.Init(isMobile);
-
+        _pointerDownArea.Init();
         _pointerDownArea.PointerDown += Scope;
         _pointerUpArea.PointerUp += Shoot;
         _pointerMoveArea.PointerMove += OnPointerMove;
@@ -85,12 +106,11 @@ public class InputController : MonoBehaviour
     private void Scope()
     {
         _isScopeMode = true;
+        _pointerUpArea.enabled = true;
 
-        if (_isMobile)
-        {
-            _pointerUpArea.CheckForMouseUp();
-            _pointerDownArea.SetActive(false);
-        }
+        if (IsMobile)
+            _pointerDownArea.gameObject.SetActive(false);
+
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
@@ -101,9 +121,10 @@ public class InputController : MonoBehaviour
     private void Unscope()
     {
         _isScopeMode = false;
+        _pointerUpArea.enabled = false;
 
-        if (_isMobile)
-            _pointerDownArea.SetActive(true);
+        if (IsMobile)
+            _pointerDownArea.gameObject.SetActive(true);
 
         if (_coroutine != null)
             StopCoroutine(_coroutine);

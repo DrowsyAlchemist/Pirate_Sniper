@@ -8,7 +8,7 @@ public class PauseButton : MonoBehaviour
 
     private bool _isMobile;
 
-    public Action Clicked;
+    public event Action Clicked;
 
     private void OnDestroy()
     {

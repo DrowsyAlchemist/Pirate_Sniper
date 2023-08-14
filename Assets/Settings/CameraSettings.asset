@@ -16,3 +16,4 @@ MonoBehaviour:
   _xMaxRotation: 15
   _yMinRotation: -15
   _yMaxRotation: 15
+  _fieldOfViewEpsilon: 0.5
