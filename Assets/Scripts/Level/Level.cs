@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private LevelsMenu _levelsMenu;
     [SerializeField] private LevelOverWindow _levelOverWindow;
@@ -15,6 +16,8 @@ public class Level : MonoBehaviour
     private LevelObserver _levelObserver;
     private Saver _saver;
     private Player _player;
+
+    public LevelPreset CurrentLevel => _currentLevel;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.NextLevelButtonClicked -= OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked -= OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
+        _levelOverWindow.DoubleMoneyButtonClick -= OnDoubleMoneyButtonClick;
 
         _levelObserver.Completed -= OnLevelCompleted;
         _pauseButton.Clicked -= OnBackToMenuButtonClick;
@@ -54,6 +58,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
+        _levelOverWindow.DoubleMoneyButtonClick += OnDoubleMoneyButtonClick;
         _levelObserver.Completed += OnLevelCompleted;
         _pauseButton.Clicked += OnPauseButtonClick;
 
@@ -72,6 +77,7 @@ public class Level : MonoBehaviour
         if (_levelObserver.LevelInstance != null)
             Destroy(_levelObserver.LevelInstance.gameObject);
 
+        _camera.transform.SetPositionAndRotation(levelTemplate.CameraTransform.position, levelTemplate.CameraTransform.rotation);
         _player.Reset();
         _currentLevel = levelTemplate;
         _levelObserver.SetLevel(Instantiate(levelTemplate));
@@ -128,6 +134,15 @@ public class Level : MonoBehaviour
         _pauseWindow.Close();
         _mainMenu.Open();
         InputController.SetMode(InputMode.UI);
+    }
+
+    private void OnDoubleMoneyButtonClick()
+    {
+#if UNITY_EDITOR
+        _player.Wallet.Add(_levelObserver.Money);
+        return;
+#endif
+        Advertising.RewardForVideo(() => _player.Wallet.Add(_levelObserver.Money));
     }
 
     private void OnPauseButtonClick()

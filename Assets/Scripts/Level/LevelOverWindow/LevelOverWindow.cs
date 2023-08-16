@@ -10,11 +10,13 @@ public class LevelOverWindow : AnimatedWindow
     public event Action NextLevelButtonClicked;
     public event Action RestartButtonClicked;
     public event Action MenuButtonClicked;
+    public event Action DoubleMoneyButtonClick;
 
     public void Init()
     {
         InitLevelOverPanel(_losePanel);
         InitLevelOverPanel(_winPanel);
+        _winPanel.DoubleMoneyButtonClick += () => DoubleMoneyButtonClick.Invoke();
         gameObject.SetActive(true);
     }
 

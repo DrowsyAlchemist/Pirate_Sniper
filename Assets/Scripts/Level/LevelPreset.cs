@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelPreset : MonoBehaviour
 {
     [SerializeField] private string _id;
+    [SerializeField] private Transform _cameraPosition;
     [SerializeField] private EnemyBody[] _enemies;
 
-    public string Id => _id;
+    public Transform CameraTransform => _cameraPosition;
     public bool IsCompleted => Score > 0;
     public Location Location => LocationsStorage.GetLocation(this);
     public int IndexInLocation => LocationsStorage.GetLocation(this).GetLevelIndex(this);
@@ -19,7 +19,7 @@ public class LevelPreset : MonoBehaviour
     public override bool Equals(object other)
     {
         if (other is LevelPreset levelPreset)
-            return _id.Equals(levelPreset.Id);
+            return _id.Equals(levelPreset._id);
         else
             return false;
     }

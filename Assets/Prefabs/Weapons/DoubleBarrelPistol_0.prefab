@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4865027638071168219}
   - component: {fileID: 4865027638068324567}
   - component: {fileID: 4865027638069304087}
-  - component: {fileID: 4855404704849663437}
   - component: {fileID: 6232331851954728246}
   - component: {fileID: 1979909576704789717}
   m_Layer: 0
@@ -53,8 +52,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4865027638071504613}
   m_Enabled: 1
-  m_CastShadows: 2
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -87,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4855404704849663437
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4865027638071504613}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43026670203560690, guid: 623aa1b3183afcf458069b11ff73392d, type: 2}
 --- !u!95 &6232331851954728246
 Animator:
   serializedVersion: 4
@@ -182,7 +167,7 @@ MonoBehaviour:
   _shotEffect: {fileID: 8080315465225846990}
   _id: DoubleBarrelPistol_0
   _sprite: {fileID: 21300000, guid: 9732f464cbec66548b77405e9643bb65, type: 3}
-  _shootClip: {fileID: 0}
+  _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
   _cost: 0
   _damage: 25
   _secondsBetweenShots: 1.2

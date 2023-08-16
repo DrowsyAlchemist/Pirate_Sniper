@@ -1,7 +1,9 @@
 using Agava.YandexGames;
 using System;
+using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Saver
 {
@@ -86,10 +88,29 @@ public class Saver
         return GetLevelScore(LocationsStorage.GetLocationIndex(level), location.GetLevelIndex(level));
     }
 
+    public int GetScore()
+    {
+        int zeroLocationScore = 0;
+        int firstLocationScore = 0;
+
+        foreach (string levelScore in _saves.ZeroLocation.Split(Devider))
+            zeroLocationScore += int.Parse(levelScore);
+
+        foreach (string levelScore in _saves.FirstLocation.Split(Devider))
+            firstLocationScore += int.Parse(levelScore);
+
+        return zeroLocationScore + firstLocationScore;
+    }
+
     public void SaveLevel(LevelPreset level, int score)
     {
         SaveLevel(level.Location.Index, level.IndexInLocation, score);
         Save();
+#if UNITY_EDITOR
+        return;
+#endif
+        if (PlayerAccount.IsAuthorized)
+            Leaderboard.SetScore(Settings.Leaderboard.LeaderboardName, GetScore());
     }
 
     public void SaveLevel(int locationNumber, int levelIndex, int score)

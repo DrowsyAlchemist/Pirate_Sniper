@@ -13,7 +13,7 @@ public class LevelOverPanel : Window
     public event Action RestartButtonClicked;
     public event Action MenuButtonClicked;
 
-    public void Init()
+    public virtual void Init()
     {
         _nextLevelButton.SetOnClickAction(() => NextLevelButtonClicked?.Invoke());
         _restartButton.SetOnClickAction(() => RestartButtonClicked?.Invoke());

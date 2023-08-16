@@ -11,6 +11,8 @@ public class InputController : MonoBehaviour
 
     [SerializeField] private PauseButton _pauseButton;
 
+    [SerializeField] private Level _level;
+
     private static InputController _instance;
     private Quaternion _initialRotation;
     private bool _isScopeMode;
@@ -21,7 +23,8 @@ public class InputController : MonoBehaviour
     public event Action<RaycastHit> Shooted;
 
     public static bool IsMobile { get; private set; }
-    private float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
+    public float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
+    public float ZeroXRotation => _level.CurrentLevel.CameraTransform.rotation.x;
 
     private void Awake()
     {
@@ -77,27 +80,29 @@ public class InputController : MonoBehaviour
         Vector3 cameraEulers = _camera.transform.localRotation.eulerAngles;
         Vector3 cameraAngles = cameraEulers;
 
-        cameraAngles.x -= (cameraEulers.x > 180) ? 360 : 0;
-        cameraAngles.y -= (cameraEulers.y > 180) ? 360 : 0;
+        cameraAngles.x %= 180;
+        cameraAngles.y %= 180;
 
-        float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
+        //  float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
 
-        if (targetXAngle > Settings.Camera.XMaxRotation)
-            targetXAngle = Settings.Camera.XMaxRotation;
+        // if (targetXAngle > Settings.Camera.XMaxRotation)
+        //     targetXAngle = Settings.Camera.XMaxRotation;
 
-        if (targetXAngle < Settings.Camera.XMinRotation)
-            targetXAngle = Settings.Camera.XMinRotation;
+        // if (targetXAngle < Settings.Camera.XMinRotation)
+        //     targetXAngle = Settings.Camera.XMinRotation;
 
-        float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
+        //  float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
 
-        if (targetYAngle > Settings.Camera.YMaxRotation)
-            targetYAngle = Settings.Camera.YMaxRotation;
+        //  if (targetYAngle > Settings.Camera.YMaxRotation)
+        //      targetYAngle = Settings.Camera.YMaxRotation;
 
-        if (targetYAngle < Settings.Camera.YMinRotation)
-            targetYAngle = Settings.Camera.YMinRotation;
+        //  if (targetYAngle < Settings.Camera.YMinRotation)
+        //      targetYAngle = Settings.Camera.YMinRotation;
 
-        targetXAngle += (cameraEulers.x < 0) ? 360 : 0;
-        targetYAngle -= (cameraEulers.y < 0) ? 360 : 0;
+        //  targetXAngle += (cameraEulers.x < 0) ? 360 : 0;
+        // targetYAngle -= (cameraEulers.y < 0) ? 360 : 0;
+        float targetXAngle = cameraEulers.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
+        float targetYAngle = cameraEulers.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
         float targetZAngle = _initialRotation.z;
 
         _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, targetZAngle));
