@@ -122,7 +122,7 @@ public class Level : MonoBehaviour
 
     private void OnRestartButtonClick()
     {
-        Advertising.RewardForVideo(reward: () => LoadLevel(_currentLevel));
+        LoadLevel(_currentLevel);
     }
 
     private void OnBackToMenuButtonClick()
