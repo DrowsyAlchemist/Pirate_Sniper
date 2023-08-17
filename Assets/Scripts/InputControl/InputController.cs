@@ -53,6 +53,7 @@ public class InputController : MonoBehaviour
             _instance._pointerMoveArea.enabled = true;
             _instance._pointerUpArea.enabled = true;
             _instance._pointerDownArea.enabled = true;
+            _instance.Unscope();
         }
     }
 
@@ -103,6 +104,9 @@ public class InputController : MonoBehaviour
         // targetYAngle -= (cameraEulers.y < 0) ? 360 : 0;
         float targetXAngle = cameraEulers.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
         float targetYAngle = cameraEulers.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
+
+      //  Debug.Log(targetXAngle);
+
         float targetZAngle = _initialRotation.z;
 
         _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, targetZAngle));
