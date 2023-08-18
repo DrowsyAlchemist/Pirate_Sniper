@@ -23,6 +23,7 @@ public class InputController : MonoBehaviour
     public event Action<RaycastHit> Shooted;
 
     public static bool IsMobile { get; private set; }
+    public static InputMode InputMode { get; private set; }
     public float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
     public float ZeroXRotation => _level.CurrentLevel.CameraTransform.rotation.x;
 
@@ -36,6 +37,8 @@ public class InputController : MonoBehaviour
 
     public static void SetMode(InputMode mode)
     {
+        InputMode = mode;
+
         if (IsMobile)
             return;
 

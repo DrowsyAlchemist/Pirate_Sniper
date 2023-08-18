@@ -19,7 +19,8 @@ public class PauseButton : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            OnButtonClick();
+            if (InputController.InputMode == InputMode.Game)
+                OnButtonClick();
     }
 
     public void Init(bool isMobile)
