@@ -93,11 +93,14 @@ public class Saver
         int zeroLocationScore = 0;
         int firstLocationScore = 0;
 
-        foreach (string levelScore in _saves.ZeroLocation.Split(Devider))
-            zeroLocationScore += int.Parse(levelScore);
+        string[] zeroLocation = _saves.ZeroLocation.Split(Devider);
+        string[] firstLocation = _saves.ZeroLocation.Split(Devider);
 
-        foreach (string levelScore in _saves.FirstLocation.Split(Devider))
-            firstLocationScore += int.Parse(levelScore);
+        for (int i = 0; i < MaxLevelsCount; i++)
+            zeroLocationScore += int.Parse(zeroLocation[i]);
+
+        for (int i = 0; i < MaxLevelsCount; i++)
+            firstLocationScore += int.Parse(firstLocation[i]);
 
         return zeroLocationScore + firstLocationScore;
     }
