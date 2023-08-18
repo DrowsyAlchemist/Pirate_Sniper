@@ -1,13 +1,15 @@
 using Agava.YandexGames;
 using System;
+using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Saver
 {
     private const string SavesName = "Saves";
     private const int DefaultScore = 0;
-    private const string Devider = "_";
+    private const char Devider = ' ';
     private const int MaxLevelsCount = 10;
 
     private readonly StringBuilder _stringBuilder;
@@ -74,10 +76,7 @@ public class Saver
         switch (locationIndex)
         {
             case 0:
-                if (int.TryParse(_saves.ZeroLocation.Split(Devider)[levelIndex], out int score))
-                    return score;
-                else
-                    throw new Exception("GetLevelScore fail");
+                return int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]);
             default:
                 throw new NotImplementedException();
         }
@@ -93,23 +92,13 @@ public class Saver
     {
         int zeroLocationScore = 0;
         int firstLocationScore = 0;
-        string[] zeroLocationsLevels = _saves.ZeroLocation.Split(Devider);
-        string[] firstLocationsLevels = _saves.ZeroLocation.Split(Devider);
 
-        for (int i = 0; i < MaxLevelsCount; i++)
-        {
-            if (int.TryParse(zeroLocationsLevels[i], out int levelScoreInt))
-                zeroLocationScore += levelScoreInt;
-            else
-                Debug.Log($"ParsingError: value was {zeroLocationsLevels[i]}, i was {i}");
-        }
-        for (int i = 0; i < MaxLevelsCount; i++)
-        {
-            if (int.TryParse(firstLocationsLevels[i], out int levelScoreInt))
-                firstLocationScore += levelScoreInt;
-            else
-                Debug.Log($"ParsingError: value was {firstLocationsLevels[i]}, i was {i}");
-        }
+        foreach (string levelScore in _saves.ZeroLocation.Split(Devider))
+            zeroLocationScore += int.Parse(levelScore);
+
+        foreach (string levelScore in _saves.FirstLocation.Split(Devider))
+            firstLocationScore += int.Parse(levelScore);
+
         return zeroLocationScore + firstLocationScore;
     }
 
@@ -118,7 +107,6 @@ public class Saver
         SaveLevel(level.Location.Index, level.IndexInLocation, score);
         Save();
 #if UNITY_EDITOR
-        Debug.Log("GENERAL_SCORE: " + GetScore());
         return;
 #endif
         if (PlayerAccount.IsAuthorized)
