@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3db64e8df16a6439b6606300c0ffdb, type: 3}
+  m_Name: ShantyLocation
+  m_EditorClassIdentifier: 
+  _lable: Shanty
+  _sprite: {fileID: 21300000, guid: 3a012dec3cd2ed14db8ffc52c7300e8d, type: 3}
+  _requiredStars: 10
+  _levels:
+  - {fileID: 1875267476965950864, guid: 246d7ede26a1bb54ab20724c7eb75319, type: 3}
+  - {fileID: 3749505097191136388, guid: e77f9d8df85b49c47887bcc1c0056b37, type: 3}
+  - {fileID: 9081240513608537188, guid: 26ef4de0dd4386845a28b689c6ced8e1, type: 3}
+  - {fileID: 6227577237597368178, guid: 97b198596b1a90443ab36bcfa5ca2c22, type: 3}
+  - {fileID: 7967435751824310067, guid: 20b728fb1409b914f96ac750a42284a8, type: 3}
+  - {fileID: 1862787046398346625, guid: 03be06f7352a6834099373365a1648f2, type: 3}
