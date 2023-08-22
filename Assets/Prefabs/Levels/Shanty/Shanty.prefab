@@ -17177,8 +17177,6 @@ GameObject:
   - component: {fileID: 3792850470570541327}
   - component: {fileID: 3792850470570541364}
   - component: {fileID: 3792850470570541323}
-  - component: {fileID: 3792850470570541321}
-  - component: {fileID: 3792850470570541320}
   m_Layer: 0
   m_Name: SM_Prop_Crane_Shark_04
   m_TagString: Untagged
@@ -17251,34 +17249,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3792850470570541321
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792850470570541326}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43947541622911666, guid: 08b238befeef0eb40a73817572faacd0, type: 2}
---- !u!64 &3792850470570541320
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792850470570541326}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43359519357298482, guid: 08b238befeef0eb40a73817572faacd0, type: 2}
 --- !u!1 &3792850470571658570
 GameObject:
   m_ObjectHideFlags: 0

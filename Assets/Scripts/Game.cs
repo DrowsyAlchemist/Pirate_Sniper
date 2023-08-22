@@ -11,6 +11,8 @@ public class Game : MonoBehaviour
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Level _level;
 
+    [SerializeField] private Canvas _backgroundCanvas;
+
     private Player _player;
     private Saver _saver;
 
@@ -35,6 +37,7 @@ public class Game : MonoBehaviour
         _mainMenu.Open();
         _shootingPoint.Init(_player, _inputController);
         _level.Init(_player, _saver);
+        _backgroundCanvas.Deactivate();
     }
 
     public void RemoveSaves()

@@ -19716,6 +19716,7 @@ MonoBehaviour:
   _shootingPoint: {fileID: 538781365}
   _mainMenu: {fileID: 1278136988}
   _level: {fileID: 89587326}
+  _backgroundCanvas: {fileID: 1947124948}
 --- !u!4 &547833384
 Transform:
   m_ObjectHideFlags: 0
@@ -29708,7 +29709,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &812989990
 MonoBehaviour:
@@ -48428,7 +48429,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1278136988
 MonoBehaviour:
@@ -75141,7 +75142,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!1 &1950278451
 GameObject:
