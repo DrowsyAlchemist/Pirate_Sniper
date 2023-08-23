@@ -9,6 +9,7 @@ public class ShootingPoint : MonoBehaviour
     [SerializeField, Range(0, 0.5f)] private float _positionChangeSpeed;
     [SerializeField] private WeaponsStore _weaponsStore;
     [SerializeField] private AudioSource _shootSound;
+    [SerializeField] private HitEffect _hitEffect;
 
     public Player _player;
     private Weapon _currentWeapon;
@@ -26,6 +27,7 @@ public class ShootingPoint : MonoBehaviour
         _inputController.Scoped += OnScope;
         _inputController.Unscoped += OnUnscope;
         SetWeapon(_weaponsStore.CurrentWeapon);
+        _hitEffect.Init();
     }
 
     private void OnDestroy()
@@ -42,7 +44,7 @@ public class ShootingPoint : MonoBehaviour
             Destroy(_currentWeapon.gameObject);
         }
         _currentWeapon = Instantiate(weaponPrefab, transform.position + weaponPrefab.transform.localPosition, transform.rotation, transform);
-        _currentWeapon.Init();
+        _currentWeapon.Init(_hitEffect);
         _currentWeapon.Shooted += OnShooted;
         _player.SetWeapon(_currentWeapon);
     }
