@@ -8,7 +8,6 @@ public class LevelPreset : MonoBehaviour
     [SerializeField] private EnemyBody[] _enemies;
 
     public Transform CameraTransform => _cameraPosition;
-    public bool IsCompleted => Score > 0;
     public Location Location => LocationsStorage.GetLocation(this);
     public int IndexInLocation => LocationsStorage.GetLocation(this).GetLevelIndex(this);
     public int Stars => Settings.Score.GetStars(Score);

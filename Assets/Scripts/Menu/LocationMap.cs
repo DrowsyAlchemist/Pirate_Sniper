@@ -5,21 +5,7 @@ using UnityEngine;
 public class LocationMap : MonoBehaviour
 {
     [SerializeField] private List<LocationButton> _locationButtons;
-    [SerializeField] private MainMenu _mainMenu;
-
-    public int Stars
-    {
-        get
-        {
-            int stars = 0;
-
-            foreach (var locationButton in _locationButtons)
-                if (stars >= locationButton.Location.RequiredStars)
-                    stars += locationButton.Location.Stars;
-
-            return stars;
-        }
-    }
+    [SerializeField] private StarsRenderer _starsRenderer;
 
     public event Action<Location> LocationChosen;
 
@@ -33,6 +19,14 @@ public class LocationMap : MonoBehaviour
     {
         foreach (var locationButton in _locationButtons)
             locationButton.Clicked -= OnLocationButtonClick;
+    }
+
+    public void Init()
+    {
+        _starsRenderer.Init(_locationButtons);
+
+        foreach (var locationButton in _locationButtons)
+            locationButton.Init(_starsRenderer);
     }
 
     private void OnLocationButtonClick(Location location)

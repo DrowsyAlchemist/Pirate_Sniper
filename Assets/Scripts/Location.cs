@@ -16,18 +16,6 @@ public class Location : ScriptableObject
     public int RequiredStars => _requiredStars;
     public int Index => LocationsStorage.GetIndex(this);
 
-    public bool IsCompleted
-    {
-        get
-        {
-            foreach (var levelPreset in _levels)
-                if (levelPreset.IsCompleted == false)
-                    return false;
-
-            return true;
-        }
-    }
-
     public int Stars
     {
         get

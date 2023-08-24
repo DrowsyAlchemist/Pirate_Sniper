@@ -56,8 +56,7 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                _hitEffect.transform.position = hit.point;
-                _hitEffect.transform.rotation = Quaternion.LookRotation(hit.normal);
+                _hitEffect.transform.SetPositionAndRotation(hit.point, Quaternion.LookRotation(hit.normal));
                 _hitEffect.Play();
             }
         }

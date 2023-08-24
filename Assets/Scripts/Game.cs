@@ -33,10 +33,10 @@ public class Game : MonoBehaviour
         InitInputController();
         _saver = new Saver();
         _player = new Player(_inputController, _saver);
+        _level.Init(_player, _saver);
         _mainMenu.Init(_player, _saver);
         _mainMenu.Open();
         _shootingPoint.Init(_player, _inputController);
-        _level.Init(_player, _saver);
         _backgroundCanvas.Deactivate();
     }
 

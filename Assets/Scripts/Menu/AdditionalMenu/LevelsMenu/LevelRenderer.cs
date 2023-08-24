@@ -25,7 +25,7 @@ public class LevelRenderer : MonoBehaviour
         _number.text = (level.IndexInLocation + 1).ToString();
 
         var previousLevel = level.GetPreviousLevel();
-        bool isLocked = (previousLevel != null) && (previousLevel.Score == 0);
+        bool isLocked = (level.IndexInLocation != 0) && (previousLevel.Score == 0);
         _lockedPanel.gameObject.SetActive(isLocked);
         _button.SetInteractable(isLocked == false);
         RenderStars();

@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     {
         _additionalMenu.Init(player, saver, _locationMap);
         _additionalMenu.ForceClosed += OnAdditionalMenuForceClosed;
+        _locationMap.Init();
     }
 
     private void OnDestroy()

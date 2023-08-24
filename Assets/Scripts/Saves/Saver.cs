@@ -75,6 +75,10 @@ public class Saver
         {
             case 0:
                 return int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]);
+            case 1:
+                return int.Parse(_saves.FirstLocation.Split(Devider)[levelIndex]);
+            case 2:
+                return int.Parse(_saves.SecondLocation.Split(Devider)[levelIndex]);
             default:
                 throw new NotImplementedException();
         }
@@ -90,9 +94,11 @@ public class Saver
     {
         int zeroLocationScore = 0;
         int firstLocationScore = 0;
+        int secondLocationScore = 0;
 
         string[] zeroLocation = _saves.ZeroLocation.Split(Devider);
         string[] firstLocation = _saves.ZeroLocation.Split(Devider);
+        string[] secondLocation = _saves.SecondLocation.Split(Devider);
 
         for (int i = 0; i < MaxLevelsCount; i++)
             zeroLocationScore += int.Parse(zeroLocation[i]);
@@ -100,7 +106,10 @@ public class Saver
         for (int i = 0; i < MaxLevelsCount; i++)
             firstLocationScore += int.Parse(firstLocation[i]);
 
-        return zeroLocationScore + firstLocationScore;
+        for (int i = 0; i < MaxLevelsCount; i++)
+            secondLocationScore += int.Parse(secondLocation[i]);
+
+        return zeroLocationScore + firstLocationScore + secondLocationScore;
     }
 
     public void SaveLevel(LevelPreset level, int score)
@@ -120,6 +129,12 @@ public class Saver
         {
             case 0:
                 _saves.ZeroLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);
+                break;
+            case 1:
+                _saves.FirstLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);
+                break;
+            case 2:
+                _saves.SecondLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);
                 break;
             default:
                 throw new NotImplementedException();
@@ -184,6 +199,7 @@ public class Saver
 
         public string ZeroLocation;
         public string FirstLocation;
+        public string SecondLocation;
 
         public string CurrentWeapon;
         public string Weapons;
@@ -201,6 +217,7 @@ public class Saver
             string defaultString = stringBuilder.ToString();
             ZeroLocation = defaultString;
             FirstLocation = defaultString;
+            SecondLocation = defaultString;
             CurrentWeapon = Settings.Shooting.DefaultWeapon.Id;
             Weapons = CurrentWeapon;
         }
