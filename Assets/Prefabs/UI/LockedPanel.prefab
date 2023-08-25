@@ -30,9 +30,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3133992900651552571}
+  - {fileID: 3133992901137292836}
   - {fileID: 3133992900087271702}
   - {fileID: 3133992900425657740}
-  - {fileID: 3133992901137292836}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,12 +80,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3133992899751574659}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.31725428, y: 0.17}
-  m_AnchorMax: {x: 0.5123729, y: 0.39659476}
-  m_AnchoredPosition: {x: -1.7712402, y: 17.98397}
-  m_SizeDelta: {x: -1.5455, y: -22.3371}
+  m_AnchorMin: {x: 0.30115062, y: 0.2008241}
+  m_AnchorMax: {x: 0.49358523, y: 0.367111}
+  m_AnchoredPosition: {x: 0.42938232, y: -0.20037842}
+  m_SizeDelta: {x: -0.7704749, y: 0.36696506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3133992900087271700
 CanvasRenderer:
@@ -215,12 +215,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3133992899751574659}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5343729, y: 0.17}
-  m_AnchorMax: {x: 0.6841357, y: 0.39659476}
-  m_AnchoredPosition: {x: -0.14430237, y: 17.98397}
-  m_SizeDelta: {x: 2.34, y: -22.3371}
+  m_AnchorMin: {x: 0.52900004, y: 0.2008241}
+  m_AnchorMax: {x: 0.68950367, y: 0.367111}
+  m_AnchoredPosition: {x: -0.010955811, y: -0.19155884}
+  m_SizeDelta: {x: 0.19139165, y: 0.39554977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3133992900425657778
 CanvasRenderer:
@@ -293,10 +293,10 @@ RectTransform:
   m_Father: {fileID: 3133992899751574659}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.32274577, y: 0.42518944}
-  m_AnchorMax: {x: 0.6717458, y: 0.97800004}
-  m_AnchoredPosition: {x: 1.950592, y: -20.72313}
-  m_SizeDelta: {x: 3.039, y: -45.857}
+  m_AnchorMin: {x: 0.31725428, y: 0.53232694}
+  m_AnchorMax: {x: 0.67174584, y: 0.90810937}
+  m_AnchoredPosition: {x: 0.75471497, y: 0.6654663}
+  m_SizeDelta: {x: 1.587341, y: 1.9328989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3133992900651552569
 CanvasRenderer:
@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 3133992901137292836}
   - component: {fileID: 3133992901137292842}
   - component: {fileID: 3133992901137292843}
+  - component: {fileID: 5953345759605352975}
   m_Layer: 5
   m_Name: CommentText (TMP)
   m_TagString: Untagged
@@ -367,12 +368,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3133992899751574659}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25470838, y: 0.16783684}
-  m_AnchorMax: {x: 0.76331866, y: 0.27713475}
-  m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: -0.6515, y: -0.6933975}
+  m_AnchorMin: {x: 0.14064059, y: 0.38500002}
+  m_AnchorMax: {x: 0.8773865, y: 0.521}
+  m_AnchoredPosition: {x: 0.021820068, y: -0.011428833}
+  m_SizeDelta: {x: -0.07109314, y: -0.65575635}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3133992901137292842
 CanvasRenderer:
@@ -402,7 +403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Required
+  m_text: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -429,7 +430,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.9
+  m_fontSize: 62.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -471,3 +472,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5953345759605352975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133992901137292837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf51be86e70d7941bd40914206e4ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Need
+  FallbackText: Need
