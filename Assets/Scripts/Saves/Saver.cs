@@ -76,8 +76,12 @@ public class Saver
             case 0:
                 return int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]);
             case 1:
-                return int.Parse(_saves.FirstLocation.Split(Devider)[levelIndex]);
+                return int.Parse(_saves.ShipLocation0.Split(Devider)[levelIndex]);
             case 2:
+                return int.Parse(_saves.FirstLocation.Split(Devider)[levelIndex]);
+            case 3:
+                return int.Parse(_saves.ShipLocation1.Split(Devider)[levelIndex]);
+            case 4:
                 return int.Parse(_saves.SecondLocation.Split(Devider)[levelIndex]);
             default:
                 throw new NotImplementedException();
@@ -93,23 +97,33 @@ public class Saver
     public int GetScore()
     {
         int zeroLocationScore = 0;
+        int shipLocation0Score = 0;
         int firstLocationScore = 0;
+        int shipLocation1Score = 0;
         int secondLocationScore = 0;
 
         string[] zeroLocation = _saves.ZeroLocation.Split(Devider);
+        string[] shipLocation0 = _saves.ShipLocation0.Split(Devider);
         string[] firstLocation = _saves.ZeroLocation.Split(Devider);
+        string[] shipLocation1 = _saves.ShipLocation1.Split(Devider);
         string[] secondLocation = _saves.SecondLocation.Split(Devider);
 
         for (int i = 0; i < MaxLevelsCount; i++)
             zeroLocationScore += int.Parse(zeroLocation[i]);
 
         for (int i = 0; i < MaxLevelsCount; i++)
+            shipLocation0Score += int.Parse(shipLocation0[i]);
+
+        for (int i = 0; i < MaxLevelsCount; i++)
             firstLocationScore += int.Parse(firstLocation[i]);
+
+        for (int i = 0; i < MaxLevelsCount; i++)
+            shipLocation1Score += int.Parse(shipLocation1[i]);
 
         for (int i = 0; i < MaxLevelsCount; i++)
             secondLocationScore += int.Parse(secondLocation[i]);
 
-        return zeroLocationScore + firstLocationScore + secondLocationScore;
+        return zeroLocationScore + shipLocation0Score + firstLocationScore + shipLocation1Score + secondLocationScore;
     }
 
     public void SaveLevel(LevelPreset level, int score)
@@ -131,10 +145,16 @@ public class Saver
                 _saves.ZeroLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);
                 break;
             case 1:
-                _saves.FirstLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);
+                _saves.ShipLocation0 = ReplaceScore(_saves.ShipLocation0, levelIndex, score);
                 break;
             case 2:
-                _saves.SecondLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);
+                _saves.FirstLocation = ReplaceScore(_saves.FirstLocation, levelIndex, score);
+                break;
+            case 3:
+                _saves.ShipLocation1 = ReplaceScore(_saves.ShipLocation1, levelIndex, score);
+                break;
+            case 4:
+                _saves.SecondLocation = ReplaceScore(_saves.SecondLocation, levelIndex, score);
                 break;
             default:
                 throw new NotImplementedException();
@@ -198,7 +218,9 @@ public class Saver
         public int PlayerDamage;
 
         public string ZeroLocation;
+        public string ShipLocation0;
         public string FirstLocation;
+        public string ShipLocation1;
         public string SecondLocation;
 
         public string CurrentWeapon;
@@ -216,7 +238,9 @@ public class Saver
 
             string defaultString = stringBuilder.ToString();
             ZeroLocation = defaultString;
+            ShipLocation0 = defaultString;
             FirstLocation = defaultString;
+            ShipLocation1 = defaultString;
             SecondLocation = defaultString;
             CurrentWeapon = Settings.Shooting.DefaultWeapon.Id;
             Weapons = CurrentWeapon;
