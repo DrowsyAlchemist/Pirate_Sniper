@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WeaponsAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: WebGL
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 29
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: ebea9328c2bf80b419af6f433be1f2c1, type: 3}
+    - {fileID: 2800000, guid: cb3f6c58370c8dc4aacdbd48acffa28b, type: 3}
+    - {fileID: 2800000, guid: 9732f464cbec66548b77405e9643bb65, type: 3}
+    - {fileID: 2800000, guid: eb6b9e0e41ad8e342813c593c0a81a1d, type: 3}
+    - {fileID: 2800000, guid: 34446c63b61f8354aa30609dcfcae2d6, type: 3}
+    - {fileID: 2800000, guid: d79d2947362457842b8eda487d540f30, type: 3}
+    - {fileID: 2800000, guid: 68d036780e6f06f4ea4b3efc7bd32947, type: 3}
+    - {fileID: 2800000, guid: 70fb0463cd46c8d44afec88d1f8144ea, type: 3}
+    - {fileID: 2800000, guid: b7a80ca3dee28bf45aff5545cc95185b, type: 3}
+    - {fileID: 2800000, guid: 108aed0256a1f3742a1a06ec617ad34e, type: 3}
+    - {fileID: 2800000, guid: adc40d78dde257f4fb97a433ab7353d2, type: 3}
+    - {fileID: 2800000, guid: dbf8c44e3a1dd1c4186080d2b9ff1e42, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 108aed0256a1f3742a1a06ec617ad34e, type: 3}
+  - {fileID: 21300000, guid: 70fb0463cd46c8d44afec88d1f8144ea, type: 3}
+  - {fileID: 21300000, guid: 34446c63b61f8354aa30609dcfcae2d6, type: 3}
+  - {fileID: 21300000, guid: b7a80ca3dee28bf45aff5545cc95185b, type: 3}
+  - {fileID: 21300000, guid: 9732f464cbec66548b77405e9643bb65, type: 3}
+  - {fileID: 21300000, guid: d79d2947362457842b8eda487d540f30, type: 3}
+  - {fileID: 21300000, guid: ebea9328c2bf80b419af6f433be1f2c1, type: 3}
+  - {fileID: 21300000, guid: cb3f6c58370c8dc4aacdbd48acffa28b, type: 3}
+  - {fileID: 21300000, guid: 68d036780e6f06f4ea4b3efc7bd32947, type: 3}
+  - {fileID: 21300000, guid: adc40d78dde257f4fb97a433ab7353d2, type: 3}
+  - {fileID: 21300000, guid: eb6b9e0e41ad8e342813c593c0a81a1d, type: 3}
+  - {fileID: 21300000, guid: dbf8c44e3a1dd1c4186080d2b9ff1e42, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Pistol_4
+  - Pistol_2
+  - DoubleBarrelPistol_2
+  - Pistol_3
+  - DoubleBarrelPistol_0
+  - Pistol_0
+  - BlunderBuss_0
+  - BlunderBuss_1
+  - Pistol_1
+  - Rifle_0
+  - DoubleBarrelPistol_1
+  - Rifle_1
+  m_RenderDataMap: {}
+  m_Tag: WeaponsAtlas
+  m_IsVariant: 0
