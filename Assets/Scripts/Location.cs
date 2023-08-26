@@ -49,7 +49,7 @@ public class Location : ScriptableObject
     public Location GetPreviousLocation()
     {
         if (Index == 0)
-            throw new InvalidOperationException();
+            return null;
 
         return LocationsStorage.GetLocationByIndex(Index - 1);
     }

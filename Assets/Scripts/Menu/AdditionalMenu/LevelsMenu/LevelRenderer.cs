@@ -23,12 +23,16 @@ public class LevelRenderer : MonoBehaviour
     {
         _level = level ?? throw new ArgumentNullException();
         _number.text = (level.IndexInLocation + 1).ToString();
-
-        var previousLevel = level.GetPreviousLevel();
-        bool isLocked = (level.IndexInLocation != 0) && (previousLevel.Score == 0);
+        bool isLocked = IsLocked();
         _lockedPanel.gameObject.SetActive(isLocked);
         _button.SetInteractable(isLocked == false);
         RenderStars();
+    }
+
+    private bool IsLocked()
+    {
+        var previousLevel = _level.GetPreviousLevel();
+        return (_level.IndexInLocation != 0) && (_level.Score == 0) && (previousLevel.Score == 0);
     }
 
     private void RenderStars()

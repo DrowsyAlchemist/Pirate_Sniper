@@ -14,6 +14,7 @@ public class LocationButton : UIButton
     private StarsRenderer _starsRenderer;
 
     public Location Location => _location;
+    protected bool IsEnoughStars => _starsRenderer.CurrentStarsCount >= _location.RequiredStars;
 
     public event Action<Location> Clicked;
 
@@ -39,10 +40,21 @@ public class LocationButton : UIButton
 
     public void Render()
     {
-        bool isLocked = _starsRenderer.CurrentStarsCount < _location.RequiredStars;
+        bool isLocked = IsLocked();
         _lockedPanel.SetActive(isLocked);
         _iconImage.color = isLocked ? Color.gray : Color.white;
         SetInteractable(isLocked == false);
+    }
+
+    protected virtual bool IsLocked()
+    {
+        return (IsEnoughStars && IsPreviousLocationCompleted()) == false;
+    }
+
+    protected bool IsPreviousLocationCompleted()
+    {
+        Location previousLocation = _location.GetPreviousLocation();
+        return previousLocation == null || previousLocation.Levels[^1].Score > 0;
     }
 
     private void OnClick()
