@@ -19,7 +19,7 @@ public class StarsRenderer : MonoBehaviour
             Render();
     }
 
-    public void Init(IReadOnlyCollection<LocationButton> locationButtons)
+    public void Init(params LocationButton[] locationButtons)
     {
         _locationButtons = locationButtons;
 
@@ -31,7 +31,7 @@ public class StarsRenderer : MonoBehaviour
 
     public void Render()
     {
-        _starsText.text = $"{GetCurrentStarsCount()} / {_maxStarsCount}";
+        _starsText.text = $"{GetCurrentStarsCount()}/{_maxStarsCount}";
     }
 
     private int GetCurrentStarsCount()

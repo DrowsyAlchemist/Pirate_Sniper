@@ -23,7 +23,7 @@ public class LocationMap : MonoBehaviour
 
     public void Init()
     {
-        _starsRenderer.Init(_locationButtons);
+        _starsRenderer.Init(_locationButtons.ToArray());
 
         foreach (var locationButton in _locationButtons)
             locationButton.Init(_starsRenderer);

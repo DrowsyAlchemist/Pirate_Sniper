@@ -9,12 +9,13 @@ public class LocationButton : UIButton
     [SerializeField] private Image _iconImage;
     [SerializeField] private RectTransform _lockedPanel;
     [SerializeField] private TMP_Text _requiredStarsText;
+    [SerializeField] private StarsRenderer _locationStarsRenderer;
 
     private bool _isInitialized;
-    private StarsRenderer _starsRenderer;
+    private StarsRenderer _generalStarsRenderer;
 
     public Location Location => _location;
-    protected bool IsEnoughStars => _starsRenderer.CurrentStarsCount >= _location.RequiredStars;
+    protected bool IsEnoughStars => _generalStarsRenderer.CurrentStarsCount >= _location.RequiredStars;
 
     public event Action<Location> Clicked;
 
@@ -32,10 +33,11 @@ public class LocationButton : UIButton
     public void Init(StarsRenderer starsRenderer)
     {
         _iconImage.sprite = _location.Sprite;
-        _starsRenderer = starsRenderer;
+        _generalStarsRenderer = starsRenderer;
         _requiredStarsText.text = _location.RequiredStars.ToString();
         _isInitialized = true;
         Render();
+        _locationStarsRenderer.Init(this);
     }
 
     public void Render()
@@ -44,6 +46,7 @@ public class LocationButton : UIButton
         _lockedPanel.SetActive(isLocked);
         _iconImage.color = isLocked ? Color.gray : Color.white;
         SetInteractable(isLocked == false);
+        _locationStarsRenderer.gameObject.SetActive(isLocked == false);
     }
 
     protected virtual bool IsLocked()
