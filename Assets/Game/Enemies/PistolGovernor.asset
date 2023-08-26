@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d751a8a418ad0fc48a1f8d0a82e5aa7c, type: 3}
   m_Name: PistolGovernor
   m_EditorClassIdentifier: 
-  _health: 50
-  _damage: 25
-  _minSecondsBetweenShots: 2.5
-  _maxSecondsBetweenShots: 3
+  _health: 75
+  _damage: 60
+  _minSecondsBetweenShots: 1.7
+  _maxSecondsBetweenShots: 2.2
   _accuracyInPercents: 60
   _headshotDamageModifier: 2

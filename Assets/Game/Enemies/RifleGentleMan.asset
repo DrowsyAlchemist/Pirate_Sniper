@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d751a8a418ad0fc48a1f8d0a82e5aa7c, type: 3}
   m_Name: RifleGentleMan
   m_EditorClassIdentifier: 
-  _health: 50
-  _damage: 50
-  _minSecondsBetweenShots: 2.2
-  _maxSecondsBetweenShots: 2.8
-  _accuracyInPercents: 70
+  _health: 70
+  _damage: 70
+  _minSecondsBetweenShots: 1.7
+  _maxSecondsBetweenShots: 2.2
+  _accuracyInPercents: 55
   _headshotDamageModifier: 2
