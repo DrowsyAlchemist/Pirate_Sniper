@@ -166,13 +166,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5949151490436197249}
   _shotEffect: {fileID: 8080315465225846990}
-  _hitEffect: {fileID: 5679768740547676571}
   _id: BlunderBuss_0
   _sprite: {fileID: 21300000, guid: ebea9328c2bf80b419af6f433be1f2c1, type: 3}
   _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
   _cost: 0
-  _damage: 80
-  _secondsBetweenShots: 2.1
+  _damage: 75
+  _secondsBetweenShots: 2
 --- !u!1001 &1228370913624984014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,11 +237,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ada578f428441854599494988e0564e3, type: 3}
---- !u!198 &5679768740547676571 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6908129602808070229, guid: ada578f428441854599494988e0564e3, type: 3}
-  m_PrefabInstance: {fileID: 1228370913624984014}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5679768740562911659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6908129602788706405, guid: ada578f428441854599494988e0564e3, type: 3}

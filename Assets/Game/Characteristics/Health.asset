@@ -15,21 +15,21 @@ MonoBehaviour:
   _levels:
   - _value: 300
     _cost: 0
+  - _value: 320
+    _cost: 50
   - _value: 340
-    _cost: 100
+    _cost: 0
+  - _value: 360
+    _cost: 70
   - _value: 380
-    _cost: 130
+    _cost: 80
   - _value: 400
-    _cost: 150
-  - _value: 440
-    _cost: 180
-  - _value: 480
-    _cost: 200
+    _cost: 90
+  - _value: 425
+    _cost: 0
+  - _value: 450
+    _cost: 100
+  - _value: 475
+    _cost: 125
   - _value: 500
-    _cost: 220
-  - _value: 540
-    _cost: 250
-  - _value: 580
-    _cost: 270
-  - _value: 600
-    _cost: 300
+    _cost: 150

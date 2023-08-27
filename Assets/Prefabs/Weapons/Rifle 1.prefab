@@ -181,12 +181,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 555815364222412139}
   _shotEffect: {fileID: 10975796577526006}
-  _hitEffect: {fileID: 6279134748273286113}
   _id: Rifle_1
   _sprite: {fileID: 21300000, guid: dbf8c44e3a1dd1c4186080d2b9ff1e42, type: 3}
   _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
   _cost: 400
-  _damage: 100
+  _damage: 150
   _secondsBetweenShots: 3
 --- !u!1001 &647793273621470132
 PrefabInstance:
@@ -248,11 +247,6 @@ PrefabInstance:
 --- !u!4 &6279134748254966737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6908129602788706405, guid: ada578f428441854599494988e0564e3, type: 3}
-  m_PrefabInstance: {fileID: 647793273621470132}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &6279134748273286113 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6908129602808070229, guid: ada578f428441854599494988e0564e3, type: 3}
   m_PrefabInstance: {fileID: 647793273621470132}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5828863294873088619

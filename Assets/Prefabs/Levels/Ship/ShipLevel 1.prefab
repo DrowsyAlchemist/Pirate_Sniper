@@ -2062,10 +2062,6 @@ GameObject:
   - component: {fileID: 3266545495141910473}
   - component: {fileID: 3266545495141910519}
   - component: {fileID: 3266545495141910516}
-  - component: {fileID: 3266545495141910517}
-  - component: {fileID: 3266545495141910474}
-  - component: {fileID: 3266545495141910475}
-  - component: {fileID: 3266545495141910472}
   m_Layer: 0
   m_Name: SM_Veh_Boat_Warship_01_Hull_Attachments (1)
   m_TagString: Untagged
@@ -2149,58 +2145,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3266545495141910517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3266545495141910478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6204395, y: 2.5686626, z: 8.233542}
-  m_Center: {x: -3.4970899, y: 5.5402, z: 0.72356564}
---- !u!65 &3266545495141910474
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3266545495141910478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.27413836, y: 0.9519086, z: 5.5879602}
-  m_Center: {x: -3.1189494, y: 8.005878, z: 7.591443}
---- !u!65 &3266545495141910475
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3266545495141910478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.92792237, y: 2.3062038, z: 4.8084755}
-  m_Center: {x: -2.3259583, y: 10.448592, z: -11.577903}
---- !u!65 &3266545495141910472
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3266545495141910478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.48680764, y: 2.4689999, z: 5.543441}
-  m_Center: {x: -3.2253828, y: 7.7029104, z: -5.722305}
 --- !u!1 &3266545495220395671
 GameObject:
   m_ObjectHideFlags: 0
