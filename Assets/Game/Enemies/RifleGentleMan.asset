@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RifleGentleMan
   m_EditorClassIdentifier: 
   _health: 70
-  _damage: 70
+  _damage: 60
   _minSecondsBetweenShots: 1.7
   _maxSecondsBetweenShots: 2.2
   _accuracyInPercents: 55

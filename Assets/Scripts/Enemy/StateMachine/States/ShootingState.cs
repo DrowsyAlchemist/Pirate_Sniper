@@ -47,16 +47,20 @@ public class ShootingState : EnemyState
         if (enabled == false)
             return;
 
-        Enemy.Animator.PlayShoot();
+        if (Enemy.ReadonlyHealth.IsAlive)
+            Enemy.Animator.PlayShoot();
     }
 
     private void OnAnimatorShoot()
     {
-        _shotEffect.Play();
-        _shootSound.Play();
-        _timer.Start(SecondsBetweenShots);
+        if (Enemy.ReadonlyHealth.IsAlive)
+        {
+            _shotEffect.Play();
+            _shootSound.Play();
+            _timer.Start(SecondsBetweenShots);
 
-        if (Random.Range(0, 100) < Enemy.Preset.AccuracyInPercents)
-            Player.ApplyDamage(Enemy.Preset.Damage);
+            if (Random.Range(0, 100) < Enemy.Preset.AccuracyInPercents)
+                Player.ApplyDamage(Enemy.Preset.Damage);
+        }
     }
 }

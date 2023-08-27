@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PistolGovernor
   m_EditorClassIdentifier: 
   _health: 75
-  _damage: 60
+  _damage: 50
   _minSecondsBetweenShots: 1.7
   _maxSecondsBetweenShots: 2.2
   _accuracyInPercents: 60
