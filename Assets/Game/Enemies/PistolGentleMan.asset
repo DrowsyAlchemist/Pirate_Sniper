@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d751a8a418ad0fc48a1f8d0a82e5aa7c, type: 3}
   m_Name: PistolGentleMan
   m_EditorClassIdentifier: 
-  _health: 52
+  _health: 70
   _damage: 40
   _minSecondsBetweenShots: 1.5
   _maxSecondsBetweenShots: 2

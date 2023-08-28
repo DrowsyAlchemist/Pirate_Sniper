@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d751a8a418ad0fc48a1f8d0a82e5aa7c, type: 3}
   m_Name: PistolCaptain
   m_EditorClassIdentifier: 
-  _health: 150
-  _damage: 70
+  _health: 170
+  _damage: 60
   _minSecondsBetweenShots: 2.2
   _maxSecondsBetweenShots: 2.8
   _accuracyInPercents: 80

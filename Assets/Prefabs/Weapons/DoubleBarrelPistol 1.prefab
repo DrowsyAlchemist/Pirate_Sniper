@@ -171,7 +171,7 @@ MonoBehaviour:
   _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
   _cost: 0
   _damage: 35
-  _secondsBetweenShots: 1.7
+  _secondsBetweenShots: 1.8
 --- !u!1001 &2369379662191759955
 PrefabInstance:
   m_ObjectHideFlags: 0

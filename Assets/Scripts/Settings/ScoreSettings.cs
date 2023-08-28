@@ -23,13 +23,13 @@ public class ScoreSettings : ScriptableObject
 
     public int GetStars(int score)
     {
-        if (score > _threeStarsScore)
+        if (score >= _threeStarsScore)
             return 3;
 
-        if (score > _twoStarsScore)
+        if (score >= _twoStarsScore)
             return 2;
 
-        if (score > _oneStarScore)
+        if (score >= _oneStarScore)
             return 1;
 
         return 0;

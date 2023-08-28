@@ -15,21 +15,21 @@ MonoBehaviour:
   _levels:
   - _value: 25
     _cost: 0
-  - _value: 30
+  - _value: 27
     _cost: 50
-  - _value: 35
+  - _value: 30
     _cost: 60
+  - _value: 32
+    _cost: 0
+  - _value: 35
+    _cost: 80
+  - _value: 37
+    _cost: 90
   - _value: 40
+    _cost: 100
+  - _value: 42
     _cost: 0
   - _value: 45
-    _cost: 80
-  - _value: 50
-    _cost: 90
-  - _value: 55
-    _cost: 100
-  - _value: 60
-    _cost: 0
-  - _value: 65
     _cost: 125
-  - _value: 80
+  - _value: 50
     _cost: 150

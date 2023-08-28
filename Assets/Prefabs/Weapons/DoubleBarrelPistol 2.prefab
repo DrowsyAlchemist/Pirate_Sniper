@@ -166,13 +166,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 6301039912554046106}
   _shotEffect: {fileID: 8080315465225846990}
-  _hitEffect: {fileID: 8601474271471402207}
   _id: DoubleBarrelPistol_2
   _sprite: {fileID: 21300000, guid: 34446c63b61f8354aa30609dcfcae2d6, type: 3}
   _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
   _cost: 150
   _damage: 40
-  _secondsBetweenShots: 1.4
+  _secondsBetweenShots: 1.5
 --- !u!1001 &2369379662191759955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300,10 +299,5 @@ PrefabInstance:
 --- !u!4 &8601474271453017327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6908129602788706405, guid: ada578f428441854599494988e0564e3, type: 3}
-  m_PrefabInstance: {fileID: 2918341368085134474}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8601474271471402207 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6908129602808070229, guid: ada578f428441854599494988e0564e3, type: 3}
   m_PrefabInstance: {fileID: 2918341368085134474}
   m_PrefabAsset: {fileID: 0}
