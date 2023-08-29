@@ -84,8 +84,8 @@ public class InputController : MonoBehaviour
         int Epsilon = 20;
         Vector3 cameraAngles = _camera.transform.localRotation.eulerAngles;
 
-        float xUpperBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.x + Settings.Camera.XMaxRotation) % 360;
-        float xLowerBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.x - Settings.Camera.XMaxRotation);
+        float xUpperBound = (_level.CurrentLevel.CameraTransform.eulerAngles.x + Settings.Camera.XMaxRotation) % 360;
+        float xLowerBound = (_level.CurrentLevel.CameraTransform.eulerAngles.x - Settings.Camera.XMaxRotation);
 
         if (xLowerBound < 0)
             xLowerBound += 360;
@@ -99,8 +99,8 @@ public class InputController : MonoBehaviour
         if ((xAngleToCheck - xUpperBound) > 0 && (xAngleToCheck - xUpperBound) < Epsilon)
             targetXAngle = cameraAngles.x;
 
-        float yUpperBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.y + Settings.Camera.YMaxRotation) % 360;
-        float yLowerBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.y - Settings.Camera.YMaxRotation);
+        float yUpperBound = (_level.CurrentLevel.CameraTransform.eulerAngles.y + Settings.Camera.YMaxRotation) % 360;
+        float yLowerBound = (_level.CurrentLevel.CameraTransform.eulerAngles.y - Settings.Camera.YMaxRotation);
 
         if (yLowerBound < 0)
             yLowerBound += 360;
@@ -116,6 +116,7 @@ public class InputController : MonoBehaviour
 
         float targetZAngle = _initialRotation.z;
         _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, targetZAngle));
+        Debug.Log("targetYAngle :" + targetYAngle + " ; yUpper: " + yUpperBound + " ; yLower" + yLowerBound + " ; initialY: " + _level.CurrentLevel.CameraTransform.eulerAngles.y);
     }
 
     private void Scope()
