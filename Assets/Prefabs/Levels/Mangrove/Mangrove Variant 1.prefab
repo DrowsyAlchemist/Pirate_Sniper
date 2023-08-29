@@ -335,6 +335,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 200.963
       objectReference: {fileID: 0}
+    - target: {fileID: 1388440129491409695, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99965495
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388440129491409695, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.02617686
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388440129491409695, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0021809416
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388440129491409695, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000057109908
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388440129491409695, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388440129491409695, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2615186318784517507, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
       propertyPath: m_Name
       value: Mangrove Variant 1
