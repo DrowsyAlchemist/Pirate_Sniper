@@ -215,6 +215,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4.408
       objectReference: {fileID: 0}
+    - target: {fileID: 6558072958270405, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5198174
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558072958270405, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558072958270405, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.85427743
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558072958270405, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558072958270405, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558072958270405, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -117.36
+      objectReference: {fileID: 0}
     - target: {fileID: 2538102875878391010, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
       propertyPath: _id
       value: Havana_1

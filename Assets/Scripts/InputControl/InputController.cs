@@ -81,37 +81,40 @@ public class InputController : MonoBehaviour
 
     public void OnPointerMove()
     {
-        Vector3 cameraEulers = _camera.transform.localRotation.eulerAngles;
-        Vector3 cameraAngles = cameraEulers;
+        int Epsilon = 20;
+        Vector3 cameraAngles = _camera.transform.localRotation.eulerAngles;
 
-        cameraAngles.x %= 180;
-        cameraAngles.y %= 180;
+        float xUpperBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.x + Settings.Camera.XMaxRotation) % 360;
+        float xLowerBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.x - Settings.Camera.XMaxRotation);
 
-        //  float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
+        if (xLowerBound < 0)
+            xLowerBound += 360;
 
-        // if (targetXAngle > Settings.Camera.XMaxRotation)
-        //     targetXAngle = Settings.Camera.XMaxRotation;
+        float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
+        float xAngleToCheck = targetXAngle % 360;
 
-        // if (targetXAngle < Settings.Camera.XMinRotation)
-        //     targetXAngle = Settings.Camera.XMinRotation;
+        if ((xAngleToCheck - xLowerBound) < 0 && (xAngleToCheck - xLowerBound) > -Epsilon)
+            targetXAngle = cameraAngles.x;
 
-        //  float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
+        if ((xAngleToCheck - xUpperBound) > 0 && (xAngleToCheck - xUpperBound) < Epsilon)
+            targetXAngle = cameraAngles.x;
 
-        //  if (targetYAngle > Settings.Camera.YMaxRotation)
-        //      targetYAngle = Settings.Camera.YMaxRotation;
+        float yUpperBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.y + Settings.Camera.YMaxRotation) % 360;
+        float yLowerBound = (_level.CurrentLevel.CameraTransform.localEulerAngles.y - Settings.Camera.YMaxRotation);
 
-        //  if (targetYAngle < Settings.Camera.YMinRotation)
-        //      targetYAngle = Settings.Camera.YMinRotation;
+        if (yLowerBound < 0)
+            yLowerBound += 360;
 
-        //  targetXAngle += (cameraEulers.x < 0) ? 360 : 0;
-        // targetYAngle -= (cameraEulers.y < 0) ? 360 : 0;
-        float targetXAngle = cameraEulers.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
-        float targetYAngle = cameraEulers.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
+        float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
+        float yAngleToCheck = targetYAngle % 360;
 
-      //  Debug.Log(targetXAngle);
+        if ((yAngleToCheck - yLowerBound) < 0 && (yAngleToCheck - yLowerBound) > -Epsilon)
+            targetYAngle = cameraAngles.y;
+
+        if ((yAngleToCheck - yUpperBound) > 0 && (yAngleToCheck - yUpperBound) < Epsilon)
+            targetYAngle = cameraAngles.y;
 
         float targetZAngle = _initialRotation.z;
-
         _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, targetZAngle));
     }
 

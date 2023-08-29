@@ -235,6 +235,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Havana Variant 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4130923710594124840, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.18823847
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130923710594124840, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9821234
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130923710594124840, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130923710594124840, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -158.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130923710594124840, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4378540568141658248, guid: bc551bfe13c177545b36aeda1c16ea6e, type: 3}
       propertyPath: m_IsActive
       value: 1

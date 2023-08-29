@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d9918fae355e644a17c5e9501baa7b, type: 3}
   m_Name: CameraSettings
   m_EditorClassIdentifier: 
-  _xMinRotation: -15
-  _xMaxRotation: 15
-  _yMinRotation: -15
-  _yMaxRotation: 15
+  _xMaxRotation: 20
+  _yMaxRotation: 45
   _fieldOfViewEpsilon: 0.5
