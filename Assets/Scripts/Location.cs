@@ -58,7 +58,7 @@ public class Location : ScriptableObject
     {
         nextLocation = null;
 
-        if (LocationsStorage.Locations.Count >= Index + 1)
+        if (Index + 1 >= LocationsStorage.Locations.Count)
             return false;
 
         nextLocation = LocationsStorage.GetLocationByIndex(Index + 1);

@@ -9,7 +9,7 @@ public static class MoneyCalculator
         if ((levelObserver.Score > levelObserver.LevelInstance.Score))
             return (int)(result * CalculateModifier(levelObserver));
         else
-            return 0;
+            return moneyForHeadshots;
     }
 
     private static float CalculateModifier(LevelObserver levelObserver)
