@@ -806,10 +806,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 19813786, guid: 346f3bf3686d682498113714ee132099, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 19821322, guid: 346f3bf3686d682498113714ee132099, type: 3}
       propertyPath: playOnAwake
       value: 0
