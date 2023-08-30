@@ -19,6 +19,8 @@ public class Level : MonoBehaviour
 
     public LevelPreset CurrentLevel => _currentLevel;
 
+    public event Action LevelLoaded;
+
     private void Awake()
     {
         if (_instance == null)
@@ -86,6 +88,7 @@ public class Level : MonoBehaviour
         _levelInfoRenderer.ResetInfo();
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
         InputController.SetMode(InputMode.Game);
+        LevelLoaded?.Invoke();
 #if UNITY_EDITOR
         return;
 #endif

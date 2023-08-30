@@ -13,10 +13,16 @@ public class InputController : MonoBehaviour
 
     [SerializeField] private Level _level;
 
+    private const float DefaultZRotation = 0;
+    private const float AngleEpsilon = 20;
     private static InputController _instance;
-    private Quaternion _initialRotation;
     private bool _isScopeMode;
     private Coroutine _coroutine;
+
+    private float _xUpperBound;
+    private float _xLowerBound;
+    private float _yUpperBound;
+    private float _yLowerBound;
 
     public event Action Scoped;
     public event Action Unscoped;
@@ -33,6 +39,14 @@ public class InputController : MonoBehaviour
             _instance = this;
         else
             Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        _pointerMoveArea.PointerMove -= OnPointerMove;
+        _pointerDownArea.PointerDown -= Scope;
+        _pointerUpArea.PointerUp -= Shoot;
+        _level.LevelLoaded -= OnNewLevelLoaded;
     }
 
     public static void SetMode(InputMode mode)
@@ -64,59 +78,33 @@ public class InputController : MonoBehaviour
     {
         IsMobile = isMobile;
         SetMode(InputMode.UI);
-        _initialRotation = _camera.transform.rotation;
         _pauseButton.Init(isMobile);
         _pointerDownArea.Init();
         _pointerDownArea.PointerDown += Scope;
         _pointerUpArea.PointerUp += Shoot;
         _pointerMoveArea.PointerMove += OnPointerMove;
-    }
-
-    private void OnDestroy()
-    {
-        _pointerMoveArea.PointerMove -= OnPointerMove;
-        _pointerDownArea.PointerDown -= Scope;
-        _pointerUpArea.PointerUp -= Shoot;
+        _level.LevelLoaded += OnNewLevelLoaded;
     }
 
     public void OnPointerMove()
     {
-        int Epsilon = 20;
         Vector3 cameraAngles = _camera.transform.localRotation.eulerAngles;
-
-        float xUpperBound = (_level.CurrentLevel.CameraTransform.eulerAngles.x + Settings.Camera.XMaxRotation) % 360;
-        float xLowerBound = (_level.CurrentLevel.CameraTransform.eulerAngles.x - Settings.Camera.XMaxRotation);
-
-        if (xLowerBound < 0)
-            xLowerBound += 360;
 
         float targetXAngle = cameraAngles.x + Time.deltaTime * CurrentSensitivity * -1 * Input.GetAxis("Mouse Y");
         float xAngleToCheck = targetXAngle % 360;
 
-        if ((xAngleToCheck - xLowerBound) < 0 && (xAngleToCheck - xLowerBound) > -Epsilon)
+        if ((xAngleToCheck - _xLowerBound) < 0 && (xAngleToCheck - _xLowerBound) > -1 * AngleEpsilon
+            || (xAngleToCheck - _xUpperBound) > 0 && (xAngleToCheck - _xUpperBound) < AngleEpsilon)
             targetXAngle = cameraAngles.x;
-
-        if ((xAngleToCheck - xUpperBound) > 0 && (xAngleToCheck - xUpperBound) < Epsilon)
-            targetXAngle = cameraAngles.x;
-
-        float yUpperBound = (_level.CurrentLevel.CameraTransform.eulerAngles.y + Settings.Camera.YMaxRotation) % 360;
-        float yLowerBound = (_level.CurrentLevel.CameraTransform.eulerAngles.y - Settings.Camera.YMaxRotation);
-
-        if (yLowerBound < 0)
-            yLowerBound += 360;
 
         float targetYAngle = cameraAngles.y + Time.deltaTime * CurrentSensitivity * Input.GetAxis("Mouse X");
         float yAngleToCheck = targetYAngle % 360;
 
-        if ((yAngleToCheck - yLowerBound) < 0 && (yAngleToCheck - yLowerBound) > -Epsilon)
+        if ((yAngleToCheck - _yLowerBound) < 0 && (yAngleToCheck - _yLowerBound) > -1 * AngleEpsilon
+            || (yAngleToCheck - _yUpperBound) > 0 && (yAngleToCheck - _yUpperBound) < AngleEpsilon)
             targetYAngle = cameraAngles.y;
 
-        if ((yAngleToCheck - yUpperBound) > 0 && (yAngleToCheck - yUpperBound) < Epsilon)
-            targetYAngle = cameraAngles.y;
-
-        float targetZAngle = _initialRotation.z;
-        _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, targetZAngle));
-        Debug.Log("targetYAngle :" + targetYAngle + " ; yUpper: " + yUpperBound + " ; yLower" + yLowerBound + " ; initialY: " + _level.CurrentLevel.CameraTransform.eulerAngles.y);
+        _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, DefaultZRotation));
     }
 
     private void Scope()
@@ -165,5 +153,20 @@ public class InputController : MonoBehaviour
         Physics.Raycast(ray, out RaycastHit hit);
         Shooted?.Invoke(hit);
         Unscope();
+    }
+
+    private void OnNewLevelLoaded()
+    {
+        _xUpperBound = (_level.CurrentLevel.CameraTransform.eulerAngles.x + Settings.Camera.XMaxRotation) % 360;
+        _xLowerBound = _level.CurrentLevel.CameraTransform.eulerAngles.x - Settings.Camera.XMaxRotation;
+
+        if (_xLowerBound < 0)
+            _xLowerBound += 360;
+
+        _yUpperBound = (_level.CurrentLevel.CameraTransform.eulerAngles.y + Settings.Camera.YMaxRotation) % 360;
+        _yLowerBound = _level.CurrentLevel.CameraTransform.eulerAngles.y - Settings.Camera.YMaxRotation;
+
+        if (_yLowerBound < 0)
+            _yLowerBound += 360;
     }
 }

@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 7085676734972540641}
   - component: {fileID: 7196196083316290548}
   - component: {fileID: 6721004394650749991}
+  - component: {fileID: 2018962020165238651}
   m_Layer: 5
   m_Name: LevelToChooseRenderer
   m_TagString: Untagged
@@ -461,6 +462,18 @@ MonoBehaviour:
   - {fileID: 2414071324257350304}
   - {fileID: 5731692830390037794}
   - {fileID: 4221560790250640447}
+--- !u!114 &2018962020165238651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6389806068713469811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314b478e125e22947bc2d243674576ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6389806069020548829
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +567,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.35
+  m_fontSize: 70.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

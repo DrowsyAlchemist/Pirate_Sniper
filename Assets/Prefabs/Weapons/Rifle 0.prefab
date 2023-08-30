@@ -183,7 +183,7 @@ MonoBehaviour:
   _shotEffect: {fileID: 10975796577526006}
   _id: Rifle_0
   _sprite: {fileID: 21300000, guid: adc40d78dde257f4fb97a433ab7353d2, type: 3}
-  _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  _shootClip: {fileID: 8300000, guid: a3117c3b7f7543f42bfdde4fd4271a49, type: 3}
   _cost: 100
   _damage: 75
   _secondsBetweenShots: 2

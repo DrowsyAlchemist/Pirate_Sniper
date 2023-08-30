@@ -168,7 +168,7 @@ MonoBehaviour:
   _shotEffect: {fileID: 8080315465225846990}
   _id: BlunderBuss_1
   _sprite: {fileID: 21300000, guid: cb3f6c58370c8dc4aacdbd48acffa28b, type: 3}
-  _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  _shootClip: {fileID: 8300000, guid: d6dbb92a655eeb549a408aa59fed63f4, type: 3}
   _cost: 100
   _damage: 80
   _secondsBetweenShots: 1.9

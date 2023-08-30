@@ -47,11 +47,11 @@ public class ShootingPoint : MonoBehaviour
         _currentWeapon.Init(_hitEffect);
         _currentWeapon.Shooted += OnShooted;
         _player.SetWeapon(_currentWeapon);
+        _shootSound.clip = _currentWeapon.ShootClip;
     }
 
     private void OnShooted()
     {
-        _shootSound.clip = _currentWeapon.ShootClip;
         _shootSound.Play();
         Shooted?.Invoke();
     }

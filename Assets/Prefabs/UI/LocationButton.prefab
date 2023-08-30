@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4139095849778039389}
   - component: {fileID: 4139095849778039388}
   - component: {fileID: 4139095849778039390}
+  - component: {fileID: 8045907009832957885}
   m_Layer: 5
   m_Name: LocationButton
   m_TagString: Untagged
@@ -108,9 +109,20 @@ MonoBehaviour:
   _location: {fileID: 11400000, guid: a3d625a87b3e50f4d9233077e8ebae33, type: 2}
   _iconImage: {fileID: 2606907188767603872}
   _lockedPanel: {fileID: 1301303135822662736}
-  _starsPanel: {fileID: 8863769259242094725}
   _requiredStarsText: {fileID: 1301303135486763462}
   _locationStarsRenderer: {fileID: 8221893137433981678}
+--- !u!114 &8045907009832957885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139095849778039387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314b478e125e22947bc2d243674576ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8929795926985071122
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,11 +331,6 @@ MonoBehaviour:
 --- !u!224 &1301303135822662736 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3133992899751574659, guid: 6e6f552479009af48b3caa8e8e6b82c0, type: 3}
-  m_PrefabInstance: {fileID: 4139095849311809747}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &8863769259242094725 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4788288010189877334, guid: 6e6f552479009af48b3caa8e8e6b82c0, type: 3}
   m_PrefabInstance: {fileID: 4139095849311809747}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8401475383294880864

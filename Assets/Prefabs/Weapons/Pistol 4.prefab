@@ -183,7 +183,7 @@ MonoBehaviour:
   _shotEffect: {fileID: 8080315465225846990}
   _id: Pistol_4
   _sprite: {fileID: 21300000, guid: 108aed0256a1f3742a1a06ec617ad34e, type: 3}
-  _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  _shootClip: {fileID: 8300000, guid: 38d95e38f52f6a54b888d9fd555fa1e3, type: 3}
   _cost: 0
   _damage: 27
   _secondsBetweenShots: 1.4

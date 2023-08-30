@@ -168,7 +168,7 @@ MonoBehaviour:
   _shotEffect: {fileID: 8080315465225846990}
   _id: DoubleBarrelPistol_1
   _sprite: {fileID: 21300000, guid: eb6b9e0e41ad8e342813c593c0a81a1d, type: 3}
-  _shootClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  _shootClip: {fileID: 8300000, guid: d6dbb92a655eeb549a408aa59fed63f4, type: 3}
   _cost: 0
   _damage: 35
   _secondsBetweenShots: 1.8
