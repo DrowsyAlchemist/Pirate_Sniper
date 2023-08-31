@@ -4,14 +4,15 @@ using UnityEngine;
 public class ShootingSettings : ScriptableObject
 {
     [SerializeField] private Weapon _defaultWeapon;
-    [SerializeField] private float _baseSensitivity = 200;
-    [SerializeField] private float _maxSensitivity = 500;
-    [SerializeField, Range(0, 1)] private float _scopeRelativeSensitivity = 0.5f;
+    [SerializeField] private float _maxSensitivity = 200;
 
     [SerializeField] private float _baseFieldOfView = 60;
     [SerializeField] private float _scopeFieldOfView = 35;
 
     [SerializeField, Range(0.01f, 1)] private float _scopeSpeed;
+
+    private float _baseSensitivity = 100;
+    private float _scopeRelativeSensitivity = 0.5f;
 
     public Weapon DefaultWeapon => _defaultWeapon;
     public float BaseSensitivity => _baseSensitivity;

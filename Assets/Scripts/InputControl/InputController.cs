@@ -14,7 +14,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private Level _level;
 
     private const float DefaultZRotation = 0;
-    private const float AngleEpsilon = 20;
+    private const float AngleEpsilon = 50;
     private static InputController _instance;
     private bool _isScopeMode;
     private Coroutine _coroutine;
