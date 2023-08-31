@@ -14,10 +14,14 @@ public class LeaderboardEntryRenderer : MonoBehaviour
     {
         _rankText.text = entry.rank.ToString();
         _scoreText.text = entry.score.ToString();
+        string name = null;
 
         if (PlayerAccount.HasPersonalProfileDataPermission)
-            _nameText.text = entry.player.publicName;
-        else
-            _nameText.text = Settings.Leaderboard.DefaultName;
+            name = entry.player.publicName;
+
+        if (string.IsNullOrEmpty(name))
+            name = Settings.Leaderboard.DefaultName;
+
+        _nameText.text = name;
     }
 }

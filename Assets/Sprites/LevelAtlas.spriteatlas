@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: WebGL
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 4096
       m_ResizeAlgorithm: 0
       m_TextureFormat: 51
       m_TextureCompression: 1
@@ -44,6 +44,7 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 2800000, guid: 16c8ca5662ad4e745accf9785c1e4c45, type: 3}
     - {fileID: 2800000, guid: 476fa7ac7fe0b27499751f2336ed8a05, type: 3}
     - {fileID: 2800000, guid: 9e8e2254e0d704081931984187b98db6, type: 3}
     - {fileID: 2800000, guid: 8ce7d0e9cb5184e2298eedeb3266e9be, type: 3}
@@ -72,6 +73,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f43899c31dd434901b0422f98bcde88b, type: 3}
   - {fileID: 21300000, guid: 8222ee04859dd4fe5b07c16b5439f249, type: 3}
   - {fileID: 21300000, guid: 9e8e2254e0d704081931984187b98db6, type: 3}
+  - {fileID: 21300000, guid: 16c8ca5662ad4e745accf9785c1e4c45, type: 3}
   - {fileID: 21300000, guid: bb530766b63782c4ebc0a0ac2b09a859, type: 3}
   - {fileID: 21300000, guid: 2d2b3db64356e414fb61812d8ec27878, type: 3}
   - {fileID: 21300000, guid: d6cce558fcc344f4ea971d01b01edaa6, type: 3}
@@ -90,6 +92,7 @@ SpriteAtlas:
   - joystick_bg
   - shop_img_gold_3
   - pause_btn_icon_play
+  - EnemyIcon
   - Crosshair
   - Headshot
   - top_btn_icon_setting
