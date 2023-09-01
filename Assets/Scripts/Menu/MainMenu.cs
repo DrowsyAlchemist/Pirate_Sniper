@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
         _additionalMenu.Init(player, saver, _locationMap);
         _additionalMenu.ForceClosed += OnAdditionalMenuForceClosed;
         _locationMap.Init();
+        _locationMap.Deactivate();
     }
 
     private void OnDestroy()
@@ -44,6 +45,7 @@ public class MainMenu : MonoBehaviour
         while (_additionalMenu.IsPlaying)
             yield return null;
 
+        _locationMap.Deactivate();
         gameObject.SetActive(false);
     }
 

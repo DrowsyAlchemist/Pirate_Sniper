@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocationMap : MonoBehaviour
+public class LocationMap : Window
 {
     [SerializeField] private List<LocationButton> _locationButtons;
     [SerializeField] private StarsRenderer _starsRenderer;
