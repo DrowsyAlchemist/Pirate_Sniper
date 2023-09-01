@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 8008992767337868964}
   - component: {fileID: 630273873281925212}
   - component: {fileID: 3089518494208149680}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas (DamageRenderer)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &630273873281925212
 MonoBehaviour:
