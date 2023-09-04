@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ReloadingRenderer : MonoBehaviour
 {
     [SerializeField] private ShootingPoint _shootingPoint;
-    [SerializeField] private Slider _slider;
+    [SerializeField] private Image _filledImage;
     [SerializeField] private Animator _animator;
 
     private const string HideAnimation = "Hide";
@@ -31,10 +31,10 @@ public class ReloadingRenderer : MonoBehaviour
     {
         while (weapon.IsReady == false)
         {
-            _slider.value = 1 - weapon.SecondsBeforeReadyLeft / weapon.SecondsBetweenShots;
+            _filledImage.fillAmount = weapon.SecondsBeforeReadyLeft / weapon.SecondsBetweenShots;
             yield return null;
         }
-        _slider.value = 1;
+        _filledImage.fillAmount = 0;
         _animator.Play(HideAnimation);
     }
 }
