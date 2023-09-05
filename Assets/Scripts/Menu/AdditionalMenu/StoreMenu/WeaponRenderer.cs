@@ -17,7 +17,7 @@ public class WeaponRenderer : WareRenderer
 
     private void Start()
     {
-        _chooseButton.SetOnClickAction(() => ChooseButtonClicked?.Invoke(this));
+        _chooseButton.AddOnClickAction(() => ChooseButtonClicked?.Invoke(this));
     }
 
     public void Render(Weapon weapon)

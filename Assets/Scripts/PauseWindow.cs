@@ -13,9 +13,9 @@ public class PauseWindow : Window
 
     public void Init()
     {
-        _resumeButton.SetOnClickAction(() => ResumeButtonClick?.Invoke());
-        _menuButton.SetOnClickAction(() => MenuButtonClicked?.Invoke());
-        _settingsButton.SetOnClickAction(() => SettingsButtonClicked?.Invoke());
+        _resumeButton.AddOnClickAction(() => ResumeButtonClick?.Invoke());
+        _menuButton.AddOnClickAction(() => MenuButtonClicked?.Invoke());
+        _settingsButton.AddOnClickAction(() => SettingsButtonClicked?.Invoke());
         gameObject.SetActive(false);
     }
 }

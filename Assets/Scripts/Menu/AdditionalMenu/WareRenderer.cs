@@ -13,7 +13,7 @@ public class WareRenderer : MonoBehaviour
 
     private void Awake()
     {
-        _buyButton.SetOnClickAction(OnBuyButtonClick);
+        _buyButton.AddOnClickAction(OnBuyButtonClick);
     }
 
     public void Render(int cost)

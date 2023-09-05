@@ -6,24 +6,27 @@ using UnityEngine.UI;
 public class UIButton : MonoBehaviour
 {
     private Button _button;
-    private UnityAction _onClick;
 
     protected void OnDestroy()
     {
         if (_button != null)
         {
-            _button.RemoveListener(_onClick);
+            _button.onClick.RemoveAllListeners();
             OnButtonDestroy();
         }
     }
 
-    public void SetOnClickAction(UnityAction onClick)
+    public void AddOnClickAction(UnityAction onClick)
     {
         if (_button == null)
             _button = GetComponent<Button>();
 
-        _onClick = onClick;
-        _button.AddListener(_onClick);
+        _button.AddListener(onClick);
+    }
+
+    public void RemoveOnClickAction(UnityAction onClick)
+    {
+        _button.RemoveListener(onClick);
     }
 
     public void SetInteractable(bool value)

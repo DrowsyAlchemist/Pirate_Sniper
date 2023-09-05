@@ -21,7 +21,7 @@ public class AdditionalMenu : AnimatedWindow
         gameObject.SetActive(true);
         _locationMap = locationMap;
         _locationMap.LocationChosen += OpenLevels;
-        _closeButton.SetOnClickAction(Disappear);
+        _closeButton.AddOnClickAction(Disappear);
 
         _characteristicsMenu.Init(player);
         _storeMenu.Init(player.Wallet, saver);

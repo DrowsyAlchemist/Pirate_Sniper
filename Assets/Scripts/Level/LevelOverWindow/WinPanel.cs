@@ -21,7 +21,7 @@ public class WinPanel : LevelOverPanel
     public override void Init()
     {
         base.Init();
-        _doubleMoneyButton.SetOnClickAction(OnDoubleMoneyButtonClick);
+        _doubleMoneyButton.AddOnClickAction(OnDoubleMoneyButtonClick);
     }
 
     public override void Open(LevelObserver levelObserver)

@@ -16,7 +16,7 @@ public class LevelRenderer : MonoBehaviour
 
     private void Awake()
     {
-        _button.SetOnClickAction(OnButtonClick);
+        _button.AddOnClickAction(OnButtonClick);
     }
 
     public void Render(LevelPreset level)

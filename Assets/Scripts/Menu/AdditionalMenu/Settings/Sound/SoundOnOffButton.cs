@@ -7,7 +7,7 @@ public class SoundOnOffButton : UIButton
 
     private void Start()
     {
-        base.SetOnClickAction(OnButtonClick);
+        base.AddOnClickAction(OnButtonClick);
         OnSoundConditionChanged(Sound.IsOn);
         Sound.ConditionChanged += OnSoundConditionChanged;
     }

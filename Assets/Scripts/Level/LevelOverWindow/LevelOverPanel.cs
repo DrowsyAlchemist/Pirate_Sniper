@@ -15,9 +15,9 @@ public class LevelOverPanel : Window
 
     public virtual void Init()
     {
-        _nextLevelButton.SetOnClickAction(() => NextLevelButtonClicked?.Invoke());
-        _restartButton.SetOnClickAction(() => RestartButtonClicked?.Invoke());
-        _menuButton.SetOnClickAction(() => MenuButtonClicked?.Invoke());
+        _nextLevelButton.AddOnClickAction(() => NextLevelButtonClicked?.Invoke());
+        _restartButton.AddOnClickAction(() => RestartButtonClicked?.Invoke());
+        _menuButton.AddOnClickAction(() => MenuButtonClicked?.Invoke());
     }
 
     public virtual void Open(LevelObserver levelObserver)

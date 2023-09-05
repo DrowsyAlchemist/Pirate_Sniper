@@ -21,7 +21,7 @@ public class LocationButton : UIButton
 
     private void Start()
     {
-        SetOnClickAction(OnClick);
+        AddOnClickAction(OnClick);
     }
 
     private void OnEnable()

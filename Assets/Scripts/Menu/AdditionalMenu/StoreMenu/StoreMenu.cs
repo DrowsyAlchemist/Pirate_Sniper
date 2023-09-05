@@ -13,8 +13,8 @@ public class StoreMenu : MoneyRenderer
 
     private void Awake()
     {
-        _charactersButtton.SetOnClickAction(OpenCharacters);
-        _weaponsButton.SetOnClickAction(OpenWeapons);
+        _charactersButtton.AddOnClickAction(OpenCharacters);
+        _weaponsButton.AddOnClickAction(OpenWeapons);
         _waresPanel.Activate();
     }
 
