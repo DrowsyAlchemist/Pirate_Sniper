@@ -5,11 +5,11 @@ public class ClickTask : StopTimeTask
     [SerializeField] private RectTransform _highlightedObject;
     [SerializeField] private UIButton _targetButton;
 
-    protected override void Begin()
+    protected override void BeginTask()
     {
         TrainingPanel.SetHighlightedObject(_highlightedObject);
         _targetButton.AddOnClickAction(Complete);
-        base.Begin();
+        base.BeginTask();
     }
 
     protected override void OnComplete()

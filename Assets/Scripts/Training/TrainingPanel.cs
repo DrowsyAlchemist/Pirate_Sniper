@@ -30,6 +30,7 @@ public class TrainingPanel : MonoBehaviour
     public void SetHighlightedObject(RectTransform highlightedObject)
     {
         transform.SetParent(highlightedObject.parent);
+        transform.SetSiblingIndex(highlightedObject.parent.childCount - 1);
         highlightedObject.SetSiblingIndex(highlightedObject.parent.childCount - 1);
         _fadePanel.Activate();
     }

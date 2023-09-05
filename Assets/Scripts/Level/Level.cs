@@ -11,6 +11,8 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelInfoRenderer _levelInfoRenderer;
     [SerializeField] private PauseButton _pauseButton;
 
+    [SerializeField] private Training _training;
+
     private static Level _instance;
     private LevelPreset _currentLevel;
     private LevelObserver _levelObserver;
@@ -89,6 +91,8 @@ public class Level : MonoBehaviour
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
         InputController.SetMode(InputMode.Game);
         LevelLoaded?.Invoke();
+
+        _training.Begin();
 #if UNITY_EDITOR
         return;
 #endif

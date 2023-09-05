@@ -1,10 +1,10 @@
 public class ReadTask : StopTimeTask
 {
-    protected override void Begin()
+    protected override void BeginTask()
     {
         TrainingPanel.SetContinueButtonActive(true);
         TrainingPanel.ContinueButtonClicked += Complete;
-        base.Begin();
+        base.BeginTask();
     }
 
     protected override void OnComplete()
