@@ -10,6 +10,9 @@ public class TrainingPanel : MonoBehaviour
     [SerializeField] private TMP_Text _noteText;
     [SerializeField] private UIButton _continueButton;
 
+    [SerializeField] Vector2 _panelLeftPosition;
+    [SerializeField] Vector2 _panelRightPosition;
+
     public event Action ContinueButtonClicked;
 
     private void Awake()
@@ -35,14 +38,18 @@ public class TrainingPanel : MonoBehaviour
         _fadePanel.Activate();
     }
 
-    public void SetInRightCorner()
-    {
-
-    }
-
     public void SetInLeftCorner()
     {
+        _notePanel.anchorMax = Vector2.up;
+        _notePanel.anchorMin = Vector2.up;
+        _notePanel.anchoredPosition = _panelLeftPosition;
+    }
 
+    public void SetInRightCorner()
+    {
+        _notePanel.anchorMax = Vector2.one;
+        _notePanel.anchorMin = Vector2.one;
+        _notePanel.anchoredPosition = _panelRightPosition;
     }
 
     public void SetContinueButtonActive(bool value)

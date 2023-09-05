@@ -11,7 +11,6 @@ public class ReadTask : StopTimeTask
     protected override void OnComplete()
     {
         TrainingPanel.ContinueButtonClicked -= Complete;
-        InputController.SetMode(InputMode.Game);
         base.OnComplete();
     }
 }

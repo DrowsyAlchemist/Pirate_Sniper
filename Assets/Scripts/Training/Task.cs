@@ -4,11 +4,13 @@ using UnityEngine;
 
 public abstract class Task : MonoBehaviour
 {
-    [SerializeField][TextArea(5, 15)] private string _note;
+    [SerializeField] private RectTransform _parent;
     [SerializeField] private float _delayBeforeTask;
-    [SerializeField] private bool _isNotePanelInLeftCorner;
+    [SerializeField] private bool _isNotePanelInRightCorner;
+    [SerializeField][TextArea(5, 15)] private string _note;
 
     private static Stopwatch _stopWatch;
+    private InputMode _initialInputMode;
 
     public event Action Completed;
 
@@ -33,6 +35,9 @@ public abstract class Task : MonoBehaviour
 
     protected void Complete()
     {
+        if (InputController.InputMode != _initialInputMode)
+            InputController.SetMode(_initialInputMode);
+
         OnComplete();
         Completed?.Invoke();
     }
@@ -50,12 +55,15 @@ public abstract class Task : MonoBehaviour
         TrainingPanel.SetContinueButtonActive(false);
         TrainingPanel.HideFadePanel();
         TrainingPanel.Activate();
+        TrainingPanel.transform.SetParent(_parent);
+        TrainingPanel.transform.SetSiblingIndex(_parent.childCount - 1);
 
-        if (_isNotePanelInLeftCorner)
-            trainingPanel.SetInLeftCorner();
-        else
+        if (_isNotePanelInRightCorner)
             trainingPanel.SetInRightCorner();
+        else
+            trainingPanel.SetInLeftCorner();
 
+        _initialInputMode = InputController.InputMode;
         BeginTask();
     }
 }

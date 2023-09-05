@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class ScopeTask : Task
 {
     [SerializeField] private InputController _inputController;
     [SerializeField] private RectTransform _scopeButton;
+    [SerializeField] private float _completeDelay;
 
     protected override void BeginTask()
     {
@@ -21,6 +23,17 @@ public class ScopeTask : Task
 
     private void OnScoped()
     {
+        StartCoroutine(CompleteWithDelay());
+    }
+
+    private IEnumerator CompleteWithDelay()
+    {
+        Stopwatch stopwatch = new();
+        stopwatch.Start();
+
+        while (stopwatch.ElapsedTime < _completeDelay)
+            yield return null;
+
         Complete();
     }
 }
