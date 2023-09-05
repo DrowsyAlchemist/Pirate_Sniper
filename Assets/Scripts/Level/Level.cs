@@ -15,10 +15,10 @@ public class Level : MonoBehaviour
 
     private static Level _instance;
     private LevelPreset _currentLevel;
-    private LevelObserver _levelObserver;
     private Saver _saver;
     private Player _player;
 
+    public LevelObserver LevelObserver { get; private set; }
     public LevelPreset CurrentLevel => _currentLevel;
 
     public event Action LevelLoaded;
@@ -40,7 +40,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.MenuButtonClicked -= OnBackToMenuButtonClick;
         _levelOverWindow.DoubleMoneyButtonClick -= OnDoubleMoneyButtonClick;
 
-        _levelObserver.Completed -= OnLevelCompleted;
+        LevelObserver.Completed -= OnLevelCompleted;
         _pauseButton.Clicked -= OnBackToMenuButtonClick;
 
         _pauseWindow.ResumeButtonClick -= OnResumeButtonClick;
@@ -53,8 +53,8 @@ public class Level : MonoBehaviour
         _player = player;
         _saver = saver;
 
-        _levelObserver = new(_player);
-        _levelInfoRenderer.Init(_player, _levelObserver);
+        LevelObserver = new(_player);
+        _levelInfoRenderer.Init(_player, LevelObserver);
         _levelOverWindow.Init();
         _pauseWindow.Init();
 
@@ -63,7 +63,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _levelOverWindow.DoubleMoneyButtonClick += OnDoubleMoneyButtonClick;
-        _levelObserver.Completed += OnLevelCompleted;
+        LevelObserver.Completed += OnLevelCompleted;
         _pauseButton.Clicked += OnPauseButtonClick;
 
         _pauseWindow.ResumeButtonClick += OnResumeButtonClick;
@@ -78,14 +78,14 @@ public class Level : MonoBehaviour
 
     private void LoadLevel(LevelPreset levelTemplate)
     {
-        if (_levelObserver.LevelInstance != null)
-            Destroy(_levelObserver.LevelInstance.gameObject);
+        if (LevelObserver.LevelInstance != null)
+            Destroy(LevelObserver.LevelInstance.gameObject);
 
         _camera.transform.SetPositionAndRotation(levelTemplate.CameraTransform.position, levelTemplate.CameraTransform.rotation);
         _player.Reset();
         _currentLevel = levelTemplate;
-        _levelObserver.SetLevel(Instantiate(levelTemplate));
-        _levelObserver.Start();
+        LevelObserver.SetLevel(Instantiate(levelTemplate));
+        LevelObserver.Start();
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
@@ -103,12 +103,12 @@ public class Level : MonoBehaviour
     {
         if (isWon)
         {
-            _player.Wallet.Add(_levelObserver.Money);
+            _player.Wallet.Add(LevelObserver.Money);
 
-            if (_levelObserver.Score > _saver.GetLevelScore(_currentLevel))
-                _saver.SaveLevel(_currentLevel, _levelObserver.Score);
+            if (LevelObserver.Score > _saver.GetLevelScore(_currentLevel))
+                _saver.SaveLevel(_currentLevel, LevelObserver.Score);
         }
-        _levelOverWindow.Appear(_levelObserver);
+        _levelOverWindow.Appear(LevelObserver);
         InputController.SetMode(InputMode.UI);
     }
 
@@ -134,8 +134,8 @@ public class Level : MonoBehaviour
 
     private void OnBackToMenuButtonClick()
     {
-        var levelInstance = _levelObserver.LevelInstance;
-        _levelObserver.Clear();
+        var levelInstance = LevelObserver.LevelInstance;
+        LevelObserver.Clear();
         Destroy(levelInstance.gameObject);
         Time.timeScale = 1;
         _pauseWindow.Close();
@@ -146,10 +146,10 @@ public class Level : MonoBehaviour
     private void OnDoubleMoneyButtonClick()
     {
 #if UNITY_EDITOR
-        _player.Wallet.Add(_levelObserver.Money);
+        _player.Wallet.Add(LevelObserver.Money);
         return;
 #endif
-        Advertising.RewardForVideo(() => _player.Wallet.Add(_levelObserver.Money));
+        Advertising.RewardForVideo(() => _player.Wallet.Add(LevelObserver.Money));
     }
 
     private void OnPauseButtonClick()

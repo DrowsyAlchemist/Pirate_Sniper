@@ -4,12 +4,14 @@ public class ReadTask : StopTimeTask
     {
         TrainingPanel.SetContinueButtonActive(true);
         TrainingPanel.ContinueButtonClicked += Complete;
+        InputController.SetMode(InputMode.UI);
         base.BeginTask();
     }
 
     protected override void OnComplete()
     {
         TrainingPanel.ContinueButtonClicked -= Complete;
+        InputController.SetMode(InputMode.Game);
         base.OnComplete();
     }
 }

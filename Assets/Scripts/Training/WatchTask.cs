@@ -6,15 +6,12 @@ public class WatchTask : ReadTask
 
     protected override void BeginTask()
     {
-        InputController.SetMode(InputMode.UI);
         TrainingPanel.SetHighlightedObject(_highlightedObject);
         base.BeginTask();
     }
 
     protected override void OnComplete()
     {
-        InputController.SetMode(InputMode.Game);
-        TrainingPanel.HideFadePanel();
         base.OnComplete();
     }
 }
