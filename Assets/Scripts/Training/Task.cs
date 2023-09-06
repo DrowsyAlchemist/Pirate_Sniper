@@ -1,3 +1,4 @@
+using Lean.Localization;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,7 @@ public abstract class Task : MonoBehaviour
     [SerializeField] private RectTransform _parent;
     [SerializeField] private float _delayBeforeTask;
     [SerializeField] private bool _isNotePanelInRightCorner;
+    [SerializeField] private string _localizationPhrase;
     [SerializeField][TextArea(5, 15)] private string _note;
 
     private static Stopwatch _stopWatch;
@@ -51,7 +53,8 @@ public abstract class Task : MonoBehaviour
             yield return null;
 
         TrainingPanel = trainingPanel;
-        trainingPanel.SetNote(_note);
+        string localizedNote = LeanLocalization.GetTranslationText(_localizationPhrase);
+        trainingPanel.SetNote(localizedNote);
         TrainingPanel.SetContinueButtonActive(false);
         TrainingPanel.HideFadePanel();
         TrainingPanel.Activate();

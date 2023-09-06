@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class ClickTask : StopTimeTask
 {
-    [SerializeField] private RectTransform _highlightedObject;
     [SerializeField] private Button _targetButton;
 
     protected override void BeginTask()
