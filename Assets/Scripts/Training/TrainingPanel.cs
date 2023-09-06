@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TrainingPanel : MonoBehaviour
 {
     [SerializeField] private Image _fadePanel;
+    [SerializeField] private Image _raycastTarget;
     [SerializeField] private RectTransform _notePanel;
     [SerializeField] private TMP_Text _noteText;
     [SerializeField] private UIButton _continueButton;
@@ -36,6 +37,11 @@ public class TrainingPanel : MonoBehaviour
         transform.SetSiblingIndex(highlightedObject.parent.childCount - 1);
         highlightedObject.SetSiblingIndex(highlightedObject.parent.childCount - 1);
         _fadePanel.Activate();
+    }
+
+    public void SetGameInteractable(bool value)
+    {
+        _raycastTarget.SetActive(value == false);
     }
 
     public void SetInLeftCorner()

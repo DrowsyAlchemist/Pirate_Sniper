@@ -60,6 +60,7 @@ public abstract class Task : MonoBehaviour
         TrainingPanel.Activate();
         TrainingPanel.transform.SetParent(_parent);
         TrainingPanel.transform.SetSiblingIndex(_parent.childCount - 1);
+        TrainingPanel.SetGameInteractable(true);
 
         if (_isNotePanelInRightCorner)
             trainingPanel.SetInRightCorner();
