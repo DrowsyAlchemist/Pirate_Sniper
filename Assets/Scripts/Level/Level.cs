@@ -62,11 +62,18 @@ public class Level : MonoBehaviour
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _levelOverWindow.DoubleMoneyButtonClick += OnDoubleMoneyButtonClick;
         LevelObserver.Completed += OnLevelCompleted;
-        _pauseButton.Clicked += OnPauseButtonClick;
+        _pauseButton.Clicked += PauseGame;
 
         _pauseWindow.ResumeButtonClick += OnResumeButtonClick;
         _pauseWindow.MenuButtonClicked += OnBackToMenuButtonClick;
         _pauseWindow.SettingsButtonClicked += OnSettingsButtonClick;
+    }
+
+    public void PauseGame()
+    {
+        _pauseWindow.Open();
+        Time.timeScale = 0;
+        InputController.SetMode(InputMode.UI);
     }
 
     public static int GetLevelScore(LevelPreset levelPreset)
@@ -147,13 +154,6 @@ public class Level : MonoBehaviour
         return;
 #endif
         Advertising.RewardForVideo(() => _player.Wallet.Add(LevelObserver.Money));
-    }
-
-    private void OnPauseButtonClick()
-    {
-        _pauseWindow.Open();
-        Time.timeScale = 0;
-        InputController.SetMode(InputMode.UI);
     }
 
     private void OnSettingsButtonClick()

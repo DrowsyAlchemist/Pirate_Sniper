@@ -7,11 +7,12 @@ public class TrainingOfferWindow : Window
     [SerializeField] private UIButton _cancelButton;
 
     public event Action AgreeButtonClicked;
+    public event Action CancelButtonClicked;
 
     private void Awake()
     {
         _agreeButton.AddOnClickAction(OnAgreeButtonClick);
-        _cancelButton.AddOnClickAction(Close);
+        _cancelButton.AddOnClickAction(OnCancelButtonClick);
     }
 
     public override void Open()
@@ -30,5 +31,11 @@ public class TrainingOfferWindow : Window
     {
         Close();
         AgreeButtonClicked?.Invoke();
+    }
+
+    private void OnCancelButtonClick()
+    {
+        Close();
+        CancelButtonClicked?.Invoke();
     }
 }

@@ -12,11 +12,11 @@ public abstract class Task : MonoBehaviour
     [SerializeField][TextArea(5, 15)] private string _note;
 
     private static Stopwatch _stopWatch;
-    private InputMode _initialInputMode;
+
+    public InputMode InitialInputMode { get; private set; }
+    protected TrainingPanel TrainingPanel { get; private set; }
 
     public event Action Completed;
-
-    protected TrainingPanel TrainingPanel { get; private set; }
 
     private void Awake()
     {
@@ -37,8 +37,8 @@ public abstract class Task : MonoBehaviour
 
     protected void Complete()
     {
-        if (InputController.InputMode != _initialInputMode)
-            InputController.SetMode(_initialInputMode);
+        if (InputController.InputMode != InitialInputMode)
+            InputController.SetMode(InitialInputMode);
 
         OnComplete();
         Completed?.Invoke();
@@ -52,7 +52,7 @@ public abstract class Task : MonoBehaviour
         while (_stopWatch.ElapsedTime < _delayBeforeTask)
             yield return null;
 
-        _initialInputMode = InputController.InputMode;
+        InitialInputMode = InputController.InputMode;
         TrainingPanel = trainingPanel;
 
         if (_isNotePanelInRightCorner)

@@ -13,16 +13,18 @@ public class Training : MonoBehaviour
 
     private void Awake()
     {
-        _trainingPanel.Deactivate();
-        _trainingOfferWindow.Close();
         _level.LevelLoaded += OnLevelLoaded;
         _trainingOfferWindow.AgreeButtonClicked += Begin;
+        _trainingPanel.Deactivate();
+        _trainingPanel.CancelButtonClicked += StopTraining;
+        _trainingOfferWindow.Close();
     }
 
     private void OnDestroy()
     {
         _level.LevelLoaded -= OnLevelLoaded;
         _trainingOfferWindow.AgreeButtonClicked -= Begin;
+        _trainingOfferWindow.CancelButtonClicked -= StopTraining;
     }
 
     private void OnLevelLoaded()
@@ -56,15 +58,22 @@ public class Training : MonoBehaviour
         }
         else
         {
-            _trainingPanel.Deactivate();
-            IsTraining = false;
+            StopTraining();
         }
     }
 
     private void ResetTrainingPanel()
     {
         _trainingPanel.SetContinueButtonActive(false);
+        _trainingPanel.SetCancelButtonActive(false);
         _trainingPanel.HideFadePanel();
         _trainingPanel.SetGameInteractable(true);
+    }
+
+    private void StopTraining()
+    {
+        _level.PauseGame();
+        _trainingPanel.Deactivate();
+        IsTraining = false;
     }
 }

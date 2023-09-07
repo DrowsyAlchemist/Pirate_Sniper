@@ -10,15 +10,18 @@ public class TrainingPanel : MonoBehaviour
     [SerializeField] private RectTransform _notePanel;
     [SerializeField] private TMP_Text _noteText;
     [SerializeField] private UIButton _continueButton;
+    [SerializeField] private UIButton _cancelButton;
 
     [SerializeField] Vector2 _panelLeftPosition;
     [SerializeField] Vector2 _panelRightPosition;
 
     public event Action ContinueButtonClicked;
+    public event Action CancelButtonClicked;
 
     private void Awake()
     {
         _continueButton.AddOnClickAction(() => ContinueButtonClicked?.Invoke());
+        _cancelButton.AddOnClickAction(() => CancelButtonClicked?.Invoke());
     }
 
     public void SetNote(string note)
@@ -61,5 +64,10 @@ public class TrainingPanel : MonoBehaviour
     public void SetContinueButtonActive(bool value)
     {
         _continueButton.SetActive(value);
+    }
+
+    public void SetCancelButtonActive(bool value)
+    {
+        _cancelButton.SetActive(value);
     }
 }
