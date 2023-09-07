@@ -52,22 +52,19 @@ public abstract class Task : MonoBehaviour
         while (_stopWatch.ElapsedTime < _delayBeforeTask)
             yield return null;
 
+        _initialInputMode = InputController.InputMode;
         TrainingPanel = trainingPanel;
-        string localizedNote = LeanLocalization.GetTranslationText(_localizationPhrase);
-        trainingPanel.SetNote(localizedNote);
-        TrainingPanel.SetContinueButtonActive(false);
-        TrainingPanel.HideFadePanel();
-        TrainingPanel.Activate();
-        TrainingPanel.transform.SetParent(_parent);
-        TrainingPanel.transform.SetSiblingIndex(_parent.childCount - 1);
-        TrainingPanel.SetGameInteractable(true);
 
         if (_isNotePanelInRightCorner)
             trainingPanel.SetInRightCorner();
         else
             trainingPanel.SetInLeftCorner();
 
-        _initialInputMode = InputController.InputMode;
+        string localizedNote = LeanLocalization.GetTranslationText(_localizationPhrase);
+        trainingPanel.SetNote(localizedNote);
+        trainingPanel.transform.SetParent(_parent);
+        trainingPanel.transform.SetSiblingIndex(_parent.childCount - 1);
+        trainingPanel.Activate();
         BeginTask();
     }
 }

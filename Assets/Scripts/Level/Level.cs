@@ -11,8 +11,6 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelInfoRenderer _levelInfoRenderer;
     [SerializeField] private PauseButton _pauseButton;
 
-    [SerializeField] private Training _training;
-
     private static Level _instance;
     private LevelPreset _currentLevel;
     private Saver _saver;
@@ -92,7 +90,6 @@ public class Level : MonoBehaviour
         InputController.SetMode(InputMode.Game);
         LevelLoaded?.Invoke();
 
-        _training.Begin();
 #if UNITY_EDITOR
         return;
 #endif
