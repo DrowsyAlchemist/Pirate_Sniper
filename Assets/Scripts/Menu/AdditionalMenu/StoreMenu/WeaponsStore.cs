@@ -81,6 +81,7 @@ public class WeaponsStore : MonoBehaviour
 
     private void OnChooseButtonClick(WeaponRenderer weaponRenderer)
     {
+        Sound.PlayClick();
         ChooseWeapon(weaponRenderer);
         weaponRenderer.SetChooseButtonActive(false);
     }

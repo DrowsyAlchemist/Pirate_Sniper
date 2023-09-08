@@ -9,6 +9,8 @@ public class ShootingPoint : MonoBehaviour
     [SerializeField, Range(0, 0.5f)] private float _positionChangeSpeed;
     [SerializeField] private WeaponsStore _weaponsStore;
     [SerializeField] private AudioSource _shootSound;
+    [SerializeField] private AudioSource _misfireSound;
+    [SerializeField] private AudioSource _reloadingFinishedSound;
     [SerializeField] private HitEffect _hitEffect;
 
     public Player _player;
@@ -26,6 +28,7 @@ public class ShootingPoint : MonoBehaviour
         _inputController = inputController;
         _inputController.Scoped += OnScope;
         _inputController.Unscoped += OnUnscope;
+        _inputController.Shooted += OnTryShooting;
         SetWeapon(_weaponsStore.CurrentWeapon);
         _hitEffect.Init();
     }
@@ -34,6 +37,7 @@ public class ShootingPoint : MonoBehaviour
     {
         _inputController.Scoped -= OnScope;
         _inputController.Unscoped -= OnUnscope;
+        _inputController.Shooted -= OnTryShooting;
     }
 
     public void SetWeapon(Weapon weaponPrefab)
@@ -41,19 +45,34 @@ public class ShootingPoint : MonoBehaviour
         if (_currentWeapon != null)
         {
             _currentWeapon.Shooted -= OnShooted;
+            _currentWeapon.ReloadingFinished -= OnWeaponReloadingFinished;
             Destroy(_currentWeapon.gameObject);
         }
         _currentWeapon = Instantiate(weaponPrefab, transform.position + weaponPrefab.transform.localPosition, transform.rotation, transform);
         _currentWeapon.Init(_hitEffect);
         _currentWeapon.Shooted += OnShooted;
+        _currentWeapon.ReloadingFinished += OnWeaponReloadingFinished;
         _player.SetWeapon(_currentWeapon);
         _shootSound.clip = _currentWeapon.ShootClip;
+    }
+
+    private void OnWeaponReloadingFinished()
+    {
+        if (InputController.InputMode == InputMode.Game)
+            _reloadingFinishedSound.Play();
     }
 
     private void OnShooted()
     {
         _shootSound.Play();
         Shooted?.Invoke();
+    }
+
+    private void OnTryShooting(RaycastHit _)
+    {
+        if (InputController.InputMode == InputMode.Game)
+            if (_currentWeapon.IsReady == false)
+                _misfireSound.Play();
     }
 
     private void OnScope()

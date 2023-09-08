@@ -23,17 +23,24 @@ public class Weapon : MonoBehaviour
     public int Cost => _cost;
     public int Damage => _damage;
     public float SecondsBetweenShots => _secondsBetweenShots;
-    public bool IsReady => SecondsBeforeReadyLeft < Settings.Epsilon;
+    public bool IsReady { get; private set; }
     public float SecondsBeforeReadyLeft => SecondsBetweenShots - _timer.ElapsedTime;
 
     public event Action Shooted;
+    public event Action ReloadingFinished;
 
     public void Init(HitEffect hitEffect)
     {
         _hitEffect = hitEffect;
         _shotEffect.Play();
         _timer = new Timer();
+        _timer.WentOff += OnTimerWentOff;
         _timer.Start(SecondsBetweenShots);
+    }
+
+    private void OnDestroy()
+    {
+        _timer.WentOff -= OnTimerWentOff;
     }
 
     public void Shoot(RaycastHit hit, int playerDamage)
@@ -44,6 +51,7 @@ public class Weapon : MonoBehaviour
         if (_animator.IsPlaying)
             throw new InvalidOperationException("Animator is still playing");
 
+        IsReady = false;
         _shotEffect.Play();
         _animator.PlayShot();
         _timer.Start(SecondsBetweenShots);
@@ -61,5 +69,11 @@ public class Weapon : MonoBehaviour
             }
         }
         Shooted?.Invoke();
+    }
+
+    private void OnTimerWentOff()
+    {
+        IsReady = true;
+        ReloadingFinished?.Invoke();
     }
 }
