@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ScoreSettings
   m_EditorClassIdentifier: 
   _minTimeForEachEnemy: 2.1
-  _completeTimeModifier: 500
-  _accuracyModifier: 350
+  _completeTimeModifier: 550
+  _accuracyModifier: 300
   _headshotsModifier: 150
   _oneStarScore: 400
   _twoStarsScore: 600

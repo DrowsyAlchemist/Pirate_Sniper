@@ -17,7 +17,7 @@ public class Training : MonoBehaviour
         _trainingOfferWindow.AgreeButtonClicked += Begin;
         _trainingPanel.Deactivate();
         _trainingPanel.CancelButtonClicked += StopTraining;
-        _trainingOfferWindow.Close();
+        _trainingOfferWindow.Deactivate();
     }
 
     private void OnDestroy()

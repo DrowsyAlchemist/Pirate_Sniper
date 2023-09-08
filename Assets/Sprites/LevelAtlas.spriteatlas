@@ -58,10 +58,11 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 32628f42d42fe3947861a98c52dd2fca, type: 3}
     - {fileID: 2800000, guid: 2d2b3db64356e414fb61812d8ec27878, type: 3}
     - {fileID: 2800000, guid: bb530766b63782c4ebc0a0ac2b09a859, type: 3}
-    - {fileID: 2800000, guid: 764f7f3b11407cd4e96f761d689700d4, type: 3}
+    - {fileID: 2800000, guid: 1266d693c7320bf44ae522b21a54a6e9, type: 3}
     - {fileID: 2800000, guid: 1f6359cc39532464595f4eeeedb325e0, type: 3}
     - {fileID: 2800000, guid: f43899c31dd434901b0422f98bcde88b, type: 3}
-    - {fileID: 2800000, guid: 1266d693c7320bf44ae522b21a54a6e9, type: 3}
+    - {fileID: 2800000, guid: 3a55403f94f368b42ac608b403808598, type: 3}
+    - {fileID: 2800000, guid: efee20b64d1e73942a29ba61ce3379c3, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -75,15 +76,16 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9e8e2254e0d704081931984187b98db6, type: 3}
   - {fileID: 21300000, guid: 16c8ca5662ad4e745accf9785c1e4c45, type: 3}
   - {fileID: 21300000, guid: bb530766b63782c4ebc0a0ac2b09a859, type: 3}
+  - {fileID: 21300000, guid: efee20b64d1e73942a29ba61ce3379c3, type: 3}
   - {fileID: 21300000, guid: 2d2b3db64356e414fb61812d8ec27878, type: 3}
   - {fileID: 21300000, guid: d6cce558fcc344f4ea971d01b01edaa6, type: 3}
   - {fileID: 21300000, guid: d249acd8c8f234a4093464e66d8c92f8, type: 3}
   - {fileID: 21300000, guid: 8ce7d0e9cb5184e2298eedeb3266e9be, type: 3}
-  - {fileID: 21300000, guid: 764f7f3b11407cd4e96f761d689700d4, type: 3}
   - {fileID: 21300000, guid: 476fa7ac7fe0b27499751f2336ed8a05, type: 3}
   - {fileID: 21300000, guid: 1f6359cc39532464595f4eeeedb325e0, type: 3}
   - {fileID: 21300000, guid: 50914faef06d1134f9670bf7adbc03fa, type: 3}
   - {fileID: 21300000, guid: 44fdb2fe54269466f8b0b810c0e57f86, type: 3}
+  - {fileID: 21300000, guid: 3a55403f94f368b42ac608b403808598, type: 3}
   - {fileID: 21300000, guid: ecb1889fcd79d4365999c3f814fa913f, type: 3}
   m_PackedSpriteNamesToIndex:
   - Accuracy
@@ -94,15 +96,16 @@ SpriteAtlas:
   - pause_btn_icon_play
   - EnemyIcon
   - Crosshair
+  - TextBTN_Medium
   - Headshot
   - top_btn_icon_setting
   - rate_star_2
   - top_btn_icon_home
-  - pirate1
   - frame_c3_01
   - play_btn_pause
   - Stopwatch
   - stage_frame_yellow
+  - checkbox_bg
   - mission_icon_trophy
   m_RenderDataMap: {}
   m_Tag: LevelAtlas
