@@ -17,7 +17,7 @@ public class ClickTask : Task
     protected override void OnComplete()
     {
         foreach (var button in _excessButtons)
-            button.interactable = false;
+            button.interactable = true;
 
         _targetButton.RemoveListener(Complete);
         base.OnComplete();
