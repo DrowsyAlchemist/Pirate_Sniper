@@ -31,7 +31,10 @@ public class Game : MonoBehaviour
 
     private void Init()
     {
-        LeanLocalization.SetCurrentLanguageAll("en");
+#if !UNITY_EDITOR
+        string currentLang = YandexGamesSdk.Environment.GetCurrentLang();
+        LeanLocalization.SetCurrentLanguageAll(currentLang);
+#endif
         InitInputController();
         _saver = new Saver();
         _player = new Player(_inputController, _saver);
