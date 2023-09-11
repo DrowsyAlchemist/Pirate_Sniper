@@ -9,6 +9,7 @@ public class Saver
     private const int DefaultScore = 0;
     private const char Devider = ' ';
     private const int MaxLevelsCount = 10;
+    private const string UnlockString = "1 1 1 1 1 1 1 1 1 1";
 
     private readonly StringBuilder _stringBuilder;
     private SaveData _saves;
@@ -27,6 +28,15 @@ public class Saver
     {
         _saves = new(_stringBuilder);
         Save();
+    }
+
+    public void UnlockAllLevels()
+    {
+        _saves.ZeroLocation = UnlockString;
+        _saves.ShipLocation0 = UnlockString;
+        _saves.FirstLocation = UnlockString;
+        _saves.ShipLocation1 = UnlockString;
+        _saves.SecondLocation = UnlockString;
     }
 
     public void SetPlayerMoney(int value)

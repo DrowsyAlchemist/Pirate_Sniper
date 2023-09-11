@@ -15,7 +15,7 @@ public static class MoneyCalculator
     private static float CalculateModifier(LevelObserver levelObserver)
     {
         if (levelObserver.LevelInstance.Score > 0)
-            return (float)levelObserver.Score / levelObserver.LevelInstance.Score - 1;
+            return 1 - (float)levelObserver.LevelInstance.Score / levelObserver.Score;
         else
             return 1;
     }

@@ -20,9 +20,9 @@ public class WeaponRenderer : WareRenderer
         _chooseButton.AddOnClickAction(() => ChooseButtonClicked?.Invoke(this));
     }
 
-    public void Render(Weapon weapon)
+    public void Render(Weapon weapon, Wallet wallet)
     {
-        base.Render(weapon.Cost);
+        base.Render(weapon.Cost, wallet);
         Weapon = weapon;
         _image.sprite = weapon.Sprite;
         _damageText.text = weapon.Damage.ToString();

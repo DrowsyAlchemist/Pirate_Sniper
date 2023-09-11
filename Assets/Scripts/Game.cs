@@ -50,6 +50,11 @@ public class Game : MonoBehaviour
         _saver.RemoveSaves();
     }
 
+    public void UnlockAllLevels()
+    {
+        _saver.UnlockAllLevels();
+    }
+
     private void InitInputController()
     {
         bool isMobile;

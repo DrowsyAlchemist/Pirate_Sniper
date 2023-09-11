@@ -57,6 +57,7 @@ public class CharacteristicsMenu : MoneyRenderer
         _player.SetMaxHealth(NextHealthLevel.Value);
         _healthRenderer.Render();
         RenderNextHealthLevel();
+        RenderNextDamageLevel();
     }
 
     private void IncreaseDamage()
@@ -64,12 +65,13 @@ public class CharacteristicsMenu : MoneyRenderer
         _player.SetDamage(NextDamageLevel.Value);
         _damageRenderer.Render();
         RenderNextDamageLevel();
+        RenderNextHealthLevel();
     }
 
     private void RenderNextHealthLevel()
     {
         if (HasHealthNextLevel)
-            _healthPanel.Render(NextHealthLevel.Cost);
+            _healthPanel.Render(NextHealthLevel.Cost, _player.Wallet);
         else
             _healthPanel.DeactivateBuyButton();
     }
@@ -77,7 +79,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void RenderNextDamageLevel()
     {
         if (HasDamageNextLevel)
-            _damagePanel.Render(NextDamageLevel.Cost);
+            _damagePanel.Render(NextDamageLevel.Cost, _player.Wallet);
         else
             _damagePanel.DeactivateBuyButton();
     }

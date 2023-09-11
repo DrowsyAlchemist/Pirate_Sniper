@@ -16,7 +16,7 @@ public class Training : MonoBehaviour
         _level.LevelLoaded += OnLevelLoaded;
         _trainingOfferWindow.AgreeButtonClicked += Begin;
         _trainingPanel.Deactivate();
-        _trainingPanel.CancelButtonClicked += StopTraining;
+        _trainingPanel.CancelButtonClicked += ForceStopTraining;
         _trainingOfferWindow.Deactivate();
     }
 
@@ -24,7 +24,7 @@ public class Training : MonoBehaviour
     {
         _level.LevelLoaded -= OnLevelLoaded;
         _trainingOfferWindow.AgreeButtonClicked -= Begin;
-        _trainingOfferWindow.CancelButtonClicked -= StopTraining;
+        _trainingOfferWindow.CancelButtonClicked -= ForceStopTraining;
     }
 
     private void OnLevelLoaded()
@@ -72,8 +72,17 @@ public class Training : MonoBehaviour
 
     private void StopTraining()
     {
-        _level.PauseGame();
+        if (InputController.InputMode == InputMode.Game)
+            _level.PauseGame();
+
         _trainingPanel.Deactivate();
         IsTraining = false;
+    }
+
+    private void ForceStopTraining()
+    {
+        _tasks[_currentTask].Completed -= BeginNextTask;
+        _tasks[_currentTask].ForceComplete();
+        StopTraining();
     }
 }

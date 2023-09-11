@@ -28,6 +28,11 @@ public abstract class Task : MonoBehaviour
         Settings.CoroutineObject.StartCoroutine(BeginTaskWithDelay(trainingPanel));
     }
 
+    public void ForceComplete()
+    {
+        Complete();
+    }
+
     protected abstract void BeginTask();
 
     protected virtual void OnComplete()

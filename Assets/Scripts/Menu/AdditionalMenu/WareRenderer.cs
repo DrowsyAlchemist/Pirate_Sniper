@@ -16,10 +16,11 @@ public class WareRenderer : MonoBehaviour
         _buyButton.AddOnClickAction(OnBuyButtonClick);
     }
 
-    public void Render(int cost)
+    public void Render(int cost, Wallet wallet)
     {
         _adPanel.gameObject.SetActive(cost <= 0);
         _moneyPanel.gameObject.SetActive(cost > 0);
+        _buyButton.SetInteractable(wallet.Money >= cost);
         _costText.text = cost.ToString();
     }
 

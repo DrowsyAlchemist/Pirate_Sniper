@@ -70,4 +70,12 @@ public class TrainingPanel : MonoBehaviour
     {
         _cancelButton.SetActive(value);
     }
+
+    private void OnValidate()
+    {
+        if (_notePanel.anchorMax == Vector2.up)
+            SetInLeftCorner();
+        else
+            SetInRightCorner();
+    }
 }

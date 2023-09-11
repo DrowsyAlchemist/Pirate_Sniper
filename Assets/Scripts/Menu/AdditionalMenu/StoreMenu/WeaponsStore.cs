@@ -54,7 +54,7 @@ public class WeaponsStore : MonoBehaviour
                 weaponWare.ChooseButtonClicked += OnChooseButtonClick;
                 _wares.Add(weaponWare);
             }
-            _wares[i].Render(Weapons[i]);
+            _wares[i].Render(Weapons[i], _wallet);
 
             if (_saver.GetWeaponAccuired(Weapons[i]))
             {
