@@ -19,13 +19,9 @@ public class ShootingState : EnemyState
         if (_timer == null)
             Init();
 
+        _timer.Reset();
         Enemy.Animator.PlayReact();
         Enemy.Animator.PlayShoot();
-    }
-
-    private void OnDisable()
-    {
-        _timer?.Reset();
     }
 
     private void OnDestroy()

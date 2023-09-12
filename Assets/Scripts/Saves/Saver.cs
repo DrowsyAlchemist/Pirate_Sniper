@@ -9,7 +9,7 @@ public class Saver
     private const int DefaultScore = 0;
     private const char Devider = ' ';
     private const int MaxLevelsCount = 10;
-    private const string UnlockString = "1 1 1 1 1 1 1 1 1 1";
+    private const string UnlockString = "1000 1000 1000 1000 1000 1000 1000 1000 1000 1000";
 
     private readonly StringBuilder _stringBuilder;
     private SaveData _saves;
