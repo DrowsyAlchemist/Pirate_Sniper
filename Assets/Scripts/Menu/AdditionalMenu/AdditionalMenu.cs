@@ -25,6 +25,7 @@ public class AdditionalMenu : AnimatedWindow
 
         _characteristicsMenu.Init(player);
         _storeMenu.Init(player.Wallet, saver);
+        _leaderboardMenu.Init(saver);
     }
 
     private void OnDestroy()

@@ -189,8 +189,13 @@ public class Saver
         SetSaves(out saves, jsonData);
         return;
 #endif
-        PlayerAccount.GetCloudSaveData((result) => jsonData = result);
+        PlayerAccount.GetCloudSaveData(SetSaves);
         SetSaves(out saves, jsonData);
+    }
+
+    private void SetSaves(string jsonData)
+    {
+        SetSaves(out _saves, jsonData);
     }
 
     private void SetSaves(out SaveData saves, string jsonData)

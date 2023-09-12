@@ -8,7 +8,6 @@ public class EnemyBodyCollider : MonoBehaviour, IApplyDamage
 
     public void ApplyDamage(int damage)
     {
-        Debug.Log(gameObject.name);
         Damaged?.Invoke(damage);
     }
 }

@@ -12,16 +12,16 @@ public class LeaderboardEntryRenderer : MonoBehaviour
 
     public void Render(LeaderboardEntryResponse entry)
     {
-        _rankText.text = entry.rank.ToString();
-        _scoreText.text = entry.score.ToString();
-        string name = null;
+        Render(entry.rank.ToString(), entry.score.ToString(), entry.player.publicName);
+    }
 
-        if (PlayerAccount.HasPersonalProfileDataPermission)
-            name = entry.player.publicName;
-
+    public void Render(string rank, string score, string name)
+    {
         if (string.IsNullOrEmpty(name))
             name = Settings.Leaderboard.DefaultName;
 
+        _rankText.text = rank;
+        _scoreText.text = score;
         _nameText.text = name;
     }
 }

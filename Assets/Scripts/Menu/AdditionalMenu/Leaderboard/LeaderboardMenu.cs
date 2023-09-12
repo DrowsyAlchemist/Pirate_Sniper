@@ -5,15 +5,23 @@ using UnityEngine;
 public class LeaderboardMenu : Window
 {
     [SerializeField] private LeaderboardEntryRenderer _entryRendererTemplate;
+    [SerializeField] private LeaderboardEntryRenderer _playerEntryRenderer;
     [SerializeField] private RectTransform _container;
 
+    private Saver _saver;
     private bool _isPlayerAuthorized;
     private List<LeaderboardEntryRenderer> _entryRenderers = new();
+
+    public void Init(Saver saver)
+    {
+        _saver = saver;
+    }
 
     public override void Open()
     {
         base.Open();
 #if UNITY_EDITOR
+        _playerEntryRenderer.Render("?", _saver.GetScore().ToString(), Settings.Leaderboard.DefaultName);
         return;
 #endif
         RenderLeaders();
@@ -21,6 +29,15 @@ public class LeaderboardMenu : Window
 
     public void RenderLeaders()
     {
+        if (PlayerAccount.IsAuthorized)
+        {
+            Leaderboard.GetPlayerEntry(Settings.Leaderboard.LeaderboardName,
+                onSuccessCallback: (result) => _playerEntryRenderer.Render(result));
+        }
+        else
+        {
+            _playerEntryRenderer.Render("?", _saver.GetScore().ToString(), Settings.Leaderboard.DefaultName);
+        }
         Leaderboard.GetEntries(Settings.Leaderboard.LeaderboardName,
             onSuccessCallback: (result) =>
             {
