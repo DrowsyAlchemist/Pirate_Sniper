@@ -16,6 +16,7 @@ public class InputController : MonoBehaviour
     private const float DefaultZRotation = 0;
     private const float AngleEpsilon = 50;
     private static InputController _instance;
+    private Sensitivity _sensitivity;
     private bool _isScopeMode;
     private Coroutine _coroutine;
 
@@ -30,7 +31,7 @@ public class InputController : MonoBehaviour
 
     public static bool IsMobile { get; private set; }
     public static InputMode InputMode { get; private set; }
-    public float CurrentSensitivity => _isScopeMode ? Settings.Shooting.ScopeSensitivity : Settings.Shooting.BaseSensitivity;
+    public float CurrentSensitivity => _isScopeMode ? _sensitivity.ScopeSensitivity : _sensitivity.BaseSensitivity;
     public float ZeroXRotation => _level.CurrentLevel.CameraTransform.rotation.x;
 
     private void Awake()
@@ -74,9 +75,10 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void Init(bool isMobile)
+    public void Init(bool isMobile, Sensitivity sensitivity)
     {
         IsMobile = isMobile;
+        _sensitivity = sensitivity;
         SetMode(InputMode.UI);
         _pauseButton.Init(isMobile);
         _pointerDownArea.Init();

@@ -18,6 +18,8 @@ public class Saver
     public int PlayerMoney => _saves.PlayerMoney;
     public int PlayerHealth => _saves.PlayerMaxHealth;
     public int PlayerDamage => _saves.PlayerDamage;
+    public float BaseSensitivity => (_saves.BaseSensitivity > Settings.Epsilon) ? _saves.BaseSensitivity : Settings.Epsilon;
+    public float ScopeRelativeSensitivity => Mathf.Clamp(_saves.ScopeSensitivity, Settings.Epsilon, 1);
 
     public Saver()
     {
@@ -55,6 +57,13 @@ public class Saver
     public void SetPlayerDamage(int value)
     {
         _saves.PlayerDamage = (value > 0) ? value : throw new ArgumentOutOfRangeException();
+        Save();
+    }
+
+    public void SetSensitivity(float baseSensitivity, float scopeRelativeSensitivity)
+    {
+        _saves.BaseSensitivity = baseSensitivity;
+        _saves.ScopeSensitivity = scopeRelativeSensitivity;
         Save();
     }
 
@@ -250,6 +259,9 @@ public class Saver
         public string CurrentWeapon;
         public string Weapons;
 
+        public float BaseSensitivity;
+        public float ScopeSensitivity;
+
         public SaveData(StringBuilder stringBuilder)
         {
             PlayerMaxHealth = Settings.Characteristics.Health.DefaultValue;
@@ -268,6 +280,8 @@ public class Saver
             SecondLocation = defaultString;
             CurrentWeapon = Settings.Shooting.DefaultWeapon.Id;
             Weapons = CurrentWeapon;
+            BaseSensitivity = Settings.Shooting.DefaultBaseSensitivity;
+            ScopeSensitivity = Settings.Shooting.DefaultScopeRelativeSensitivity;
         }
     }
 }

@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
     [SerializeField] private InputController _inputController;
+    [SerializeField] private Sensitivity _sensitivity;
     [SerializeField] private ShootingPoint _shootingPoint;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Level _level;
@@ -62,12 +63,13 @@ public class Game : MonoBehaviour
     private void InitInputController()
     {
         bool isMobile;
+        _sensitivity.Init(_saver);
 #if UNITY_EDITOR
         isMobile = _useMobileControlInEditor;
-        _inputController.Init(isMobile);
+        _inputController.Init(isMobile, _sensitivity);
         return;
 #endif
         isMobile = Device.IsMobile;
-        _inputController.Init(isMobile);
+        _inputController.Init(isMobile, _sensitivity);
     }
 }

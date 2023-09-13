@@ -23092,6 +23092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useMobileControlInEditor: 0
   _inputController: {fileID: 1269375120}
+  _sensitivity: {fileID: 1350065717}
   _shootingPoint: {fileID: 538781365}
   _mainMenu: {fileID: 1560358231}
   _level: {fileID: 89587326}
@@ -49676,6 +49677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859ae71f4783a7542a5a654ec9a36cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sensitivity: {fileID: 1350065717}
 --- !u!1001 &1124623435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59640,6 +59642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1350065716}
+  - component: {fileID: 1350065717}
   m_Layer: 5
   m_Name: Sensitivity
   m_TagString: Untagged
@@ -59672,6 +59675,19 @@ RectTransform:
   m_AnchoredPosition: {x: -0.6470947, y: -0.5}
   m_SizeDelta: {x: 1.2940063, y: 2.850006}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1350065717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350065715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e29c2fdfde8074bad75cda06e9e386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseSensitivity: 100
 --- !u!1001 &1351685066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73089,6 +73105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d051b681f06ad428b4902206cdede6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sensitivity: {fileID: 1350065717}
 --- !u!224 &1698315839 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8634441848690968190, guid: f95293f22d069634c9c452a9ff66a47f, type: 3}
