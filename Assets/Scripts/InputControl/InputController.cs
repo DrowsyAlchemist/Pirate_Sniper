@@ -55,8 +55,10 @@ public class InputController : MonoBehaviour
         InputMode = mode;
 
         if (IsMobile)
+        {
+            _instance._pointerUpArea.enabled = false;
             return;
-
+        }
         if (mode == InputMode.UI)
         {
             Cursor.visible = true;
