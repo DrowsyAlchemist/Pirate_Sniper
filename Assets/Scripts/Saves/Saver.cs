@@ -175,7 +175,6 @@ public class Saver
 
     private void Save()
     {
-        Debug.Log("Save");
 #if UNITY_EDITOR
         PlayerPrefs.SetString(SavesName, JsonUtility.ToJson(_saves));
         return;
@@ -185,7 +184,6 @@ public class Saver
 
     private void LoadSaves()
     {
-        Debug.Log("Load");
 #if UNITY_EDITOR
         string jsonData = PlayerPrefs.GetString(SavesName);
         SetSaves(jsonData);

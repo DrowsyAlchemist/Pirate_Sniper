@@ -8,6 +8,8 @@ public class Sound : MonoBehaviour
     [SerializeField] private AudioSource _clickSound;
     [SerializeField] private AudioSource _buySound;
 
+    private const float ValuePower = 0.3f;
+    private const float MasterVolumeModifier = 0.5f;
     private static Sound _instance;
 
     public static bool IsOn { get; private set; }
@@ -34,12 +36,6 @@ public class Sound : MonoBehaviour
     private void OnDestroy()
     {
         WebApplication.InBackgroundChangeEvent -= OnBackgroundChanged;
-    }
-
-    public static float GetNormalizedVolume(string volumeName)
-    {
-        SoundSettings.Mixer.GetFloat(volumeName, out float value);
-        return Mathf.Lerp(SoundSettings.MinValue, SoundSettings.MaxValue, value);
     }
 
     public static void TurnOn()
@@ -102,7 +98,7 @@ public class Sound : MonoBehaviour
 
     private void TurnSoundOn()
     {
-        SetVolume(SoundSettings.MasterVolumeName, 1);
+        SetVolume(SoundSettings.MasterVolumeName, MasterVolumeModifier);
     }
 
     private void TurnSoundOff()
@@ -112,6 +108,7 @@ public class Sound : MonoBehaviour
 
     private static void SetVolume(string volumeName, float normalizedValue)
     {
-        SoundSettings.Mixer.SetFloat(volumeName, Mathf.Lerp(SoundSettings.MinValue, SoundSettings.MaxValue, normalizedValue));
+        float poweredValue = Mathf.Pow(normalizedValue, ValuePower);
+        SoundSettings.Mixer.SetFloat(volumeName, Mathf.Lerp(SoundSettings.MinValue, SoundSettings.MaxValue, poweredValue));
     }
 }

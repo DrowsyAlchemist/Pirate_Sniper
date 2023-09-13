@@ -11,6 +11,7 @@ public class ShootingSettings : ScriptableObject
 
     [SerializeField, Range(0.01f, 1)] private float _scopeSpeed;
 
+    private const float ValuePower = 1.3f;
     private float _baseSensitivity = 100;
     private float _scopeRelativeSensitivity = 0.5f;
 
@@ -26,7 +27,8 @@ public class ShootingSettings : ScriptableObject
 
     public void SetSensitivity(float value)
     {
-        _baseSensitivity = Mathf.Clamp(value, Settings.Epsilon, 1) * _maxSensitivity;
+        float clampedValue = Mathf.Clamp(value, Settings.Epsilon, 1);
+        _baseSensitivity = Mathf.Pow(clampedValue, ValuePower) * _maxSensitivity;
     }
 
     public void SetScopeSensitivity(float value)

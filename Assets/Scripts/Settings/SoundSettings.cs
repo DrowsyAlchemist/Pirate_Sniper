@@ -10,7 +10,7 @@ public class SoundSettings : ScriptableObject
     [SerializeField] private string _musicVolumeName = "MusicVolume";
     [SerializeField] private string _effectsVolumeName = "EffectsVolume";
     [SerializeField] private string _uiVolumeName = "UIVolume";
-    [SerializeField] private float _maxValue = -20;
+    [SerializeField] private float _maxValue = 0;
     [SerializeField] private float _minValue = -80;
 
     [SerializeField] private Sprite _onSprite;
