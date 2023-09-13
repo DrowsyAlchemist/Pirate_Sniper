@@ -10,20 +10,16 @@ public class Stopwatch
 
     public void Start()
     {
+        if (_coroutine != null)
+            Settings.CoroutineObject.StopCoroutine(_coroutine);
+
+        _elapsedTime = 0;
         _coroutine = Settings.CoroutineObject.StartCoroutine(CountTime());
     }
 
     public void Stop()
     {
         Settings.CoroutineObject.StopCoroutine(_coroutine);
-    }
-
-    public void Reset()
-    {
-        if (_coroutine != null)
-            Settings.CoroutineObject.StopCoroutine(_coroutine);
-
-        _elapsedTime = 0;
     }
 
     private IEnumerator CountTime()

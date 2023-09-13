@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7b2bce69cf1104ea5785122eedf2d8, type: 3}
   m_Name: ScoreSettings
   m_EditorClassIdentifier: 
-  _minTimeForEachEnemy: 3.5
+  _minTimeForEachEnemy: 2.5
   _completeTimeModifier: 700
   _accuracyModifier: 150
   _headshotsModifier: 150
-  _oneStarScore: 350
-  _twoStarsScore: 550
-  _threeStarsScore: 750
+  _oneStarScore: 400
+  _twoStarsScore: 600
+  _threeStarsScore: 800

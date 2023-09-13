@@ -56,7 +56,6 @@ public class LevelObserver
         if (Score > 0)
             throw new InvalidOperationException("You should Set Level before start");
 
-        _stopwatch.Reset();
         _player.Shooted += StartStopwatch;
     }
 

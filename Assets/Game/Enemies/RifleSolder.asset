@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RifleSolder
   m_EditorClassIdentifier: 
   _health: 140
-  _damage: 60
-  _minSecondsBetweenShots: 2.3
+  _damage: 55
+  _minSecondsBetweenShots: 2.4
   _maxSecondsBetweenShots: 2.9
-  _accuracyInPercents: 75
+  _accuracyInPercents: 70
   _headshotDamageModifier: 2

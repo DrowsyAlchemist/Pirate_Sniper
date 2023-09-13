@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PistolSolder
   m_EditorClassIdentifier: 
   _health: 120
-  _damage: 50
-  _minSecondsBetweenShots: 2.1
+  _damage: 45
+  _minSecondsBetweenShots: 2.2
   _maxSecondsBetweenShots: 2.7
   _accuracyInPercents: 70
   _headshotDamageModifier: 2
