@@ -150,11 +150,14 @@ public class InputController : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 cameraÑenter = new Vector3(0.5f, 0.5f, 0);
-        Ray ray = _camera.ViewportPointToRay(cameraÑenter);
-        Physics.Raycast(ray, out RaycastHit hit);
-        Shooted?.Invoke(hit);
-        Unscope();
+        if (InputMode == InputMode.Game)
+        {
+            Vector3 cameraÑenter = new Vector3(0.5f, 0.5f, 0);
+            Ray ray = _camera.ViewportPointToRay(cameraÑenter);
+            Physics.Raycast(ray, out RaycastHit hit);
+            Shooted?.Invoke(hit);
+            Unscope();
+        }
     }
 
     private void OnNewLevelLoaded()
