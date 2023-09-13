@@ -67,7 +67,6 @@ public class InputController : MonoBehaviour
         }
         else
         {
-            Sound.SetEffectsVolume(1);
             Cursor.lockState = CursorLockMode.Locked;
             _instance._pointerMoveArea.enabled = true;
             _instance._pointerUpArea.enabled = true;
