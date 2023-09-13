@@ -18,7 +18,7 @@ MonoBehaviour:
   _musicVolumeName: MusicVolume
   _effectsVolumeName: EffectsVolume
   _uiVolumeName: UIVolume
-  _maxValue: -10
+  _maxValue: -15
   _minValue: -80
   _onSprite: {fileID: 21300000, guid: a63a928ea7cb832458f4a167837c50cf, type: 3}
   _offSprite: {fileID: 21300000, guid: 6c837df8434edbc499ed30003e7e973a, type: 3}

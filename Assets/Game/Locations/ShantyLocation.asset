@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lable: Shanty
   _sprite: {fileID: 21300000, guid: 3a012dec3cd2ed14db8ffc52c7300e8d, type: 3}
-  _requiredStars: 10
+  _requiredStars: 15
   _levels:
   - {fileID: 1875267476965950864, guid: 246d7ede26a1bb54ab20724c7eb75319, type: 3}
   - {fileID: 3749505097191136388, guid: e77f9d8df85b49c47887bcc1c0056b37, type: 3}

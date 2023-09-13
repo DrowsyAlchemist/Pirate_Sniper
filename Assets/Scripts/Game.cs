@@ -20,23 +20,27 @@ public class Game : MonoBehaviour
     private IEnumerator Start()
     {
 #if UNITY_EDITOR
-        Init();
+        yield return Init();
         yield break;
 #endif
         while (YandexGamesSdk.IsInitialized == false)
             yield return YandexGamesSdk.Initialize();
 
-        Init();
+        yield return Init();
     }
 
-    private void Init()
+    private IEnumerator Init()
     {
 #if !UNITY_EDITOR
         string currentLang = YandexGamesSdk.Environment.GetCurrentLang();
         LeanLocalization.SetCurrentLanguageAll(currentLang);
 #endif
-        InitInputController();
         _saver = new Saver();
+
+        while (_saver.IsReady == false)
+            yield return null;
+
+        InitInputController();
         _player = new Player(_inputController, _saver);
         _level.Init(_player, _saver);
         _mainMenu.Init(_player, _saver);

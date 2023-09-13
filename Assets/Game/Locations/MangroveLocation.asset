@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lable: Mangrove
   _sprite: {fileID: 21300000, guid: 9e80d08906ff8e548a820758d039ca87, type: 3}
-  _requiredStars: 5
+  _requiredStars: 8
   _levels:
   - {fileID: 3576496503031012303, guid: adbf166e0222dd240a6071ba3f8b6099, type: 3}
   - {fileID: 8650805170612563902, guid: afe31e48bd999ad448e38ad9871250a8, type: 3}

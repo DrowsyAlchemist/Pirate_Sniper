@@ -10011,7 +10011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &222117912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21306,7 +21306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &509042169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34732,7 +34732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &812989986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38346,7 +38346,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.0062408447}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &876173726
 MonoBehaviour:
@@ -43991,7 +43991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1010578917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49864,7 +49864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1128491623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51365,7 +51365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1172987637
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55046,7 +55046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1246718082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56345,7 +56345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1278136984
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72951,7 +72951,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -72959,11 +72959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113992840460, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113992840460, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -72972,6 +72972,10 @@ PrefabInstance:
     - target: {fileID: 2486017114089329472, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_Name
       value: ScopeSensitivitySlider (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486017114089329474, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
+      propertyPath: m_Value
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2486017114089329474, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_MinValue
@@ -78296,7 +78300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1794400119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -84140,7 +84144,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 0.000015259, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -86684,7 +86688,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.958
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -86692,11 +86696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.958
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113992840460, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.958
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113992840460, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -86705,6 +86709,10 @@ PrefabInstance:
     - target: {fileID: 2486017114089329472, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_Name
       value: MusicVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486017114089329474, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
+      propertyPath: m_Value
+      value: 0.958
       objectReference: {fileID: 0}
     - target: {fileID: 2486017114089329475, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_Pivot.x
@@ -87175,7 +87183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1947124945
 RectTransform:
   m_ObjectHideFlags: 0
@@ -96862,7 +96870,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -96870,11 +96878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113696383752, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113992840460, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 2486017113992840460, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -96883,6 +96891,10 @@ PrefabInstance:
     - target: {fileID: 2486017114089329472, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_Name
       value: BaseSensitivitySlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486017114089329474, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
+      propertyPath: m_Value
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2486017114089329474, guid: c32006dafe2cefe459b6e4a94df838fd, type: 3}
       propertyPath: m_MinValue

@@ -14,6 +14,7 @@ public class Saver
     private readonly StringBuilder _stringBuilder;
     private SaveData _saves;
 
+    public bool IsReady { get; private set; }
     public int PlayerMoney => _saves.PlayerMoney;
     public int PlayerHealth => _saves.PlayerMaxHealth;
     public int PlayerDamage => _saves.PlayerDamage;
@@ -21,7 +22,7 @@ public class Saver
     public Saver()
     {
         _stringBuilder = new();
-        LoadSaves(out _saves);
+        LoadSaves();
     }
 
     public void RemoveSaves()
@@ -174,6 +175,7 @@ public class Saver
 
     private void Save()
     {
+        Debug.Log("Save");
 #if UNITY_EDITOR
         PlayerPrefs.SetString(SavesName, JsonUtility.ToJson(_saves));
         return;
@@ -181,26 +183,35 @@ public class Saver
         PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(_saves));
     }
 
-    private void LoadSaves(out SaveData saves)
+    private void LoadSaves()
     {
-        string jsonData = null;
+        Debug.Log("Load");
 #if UNITY_EDITOR
-        jsonData = PlayerPrefs.GetString(SavesName);
-        SetSaves(out saves, jsonData);
+        string jsonData = PlayerPrefs.GetString(SavesName);
+        SetSaves(jsonData);
+        IsReady = true;
         return;
 #endif
-        PlayerAccount.GetCloudSaveData(SetSaves);
-        SetSaves(out saves, jsonData);
+        if (PlayerAccount.IsAuthorized)
+        {
+            PlayerAccount.GetCloudSaveData(
+                onSuccessCallback: (result) =>
+                {
+                    SetSaves(result);
+                    IsReady = true;
+                },
+                onErrorCallback: (error) => throw new ApplicationException("Can not load CloudSaveData: " + error));
+        }
+        else
+        {
+            SetSaves(PlayerPrefs.GetString(SavesName));
+            IsReady = true;
+        }
     }
 
     private void SetSaves(string jsonData)
     {
-        SetSaves(out _saves, jsonData);
-    }
-
-    private void SetSaves(out SaveData saves, string jsonData)
-    {
-        saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder);
+        _saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder);
     }
 
     private string ReplaceScore(string locationString, int levelIndex, int score)
