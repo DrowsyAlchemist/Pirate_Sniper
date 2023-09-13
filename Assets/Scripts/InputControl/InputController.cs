@@ -54,11 +54,6 @@ public class InputController : MonoBehaviour
     {
         InputMode = mode;
 
-        if (IsMobile)
-        {
-            _instance._pointerUpArea.enabled = false;
-            return;
-        }
         if (mode == InputMode.UI)
         {
             Cursor.visible = true;
@@ -69,7 +64,9 @@ public class InputController : MonoBehaviour
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            if (IsMobile == false)
+                Cursor.lockState = CursorLockMode.Locked;
+
             _instance._pointerMoveArea.enabled = true;
             _instance._pointerUpArea.enabled = true;
             _instance._pointerDownArea.enabled = true;
@@ -175,5 +172,12 @@ public class InputController : MonoBehaviour
 
         if (_yLowerBound < 0)
             _yLowerBound += 360;
+
+        Unscope();
+    }
+
+    private void OnLevelFinished()
+    {
+
     }
 }
