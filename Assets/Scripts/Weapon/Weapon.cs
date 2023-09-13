@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
     public int Cost => _cost;
     public int Damage => _damage;
     public float SecondsBetweenShots => _secondsBetweenShots;
-    public bool IsReady { get; private set; }
+    public bool IsReady { get; private set; } = true;
     public float SecondsBeforeReadyLeft => SecondsBetweenShots - _timer.ElapsedTime;
 
     public event Action Shooted;
@@ -35,7 +35,6 @@ public class Weapon : MonoBehaviour
         _shotEffect.Play();
         _timer = new Timer();
         _timer.WentOff += OnTimerWentOff;
-        _timer.Start(SecondsBetweenShots);
     }
 
     private void OnDestroy()

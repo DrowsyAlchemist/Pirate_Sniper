@@ -59,20 +59,27 @@ public class ShootingPoint : MonoBehaviour
     private void OnWeaponReloadingFinished()
     {
         if (InputController.InputMode == InputMode.Game)
+        {
             _reloadingFinishedSound.Play();
+            Debug.Log("ReloadingSound");
+        }
     }
 
     private void OnShooted()
     {
         _shootSound.Play();
+        Debug.Log("ShootSound");
         Shooted?.Invoke();
     }
 
     private void OnTryShooting(RaycastHit _)
     {
         if (InputController.InputMode == InputMode.Game)
-            if (_currentWeapon.IsReady == false)
+            if (_currentWeapon.SecondsBetweenShots - _currentWeapon.SecondsBeforeReadyLeft > Settings.Epsilon)
+            {
                 _misfireSound.Play();
+                Debug.Log("MisfireSound");
+            }
     }
 
     private void OnScope()
