@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PistolGentleMan
   m_EditorClassIdentifier: 
   _health: 70
-  _damage: 40
+  _damage: 30
   _minSecondsBetweenShots: 1.7
   _maxSecondsBetweenShots: 2.1
   _accuracyInPercents: 45

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RifleGovernor
   m_EditorClassIdentifier: 
   _health: 110
-  _damage: 60
+  _damage: 50
   _minSecondsBetweenShots: 2
   _maxSecondsBetweenShots: 2.5
   _accuracyInPercents: 65

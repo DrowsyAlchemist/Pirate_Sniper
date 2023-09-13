@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PistolCaptain
   m_EditorClassIdentifier: 
   _health: 170
-  _damage: 60
+  _damage: 50
   _minSecondsBetweenShots: 2.3
   _maxSecondsBetweenShots: 2.9
   _accuracyInPercents: 80
