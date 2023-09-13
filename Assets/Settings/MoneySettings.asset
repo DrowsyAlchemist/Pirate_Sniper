@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae9d57365f1bda4ca5fe16fa19e3d28, type: 3}
   m_Name: MoneySettings
   m_EditorClassIdentifier: 
-  _moneyForEachEnemy: 20
-  _moneyForHeadshot: 5
+  _moneyForEachEnemy: 15
+  _moneyForHeadshot: 4

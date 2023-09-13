@@ -6,7 +6,7 @@ public class BaseSensitivitySlider : UISlider
 
     private void OnEnable()
     {
-        Slider.value = _sensitivity.BaseSensitivity / Settings.Shooting.MaxSensitivity;
+        Slider.value = Mathf.Pow(_sensitivity.BaseSensitivity / Settings.Shooting.MaxSensitivity, 1 / Sensitivity.ValuePower);
     }
 
     private void OnDisable()
