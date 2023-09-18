@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using Lean.Localization;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LeaderboardSettings", menuName = "Settings/Leaderboard", order = 51)]
@@ -10,7 +11,7 @@ public class LeaderboardSettings : ScriptableObject
     [SerializeField] private bool _includeSelf = true;
     [SerializeField] private ProfilePictureSize _profilePictureSize = ProfilePictureSize.medium;
 
-    [SerializeField] private string _defaultName = "Инкогнито";
+    [SerializeField] private string _defaultNamePhrase = "DefaultName";
     [SerializeField] private Sprite _defaultAvatar;
 
     public string LeaderboardName => _leaderboardName;
@@ -18,6 +19,6 @@ public class LeaderboardSettings : ScriptableObject
     public int CompetingPlayersCount => _competingPlayersCount;
     public bool IncludeSelf => _includeSelf;
     public ProfilePictureSize ProfilePictureSize => _profilePictureSize;
-    public string DefaultName => _defaultName;
+    public string DefaultName => LeanLocalization.GetTranslationText(_defaultNamePhrase);
     public Sprite DefaultAvatar => _defaultAvatar;
 }
