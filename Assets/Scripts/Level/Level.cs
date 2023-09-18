@@ -5,6 +5,7 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private AdditionalMenu _additionalMenu;
     [SerializeField] private LevelsMenu _levelsMenu;
     [SerializeField] private LevelOverWindow _levelOverWindow;
     [SerializeField] private PauseWindow _pauseWindow;
@@ -158,7 +159,7 @@ public class Level : MonoBehaviour
 
     private void OnSettingsButtonClick()
     {
-        _mainMenu.OpenSettings();
+        _additionalMenu.OpenSettings();
     }
 
     private void OnResumeButtonClick()

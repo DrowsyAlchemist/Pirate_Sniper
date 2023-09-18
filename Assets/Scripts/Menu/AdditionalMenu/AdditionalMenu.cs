@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class AdditionalMenu : AnimatedWindow
@@ -13,8 +11,6 @@ public class AdditionalMenu : AnimatedWindow
     [SerializeField] UIButton _closeButton;
 
     private LocationMap _locationMap;
-
-    public event Action ForceClosed;
 
     public void Init(Player player, Saver saver, LocationMap locationMap)
     {
@@ -63,22 +59,6 @@ public class AdditionalMenu : AnimatedWindow
     {
         OpenCleared();
         _settingsMenu.Open();
-    }
-
-    public override void Disappear()
-    {
-        base.Disappear();
-
-        if (Time.timeScale < Settings.Epsilon)
-            Settings.CoroutineObject.StartCoroutine(ForseClose());
-    }
-
-    private IEnumerator ForseClose()
-    {
-        while (IsPlaying)
-            yield return null;
-
-        ForceClosed?.Invoke();
     }
 
     private void OpenCleared()
