@@ -25,7 +25,7 @@ SpriteAtlas:
       m_BuildTarget: WebGL
       m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
-      m_TextureFormat: 51
+      m_TextureFormat: 50
       m_TextureCompression: 1
       m_CompressionQuality: 50
       m_CrunchedCompression: 0
@@ -45,7 +45,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: 4a1bded4c7e025b479cf04d3eada76c2, type: 3}
-    - {fileID: 2800000, guid: bb833b7987a18104ebf3a6b26844eb51, type: 3}
+    - {fileID: 2800000, guid: a30750f59d7643748b8ce9d0f6b138d0, type: 3}
     - {fileID: 2800000, guid: 209e0eb770bd94bc4ac1cf106de18eb7, type: 3}
     - {fileID: 2800000, guid: 1d7208690780e4460905c3cea38318bb, type: 3}
     - {fileID: 2800000, guid: 6f82c769d51ea504083832377e952d62, type: 3}
@@ -57,12 +57,10 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 9876fcfabd3b2425687da38e45dedbc2, type: 3}
     - {fileID: 2800000, guid: 3c6f5b7a54bd84489ba7d655c5b7b812, type: 3}
     - {fileID: 2800000, guid: a454050719005b444b59a84eaafba779, type: 3}
-    - {fileID: 2800000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
+    - {fileID: 2800000, guid: 0d0b4c5c741da254991b37f3977b015b, type: 3}
     - {fileID: 21300000, guid: 2350fdbe01c4d42649eaf2b3259e2021, type: 3}
     - {fileID: 2800000, guid: a454050719005b444b59a84eaafba779, type: 3}
     - {fileID: 2800000, guid: eb30ddda20b252d43bf48e22a42dccf8, type: 3}
-    - {fileID: 2800000, guid: 0d0b4c5c741da254991b37f3977b015b, type: 3}
-    - {fileID: 2800000, guid: a30750f59d7643748b8ce9d0f6b138d0, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -76,7 +74,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6c837df8434edbc499ed30003e7e973a, type: 3}
   - {fileID: 21300000, guid: 6f82c769d51ea504083832377e952d62, type: 3}
   - {fileID: 21300000, guid: 1d7208690780e4460905c3cea38318bb, type: 3}
-  - {fileID: 21300000, guid: bb833b7987a18104ebf3a6b26844eb51, type: 3}
   - {fileID: 21300000, guid: 00d268f9870dd41d1ab0c13d9f0149fd, type: 3}
   - {fileID: 21300000, guid: 3c6f5b7a54bd84489ba7d655c5b7b812, type: 3}
   - {fileID: 21300000, guid: eb30ddda20b252d43bf48e22a42dccf8, type: 3}
@@ -85,7 +82,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a63a928ea7cb832458f4a167837c50cf, type: 3}
   - {fileID: 21300000, guid: a93de9becdfd7454cb14729a3061c233, type: 3}
   - {fileID: 21300000, guid: 2350fdbe01c4d42649eaf2b3259e2021, type: 3}
-  - {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_PackedSpriteNamesToIndex:
   - frame_c_06
   - frame_c2_01
@@ -95,7 +91,6 @@ SpriteAtlas:
   - GUI2
   - gear
   - lobby_token_gold
-  - MapIcon
   - character_select_icon_lock
   - ability_icon_critical
   - obj_01
@@ -104,7 +99,6 @@ SpriteAtlas:
   - GUI1
   - frame_green
   - top_btn_icon_exit
-  - Close Button
   m_RenderDataMap: {}
   m_Tag: MenuAtlas
   m_IsVariant: 0
