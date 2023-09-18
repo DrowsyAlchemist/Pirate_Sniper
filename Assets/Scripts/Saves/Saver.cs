@@ -24,12 +24,14 @@ public class Saver
     public Saver()
     {
         _stringBuilder = new();
+        ResetStringBuilder(_stringBuilder);
         LoadSaves();
     }
 
     public void RemoveSaves()
     {
-        _saves = new(_stringBuilder);
+        ResetStringBuilder(_stringBuilder);
+        _saves = new(_stringBuilder.ToString());
         Save();
     }
 
@@ -182,6 +184,14 @@ public class Saver
         Save();
     }
 
+    private void ResetStringBuilder(StringBuilder stringBuilder)
+    {
+        stringBuilder.Clear();
+
+        for (int i = 0; i < MaxLevelsCount; i++)
+            _stringBuilder.Append(DefaultScore.ToString() + Devider);
+    }
+
     private void Save()
     {
 #if UNITY_EDITOR
@@ -241,47 +251,5 @@ public class Saver
     private string[] SplitLocationString(string locationString)
     {
         return locationString.Split(Devider);
-    }
-
-    [Serializable]
-    private class SaveData
-    {
-        public int PlayerMoney;
-        public int PlayerMaxHealth;
-        public int PlayerDamage;
-
-        public string ZeroLocation;
-        public string ShipLocation0;
-        public string FirstLocation;
-        public string ShipLocation1;
-        public string SecondLocation;
-
-        public string CurrentWeapon;
-        public string Weapons;
-
-        public float BaseSensitivity;
-        public float ScopeSensitivity;
-
-        public SaveData(StringBuilder stringBuilder)
-        {
-            PlayerMaxHealth = Settings.Characteristics.Health.DefaultValue;
-            PlayerDamage = Settings.Characteristics.Damage.DefaultValue;
-
-            stringBuilder.Clear();
-
-            for (int i = 0; i < MaxLevelsCount; i++)
-                stringBuilder.Append(DefaultScore.ToString() + Devider);
-
-            string defaultString = stringBuilder.ToString();
-            ZeroLocation = defaultString;
-            ShipLocation0 = defaultString;
-            FirstLocation = defaultString;
-            ShipLocation1 = defaultString;
-            SecondLocation = defaultString;
-            CurrentWeapon = Settings.Shooting.DefaultWeapon.Id;
-            Weapons = CurrentWeapon;
-            BaseSensitivity = 0;
-            ScopeSensitivity = 0;
-        }
     }
 }
