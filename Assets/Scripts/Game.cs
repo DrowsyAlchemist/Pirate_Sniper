@@ -62,14 +62,12 @@ public class Game : MonoBehaviour
 
     private void InitInputController()
     {
-        bool isMobile;
-        _sensitivity.Init(_saver);
 #if UNITY_EDITOR
-        isMobile = _useMobileControlInEditor;
-        _inputController.Init(isMobile, _sensitivity);
-        return;
+        bool isMobile = _useMobileControlInEditor;
+#else
+        bool isMobile = Device.IsMobile;
 #endif
-        isMobile = Device.IsMobile;
+        _sensitivity.Init(_saver, isMobile);
         _inputController.Init(isMobile, _sensitivity);
     }
 }

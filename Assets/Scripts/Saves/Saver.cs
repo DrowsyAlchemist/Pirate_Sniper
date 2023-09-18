@@ -18,7 +18,7 @@ public class Saver
     public int PlayerMoney => _saves.PlayerMoney;
     public int PlayerHealth => _saves.PlayerMaxHealth;
     public int PlayerDamage => _saves.PlayerDamage;
-    public float BaseSensitivity => (_saves.BaseSensitivity > Settings.Epsilon) ? _saves.BaseSensitivity : Settings.Epsilon;
+    public float BaseSensitivity => _saves.BaseSensitivity;
     public float ScopeRelativeSensitivity => Mathf.Clamp(_saves.ScopeSensitivity, Settings.Epsilon, 1);
 
     public Saver()
@@ -280,8 +280,8 @@ public class Saver
             SecondLocation = defaultString;
             CurrentWeapon = Settings.Shooting.DefaultWeapon.Id;
             Weapons = CurrentWeapon;
-            BaseSensitivity = Settings.Shooting.DefaultBaseSensitivity;
-            ScopeSensitivity = Settings.Shooting.DefaultScopeRelativeSensitivity;
+            BaseSensitivity = 0;
+            ScopeSensitivity = 0;
         }
     }
 }

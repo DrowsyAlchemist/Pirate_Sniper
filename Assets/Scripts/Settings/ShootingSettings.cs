@@ -9,7 +9,8 @@ public class ShootingSettings : ScriptableObject
     [SerializeField] private float _scopeFieldOfView = 35;
     [SerializeField, Range(0.01f, 1)] private float _scopeSpeed;
 
-    [SerializeField] private float _defaultBaseSensitivity = 100;
+    [SerializeField] private float _defaultPCBaseSensitivity = 70;
+    [SerializeField] private float _defaultMobileBaseSensitivity = 150;
     [SerializeField] private float _defaultScopeRelativeSensitivity = 0.5f;
 
     public Weapon DefaultWeapon => _defaultWeapon;
@@ -18,6 +19,7 @@ public class ShootingSettings : ScriptableObject
     public float ScopeFieldOfView => _scopeFieldOfView;
     public float ScopeSpeed => _scopeSpeed;
 
-    public float DefaultBaseSensitivity=> _defaultBaseSensitivity;
+    public float DefaultPCBaseSensitivity=> _defaultPCBaseSensitivity;
+    public float DefaultMobileBaseSensitivity=> _defaultMobileBaseSensitivity;
     public float DefaultScopeRelativeSensitivity => _defaultScopeRelativeSensitivity;
 }

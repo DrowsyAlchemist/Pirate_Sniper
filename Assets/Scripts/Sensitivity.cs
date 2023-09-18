@@ -3,18 +3,25 @@ using UnityEngine;
 public class Sensitivity : MonoBehaviour
 {
     public const float ValuePower = 1.3f;
-    public float _baseSensitivity = 100;
-    private float _scopeRelativeSensitivity = 0.5f;
+    public float _baseSensitivity;
+    private float _scopeRelativeSensitivity;
     private Saver _saver;
 
     public float BaseSensitivity => _baseSensitivity;
     public float ScopeSensitivity => _baseSensitivity * _scopeRelativeSensitivity;
 
-    public void Init(Saver saver)
+    public void Init(Saver saver, bool isMobile)
     {
         _saver = saver;
         _baseSensitivity = _saver.BaseSensitivity;
         _scopeRelativeSensitivity = _saver.ScopeRelativeSensitivity;
+
+        if (_baseSensitivity < Settings.Epsilon)
+        {
+            _baseSensitivity = isMobile ? Settings.Shooting.DefaultMobileBaseSensitivity : Settings.Shooting.DefaultPCBaseSensitivity;
+            _scopeRelativeSensitivity = Settings.Shooting.DefaultScopeRelativeSensitivity;
+            saver.SetSensitivity(_baseSensitivity, _scopeRelativeSensitivity);
+        }
     }
 
     public void SetBaseSensitivity(float value)
