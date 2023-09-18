@@ -228,7 +228,7 @@ public class Saver
 
     private void SetSaves(string jsonData)
     {
-        _saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder);
+        _saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder.ToString());
     }
 
     private string ReplaceScore(string locationString, int levelIndex, int score)
