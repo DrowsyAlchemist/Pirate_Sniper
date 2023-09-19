@@ -25,9 +25,9 @@ SpriteAtlas:
       m_BuildTarget: WebGL
       m_MaxTextureSize: 4096
       m_ResizeAlgorithm: 0
-      m_TextureFormat: 50
+      m_TextureFormat: 49
       m_TextureCompression: 1
-      m_CompressionQuality: 50
+      m_CompressionQuality: 100
       m_CrunchedCompression: 0
       m_AllowsAlphaSplitting: 0
       m_Overridden: 1
@@ -47,7 +47,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 16c8ca5662ad4e745accf9785c1e4c45, type: 3}
     - {fileID: 2800000, guid: 476fa7ac7fe0b27499751f2336ed8a05, type: 3}
     - {fileID: 2800000, guid: 7ee65bf32d3c5764aa666b2ed7560a1f, type: 3}
-    - {fileID: 2800000, guid: 3a55403f94f368b42ac608b403808598, type: 3}
+    - {fileID: 2800000, guid: 1f6359cc39532464595f4eeeedb325e0, type: 3}
     - {fileID: 2800000, guid: efee20b64d1e73942a29ba61ce3379c3, type: 3}
     - {fileID: 2800000, guid: d249acd8c8f234a4093464e66d8c92f8, type: 3}
     - {fileID: 2800000, guid: ecb1889fcd79d4365999c3f814fa913f, type: 3}
@@ -59,7 +59,6 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 2d2b3db64356e414fb61812d8ec27878, type: 3}
     - {fileID: 2800000, guid: bb530766b63782c4ebc0a0ac2b09a859, type: 3}
     - {fileID: 2800000, guid: 1266d693c7320bf44ae522b21a54a6e9, type: 3}
-    - {fileID: 2800000, guid: 1f6359cc39532464595f4eeeedb325e0, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -79,7 +78,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1f6359cc39532464595f4eeeedb325e0, type: 3}
   - {fileID: 21300000, guid: 50914faef06d1134f9670bf7adbc03fa, type: 3}
   - {fileID: 21300000, guid: 44fdb2fe54269466f8b0b810c0e57f86, type: 3}
-  - {fileID: 21300000, guid: 3a55403f94f368b42ac608b403808598, type: 3}
   - {fileID: 21300000, guid: ecb1889fcd79d4365999c3f814fa913f, type: 3}
   m_PackedSpriteNamesToIndex:
   - Accuracy
@@ -96,7 +94,6 @@ SpriteAtlas:
   - play_btn_pause
   - Stopwatch
   - stage_frame_yellow
-  - checkbox_bg
   - mission_icon_trophy
   m_RenderDataMap: {}
   m_Tag: LevelAtlas

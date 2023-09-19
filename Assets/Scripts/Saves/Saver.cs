@@ -228,6 +228,7 @@ public class Saver
 
     private void SetSaves(string jsonData)
     {
+        jsonData = "";
         _saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder.ToString());
     }
 
