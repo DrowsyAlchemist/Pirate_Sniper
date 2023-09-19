@@ -42,6 +42,7 @@ public class Saver
         _saves.FirstLocation = UnlockString;
         _saves.ShipLocation1 = UnlockString;
         _saves.SecondLocation = UnlockString;
+        Save();
     }
 
     public void SetPlayerMoney(int value)
@@ -228,7 +229,6 @@ public class Saver
 
     private void SetSaves(string jsonData)
     {
-        jsonData = "";
         _saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder.ToString());
     }
 

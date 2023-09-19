@@ -445,6 +445,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+--- !u!1 &6700241958752039973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3447625994366850430, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
+  m_PrefabInstance: {fileID: 8296869786637738331}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3249513569533474797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700241958752039973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &6700241958752093563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3447625994366657568, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
@@ -464,6 +483,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 762ed5390269c4c4185e61661508264a, type: 3}
+--- !u!114 &1017011098695795672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700241958752093563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &6700241958752095213 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3447625994366659254, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}
@@ -521,6 +554,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.48680764, y: 2.4689999, z: 5.543441}
   m_Center: {x: -3.2253828, y: 7.7029104, z: -5.722305}
+--- !u!114 &2095926470517658238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700241958752095213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &6700241958752108259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3447625994366656440, guid: 077dc00ef9a34d14fa266513ec3b7f0c, type: 3}

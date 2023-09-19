@@ -5039,6 +5039,7 @@ GameObject:
   - component: {fileID: 7193446629881290568}
   - component: {fileID: 7193446629882048734}
   - component: {fileID: 6304212925255391560}
+  - component: {fileID: 2077359026279010673}
   m_Layer: 0
   m_Name: SM_Veh_Veh_Boat_Large_01_Hull_Pirate_Attachments
   m_TagString: Untagged
@@ -5131,6 +5132,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.36106396, y: 1.216835, z: 9.766188}
   m_Center: {x: -2.9489985, y: 3.185421, z: 2.5580206}
+--- !u!114 &2077359026279010673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193446629884520452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &7193446629884524670
 GameObject:
   m_ObjectHideFlags: 0

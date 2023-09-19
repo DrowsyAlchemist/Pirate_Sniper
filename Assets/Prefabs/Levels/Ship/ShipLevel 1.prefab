@@ -2158,6 +2158,7 @@ GameObject:
   - component: {fileID: 3266545495220395667}
   - component: {fileID: 3266545495220395664}
   - component: {fileID: 3266545495220395665}
+  - component: {fileID: 8291810350865984931}
   m_Layer: 0
   m_Name: SM_Prop_Crate_05
   m_TagString: Untagged
@@ -2243,6 +2244,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.013852, y: 0.3634439, z: 0.5760246}
   m_Center: {x: 0.000000008122912, y: 0.1817055, z: 0.000015259635}
+--- !u!114 &8291810350865984931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266545495220395671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &3266545495266334987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,6 +2866,7 @@ GameObject:
   - component: {fileID: 3266545495355589583}
   - component: {fileID: 3266545495355589580}
   - component: {fileID: 3266545495355589581}
+  - component: {fileID: 766529585649711048}
   m_Layer: 0
   m_Name: SM_Veh_Boat_Warship_01_Hull_Attachments
   m_TagString: Untagged
@@ -2986,6 +3002,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.48680764, y: 2.4689999, z: 5.543441}
   m_Center: {x: -3.2253828, y: 7.7029104, z: -5.722305}
+--- !u!114 &766529585649711048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266545495355589571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &3266545495371194930
 GameObject:
   m_ObjectHideFlags: 0
@@ -3247,6 +3277,7 @@ GameObject:
   - component: {fileID: 3266545495473270629}
   - component: {fileID: 3266545495473270650}
   - component: {fileID: 3266545495473270651}
+  - component: {fileID: 1284055673536247902}
   m_Layer: 0
   m_Name: SM_Prop_Cannon_01
   m_TagString: Untagged
@@ -3333,6 +3364,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 762ed5390269c4c4185e61661508264a, type: 3}
+--- !u!114 &1284055673536247902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266545495473270649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &3266545495476215347
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,6 +5835,7 @@ GameObject:
   - component: {fileID: 3266545496264834394}
   - component: {fileID: 3266545496264834372}
   - component: {fileID: 3266545496264834373}
+  - component: {fileID: 5182913584902884556}
   m_Layer: 0
   m_Name: SM_Veh_Boat_Warship_01_Rigging
   m_TagString: Untagged
@@ -5862,6 +5908,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5182913584902884556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266545496264834395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
 --- !u!1 &3266545496268975663
 GameObject:
   m_ObjectHideFlags: 0
