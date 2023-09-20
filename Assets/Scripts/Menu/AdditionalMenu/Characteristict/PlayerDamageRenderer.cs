@@ -5,15 +5,15 @@ public class PlayerDamageRenderer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _damageText;
 
-    private Player _player;
+    private Saver _saver;
 
-    public void Init(Player player)
+    public void Init(Saver saver)
     {
-        _player = player;
+        _saver = saver;
     }
 
     public void Render()
     {
-        _damageText.text = _player.Damage.ToString();
+        _damageText.text = _saver.PlayerDamage.ToString();
     }
 }

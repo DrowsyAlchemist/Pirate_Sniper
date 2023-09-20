@@ -19,7 +19,7 @@ public class AdditionalMenu : AnimatedWindow
         _locationMap.LocationChosen += OpenLevels;
         _closeButton.AddOnClickAction(Disappear);
 
-        _characteristicsMenu.Init(player);
+        _characteristicsMenu.Init(saver, player.Wallet);
         _storeMenu.Init(player.Wallet, saver);
         _leaderboardMenu.Init(saver);
     }

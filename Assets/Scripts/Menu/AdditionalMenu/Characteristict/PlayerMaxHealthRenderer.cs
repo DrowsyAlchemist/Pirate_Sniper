@@ -5,15 +5,15 @@ public class PlayerMaxHealthRenderer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _healthText;
 
-    private Player _player;
+    private Saver _saver;
 
-    public void Init(Player player)
+    public void Init(Saver saver)
     {
-        _player = player;
+        _saver = saver;
     }
 
     public void Render()
     {
-        _healthText.text = _player.MaxHealth.ToString();
+        _healthText.text = _saver.PlayerHealth.ToString();
     }
 }

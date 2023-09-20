@@ -3,6 +3,7 @@ using Agava.YandexGames;
 using Lean.Localization;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Game : MonoBehaviour
 {
@@ -43,11 +44,13 @@ public class Game : MonoBehaviour
             yield return null;
 
         InitInputController();
-        _player = new Player(_inputController, _saver);
+        Health health = new(_saver.PlayerHealth);
+        Wallet wallet = new(_saver);
+        _player = new Player(_saver, health, wallet, _shootingPoint);
         _level.Init(_player, _saver);
         _mainMenu.Init(_player, _saver);
         _mainMenu.Open();
-        _shootingPoint.Init(_player, _inputController);
+        _shootingPoint.Init(_saver, _inputController, _player);
         _backgroundCanvas.Deactivate();
     }
 

@@ -1,28 +1,28 @@
-using Agava.YandexGames;
-using System;
 using UnityEngine;
 
 public class CharacteristicsMenu : MoneyRenderer
 {
-    [SerializeField] private PlayerMaxHealthRenderer _healthRenderer;
+    [SerializeField] private PlayerMaxHealthRenderer _maxHealthRenderer;
     [SerializeField] private PlayerDamageRenderer _damageRenderer;
 
     [SerializeField] private WareRenderer _healthPanel;
     [SerializeField] private WareRenderer _damagePanel;
 
-    private Player _player;
+    private Saver _saver;
+    private Wallet _wallet;
 
-    public bool HasHealthNextLevel => Settings.Characteristics.Health.HasNextLevel(_player.MaxHealth);
-    public bool HasDamageNextLevel => Settings.Characteristics.Damage.HasNextLevel(_player.Damage);
-    public CharacteristicLevel NextHealthLevel => Settings.Characteristics.Health.GetNextLevel(_player.MaxHealth);
-    public CharacteristicLevel NextDamageLevel => Settings.Characteristics.Damage.GetNextLevel(_player.Damage);
+    public bool HasHealthNextLevel => Settings.Characteristics.Health.HasNextLevel(_saver.PlayerHealth);
+    public bool HasDamageNextLevel => Settings.Characteristics.Damage.HasNextLevel(_saver.PlayerDamage);
+    public CharacteristicLevel NextHealthLevel => Settings.Characteristics.Health.GetNextLevel(_saver.PlayerHealth);
+    public CharacteristicLevel NextDamageLevel => Settings.Characteristics.Damage.GetNextLevel(_saver.PlayerDamage);
 
-    public void Init(Player player)
+    public void Init(Saver saver, Wallet wallet)
     {
-        _player = player;
-        base.Init(player.Wallet);
-        _healthRenderer.Init(player);
-        _damageRenderer.Init(player);
+        _saver = saver;
+        _wallet = wallet;
+        base.Init(wallet);
+        _maxHealthRenderer.Init(saver);
+        _damageRenderer.Init(saver);
         _healthPanel.BuyButtonClicked += OnHealthButtonClick;
         _damagePanel.BuyButtonClicked += OnDamageButtonClick;
     }
@@ -30,7 +30,7 @@ public class CharacteristicsMenu : MoneyRenderer
     public override void Open()
     {
         base.Open();
-        _healthRenderer.Render();
+        _maxHealthRenderer.Render();
         _damageRenderer.Render();
         RenderNextHealthLevel();
         RenderNextDamageLevel();
@@ -40,7 +40,7 @@ public class CharacteristicsMenu : MoneyRenderer
     {
         if (NextHealthLevel.Cost <= 0)
             Advertising.RewardForVideo(IncreaseHealth);
-        else if (_player.Wallet.TryGiveMoney(NextHealthLevel.Cost))
+        else if (_wallet.TryGiveMoney(NextHealthLevel.Cost))
             IncreaseHealth();
     }
 
@@ -48,21 +48,21 @@ public class CharacteristicsMenu : MoneyRenderer
     {
         if (NextDamageLevel.Cost <= 0)
             Advertising.RewardForVideo(IncreaseDamage);
-        else if (_player.Wallet.TryGiveMoney(NextDamageLevel.Cost))
+        else if (_wallet.TryGiveMoney(NextDamageLevel.Cost))
             IncreaseDamage();
     }
 
     private void IncreaseHealth()
     {
-        _player.SetMaxHealth(NextHealthLevel.Value);
-        _healthRenderer.Render();
+        _saver.SetPlayerHealth(NextHealthLevel.Value);
+        _maxHealthRenderer.Render();
         RenderNextHealthLevel();
         RenderNextDamageLevel();
     }
 
     private void IncreaseDamage()
     {
-        _player.SetDamage(NextDamageLevel.Value);
+        _saver.SetPlayerDamage(NextDamageLevel.Value);
         _damageRenderer.Render();
         RenderNextDamageLevel();
         RenderNextHealthLevel();
@@ -71,7 +71,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void RenderNextHealthLevel()
     {
         if (HasHealthNextLevel)
-            _healthPanel.Render(NextHealthLevel.Cost, _player.Wallet);
+            _healthPanel.Render(NextHealthLevel.Cost, _wallet);
         else
             _healthPanel.DeactivateBuyButton();
     }
@@ -79,7 +79,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void RenderNextDamageLevel()
     {
         if (HasDamageNextLevel)
-            _damagePanel.Render(NextDamageLevel.Cost, _player.Wallet);
+            _damagePanel.Render(NextDamageLevel.Cost, _wallet);
         else
             _damagePanel.DeactivateBuyButton();
     }
