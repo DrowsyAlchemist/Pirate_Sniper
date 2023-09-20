@@ -52,7 +52,7 @@ public class WinPanel : LevelOverPanel
 
     private void OnDoubleMoneyButtonClick()
     {
-        _doubleMoneyButton.SetInteractable(false);
+        _doubleMoneyButton.Deactivate();
         DoubleMoneyButtonClick?.Invoke();
         _moneyText.text = "+" + (IncreaseMoneyModifier * _levelObserver.Money).ToString();
     }
