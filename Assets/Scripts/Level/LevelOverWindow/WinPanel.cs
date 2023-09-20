@@ -18,9 +18,9 @@ public class WinPanel : LevelOverPanel
 
     public event Action DoubleMoneyButtonClick;
 
-    public override void Init()
+    public override void Init(LocationsStorage locationsStorage)
     {
-        base.Init();
+        base.Init(locationsStorage);
         _doubleMoneyButton.AddOnClickAction(OnDoubleMoneyButtonClick);
     }
 

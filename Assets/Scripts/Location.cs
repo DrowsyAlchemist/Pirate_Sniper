@@ -14,7 +14,6 @@ public class Location : ScriptableObject
     public Sprite Sprite => _sprite;
     public IReadOnlyList<LevelPreset> Levels => _levels;
     public int RequiredStars => _requiredStars;
-    public int Index => LocationsStorage.GetIndex(this);
 
     public int Stars
     {
@@ -36,32 +35,5 @@ public class Location : ScriptableObject
                 return i;
 
         throw new InvalidOperationException("There are no such level in the location");
-    }
-
-    public LevelPreset GetLevelByIndex(int index)
-    {
-        if (index < 0 || index >= _levels.Length)
-            throw new ArgumentOutOfRangeException("index");
-
-        return _levels[index];
-    }
-
-    public Location GetPreviousLocation()
-    {
-        if (Index == 0)
-            return null;
-
-        return LocationsStorage.GetLocationByIndex(Index - 1);
-    }
-
-    public bool TryGetNextLocation(out Location nextLocation)
-    {
-        nextLocation = null;
-
-        if (Index + 1 >= LocationsStorage.Locations.Count)
-            return false;
-
-        nextLocation = LocationsStorage.GetLocationByIndex(Index + 1);
-        return true;
     }
 }

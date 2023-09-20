@@ -12,6 +12,7 @@ public class Saver
     private const string UnlockString = "1000 1000 1000 1000 1000 1000 1000 1000 1000 1000";
 
     private readonly StringBuilder _stringBuilder;
+    private readonly LocationsStorage _locationsStorage;
     private SaveData _saves;
 
     public bool IsReady { get; private set; }
@@ -21,8 +22,9 @@ public class Saver
     public float BaseSensitivity => _saves.BaseSensitivity;
     public float ScopeRelativeSensitivity => Mathf.Clamp(_saves.ScopeSensitivity, Settings.Epsilon, 1);
 
-    public Saver()
+    public Saver(LocationsStorage locationsStorage)
     {
+        _locationsStorage = locationsStorage;
         _stringBuilder = new();
         ResetStringBuilder(_stringBuilder);
         LoadSaves();
@@ -113,8 +115,8 @@ public class Saver
 
     public int GetLevelScore(LevelPreset level)
     {
-        Location location = LocationsStorage.GetLocation(level);
-        return GetLevelScore(LocationsStorage.GetLocationIndex(level), location.GetLevelIndex(level));
+        Location location = _locationsStorage.GetLocation(level);
+        return GetLevelScore(_locationsStorage.GetLocationIndex(level), location.GetLevelIndex(level));
     }
 
     public int GetScore()
@@ -151,7 +153,7 @@ public class Saver
 
     public void SaveLevel(LevelPreset level, int score)
     {
-        SaveLevel(level.Location.Index, level.IndexInLocation, score);
+        SaveLevel(_locationsStorage.GetLocationIndex(level), _locationsStorage.GetIndexInLocation(level), score);
         Save();
 #if UNITY_EDITOR
         return;
@@ -160,9 +162,9 @@ public class Saver
             Leaderboard.SetScore(Settings.Leaderboard.LeaderboardName, GetScore());
     }
 
-    public void SaveLevel(int locationNumber, int levelIndex, int score)
+    public void SaveLevel(int locationIndex, int levelIndex, int score)
     {
-        switch (locationNumber)
+        switch (locationIndex)
         {
             case 0:
                 _saves.ZeroLocation = ReplaceScore(_saves.ZeroLocation, levelIndex, score);

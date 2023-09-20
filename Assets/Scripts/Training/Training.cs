@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Training : MonoBehaviour
 {
+    [SerializeField] private LocationsStorage _locationsStorage;
     [SerializeField] private Level _level;
     [SerializeField] private TrainingOfferWindow _trainingOfferWindow;
     [SerializeField] TrainingPanel _trainingPanel;
@@ -29,7 +30,7 @@ public class Training : MonoBehaviour
 
     private void OnLevelLoaded()
     {
-        if (_level.CurrentLevel.Location.Index == 0 && _level.CurrentLevel.IndexInLocation == 0)
+        if (_locationsStorage.GetLocationIndex(_level.CurrentLevel) == 0 && _locationsStorage.GetIndexInLocation(_level.CurrentLevel) == 0)
             if (IsTraining == false)
                 _trainingOfferWindow.Open();
     }

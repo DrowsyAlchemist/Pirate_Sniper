@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LocationMap : Window
 {
-    [SerializeField] private List<LocationButton> _locationButtons;
+    [SerializeField] private LocationsStorage _locationsStorage;
     [SerializeField] private StarsRenderer _starsRenderer;
+    [SerializeField] private List<LocationButton> _locationButtons;
 
     public event Action<Location> LocationChosen;
 
@@ -26,7 +27,7 @@ public class LocationMap : Window
         _starsRenderer.Init(_locationButtons.ToArray());
 
         foreach (var locationButton in _locationButtons)
-            locationButton.Init(_starsRenderer);
+            locationButton.Init(_starsRenderer, _locationsStorage);
     }
 
     private void OnLocationButtonClick(Location location)

@@ -12,10 +12,10 @@ public class LevelOverWindow : AnimatedWindow
     public event Action MenuButtonClicked;
     public event Action DoubleMoneyButtonClick;
 
-    public void Init()
+    public void Init(LocationsStorage locationsStorage)
     {
-        InitLevelOverPanel(_losePanel);
-        InitLevelOverPanel(_winPanel);
+        InitLevelOverPanel(_losePanel, locationsStorage);
+        InitLevelOverPanel(_winPanel, locationsStorage);
         _winPanel.DoubleMoneyButtonClick += () => DoubleMoneyButtonClick.Invoke();
         gameObject.SetActive(true);
     }
@@ -26,9 +26,9 @@ public class LevelOverWindow : AnimatedWindow
         base.Appear();
     }
 
-    private void InitLevelOverPanel(LevelOverPanel panel)
+    private void InitLevelOverPanel(LevelOverPanel panel, LocationsStorage locationsStorage)
     {
-        panel.Init();
+        panel.Init(locationsStorage);
         panel.NextLevelButtonClicked += OnNextLevelButtonClick;
         panel.RestartButtonClicked += OnRestartButtonClick;
         panel.MenuButtonClicked += OnMenuButtonClick;

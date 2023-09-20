@@ -4281,6 +4281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
+  _locationStorage: {fileID: 2052177870}
   _mainMenu: {fileID: 1560358231}
   _additionalMenu: {fileID: 1246718083}
   _levelsMenu: {fileID: 1187518786}
@@ -23121,12 +23122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dbe0f41c9eaa4449fa10554d9eb37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useMobileControlInEditor: 1
+  _useMobileControlInEditor: 0
   _inputController: {fileID: 1269375120}
   _sensitivity: {fileID: 1350065717}
   _shootingPoint: {fileID: 538781365}
   _mainMenu: {fileID: 1560358231}
   _level: {fileID: 89587326}
+  _locationsStorage: {fileID: 2052177870}
   _backgroundCanvas: {fileID: 1947124948}
 --- !u!4 &547833384
 Transform:
@@ -30827,7 +30829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -86}
+  m_AnchoredPosition: {x: 0, y: -85.999985}
   m_SizeDelta: {x: -89.7, y: -247.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723990036
@@ -44528,13 +44530,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd51da985227ea440a4d5972826af88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _locationsStorage: {fileID: 2052177870}
+  _starsRenderer: {fileID: 1431347171}
   _locationButtons:
   - {fileID: 198461173}
   - {fileID: 1074809138}
   - {fileID: 1916657872}
   - {fileID: 588343646}
   - {fileID: 630046795}
-  _starsRenderer: {fileID: 1431347171}
 --- !u!1001 &1017227768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52062,6 +52065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a4683093867114dbd667f6866421cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _locationsStorage: {fileID: 2052177870}
   _container: {fileID: 1201646938}
   _levelRendererTemplate: {fileID: 6721004394650749991, guid: 37dc891a60b99e94486817f79f3e614a, type: 3}
 --- !u!1001 &1187789943
@@ -84491,6 +84495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fad067bccaf5694085f23b6ee390d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _locationsStorage: {fileID: 2052177870}
   _level: {fileID: 89587326}
   _trainingOfferWindow: {fileID: 1030797581}
   _trainingPanel: {fileID: 755372333}

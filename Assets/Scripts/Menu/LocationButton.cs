@@ -11,6 +11,7 @@ public class LocationButton : UIButton
     [SerializeField] private TMP_Text _requiredStarsText;
     [SerializeField] private StarsRenderer _locationStarsRenderer;
 
+    private LocationsStorage _locationsStorage;
     private bool _isInitialized;
     private StarsRenderer _generalStarsRenderer;
 
@@ -30,8 +31,9 @@ public class LocationButton : UIButton
             Render();
     }
 
-    public void Init(StarsRenderer starsRenderer)
+    public void Init(StarsRenderer starsRenderer, LocationsStorage locationsStorage)
     {
+        _locationsStorage = locationsStorage;
         _iconImage.sprite = _location.Sprite;
         _generalStarsRenderer = starsRenderer;
         _requiredStarsText.text = _location.RequiredStars.ToString();
@@ -56,7 +58,7 @@ public class LocationButton : UIButton
 
     protected bool IsPreviousLocationCompleted()
     {
-        Location previousLocation = _location.GetPreviousLocation();
+        Location previousLocation = _locationsStorage.GetPreviousLocation(_location);
         return previousLocation == null || previousLocation.Levels[^1].Score > 0;
     }
 

@@ -14,8 +14,8 @@ public class CharacteristicsMenu : MoneyRenderer
 
     public bool HasHealthNextLevel => Settings.Characteristics.Health.HasNextLevel(_player.MaxHealth);
     public bool HasDamageNextLevel => Settings.Characteristics.Damage.HasNextLevel(_player.Damage);
-    public Characteristic.Level NextHealthLevel => Settings.Characteristics.Health.GetNextLevel(_player.MaxHealth);
-    public Characteristic.Level NextDamageLevel => Settings.Characteristics.Damage.GetNextLevel(_player.Damage);
+    public CharacteristicLevel NextHealthLevel => Settings.Characteristics.Health.GetNextLevel(_player.MaxHealth);
+    public CharacteristicLevel NextDamageLevel => Settings.Characteristics.Damage.GetNextLevel(_player.Damage);
 
     public void Init(Player player)
     {

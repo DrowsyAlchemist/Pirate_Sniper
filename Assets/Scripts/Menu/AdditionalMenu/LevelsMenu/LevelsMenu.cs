@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class LevelsMenu : Window
 {
+    [SerializeField] private LocationsStorage _locationsStorage;
     [SerializeField] private RectTransform _container;
     [SerializeField] private LevelRenderer _levelRendererTemplate;
 
-    public event Action<LevelPreset> LevelClicked;
-
     private List<LevelRenderer> _levelRenderers = new();
+
+    public event Action<LevelPreset> LevelClicked;
 
     private void OnDestroy()
     {
@@ -27,7 +28,7 @@ public class LevelsMenu : Window
                 levelRenderer.Clicked += OnLevelClick;
                 _levelRenderers.Add(levelRenderer);
             }
-            _levelRenderers[i].Render(location.Levels[i]);
+            _levelRenderers[i].Render(location.Levels[i], _locationsStorage);
             _levelRenderers[i].Activate();
         }
         for (int i = location.Levels.Count; i < _levelRenderers.Count; i++)

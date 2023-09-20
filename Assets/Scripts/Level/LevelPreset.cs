@@ -8,8 +8,6 @@ public class LevelPreset : MonoBehaviour
     [SerializeField] private EnemyBody[] _enemies;
 
     public Transform CameraTransform => _cameraPosition;
-    public Location Location => LocationsStorage.GetLocation(this);
-    public int IndexInLocation => LocationsStorage.GetLocation(this).GetLevelIndex(this);
     public int Stars => Settings.Score.GetStars(Score);
     public int Score => Level.GetLevelScore(this);
 
@@ -21,34 +19,5 @@ public class LevelPreset : MonoBehaviour
             return _id.Equals(levelPreset._id);
         else
             return false;
-    }
-
-    public LevelPreset GetPreviousLevel()
-    {
-        if (IndexInLocation == 0)
-        {
-            if (Location.Index == 0)
-                return null;
-            else
-                return Location.GetPreviousLocation().Levels[^1];
-        }
-        return Location.Levels[IndexInLocation - 1];
-    }
-
-    public bool TryGetNextLevel(out LevelPreset nextLevel)
-    {
-        nextLevel = null;
-
-        if (IndexInLocation == Location.Levels.Count - 1)
-        {
-            if (Location.TryGetNextLocation(out Location nextLocation))
-            {
-                nextLevel = nextLocation.Levels[0];
-                return true;
-            }
-            return false;
-        }
-        nextLevel = Location.Levels[IndexInLocation + 1];
-        return true;
     }
 }

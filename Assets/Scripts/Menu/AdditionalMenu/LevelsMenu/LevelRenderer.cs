@@ -19,20 +19,20 @@ public class LevelRenderer : MonoBehaviour
         _button.AddOnClickAction(OnButtonClick);
     }
 
-    public void Render(LevelPreset level)
+    public void Render(LevelPreset level, LocationsStorage locationsStorage)
     {
         _level = level ?? throw new ArgumentNullException();
-        _number.text = (level.IndexInLocation + 1).ToString();
-        bool isLocked = IsLocked();
+        _number.text = (locationsStorage.GetIndexInLocation(level) + 1).ToString();
+        bool isLocked = IsLocked(level, locationsStorage);
         _lockedPanel.gameObject.SetActive(isLocked);
         _button.SetInteractable(isLocked == false);
         RenderStars();
     }
 
-    private bool IsLocked()
+    private bool IsLocked(LevelPreset level, LocationsStorage locationsStorage)
     {
-        var previousLevel = _level.GetPreviousLevel();
-        return (_level.IndexInLocation != 0) && (_level.Score == 0) && (previousLevel.Score == 0);
+        var previousLevel = locationsStorage.GetPreviousLevel(level);
+        return (locationsStorage.GetIndexInLocation(level) != 0) && (level.Score == 0) && (previousLevel.Score == 0);
     }
 
     private void RenderStars()

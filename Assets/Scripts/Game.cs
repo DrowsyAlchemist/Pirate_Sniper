@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     [SerializeField] private ShootingPoint _shootingPoint;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Level _level;
+    [SerializeField] private LocationsStorage _locationsStorage;
 
     [SerializeField] private Canvas _backgroundCanvas;
 
@@ -36,7 +37,7 @@ public class Game : MonoBehaviour
         string currentLang = YandexGamesSdk.Environment.GetCurrentLang();
         LeanLocalization.SetCurrentLanguageAll(currentLang);
 #endif
-        _saver = new Saver();
+        _saver = new Saver(_locationsStorage);
 
         while (_saver.IsReady == false)
             yield return null;

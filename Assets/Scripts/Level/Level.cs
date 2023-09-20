@@ -4,6 +4,7 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private LocationsStorage _locationStorage;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private AdditionalMenu _additionalMenu;
     [SerializeField] private LevelsMenu _levelsMenu;
@@ -54,7 +55,7 @@ public class Level : MonoBehaviour
 
         LevelObserver = new(_player);
         _levelInfoRenderer.Init(_player, LevelObserver);
-        _levelOverWindow.Init();
+        _levelOverWindow.Init(_locationStorage);
         _pauseWindow.Init();
 
         _levelsMenu.LevelClicked += LoadLevel;
@@ -119,17 +120,15 @@ public class Level : MonoBehaviour
 
     private void OnNextLevelButtonClick()
     {
-        if (_currentLevel.TryGetNextLevel(out LevelPreset nextLevel))
-        {
-            if (_currentLevel.Score > 0)
-                LoadLevel(nextLevel);
-            else
-                Advertising.RewardForVideo(() => LoadLevel(nextLevel));
-        }
-        else
-        {
+        var nextLevel = _locationStorage.GetNextLevel(_currentLevel);
+
+        if (nextLevel == null)
             throw new InvalidOperationException();
-        }
+
+        if (_currentLevel.Score > 0)
+            LoadLevel(nextLevel);
+        else
+            Advertising.RewardForVideo(() => LoadLevel(nextLevel));
     }
 
     private void OnRestartButtonClick()
