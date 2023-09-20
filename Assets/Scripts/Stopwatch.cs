@@ -7,6 +7,7 @@ public class Stopwatch
     private Coroutine _coroutine;
 
     public float ElapsedTime => _elapsedTime;
+    public bool IsRunning { get; private set; }
 
     public void Start()
     {
@@ -19,12 +20,14 @@ public class Stopwatch
 
     public void Stop()
     {
-        Settings.CoroutineObject.StopCoroutine(_coroutine);
+        IsRunning = false;
     }
 
     private IEnumerator CountTime()
     {
-        while (true)
+        IsRunning = true;
+
+        while (IsRunning)
         {
             _elapsedTime += Time.deltaTime;
             yield return null;
