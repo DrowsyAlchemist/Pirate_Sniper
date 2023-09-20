@@ -11,16 +11,23 @@ public abstract class Task : MonoBehaviour
     [SerializeField] private string _localizationPhrase;
     [SerializeField][TextArea(5, 15)] private string _note;
 
+    private InputHandler _inputHandler;
     private static Stopwatch _stopWatch;
 
     public InputMode InitialInputMode { get; private set; }
     protected TrainingPanel TrainingPanel { get; private set; }
+    protected InputHandler InputHandler => _inputHandler;
 
     public event Action Completed;
 
     private void Awake()
     {
         _stopWatch ??= new Stopwatch();
+    }
+
+    public void Init(InputHandler inputHandler)
+    {
+        _inputHandler = inputHandler;
     }
 
     public void Begin(TrainingPanel trainingPanel)
@@ -42,8 +49,8 @@ public abstract class Task : MonoBehaviour
 
     protected void Complete()
     {
-        if (InputController.InputMode != InitialInputMode)
-            InputController.SetMode(InitialInputMode);
+        if (InputHandler.InputMode != InitialInputMode)
+            InputHandler.SetMode(InitialInputMode);
 
         OnComplete();
         Completed?.Invoke();
@@ -56,7 +63,7 @@ public abstract class Task : MonoBehaviour
         while (_stopWatch.ElapsedTime < _delayBeforeTask)
             yield return null;
 
-        InitialInputMode = InputController.InputMode;
+        InitialInputMode = InputHandler.InputMode;
         TrainingPanel = trainingPanel;
 
         if (_isNotePanelInRightCorner)

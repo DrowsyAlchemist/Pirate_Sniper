@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ScopeTask : Task
 {
-    [SerializeField] private InputController _inputController;
+    [SerializeField] private InputHandler _inputController;
     [SerializeField] private RectTransform _scopeButton;
     [SerializeField] private float _completeDelay;
 
@@ -11,7 +11,7 @@ public class ScopeTask : Task
     {
         _inputController.Scoped += OnScoped;
 
-        if (InputController.IsMobile)
+        if (InputHandler.IsMobile)
             TrainingPanel.SetHighlightedObject(_scopeButton);
     }
 

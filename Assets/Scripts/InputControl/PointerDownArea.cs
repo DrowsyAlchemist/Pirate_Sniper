@@ -7,23 +7,31 @@ public class PointerDownArea : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private Image _image;
 
+    private InputHandler _inputHandler;
+
     public event Action PointerDown;
 
-    public void Init()
+    private void Awake()
     {
-        _image.gameObject.SetActive(InputController.IsMobile);
+        enabled = false;
+    }
+
+    public void Init(InputHandler inputHandler)
+    {
+        _inputHandler = inputHandler;
+        _image.gameObject.SetActive(inputHandler.IsMobile);
     }
 
     private void Update()
     {
-        if (InputController.IsMobile == false)
+        if (_inputHandler.IsMobile == false)
             if (Input.GetMouseButtonDown(0))
                 PointerDown?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (InputController.IsMobile)
+        if (_inputHandler.IsMobile)
             PointerDown?.Invoke();
     }
 }

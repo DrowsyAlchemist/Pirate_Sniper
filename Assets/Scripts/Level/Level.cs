@@ -5,6 +5,7 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private LocationsStorage _locationStorage;
+    [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private AdditionalMenu _additionalMenu;
     [SerializeField] private LevelsMenu _levelsMenu;
@@ -75,7 +76,7 @@ public class Level : MonoBehaviour
     {
         _pauseWindow.Open();
         Time.timeScale = 0;
-        InputController.SetMode(InputMode.UI);
+        _inputHandler.SetMode(InputMode.UI);
     }
 
     public static int GetLevelScore(LevelPreset levelPreset)
@@ -96,7 +97,7 @@ public class Level : MonoBehaviour
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
         Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
-        InputController.SetMode(InputMode.Game);
+        _inputHandler.SetMode(InputMode.Game);
         LevelLoaded?.Invoke();
 
 #if UNITY_EDITOR
@@ -115,7 +116,7 @@ public class Level : MonoBehaviour
                 _saver.SaveLevel(_currentLevel, LevelObserver.Score);
         }
         _levelOverWindow.Appear(LevelObserver);
-        InputController.SetMode(InputMode.UI);
+        _inputHandler.SetMode(InputMode.UI);
     }
 
     private void OnNextLevelButtonClick()
@@ -144,7 +145,7 @@ public class Level : MonoBehaviour
         Time.timeScale = 1;
         _pauseWindow.Close();
         _mainMenu.Open();
-        InputController.SetMode(InputMode.UI);
+        _inputHandler.SetMode(InputMode.UI);
     }
 
     private void OnDoubleMoneyButtonClick()
@@ -165,6 +166,6 @@ public class Level : MonoBehaviour
     {
         _pauseWindow.Close();
         Time.timeScale = 1;
-        InputController.SetMode(InputMode.Game);
+        _inputHandler.SetMode(InputMode.Game);
     }
 }

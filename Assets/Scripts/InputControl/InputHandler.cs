@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class InputHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private PointerMoveArea _pointerMoveArea;
@@ -15,7 +15,6 @@ public class InputController : MonoBehaviour
 
     private const float DefaultZRotation = 0;
     private const float AngleEpsilon = 50;
-    private static InputController _instance;
     private Sensitivity _sensitivity;
     private bool _isScopeMode;
     private Coroutine _coroutine;
@@ -29,18 +28,9 @@ public class InputController : MonoBehaviour
     public event Action Unscoped;
     public event Action<RaycastHit> Shooted;
 
-    public static bool IsMobile { get; private set; }
-    public static InputMode InputMode { get; private set; }
+    public bool IsMobile { get; private set; }
+    public InputMode InputMode { get; private set; }
     public float CurrentSensitivity => _isScopeMode ? _sensitivity.ScopeSensitivity : _sensitivity.BaseSensitivity;
-    public float ZeroXRotation => _level.CurrentLevel.CameraTransform.rotation.x;
-
-    private void Awake()
-    {
-        if (_instance == null)
-            _instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     private void OnDestroy()
     {
@@ -50,7 +40,7 @@ public class InputController : MonoBehaviour
         _level.LevelLoaded -= OnNewLevelLoaded;
     }
 
-    public static void SetMode(InputMode mode)
+    public void SetMode(InputMode mode)
     {
         InputMode = mode;
 
@@ -58,19 +48,19 @@ public class InputController : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            _instance._pointerMoveArea.enabled = false;
-            _instance._pointerUpArea.enabled = false;
-            _instance._pointerDownArea.enabled = false;
+            _pointerMoveArea.enabled = false;
+            _pointerUpArea.enabled = false;
+            _pointerDownArea.enabled = false;
         }
         else
         {
             if (IsMobile == false)
                 Cursor.lockState = CursorLockMode.Locked;
 
-            _instance._pointerMoveArea.enabled = true;
-            _instance._pointerUpArea.enabled = true;
-            _instance._pointerDownArea.enabled = true;
-            _instance.Unscope();
+            _pointerMoveArea.enabled = true;
+            _pointerUpArea.enabled = true;
+            _pointerDownArea.enabled = true;
+            Unscope();
         }
     }
 
@@ -80,7 +70,8 @@ public class InputController : MonoBehaviour
         _sensitivity = sensitivity;
         SetMode(InputMode.UI);
         _pauseButton.Init(isMobile);
-        _pointerDownArea.Init();
+        _pointerDownArea.Init(this);
+        _pointerMoveArea.Init(this);
         _pointerDownArea.PointerDown += Scope;
         _pointerUpArea.PointerUp += Shoot;
         _pointerMoveArea.PointerMove += OnPointerMove;
@@ -174,10 +165,5 @@ public class InputController : MonoBehaviour
             _yLowerBound += 360;
 
         Unscope();
-    }
-
-    private void OnLevelFinished()
-    {
-
     }
 }

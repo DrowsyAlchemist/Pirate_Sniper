@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : IApplyDamage
 {
     private readonly Saver _saver;
-    private readonly InputController _inputController;
+    private readonly InputHandler _inputController;
     private Health _health;
     private Wallet _wallet;
 
@@ -16,7 +16,7 @@ public class Player : IApplyDamage
 
     public event Action Shooted;
 
-    public Player(InputController inputController, Saver saver)
+    public Player(InputHandler inputController, Saver saver)
     {
         _saver = saver;
         _health = new(MaxHealth);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingTask : Task
 {
-    [SerializeField] private InputController _inputController;
+    [SerializeField] private InputHandler _inputController;
 
     protected override void BeginTask()
     {

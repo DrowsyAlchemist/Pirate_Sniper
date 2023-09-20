@@ -7,7 +7,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
-    [SerializeField] private InputController _inputController;
+    [SerializeField] private InputHandler _inputController;
     [SerializeField] private Sensitivity _sensitivity;
     [SerializeField] private ShootingPoint _shootingPoint;
     [SerializeField] private MainMenu _mainMenu;

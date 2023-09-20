@@ -6,6 +6,8 @@ public class TrainingOfferWindow : Window
     [SerializeField] private UIButton _agreeButton;
     [SerializeField] private UIButton _cancelButton;
 
+    private InputHandler _inputHandler;
+
     public event Action AgreeButtonClicked;
     public event Action CancelButtonClicked;
 
@@ -15,16 +17,21 @@ public class TrainingOfferWindow : Window
         _cancelButton.AddOnClickAction(OnCancelButtonClick);
     }
 
+    public void Init(InputHandler inputHandler)
+    {
+        _inputHandler = inputHandler;
+    }
+
     public override void Open()
     {
         base.Open();
-        InputController.SetMode(InputMode.UI);
+        _inputHandler.SetMode(InputMode.UI);
     }
 
     public override void Close()
     {
         base.Close();
-        InputController.SetMode(InputMode.Game);
+        _inputHandler.SetMode(InputMode.Game);
     }
 
     private void OnAgreeButtonClick()

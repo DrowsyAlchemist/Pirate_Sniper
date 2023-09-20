@@ -3,6 +3,7 @@ using UnityEngine;
 public class Training : MonoBehaviour
 {
     [SerializeField] private LocationsStorage _locationsStorage;
+    [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private Level _level;
     [SerializeField] private TrainingOfferWindow _trainingOfferWindow;
     [SerializeField] TrainingPanel _trainingPanel;
@@ -16,6 +17,7 @@ public class Training : MonoBehaviour
     {
         _level.LevelLoaded += OnLevelLoaded;
         _trainingOfferWindow.AgreeButtonClicked += Begin;
+        _trainingOfferWindow.Init(_inputHandler);
         _trainingPanel.Deactivate();
         _trainingPanel.CancelButtonClicked += ForceStopTraining;
         _trainingOfferWindow.Deactivate();
@@ -55,6 +57,7 @@ public class Training : MonoBehaviour
             ResetTrainingPanel();
             _currentTask++;
             _tasks[_currentTask].Completed += BeginNextTask;
+            _tasks[_currentTask].Init(_inputHandler);
             _tasks[_currentTask].Begin(_trainingPanel);
         }
         else
@@ -73,7 +76,7 @@ public class Training : MonoBehaviour
 
     private void StopTraining()
     {
-        if (InputController.InputMode == InputMode.Game)
+        if (_inputHandler.InputMode == InputMode.Game)
             _level.PauseGame();
 
         _trainingPanel.Deactivate();

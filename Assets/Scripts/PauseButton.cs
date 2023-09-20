@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PauseButton : MonoBehaviour
 {
+    [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private Button _button;
 
     private bool _isMobile;
@@ -19,7 +20,7 @@ public class PauseButton : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            if (InputController.InputMode == InputMode.Game)
+            if (_inputHandler.InputMode == InputMode.Game)
                 OnButtonClick();
     }
 

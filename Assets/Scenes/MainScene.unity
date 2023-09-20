@@ -4282,6 +4282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
   _locationStorage: {fileID: 2052177870}
+  _inputHandler: {fileID: 1269375120}
   _mainMenu: {fileID: 1560358231}
   _additionalMenu: {fileID: 1246718083}
   _levelsMenu: {fileID: 1187518786}
@@ -43419,6 +43420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd24ee230e69df459a8f9b102bb733c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputHandler: {fileID: 1269375120}
   _button: {fileID: 708773638}
 --- !u!1001 &995952857
 PrefabInstance:
@@ -56122,7 +56124,7 @@ GameObject:
   - component: {fileID: 1269375119}
   - component: {fileID: 1269375120}
   m_Layer: 0
-  m_Name: InputController
+  m_Name: InputHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56152,7 +56154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1269375118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d530af498c698e4282c56db846885c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 133ba3470b971614c89593478284a706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
@@ -84496,6 +84498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _locationsStorage: {fileID: 2052177870}
+  _inputHandler: {fileID: 1269375120}
   _level: {fileID: 89587326}
   _trainingOfferWindow: {fileID: 1030797581}
   _trainingPanel: {fileID: 755372333}

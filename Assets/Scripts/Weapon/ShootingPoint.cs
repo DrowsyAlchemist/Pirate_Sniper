@@ -15,29 +15,29 @@ public class ShootingPoint : MonoBehaviour
 
     public Player _player;
     private Weapon _currentWeapon;
-    private InputController _inputController;
+    private InputHandler _inputHandler;
     private Coroutine _coroutine;
 
     public Weapon CurrentWeapon => _currentWeapon;
 
     public event Action Shooted;
 
-    public void Init(Player player, InputController inputController)
+    public void Init(Player player, InputHandler inputHandler)
     {
         _player = player;
-        _inputController = inputController;
-        _inputController.Scoped += OnScope;
-        _inputController.Unscoped += OnUnscope;
-        _inputController.Shooted += OnTryShooting;
+        _inputHandler = inputHandler;
+        _inputHandler.Scoped += OnScope;
+        _inputHandler.Unscoped += OnUnscope;
+        _inputHandler.Shooted += OnTryShooting;
         SetWeapon(_weaponsStore.CurrentWeapon);
         _hitEffect.Init();
     }
 
     private void OnDestroy()
     {
-        _inputController.Scoped -= OnScope;
-        _inputController.Unscoped -= OnUnscope;
-        _inputController.Shooted -= OnTryShooting;
+        _inputHandler.Scoped -= OnScope;
+        _inputHandler.Unscoped -= OnUnscope;
+        _inputHandler.Shooted -= OnTryShooting;
     }
 
     public void SetWeapon(Weapon weaponPrefab)
@@ -58,7 +58,7 @@ public class ShootingPoint : MonoBehaviour
 
     private void OnWeaponReloadingFinished()
     {
-        if (InputController.InputMode == InputMode.Game)
+        if (_inputHandler.InputMode == InputMode.Game)
             _reloadingFinishedSound.Play();
     }
 
@@ -70,7 +70,7 @@ public class ShootingPoint : MonoBehaviour
 
     private void OnTryShooting(RaycastHit _)
     {
-        if (InputController.InputMode == InputMode.Game)
+        if (_inputHandler.InputMode == InputMode.Game)
             if (_currentWeapon.SecondsBetweenShots - _currentWeapon.SecondsBeforeReadyLeft > Settings.Epsilon)
                 _misfireSound.Play();
     }
