@@ -1,11 +1,11 @@
 using Agava.WebUtility;
 using Agava.YandexGames;
+using cakeslice;
 using Lean.Localization;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class Game : MonoBehaviour
+public class GameInitialization : MonoBehaviour
 {
     [SerializeField] private bool _useMobileControlInEditor;
     [SerializeField] private InputHandler _inputController;
@@ -14,10 +14,10 @@ public class Game : MonoBehaviour
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Level _level;
     [SerializeField] private LocationsStorage _locationsStorage;
+    [SerializeField] private OutlineEffect _outlineEffect;
 
     [SerializeField] private Canvas _backgroundCanvas;
 
-    private Player _player;
     private Saver _saver;
 
     private IEnumerator Start()
@@ -34,23 +34,21 @@ public class Game : MonoBehaviour
 
     private IEnumerator Init()
     {
-#if !UNITY_EDITOR
-        string currentLang = YandexGamesSdk.Environment.GetCurrentLang();
-        LeanLocalization.SetCurrentLanguageAll(currentLang);
-#endif
+        SetLanguage();
         _saver = new Saver(_locationsStorage);
 
         while (_saver.IsReady == false)
             yield return null;
 
-        InitInputController();
-        Health health = new(_saver.PlayerHealth);
-        Wallet wallet = new(_saver);
-        _player = new Player(_saver, health, wallet, _shootingPoint);
-        _level.Init(_player, _saver);
-        _mainMenu.Init(_player, _saver);
+        bool isMobile = IsMobile();
+        InitOutlineEffect(isMobile);
+        _sensitivity.Init(_saver, isMobile);
+        _inputController.Init(isMobile, _sensitivity);
+        var player = CreatePlayer(_saver);
+        _level.Init(player, _saver);
+        _mainMenu.Init(player, _saver);
         _mainMenu.Open();
-        _shootingPoint.Init(_saver, _inputController, _player);
+        _shootingPoint.Init(_saver, _inputController, player);
         _backgroundCanvas.Deactivate();
     }
 
@@ -64,14 +62,33 @@ public class Game : MonoBehaviour
         _saver.UnlockAllLevels();
     }
 
-    private void InitInputController()
+    private void SetLanguage()
+    {
+#if !UNITY_EDITOR
+        string currentLang = YandexGamesSdk.Environment.GetCurrentLang();
+        LeanLocalization.SetCurrentLanguageAll(currentLang);
+#endif
+    }
+
+    private bool IsMobile()
     {
 #if UNITY_EDITOR
-        bool isMobile = _useMobileControlInEditor;
+        return _useMobileControlInEditor;
 #else
-        bool isMobile = Device.IsMobile;
+        return = Device.IsMobile;
 #endif
-        _sensitivity.Init(_saver, isMobile);
-        _inputController.Init(isMobile, _sensitivity);
+    }
+
+    private void InitOutlineEffect(bool isMobile)
+    {
+        if (isMobile == false)
+            Destroy(_outlineEffect);
+    }
+
+    private Player CreatePlayer(Saver saver)
+    {
+        Health health = new(saver.PlayerHealth);
+        Wallet wallet = new(saver);
+        return new Player(saver, health, wallet, _shootingPoint);
     }
 }
