@@ -96,7 +96,7 @@ public class GameInitialization : MonoBehaviour
 #if UNITY_EDITOR
         return _useMobileControlInEditor;
 #else
-        return = Device.IsMobile;
+        return Device.IsMobile;
 #endif
     }
 
