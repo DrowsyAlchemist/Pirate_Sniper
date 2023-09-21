@@ -8,8 +8,6 @@ public class AdditionalMenu : AnimatedWindow
     [SerializeField] private LeaderboardMenu _leaderboardMenu;
     [SerializeField] private SettingsMenu _settingsMenu;
 
-    [SerializeField] UIButton _closeButton;
-
     private LocationMap _locationMap;
 
     public void Init(Player player, Saver saver, LocationMap locationMap, Sound sound)
@@ -17,8 +15,6 @@ public class AdditionalMenu : AnimatedWindow
         gameObject.SetActive(true);
         _locationMap = locationMap;
         _locationMap.LocationChosen += OpenLevels;
-        _closeButton.AddOnClickAction(Disappear);
-
         _characteristicsMenu.Init(saver, player.Wallet, sound.BackgroundMusic);
         _storeMenu.Init(player.Wallet, saver, sound);
         _leaderboardMenu.Init(saver);

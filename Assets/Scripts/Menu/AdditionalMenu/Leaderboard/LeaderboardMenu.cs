@@ -1,43 +1,69 @@
 using Agava.YandexGames;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class LeaderboardMenu : Window
 {
+    [SerializeField] private RectTransform _authorizePanel;
+    [SerializeField] private UIButton _authorizeButton;
+
     [SerializeField] private LeaderboardEntryRenderer _entryRendererTemplate;
     [SerializeField] private LeaderboardEntryRenderer _playerEntryRenderer;
     [SerializeField] private RectTransform _container;
 
     private Saver _saver;
-    private bool _isPlayerAuthorized;
     private List<LeaderboardEntryRenderer> _entryRenderers = new();
 
     public void Init(Saver saver)
     {
         _saver = saver;
+        _authorizeButton.AddOnClickAction(OnAuthorizationButtonClick);
     }
 
     public override void Open()
     {
         base.Open();
 #if UNITY_EDITOR
-        _playerEntryRenderer.Render("?", _saver.GetScore().ToString(), Settings.Leaderboard.DefaultName);
+        RenderPlayerOnly();
         return;
 #endif
-        RenderLeaders();
+        if (PlayerAccount.IsAuthorized)
+            RenderLeaders();
+        else
+            RenderPlayerOnly();
     }
 
-    public void RenderLeaders()
+    private void OnAuthorizationButtonClick()
     {
-        if (PlayerAccount.IsAuthorized)
+        PlayerAccount.Authorize(
+            onSuccessCallback: OnAuthorized,
+            onErrorCallback: (error) => Debug.Log("Authorization error: " + error));
+    }
+
+    private void OnAuthorized()
+    {
+        if (PlayerAccount.HasPersonalProfileDataPermission)
         {
-            Leaderboard.GetPlayerEntry(Settings.Leaderboard.LeaderboardName,
-                onSuccessCallback: (result) => _playerEntryRenderer.Render(result));
+            RenderLeaders();
         }
         else
         {
-            _playerEntryRenderer.Render("?", _saver.GetScore().ToString(), Settings.Leaderboard.DefaultName);
+            PlayerAccount.RequestPersonalProfileDataPermission(
+                onSuccessCallback: RenderLeaders,
+                onErrorCallback: (error) =>
+                {
+                    Debug.Log("RequestPersonalProfileDataPermission error: " + error);
+                    RenderLeaders();
+                });
         }
+    }
+
+    private void RenderLeaders()
+    {
+        _authorizePanel.Deactivate();
+        Leaderboard.GetPlayerEntry(Settings.Leaderboard.LeaderboardName,
+                onSuccessCallback: (result) => _playerEntryRenderer.Render(result));
         Leaderboard.GetEntries(Settings.Leaderboard.LeaderboardName,
             onSuccessCallback: (result) =>
             {
@@ -60,5 +86,11 @@ public class LeaderboardMenu : Window
             includeSelf: Settings.Leaderboard.IncludeSelf,
             pictureSize: Settings.Leaderboard.ProfilePictureSize
         );
+    }
+
+    private void RenderPlayerOnly()
+    {
+        _authorizePanel.Activate();
+        _playerEntryRenderer.Render("?", _saver.GetScore().ToString(), Settings.Leaderboard.DefaultName);
     }
 }

@@ -2,7 +2,9 @@ using Agava.WebUtility;
 using Agava.YandexGames;
 using cakeslice;
 using Lean.Localization;
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameInitialization : MonoBehaviour
@@ -18,6 +20,7 @@ public class GameInitialization : MonoBehaviour
     [SerializeField] private OutlineEffect _outlineEffect;
 
     [SerializeField] private Canvas _backgroundCanvas;
+    [SerializeField] private TMP_Text _errorText;
 
     private Saver _saver;
 
@@ -35,23 +38,39 @@ public class GameInitialization : MonoBehaviour
 
     private IEnumerator Init()
     {
-        SetLanguage();
-        _saver = new Saver(_locationsStorage);
+        try
+        {
+            SetLanguage();
+            _saver = new Saver(_locationsStorage); _errorText.text = "Saver created";
 
+        }
+        catch (Exception e)
+        {
+            _errorText.text = "Saver error: " + e.Message;
+            _errorText.Activate();
+        }
         while (_saver.IsReady == false)
             yield return null;
 
-        bool isMobile = IsMobile();
-        InitOutlineEffect(isMobile);
-        _sensitivity.Init(_saver, isMobile);
-        _inputController.Init(isMobile, _sensitivity);
-        _sound.Init();
-        var player = CreatePlayer(_saver);
-        _level.Init(player, _saver, _sound);
-        _mainMenu.Init(player, _saver, _sound);
-        _mainMenu.Open();
-        _shootingPoint.Init(_saver, _inputController, player);
-        _backgroundCanvas.Deactivate();
+        try
+        {
+            bool isMobile = IsMobile(); _errorText.text = "57";
+            InitOutlineEffect(isMobile); _errorText.text = "58";
+            _sensitivity.Init(_saver, isMobile); _errorText.text = "59";
+            _inputController.Init(isMobile, _sensitivity); _errorText.text = "60";
+            _sound.Init(); _errorText.text = "61";
+            var player = CreatePlayer(_saver); _errorText.text = "62";
+            _level.Init(player, _saver, _sound); _errorText.text = "63";
+            _mainMenu.Init(player, _saver, _sound); _errorText.text = "64";
+            _mainMenu.Open(); _errorText.text = "65";
+            _shootingPoint.Init(_saver, _inputController, player); _errorText.text = "66";
+            _backgroundCanvas.Deactivate(); _errorText.text = "67";
+        }
+        catch (Exception e)
+        {
+            _errorText.text = e.Message;
+            _errorText.Activate();
+        }
     }
 
     public void RemoveSaves()
