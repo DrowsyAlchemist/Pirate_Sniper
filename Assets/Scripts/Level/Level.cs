@@ -43,7 +43,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.DoubleMoneyButtonClick -= OnDoubleMoneyButtonClick;
 
         LevelObserver.Completed -= OnLevelCompleted;
-        _pauseButton.Clicked -= OnBackToMenuButtonClick;
+        _pauseButton.Clicked -= PauseGame;
 
         _pauseWindow.ResumeButtonClick -= OnResumeButtonClick;
         _pauseWindow.MenuButtonClicked -= OnBackToMenuButtonClick;

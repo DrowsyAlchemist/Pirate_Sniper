@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Agava.WebUtility;
 
 public class InputHandler : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class InputHandler : MonoBehaviour
         _pointerDownArea.PointerDown -= Scope;
         _pointerUpArea.PointerUp -= Shoot;
         _level.LevelLoaded -= OnNewLevelLoaded;
+        WebApplication.InBackgroundChangeEvent -= OnBackgroundChanged;
     }
 
     public void SetMode(InputMode mode)
@@ -76,6 +78,13 @@ public class InputHandler : MonoBehaviour
         _pointerUpArea.PointerUp += Shoot;
         _pointerMoveArea.PointerMove += OnPointerMove;
         _level.LevelLoaded += OnNewLevelLoaded;
+        WebApplication.InBackgroundChangeEvent += OnBackgroundChanged;
+    }
+
+    private void OnBackgroundChanged(bool isOut)
+    {
+        if (isOut)
+            _level.PauseGame();
     }
 
     public void OnPointerMove()
