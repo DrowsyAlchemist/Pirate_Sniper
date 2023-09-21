@@ -76,9 +76,12 @@ public class Level : MonoBehaviour
 
     public void PauseGame()
     {
-        _pauseWindow.Open();
-        Time.timeScale = 0;
-        _inputHandler.SetMode(InputMode.UI);
+        if (_inputHandler.InputMode == InputMode.Game && Time.timeScale > Settings.Epsilon)
+        {
+            _pauseWindow.Open();
+            Time.timeScale = 0;
+            _inputHandler.SetMode(InputMode.UI);
+        }
     }
 
     public static int GetLevelScore(LevelPreset levelPreset)
