@@ -71,7 +71,6 @@ public class ShootingPoint : MonoBehaviour
         if (isGameReady == false || isPlayerReady == false)
             return;
 
-        // if (_currentWeapon.SecondsBetweenShots - _currentWeapon.SecondsBeforeReadyLeft > Settings.Epsilon)
         if (isWeaponReady)
         {
             _currentWeapon.Shoot(raycastHit,_player.Damage);

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Sensitivity : MonoBehaviour
 {
     public const float ValuePower = 1.3f;
-    public float _baseSensitivity;
+    private float _baseSensitivity;
     private float _scopeRelativeSensitivity;
     private Saver _saver;
 

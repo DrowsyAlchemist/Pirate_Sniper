@@ -5,10 +5,13 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private LocationMap _locationMap;
     [SerializeField] private AdditionalMenu _additionalMenu;
+    
+    private Sound _sound;
 
-    public void Init(Player player, Saver saver)
+    public void Init(Player player, Saver saver, Sound sound)
     {
-        _additionalMenu.Init(player, saver, _locationMap);
+        _sound = sound;
+        _additionalMenu.Init(player, saver, _locationMap, _sound);
         _locationMap.Init();
         _locationMap.Deactivate();
     }
@@ -16,7 +19,7 @@ public class MainMenu : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
-        Sound.SetBackgroundMusic(Settings.Sound.MenuMusic);
+        _sound.SetBackgroundMusic(Settings.Sound.MenuMusic);
     }
 
     public void Close()

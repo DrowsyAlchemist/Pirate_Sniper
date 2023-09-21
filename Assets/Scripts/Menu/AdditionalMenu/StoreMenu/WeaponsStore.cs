@@ -13,6 +13,7 @@ public class WeaponsStore : MonoBehaviour
 
     private Wallet _wallet;
     private Saver _saver;
+    private Sound _sound;
 
     public IReadOnlyList<Weapon> Weapons => _weaponStorage.Weapons;
 
@@ -37,10 +38,11 @@ public class WeaponsStore : MonoBehaviour
         }
     }
 
-    public void Init(Wallet wallet, Saver saver)
+    public void Init(Wallet wallet, Saver saver, Sound sound)
     {
         _wallet = wallet;
         _saver = saver;
+        _sound = sound;
     }
 
     public void RenderWeapons()
@@ -74,14 +76,14 @@ public class WeaponsStore : MonoBehaviour
         var weaponRenderer = wareRenderer as WeaponRenderer;
 
         if (weaponRenderer.Weapon.Cost <= 0)
-            Advertising.RewardForVideo(() => AccuireWeapon(weaponRenderer));
+            Advertising.RewardForVideo(() => AccuireWeapon(weaponRenderer), _sound.BackgroundMusic);
         else if (_wallet.TryGiveMoney(weaponRenderer.Weapon.Cost))
             AccuireWeapon(weaponRenderer);
     }
 
     private void OnChooseButtonClick(WeaponRenderer weaponRenderer)
     {
-        Sound.PlayClick();
+        _sound.PlayClick();
         ChooseWeapon(weaponRenderer);
         weaponRenderer.SetChooseButtonActive(false);
     }

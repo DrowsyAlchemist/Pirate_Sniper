@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseSensitivitySlider : UISlider
 {
-    [SerializeField] private Sensitivity _sensitivity;
+    private Sensitivity _sensitivity;
 
     private void OnEnable()
     {
@@ -12,6 +12,11 @@ public class BaseSensitivitySlider : UISlider
     private void OnDisable()
     {
         _sensitivity.SetBaseSensitivity(Slider.value);
+    }
+
+    public void Init(Sensitivity sensitivity)
+    {
+        _sensitivity = sensitivity;
     }
 
     protected override void OnValueChanged(float value)

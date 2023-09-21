@@ -10,27 +10,19 @@ public class Sound : MonoBehaviour
 
     private const float ValuePower = 0.3f;
     private const float MasterVolumeModifier = 0.5f;
-    private static Sound _instance;
 
-    public static bool IsOn { get; private set; }
-    public static AudioSource BackgroundMusic => _instance._backgroundMusic;
-    protected static SoundSettings SoundSettings => Settings.Sound;
+    public bool IsOn { get; private set; }
+    public AudioSource BackgroundMusic => _backgroundMusic;
+    public AudioSource BuySound => _buySound;
+    protected SoundSettings SoundSettings => Settings.Sound;
 
-    public static event Action<bool> ConditionChanged;
+    public event Action TurnedOn;
+    public event Action TurnedOff;
 
-    private void Awake()
-    {
-        if (_instance == false)
-            _instance = this;
-        else
-            Destroy(gameObject);
-    }
-
-    private void Start()
+    public void Init()
     {
         TurnOn();
         WebApplication.InBackgroundChangeEvent += OnBackgroundChanged;
-        ConditionChanged?.Invoke(false);
     }
 
     private void OnDestroy()
@@ -38,54 +30,54 @@ public class Sound : MonoBehaviour
         WebApplication.InBackgroundChangeEvent -= OnBackgroundChanged;
     }
 
-    public static void TurnOn()
+    public void TurnOn()
     {
-        _instance.TurnSoundOn();
+        TurnSoundOn();
         IsOn = true;
-        ConditionChanged?.Invoke(true);
+        TurnedOn?.Invoke();
     }
 
-    public static void Mute()
+    public void Mute()
     {
-        _instance.TurnSoundOff();
+        TurnSoundOff();
         IsOn = false;
-        ConditionChanged?.Invoke(false);
+        TurnedOff?.Invoke();
     }
 
-    public static void SetBackgroundMusic(AudioClip clip)
+    public void SetBackgroundMusic(AudioClip clip)
     {
-        _instance._backgroundMusic.clip = clip;
-        _instance._backgroundMusic.Play();
+        _backgroundMusic.clip = clip;
+        _backgroundMusic.Play();
     }
 
-    public static void SetGeneralVolume(float normalizedValue)
+    public void SetGeneralVolume(float normalizedValue)
     {
         SetVolume(SoundSettings.GeneralVolumeName, normalizedValue);
     }
 
-    public static void SetMusicVolume(float normalizedValue)
+    public void SetMusicVolume(float normalizedValue)
     {
         SetVolume(SoundSettings.MusicVolumeName, normalizedValue);
     }
 
-    public static void SetEffectsVolume(float normalizedValue)
+    public void SetEffectsVolume(float normalizedValue)
     {
         SetVolume(SoundSettings.EffectsVolumeName, normalizedValue);
     }
 
-    public static void SetUIVolume(float normalizedValue)
+    public void SetUIVolume(float normalizedValue)
     {
         SetVolume(SoundSettings.UIVolumeName, normalizedValue);
     }
 
-    public static void PlayClick()
+    public void PlayClick()
     {
-        _instance._clickSound.Play();
+        _clickSound.Play();
     }
 
-    public static void PlayBuy()
+    public void PlayBuy()
     {
-        _instance._buySound.Play();
+        _buySound.Play();
     }
 
     private void OnBackgroundChanged(bool isOut)
@@ -106,7 +98,7 @@ public class Sound : MonoBehaviour
         SetVolume(SoundSettings.MasterVolumeName, 0);
     }
 
-    private static void SetVolume(string volumeName, float normalizedValue)
+    private void SetVolume(string volumeName, float normalizedValue)
     {
         float poweredValue = Mathf.Pow(normalizedValue, ValuePower);
         SoundSettings.Mixer.SetFloat(volumeName, Mathf.Lerp(SoundSettings.MinValue, SoundSettings.MaxValue, poweredValue));

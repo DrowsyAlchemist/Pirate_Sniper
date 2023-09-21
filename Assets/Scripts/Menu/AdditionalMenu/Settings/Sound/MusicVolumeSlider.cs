@@ -1,7 +1,14 @@
 public class MusicVolumeSlider : UISlider
 {
+    private Sound _sound;
+
+    public void Init(Sound sound)
+    {
+        _sound = sound;
+    }
+
     protected override void OnValueChanged(float value)
     {
-        Sound.SetMusicVolume(value);
+        _sound.SetMusicVolume(value);
     }
 }

@@ -1,8 +1,6 @@
-using UnityEngine;
-
 public class ScopeSensitivitySlider : UISlider
 {
-    [SerializeField] private Sensitivity _sensitivity;
+    private Sensitivity _sensitivity;
 
     private void OnEnable()
     {
@@ -12,6 +10,11 @@ public class ScopeSensitivitySlider : UISlider
     private void OnDisable()
     {
         _sensitivity.SetScopeSensitivity(Slider.value);
+    }
+
+    public void Init(Sensitivity sensitivity)
+    {
+        _sensitivity = sensitivity;
     }
 
     protected override void OnValueChanged(float value)

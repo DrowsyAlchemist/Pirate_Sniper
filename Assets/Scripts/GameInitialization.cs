@@ -14,6 +14,7 @@ public class GameInitialization : MonoBehaviour
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Level _level;
     [SerializeField] private LocationsStorage _locationsStorage;
+    [SerializeField] private Sound _sound;
     [SerializeField] private OutlineEffect _outlineEffect;
 
     [SerializeField] private Canvas _backgroundCanvas;
@@ -44,9 +45,10 @@ public class GameInitialization : MonoBehaviour
         InitOutlineEffect(isMobile);
         _sensitivity.Init(_saver, isMobile);
         _inputController.Init(isMobile, _sensitivity);
+        _sound.Init();
         var player = CreatePlayer(_saver);
-        _level.Init(player, _saver);
-        _mainMenu.Init(player, _saver);
+        _level.Init(player, _saver, _sound);
+        _mainMenu.Init(player, _saver, _sound);
         _mainMenu.Open();
         _shootingPoint.Init(_saver, _inputController, player);
         _backgroundCanvas.Deactivate();
@@ -88,7 +90,7 @@ public class GameInitialization : MonoBehaviour
     private Player CreatePlayer(Saver saver)
     {
         Health health = new(saver.PlayerHealth);
-        Wallet wallet = new(saver);
+        Wallet wallet = new(saver, _sound.BuySound);
         return new Player(saver, health, wallet, _shootingPoint);
     }
 }

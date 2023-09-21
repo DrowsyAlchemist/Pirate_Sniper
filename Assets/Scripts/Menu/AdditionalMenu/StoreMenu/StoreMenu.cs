@@ -23,10 +23,10 @@ public class StoreMenu : MoneyRenderer
         OpenWeapons();
     }
 
-    public void Init(Wallet wallet, Saver saver)
+    public void Init(Wallet wallet, Saver saver, Sound sound)
     {
         base.Init(wallet);
-        _weaponsStore.Init(wallet, saver);
+        _weaponsStore.Init(wallet, saver, sound);
     }
 
     public void OpenWeapons()

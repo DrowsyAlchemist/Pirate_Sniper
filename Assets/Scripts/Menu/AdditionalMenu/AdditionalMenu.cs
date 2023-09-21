@@ -12,16 +12,17 @@ public class AdditionalMenu : AnimatedWindow
 
     private LocationMap _locationMap;
 
-    public void Init(Player player, Saver saver, LocationMap locationMap)
+    public void Init(Player player, Saver saver, LocationMap locationMap, Sound sound)
     {
         gameObject.SetActive(true);
         _locationMap = locationMap;
         _locationMap.LocationChosen += OpenLevels;
         _closeButton.AddOnClickAction(Disappear);
 
-        _characteristicsMenu.Init(saver, player.Wallet);
-        _storeMenu.Init(player.Wallet, saver);
+        _characteristicsMenu.Init(saver, player.Wallet, sound.BackgroundMusic);
+        _storeMenu.Init(player.Wallet, saver, sound);
         _leaderboardMenu.Init(saver);
+        _settingsMenu.Init(sound);
     }
 
     private void OnDestroy()

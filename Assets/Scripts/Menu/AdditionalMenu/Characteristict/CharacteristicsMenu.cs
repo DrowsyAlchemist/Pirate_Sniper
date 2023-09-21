@@ -10,16 +10,18 @@ public class CharacteristicsMenu : MoneyRenderer
 
     private Saver _saver;
     private Wallet _wallet;
+    private AudioSource _backgroundMusic;
 
     public bool HasHealthNextLevel => Settings.Characteristics.Health.HasNextLevel(_saver.PlayerHealth);
     public bool HasDamageNextLevel => Settings.Characteristics.Damage.HasNextLevel(_saver.PlayerDamage);
     public CharacteristicLevel NextHealthLevel => Settings.Characteristics.Health.GetNextLevel(_saver.PlayerHealth);
     public CharacteristicLevel NextDamageLevel => Settings.Characteristics.Damage.GetNextLevel(_saver.PlayerDamage);
 
-    public void Init(Saver saver, Wallet wallet)
+    public void Init(Saver saver, Wallet wallet, AudioSource backgroundMusic)
     {
         _saver = saver;
         _wallet = wallet;
+        _backgroundMusic = backgroundMusic;
         base.Init(wallet);
         _maxHealthRenderer.Init(saver);
         _damageRenderer.Init(saver);
@@ -39,7 +41,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void OnHealthButtonClick(WareRenderer _)
     {
         if (NextHealthLevel.Cost <= 0)
-            Advertising.RewardForVideo(IncreaseHealth);
+            Advertising.RewardForVideo(IncreaseHealth, _backgroundMusic);
         else if (_wallet.TryGiveMoney(NextHealthLevel.Cost))
             IncreaseHealth();
     }
@@ -47,7 +49,7 @@ public class CharacteristicsMenu : MoneyRenderer
     private void OnDamageButtonClick(WareRenderer _)
     {
         if (NextDamageLevel.Cost <= 0)
-            Advertising.RewardForVideo(IncreaseDamage);
+            Advertising.RewardForVideo(IncreaseDamage, _backgroundMusic);
         else if (_wallet.TryGiveMoney(NextDamageLevel.Cost))
             IncreaseDamage();
     }

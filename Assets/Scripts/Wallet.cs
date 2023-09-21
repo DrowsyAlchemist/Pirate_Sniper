@@ -1,16 +1,19 @@
 using System;
+using UnityEngine;
 
 public class Wallet
 {
     private readonly Saver _saver;
+    private readonly AudioSource _buySound;
 
     public int Money { get; private set; }
 
     public event Action<int> MoneyValueChanged;
 
-    public Wallet(Saver saver)
+    public Wallet(Saver saver, AudioSource buySound)
     {
         _saver = saver;
+        _buySound = buySound;
         Money = _saver.PlayerMoney;
         MoneyValueChanged?.Invoke(Money);
     }
@@ -39,7 +42,7 @@ public class Wallet
             throw new InvalidOperationException();
 
         SetMoney(Money - money);
-        Sound.PlayBuy();
+        _buySound.Play();
     }
 
     public void Add(int money)

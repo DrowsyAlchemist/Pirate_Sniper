@@ -18,6 +18,7 @@ public class Level : MonoBehaviour
     private LevelPreset _currentLevel;
     private Saver _saver;
     private Player _player;
+    private Sound _sound;
 
     public LevelObserver LevelObserver { get; private set; }
     public LevelPreset CurrentLevel => _currentLevel;
@@ -49,10 +50,11 @@ public class Level : MonoBehaviour
         _pauseWindow.SettingsButtonClicked -= OnSettingsButtonClick;
     }
 
-    public void Init(Player player, Saver saver)
+    public void Init(Player player, Saver saver, Sound sound)
     {
         _player = player;
         _saver = saver;
+        _sound = sound;
 
         LevelObserver = new(_player);
         _levelInfoRenderer.Init(_player, LevelObserver);
@@ -96,14 +98,14 @@ public class Level : MonoBehaviour
         LevelObserver.Start();
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
-        Sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
+        _sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
         _inputHandler.SetMode(InputMode.Game);
         LevelLoaded?.Invoke();
 
 #if UNITY_EDITOR
         return;
 #endif
-        Advertising.ShowInter();
+        Advertising.ShowInter(_sound.BackgroundMusic);
     }
 
     private void OnLevelCompleted(bool isWon)
@@ -129,7 +131,7 @@ public class Level : MonoBehaviour
         if (_currentLevel.Score > 0)
             LoadLevel(nextLevel);
         else
-            Advertising.RewardForVideo(() => LoadLevel(nextLevel));
+            Advertising.RewardForVideo(() => LoadLevel(nextLevel), _sound.BackgroundMusic);
     }
 
     private void OnRestartButtonClick()
@@ -154,7 +156,7 @@ public class Level : MonoBehaviour
         _player.Wallet.Add(LevelObserver.Money);
         return;
 #endif
-        Advertising.RewardForVideo(() => _player.Wallet.Add(LevelObserver.Money));
+        Advertising.RewardForVideo(() => _player.Wallet.Add(LevelObserver.Money), _sound.BackgroundMusic);
     }
 
     private void OnSettingsButtonClick()
