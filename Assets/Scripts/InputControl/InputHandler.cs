@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Agava.WebUtility;
+using cakeslice;
 
 public class InputHandler : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private PointerMoveArea _pointerMoveArea;
     [SerializeField] private PointerDownArea _pointerDownArea;
     [SerializeField] private PointerUpArea _pointerUpArea;
+    [SerializeField] private OutlineEffect _outlineEffect;
 
     [SerializeField] private PauseButton _pauseButton;
 
@@ -48,6 +50,7 @@ public class InputHandler : MonoBehaviour
 
         if (mode == InputMode.UI)
         {
+            _outlineEffect.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _pointerMoveArea.enabled = false;
@@ -56,7 +59,9 @@ public class InputHandler : MonoBehaviour
         }
         else
         {
-            if (IsMobile == false)
+            if (IsMobile)
+                _outlineEffect.enabled = true;
+            else
                 Cursor.lockState = CursorLockMode.Locked;
 
             _pointerMoveArea.enabled = true;

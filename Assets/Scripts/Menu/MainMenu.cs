@@ -10,10 +10,10 @@ public class MainMenu : MonoBehaviour
 
     public void Init(Player player, Saver saver, Sound sound)
     {
-        _sound = sound;
-        _additionalMenu.Init(player, saver, _locationMap, _sound);
-        _locationMap.Init();
-        _locationMap.Deactivate();
+        _sound = sound; GameInitialization.ErrorText.text += " MainMenu 13";
+        _additionalMenu.Init(player, saver, _locationMap, _sound); GameInitialization.ErrorText.text += " MainMenu 14";
+        _locationMap.Init(); GameInitialization.ErrorText.text += " MainMenu 15";
+        _locationMap.Deactivate(); GameInitialization.ErrorText.text += " MainMenu 16";
     }
 
     public void Open()

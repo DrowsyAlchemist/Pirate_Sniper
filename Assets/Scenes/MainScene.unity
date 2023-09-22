@@ -8729,7 +8729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1301303135486763461, guid: fe910d8a420a972428e0592d61c92c30, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -9.399996
+      value: -9.399994
       objectReference: {fileID: 0}
     - target: {fileID: 1301303135486763462, guid: fe910d8a420a972428e0592d61c92c30, type: 3}
       propertyPath: m_fontSize
@@ -21179,7 +21179,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.6
+  m_fontSize: 65.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22429,10 +22429,10 @@ RectTransform:
   m_Father: {fileID: 1947124945}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.00021362}
-  m_SizeDelta: {x: 717.8, y: 198.8}
+  m_AnchorMin: {x: 0.1685619, y: 0.18359944}
+  m_AnchorMax: {x: 0.83500004, y: 0.8172212}
+  m_AnchoredPosition: {x: -3.5, y: -0.50009155}
+  m_SizeDelta: {x: -2.1999512, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &533077630
 MonoBehaviour:
@@ -23489,7 +23489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dbe0f41c9eaa4449fa10554d9eb37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useMobileControlInEditor: 0
+  _useMobileControlInEditor: 1
   _inputController: {fileID: 1269375120}
   _sensitivity: {fileID: 1342533822}
   _shootingPoint: {fileID: 538781365}
@@ -23497,7 +23497,6 @@ MonoBehaviour:
   _level: {fileID: 89587326}
   _locationsStorage: {fileID: 2052177870}
   _sound: {fileID: 1558616987}
-  _outlineEffect: {fileID: 963194229}
   _backgroundCanvas: {fileID: 1947124948}
   _errorText: {fileID: 533077630}
 --- !u!4 &547833384
@@ -26720,7 +26719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1301303135486763461, guid: fe910d8a420a972428e0592d61c92c30, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -9.399993
+      value: -9.399994
       objectReference: {fileID: 0}
     - target: {fileID: 1301303135486763462, guid: fe910d8a420a972428e0592d61c92c30, type: 3}
       propertyPath: m_fontSize
@@ -57156,6 +57155,7 @@ MonoBehaviour:
   _pointerMoveArea: {fileID: 228906113}
   _pointerDownArea: {fileID: 1217553849}
   _pointerUpArea: {fileID: 228906114}
+  _outlineEffect: {fileID: 963194229}
   _pauseButton: {fileID: 993545494}
   _level: {fileID: 89587326}
 --- !u!1 &1269739147
@@ -66663,7 +66663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.73257726, y: 0}
   m_AnchorMax: {x: 1, y: 0.79800004}
-  m_AnchoredPosition: {x: 0.47998047, y: -0.35998535}
+  m_AnchoredPosition: {x: 0.47999573, y: -0.35998535}
   m_SizeDelta: {x: -1.8800049, y: -0.71899414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1485252368

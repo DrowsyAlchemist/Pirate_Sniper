@@ -17,15 +17,18 @@ public class GameInitialization : MonoBehaviour
     [SerializeField] private Level _level;
     [SerializeField] private LocationsStorage _locationsStorage;
     [SerializeField] private Sound _sound;
-    [SerializeField] private OutlineEffect _outlineEffect;
 
     [SerializeField] private Canvas _backgroundCanvas;
     [SerializeField] private TMP_Text _errorText;
 
+    private static GameInitialization _instance;//
     private Saver _saver;
+
+    public static TMP_Text ErrorText => _instance._errorText;//
 
     private IEnumerator Start()
     {
+        _instance = this;//
 #if UNITY_EDITOR
         yield return Init();
         yield break;
@@ -54,21 +57,20 @@ public class GameInitialization : MonoBehaviour
 
         try
         {
-            bool isMobile = IsMobile(); _errorText.text = "57";
-            InitOutlineEffect(isMobile); _errorText.text = "58";
-            _sensitivity.Init(_saver, isMobile); _errorText.text = "59";
-            _inputController.Init(isMobile, _sensitivity); _errorText.text = "60";
-            _sound.Init(); _errorText.text = "61";
-            var player = CreatePlayer(_saver); _errorText.text = "62";
-            _level.Init(player, _saver, _sound); _errorText.text = "63";
-            _mainMenu.Init(player, _saver, _sound); _errorText.text = "64";
-            _mainMenu.Open(); _errorText.text = "65";
-            _shootingPoint.Init(_saver, _inputController, player); _errorText.text = "66";
-            _backgroundCanvas.Deactivate(); _errorText.text = "67";
+            bool isMobile = IsMobile(); _errorText.text += " 60";
+            _sensitivity.Init(_saver, isMobile); _errorText.text += " 61";
+            _inputController.Init(isMobile, _sensitivity); _errorText.text += " 62";
+            _sound.Init(); _errorText.text += " 63";
+            var player = CreatePlayer(_saver); _errorText.text += " 64";
+            _level.Init(player, _saver, _sound); _errorText.text += " 65";
+            _mainMenu.Init(player, _saver, _sound); _errorText.text += " 66";
+            _mainMenu.Open(); _errorText.text += " 67";
+            _shootingPoint.Init(_saver, _inputController, player); _errorText.text += " 68";
+            _backgroundCanvas.Deactivate(); _errorText.text += " 69";
         }
         catch (Exception e)
         {
-            _errorText.text = e.Message;
+            _errorText.text += e.Message;
             _errorText.Activate();
         }
     }
@@ -98,12 +100,6 @@ public class GameInitialization : MonoBehaviour
 #else
         return Device.IsMobile;
 #endif
-    }
-
-    private void InitOutlineEffect(bool isMobile)
-    {
-        if (isMobile == false)
-            Destroy(_outlineEffect);
     }
 
     private Player CreatePlayer(Saver saver)
