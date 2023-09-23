@@ -44,12 +44,17 @@ public class LeaderboardMenu : Window
     {
         if (PlayerAccount.HasPersonalProfileDataPermission)
         {
+            _saver.LoadSaves();
             RenderLeaders();
         }
         else
         {
             PlayerAccount.RequestPersonalProfileDataPermission(
-                onSuccessCallback: RenderLeaders,
+                onSuccessCallback: () =>
+                {
+                    RenderLeaders();
+                    _saver.LoadSaves();
+                },
                 onErrorCallback: (error) =>
                 {
                     Debug.Log("RequestPersonalProfileDataPermission error: " + error);

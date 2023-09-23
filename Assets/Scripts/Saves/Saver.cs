@@ -1,12 +1,13 @@
 using Agava.YandexGames;
 using System;
+using System.Collections;
 using System.Text;
 using UnityEngine;
 
 public class Saver
 {
     private const string SavesName = "Saves";
-    private const int DefaultScore = 0;
+    private const string DefaultScore = "0";
     private const char Devider = ' ';
     private const int MaxLevelsCount = 10;
     private const string UnlockString = "1000 1000 1000 1000 1000 1000 1000 1000 1000 1000";
@@ -24,15 +25,41 @@ public class Saver
 
     public Saver(LocationsStorage locationsStorage)
     {
+        IsReady = false;
         _locationsStorage = locationsStorage;
         _stringBuilder = new();
-        ResetStringBuilder(_stringBuilder);
+        ResetStringBuilder();
         LoadSaves();
+    }
+
+    public void LoadSaves()
+    {
+#if UNITY_EDITOR
+        string jsonData = PlayerPrefs.GetString(SavesName);
+        SetSaves(jsonData);
+        IsReady = true;
+        return;
+#endif
+        if (PlayerAccount.IsAuthorized)
+        {
+            PlayerAccount.GetCloudSaveData(
+                onSuccessCallback: (result) =>
+                {
+                    SetSaves(result);
+                    IsReady = true;
+                },
+                onErrorCallback: (error) => throw new ApplicationException("Can not load CloudSaveData: " + error));
+        }
+        else
+        {
+            SetSaves(PlayerPrefs.GetString(SavesName));
+            IsReady = true;
+        }
     }
 
     public void RemoveSaves()
     {
-        ResetStringBuilder(_stringBuilder);
+        ResetStringBuilder();
         _saves = new(_stringBuilder.ToString());
         Save();
     }
@@ -96,21 +123,15 @@ public class Saver
 
     public int GetLevelScore(int locationIndex, int levelIndex)
     {
-        switch (locationIndex)
+        return locationIndex switch
         {
-            case 0:
-                return int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]);
-            case 1:
-                return int.Parse(_saves.ShipLocation0.Split(Devider)[levelIndex]);
-            case 2:
-                return int.Parse(_saves.FirstLocation.Split(Devider)[levelIndex]);
-            case 3:
-                return int.Parse(_saves.ShipLocation1.Split(Devider)[levelIndex]);
-            case 4:
-                return int.Parse(_saves.SecondLocation.Split(Devider)[levelIndex]);
-            default:
-                throw new NotImplementedException();
-        }
+            0 => int.Parse(_saves.ZeroLocation.Split(Devider)[levelIndex]),
+            1 => int.Parse(_saves.ShipLocation0.Split(Devider)[levelIndex]),
+            2 => int.Parse(_saves.FirstLocation.Split(Devider)[levelIndex]),
+            3 => int.Parse(_saves.ShipLocation1.Split(Devider)[levelIndex]),
+            4 => int.Parse(_saves.SecondLocation.Split(Devider)[levelIndex]),
+            _ => throw new NotImplementedException(),
+        };
     }
 
     public int GetLevelScore(LevelPreset level)
@@ -187,12 +208,12 @@ public class Saver
         Save();
     }
 
-    private void ResetStringBuilder(StringBuilder stringBuilder)
+    private void ResetStringBuilder()
     {
-        stringBuilder.Clear();
+        _stringBuilder.Clear();
 
         for (int i = 0; i < MaxLevelsCount; i++)
-            _stringBuilder.Append(DefaultScore.ToString() + Devider);
+            _stringBuilder.Append(DefaultScore + Devider);
     }
 
     private void Save()
@@ -204,34 +225,12 @@ public class Saver
         PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(_saves));
     }
 
-    private void LoadSaves()
-    {
-#if UNITY_EDITOR
-        string jsonData = PlayerPrefs.GetString(SavesName);
-        SetSaves(jsonData);
-        IsReady = true;
-        return;
-#endif
-        if (PlayerAccount.IsAuthorized)
-        {
-            PlayerAccount.GetCloudSaveData(
-                onSuccessCallback: (result) =>
-                {
-                    SetSaves(result);
-                    IsReady = true;
-                },
-                onErrorCallback: (error) => throw new ApplicationException("Can not load CloudSaveData: " + error));
-        }
-        else
-        {
-            SetSaves(PlayerPrefs.GetString(SavesName));
-            IsReady = true;
-        }
-    }
-
     private void SetSaves(string jsonData)
     {
-        _saves = JsonUtility.FromJson<SaveData>(jsonData) ?? new(_stringBuilder.ToString());
+        if (string.IsNullOrEmpty(jsonData))
+            _saves = new(_stringBuilder.ToString());
+        else
+            _saves = JsonUtility.FromJson<SaveData>(jsonData);
     }
 
     private string ReplaceScore(string locationString, int levelIndex, int score)

@@ -7,11 +7,18 @@ public class LevelPreset : MonoBehaviour
     [SerializeField] private Transform _cameraPosition;
     [SerializeField] private EnemyBody[] _enemies;
 
+    private Level _level;
+
     public Transform CameraTransform => _cameraPosition;
     public int Stars => Settings.Score.GetStars(Score);
-    public int Score => Level.GetLevelScore(this);
+    public int Score => _level.GetLevelScore(this);
 
     public IReadOnlyCollection<EnemyBody> Enemies => _enemies;
+
+    public void Init(Level level)
+    {
+        _level = level;
+    }
 
     public override bool Equals(object other)
     {

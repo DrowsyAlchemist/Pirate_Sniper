@@ -8,6 +8,13 @@ public class LocationsStorage : MonoBehaviour
 
     public IReadOnlyCollection<Location> Locations => _locations;
 
+    public void Init(Level level)
+    {
+        foreach (var location in _locations)
+            foreach (var levelPreset in location.Levels)
+                levelPreset.Init(level);
+    }
+
     public int GetLocationIndex(Location location)
     {
         for (int i = 0; i < _locations.Length; i++)

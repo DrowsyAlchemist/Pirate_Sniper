@@ -14,7 +14,6 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelInfoRenderer _levelInfoRenderer;
     [SerializeField] private PauseButton _pauseButton;
 
-    private static Level _instance;
     private LevelPreset _currentLevel;
     private Saver _saver;
     private Player _player;
@@ -24,14 +23,6 @@ public class Level : MonoBehaviour
     public LevelPreset CurrentLevel => _currentLevel;
 
     public event Action LevelLoaded;
-
-    private void Awake()
-    {
-        if (_instance == null)
-            _instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     private void OnDestroy()
     {
@@ -84,9 +75,9 @@ public class Level : MonoBehaviour
         }
     }
 
-    public static int GetLevelScore(LevelPreset levelPreset)
+    public int GetLevelScore(LevelPreset levelPreset)
     {
-        return _instance._saver.GetLevelScore(levelPreset);
+        return _saver.GetLevelScore(levelPreset);
     }
 
     private void LoadLevel(LevelPreset levelTemplate)
@@ -97,7 +88,9 @@ public class Level : MonoBehaviour
         _camera.transform.SetPositionAndRotation(levelTemplate.CameraTransform.position, levelTemplate.CameraTransform.rotation);
         _player.Reset();
         _currentLevel = levelTemplate;
-        LevelObserver.SetLevel(Instantiate(levelTemplate));
+        LevelPreset levelInstance = Instantiate(levelTemplate);
+        levelInstance.Init(this);
+        LevelObserver.SetLevel(levelInstance);
         LevelObserver.Start();
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();

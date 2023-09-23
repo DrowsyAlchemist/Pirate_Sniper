@@ -17,6 +17,6 @@ MonoBehaviour:
   _baseFieldOfView: 50
   _scopeFieldOfView: 15
   _scopeSpeed: 0.1
-  _defaultPCBaseSensitivity: 30
-  _defaultMobileBaseSensitivity: 150
+  _defaultPCBaseSensitivity: 25
+  _defaultMobileBaseSensitivity: 120
   _defaultScopeRelativeSensitivity: 0.5

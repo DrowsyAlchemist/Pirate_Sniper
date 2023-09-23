@@ -12,13 +12,13 @@ public class AdditionalMenu : AnimatedWindow
 
     public void Init(Player player, Saver saver, LocationMap locationMap, Sound sound)
     {
-        gameObject.SetActive(true); GameInitialization.ErrorText.text += " AdMenu 15";
-        _locationMap = locationMap; GameInitialization.ErrorText.text += " AdMenu 16";
-        _locationMap.LocationChosen += OpenLevels; GameInitialization.ErrorText.text += " AdMenu 17";
-        _characteristicsMenu.Init(saver, player.Wallet, sound.BackgroundMusic); GameInitialization.ErrorText.text += " AdMenu 18";
-        _storeMenu.Init(player.Wallet, saver, sound); GameInitialization.ErrorText.text += " AdMenu 19";
-        _leaderboardMenu.Init(saver); GameInitialization.ErrorText.text += " AdMenu 20";
-        _settingsMenu.Init(sound); GameInitialization.ErrorText.text += " AdMenu 21";
+        gameObject.SetActive(true); 
+        _locationMap = locationMap; 
+        _locationMap.LocationChosen += OpenLevels; 
+        _characteristicsMenu.Init(saver, player.Wallet, sound.BackgroundMusic);
+        _storeMenu.Init(player.Wallet, saver, sound);
+        _leaderboardMenu.Init(saver); 
+        _settingsMenu.Init(sound); 
     }
 
     private void OnDestroy()
