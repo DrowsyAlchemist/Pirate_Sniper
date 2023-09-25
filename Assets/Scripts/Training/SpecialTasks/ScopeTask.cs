@@ -29,7 +29,7 @@ public class ScopeTask : Task
     private IEnumerator CompleteWithDelay()
     {
         Stopwatch stopwatch = new();
-        stopwatch.Start();
+        stopwatch.ReStart();
 
         while (stopwatch.ElapsedTime < _completeDelay)
             yield return null;

@@ -81,7 +81,7 @@ public class LevelObserver
 
     private void StartStopwatch()
     {
-        _stopwatch.Start();
+        _stopwatch.ReStart();
         _player.Shooted -= StartStopwatch;
     }
 

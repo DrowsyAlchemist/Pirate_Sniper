@@ -9,7 +9,7 @@ public class Stopwatch
     public float ElapsedTime => _elapsedTime;
     public bool IsRunning { get; private set; }
 
-    public void Start()
+    public void ReStart()
     {
         if (_coroutine != null)
             Settings.CoroutineObject.StopCoroutine(_coroutine);

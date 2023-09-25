@@ -4,14 +4,29 @@ using UnityEngine;
 
 public static class Advertising
 {
+    private const float SecondsBetweenInters = 65;
+    private static Stopwatch _stopwatch;
+
+    public static bool IsInterReady => _stopwatch.ElapsedTime > SecondsBetweenInters;
+
+    static Advertising()
+    {
+        _stopwatch = new();
+        _stopwatch.ReStart();
+    }
+
     public static void ShowInter(AudioSource backgroundMusic)
     {
 #if UNITY_EDITOR
         return;
 #endif
-        InterstitialAd.Show(
-            onOpenCallback: () => backgroundMusic.Stop(),
-            onCloseCallback: (_) => backgroundMusic.Play());
+        if (IsInterReady)
+        {
+            _stopwatch.ReStart();
+            InterstitialAd.Show(
+                onOpenCallback: () => backgroundMusic.Stop(),
+                onCloseCallback: (_) => backgroundMusic.Play());
+        }
     }
 
     public static void RewardForVideo(Action reward, AudioSource backgroundMusic)

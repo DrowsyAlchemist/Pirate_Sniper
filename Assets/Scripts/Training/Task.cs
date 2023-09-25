@@ -58,7 +58,7 @@ public abstract class Task : MonoBehaviour
 
     private IEnumerator BeginTaskWithDelay(TrainingPanel trainingPanel)
     {
-        _stopWatch.Start();
+        _stopWatch.ReStart();
 
         while (_stopWatch.ElapsedTime < _delayBeforeTask)
             yield return null;
