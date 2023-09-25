@@ -6,7 +6,7 @@ public class ReadTask : StopTimeTask
         TrainingPanel.SetCancelButtonActive(true);
         TrainingPanel.SetGameInteractable(false);
         TrainingPanel.ContinueButtonClicked += Complete;
-        InputHandler.SetMode(InputMode.UI);
+        InputHandler.SetUIMode();
         base.BeginTask();
     }
 

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler
 {
     private InputHandler _inputHandler;
+    private Vector2 _previousPosition;
 
     public event Action PointerMove;
 
@@ -18,6 +19,11 @@ public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler
         _inputHandler = inputHandler;
     }
 
+    private void OnEnable()
+    {
+        _previousPosition = Input.mousePosition;
+    }
+
     private void Update()
     {
         if (_inputHandler.IsMobile == false)
@@ -27,6 +33,14 @@ public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler
     public void OnPointerMove(PointerEventData eventData)
     {
         if (_inputHandler.IsMobile)
+        {
+            if (Vector2.Distance(eventData.position, _previousPosition) > 60)
+            {
+                _previousPosition = eventData.position;
+                return;
+            }
+            _previousPosition = eventData.position;
             PointerMove?.Invoke();
+        }
     }
 }

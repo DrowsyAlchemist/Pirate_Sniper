@@ -33,8 +33,13 @@ public class Training : MonoBehaviour
     private void OnLevelLoaded()
     {
         if (_locationsStorage.GetLocationIndex(_level.CurrentLevel) == 0 && _locationsStorage.GetIndexInLocation(_level.CurrentLevel) == 0)
+        {
             if (IsTraining == false)
+            {
                 _trainingOfferWindow.Open();
+                _inputHandler.SetUIMode();
+            }
+        }
     }
 
     private void Begin()

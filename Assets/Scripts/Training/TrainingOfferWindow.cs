@@ -25,13 +25,13 @@ public class TrainingOfferWindow : Window
     public override void Open()
     {
         base.Open();
-        _inputHandler.SetMode(InputMode.UI);
+        _inputHandler.SetUIMode();
     }
 
     public override void Close()
     {
         base.Close();
-        _inputHandler.SetMode(InputMode.Game);
+        _inputHandler.SetGameMode();
     }
 
     private void OnAgreeButtonClick()

@@ -71,7 +71,7 @@ public class Level : MonoBehaviour
         {
             _pauseWindow.Open();
             Time.timeScale = 0;
-            _inputHandler.SetMode(InputMode.UI);
+            _inputHandler.SetUIMode();
         }
     }
 
@@ -95,7 +95,7 @@ public class Level : MonoBehaviour
         _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
         _sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
-        _inputHandler.SetMode(InputMode.Game);
+        _inputHandler.SetGameMode();
         LevelLoaded?.Invoke();
 
 #if UNITY_EDITOR
@@ -114,7 +114,7 @@ public class Level : MonoBehaviour
                 _saver.SaveLevel(_currentLevel, LevelObserver.Score);
         }
         _levelOverWindow.Appear(LevelObserver);
-        _inputHandler.SetMode(InputMode.UI);
+        _inputHandler.SetUIMode();
     }
 
     private void OnNextLevelButtonClick()
@@ -143,7 +143,7 @@ public class Level : MonoBehaviour
         Time.timeScale = 1;
         _pauseWindow.Close();
         _mainMenu.Open();
-        _inputHandler.SetMode(InputMode.UI);
+        _inputHandler.SetUIMode();
     }
 
     private void OnDoubleMoneyButtonClick()
@@ -164,6 +164,6 @@ public class Level : MonoBehaviour
     {
         _pauseWindow.Close();
         Time.timeScale = 1;
-        _inputHandler.SetMode(InputMode.Game);
+        _inputHandler.SetGameMode();
     }
 }

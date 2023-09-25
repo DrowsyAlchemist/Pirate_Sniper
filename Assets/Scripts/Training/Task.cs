@@ -50,7 +50,12 @@ public abstract class Task : MonoBehaviour
     protected void Complete()
     {
         if (InputHandler.InputMode != InitialInputMode)
-            InputHandler.SetMode(InitialInputMode);
+        {
+            if (InputHandler.InputMode == InputMode.UI)
+                InputHandler.SetGameMode();
+            else
+                InputHandler.SetUIMode();
+        }
 
         OnComplete();
         Completed?.Invoke();

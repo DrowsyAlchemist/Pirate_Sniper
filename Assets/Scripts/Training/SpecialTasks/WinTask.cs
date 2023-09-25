@@ -14,7 +14,7 @@ public class WinTask : Task
     protected override void OnComplete()
     {
         _level.LevelObserver.Completed -= OnCompleted;
-        InputHandler.SetMode(InputMode.UI);
+        InputHandler.SetUIMode();
         base.OnComplete();
     }
 
