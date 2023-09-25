@@ -23363,7 +23363,6 @@ MonoBehaviour:
   _locationsStorage: {fileID: 2052177870}
   _sound: {fileID: 1558616987}
   _backgroundCanvas: {fileID: 1947124948}
-  _errorText: {fileID: 0}
 --- !u!4 &547833384
 Transform:
   m_ObjectHideFlags: 0
@@ -89677,7 +89676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!1001 &1967109911
 PrefabInstance:
