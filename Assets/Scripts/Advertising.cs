@@ -33,8 +33,8 @@ public static class Advertising
                 },
                 onCloseCallback: (_) =>
                 {
-                    sound.PlayBackgroundMusic();
                     IsRunning = false;
+                    sound.PlayBackgroundMusic();
                 });
         }
     }
@@ -53,8 +53,8 @@ public static class Advertising
             },
             onCloseCallback: () =>
             {
-                sound.PlayBackgroundMusic();
                 IsRunning = false;
+                sound.PlayBackgroundMusic();
             },
             onRewardedCallback: reward,
             onErrorCallback: (_) => reward());
