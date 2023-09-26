@@ -15,7 +15,7 @@ public class AdditionalMenu : AnimatedWindow
         gameObject.SetActive(true); 
         _locationMap = locationMap; 
         _locationMap.LocationChosen += OpenLevels; 
-        _characteristicsMenu.Init(saver, player.Wallet, sound.BackgroundMusic);
+        _characteristicsMenu.Init(saver, player.Wallet, sound);
         _storeMenu.Init(player.Wallet, saver, sound);
         _leaderboardMenu.Init(saver); 
         _settingsMenu.Init(sound); 

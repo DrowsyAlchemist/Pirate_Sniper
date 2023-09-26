@@ -76,7 +76,7 @@ public class WeaponsStore : MonoBehaviour
         var weaponRenderer = wareRenderer as WeaponRenderer;
 
         if (weaponRenderer.Weapon.Cost <= 0)
-            Advertising.RewardForVideo(() => AccuireWeapon(weaponRenderer), _sound.BackgroundMusic);
+            Advertising.RewardForVideo(() => AccuireWeapon(weaponRenderer), _sound);
         else if (_wallet.TryGiveMoney(weaponRenderer.Weapon.Cost))
             AccuireWeapon(weaponRenderer);
     }

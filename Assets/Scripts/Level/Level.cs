@@ -101,7 +101,7 @@ public class Level : MonoBehaviour
 #if UNITY_EDITOR
         return;
 #endif
-        Advertising.ShowInter(_sound.BackgroundMusic);
+        Advertising.ShowInter(_sound);
     }
 
     private void OnLevelCompleted(bool isWon)
@@ -127,7 +127,7 @@ public class Level : MonoBehaviour
         if (_currentLevel.Score > 0)
             LoadLevel(nextLevel);
         else
-            Advertising.RewardForVideo(() => LoadLevel(nextLevel), _sound.BackgroundMusic);
+            Advertising.RewardForVideo(() => LoadLevel(nextLevel), _sound);
     }
 
     private void OnRestartButtonClick()
@@ -159,7 +159,7 @@ public class Level : MonoBehaviour
                 _player.Wallet.Add(LevelObserver.Money);
                 _levelOverWindow.Rerender(2 * LevelObserver.Money);
             },
-            _sound.BackgroundMusic);
+            _sound);
     }
 
     private void OnSettingsButtonClick()

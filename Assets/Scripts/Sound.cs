@@ -12,7 +12,6 @@ public class Sound : MonoBehaviour
     private const float MasterVolumeModifier = 0.5f;
 
     public bool IsOn { get; private set; }
-    public AudioSource BackgroundMusic => _backgroundMusic;
     public AudioSource BuySound => _buySound;
     protected SoundSettings SoundSettings => Settings.Sound;
 
@@ -47,9 +46,18 @@ public class Sound : MonoBehaviour
     public void SetBackgroundMusic(AudioClip clip)
     {
         _backgroundMusic.clip = clip;
+        PlayBackgroundMusic();
+    }
 
+    public void PlayBackgroundMusic()
+    {
         if (Advertising.IsRunning == false)
             _backgroundMusic.Play();
+    }
+
+    public void StopBackgroundMusic()
+    {
+        _backgroundMusic.Stop();
     }
 
     public void SetGeneralVolume(float normalizedValue)

@@ -17,29 +17,29 @@ public static class Advertising
         IsRunning = false;
     }
 
-    public static void ShowInter(AudioSource backgroundMusic)
+    public static void ShowInter(Sound sound)
     {
 #if UNITY_EDITOR
         return;
 #endif
-        if (IsInterReady)
+        if (IsInterReady && IsRunning == false)
         {
             _stopwatch.ReStart();
             InterstitialAd.Show(
                 onOpenCallback: () =>
                 {
-                    backgroundMusic.Stop();
+                    sound.StopBackgroundMusic();
                     IsRunning = true;
                 },
                 onCloseCallback: (_) =>
                 {
-                    backgroundMusic.Play();
+                    sound.PlayBackgroundMusic();
                     IsRunning = false;
                 });
         }
     }
 
-    public static void RewardForVideo(Action reward, AudioSource backgroundMusic)
+    public static void RewardForVideo(Action reward, Sound sound)
     {
 #if UNITY_EDITOR
         reward();
@@ -48,12 +48,12 @@ public static class Advertising
         VideoAd.Show(
             onOpenCallback: () =>
             {
-                backgroundMusic.Stop();
+                sound.StopBackgroundMusic();
                 IsRunning = true;
             },
             onCloseCallback: () =>
             {
-                backgroundMusic.Play();
+                sound.PlayBackgroundMusic();
                 IsRunning = false;
             },
             onRewardedCallback: reward,
