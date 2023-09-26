@@ -8,11 +8,13 @@ public static class Advertising
     private static Stopwatch _stopwatch;
 
     public static bool IsInterReady => _stopwatch.ElapsedTime > SecondsBetweenInters;
+    public static bool IsRunning { get; private set; }
 
     static Advertising()
     {
         _stopwatch = new();
         _stopwatch.ReStart();
+        IsRunning = false;
     }
 
     public static void ShowInter(AudioSource backgroundMusic)
@@ -24,8 +26,16 @@ public static class Advertising
         {
             _stopwatch.ReStart();
             InterstitialAd.Show(
-                onOpenCallback: () => backgroundMusic.Stop(),
-                onCloseCallback: (_) => backgroundMusic.Play());
+                onOpenCallback: () =>
+                {
+                    backgroundMusic.Stop();
+                    IsRunning = true;
+                },
+                onCloseCallback: (_) =>
+                {
+                    backgroundMusic.Play();
+                    IsRunning = false;
+                });
         }
     }
 
@@ -36,8 +46,16 @@ public static class Advertising
         return;
 #endif
         VideoAd.Show(
-            onOpenCallback: () => backgroundMusic.Stop(),
-            onCloseCallback: () => backgroundMusic.Play(),
+            onOpenCallback: () =>
+            {
+                backgroundMusic.Stop();
+                IsRunning = true;
+            },
+            onCloseCallback: () =>
+            {
+                backgroundMusic.Play();
+                IsRunning = false;
+            },
             onRewardedCallback: reward,
             onErrorCallback: (_) => reward());
     }

@@ -8524,6 +8524,7 @@ MonoBehaviour:
   _nextLevelButton: {fileID: 1986416465}
   _restartButton: {fileID: 1224511194}
   _menuButton: {fileID: 581789244}
+  _adImage: {fileID: 1213103215}
   _openSound: {fileID: 1251981304}
   _scoreText: {fileID: 467646891}
   _timeText: {fileID: 1751655665}
@@ -23354,7 +23355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dbe0f41c9eaa4449fa10554d9eb37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useMobileControlInEditor: 1
+  _useMobileControlInEditor: 0
   _inputController: {fileID: 1269375120}
   _sensitivity: {fileID: 1342533822}
   _shootingPoint: {fileID: 538781365}
@@ -31251,7 +31252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -86}
+  m_AnchoredPosition: {x: 0, y: -85.999985}
   m_SizeDelta: {x: -89.7, y: -247.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723990036
@@ -91799,6 +91800,7 @@ MonoBehaviour:
   _nextLevelButton: {fileID: 851135576}
   _restartButton: {fileID: 381186815}
   _menuButton: {fileID: 825579390}
+  _adImage: {fileID: 1213103215}
   _openSound: {fileID: 1622275352}
 --- !u!1001 &2000644762
 PrefabInstance:

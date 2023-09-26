@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ShootingSettings
   m_EditorClassIdentifier: 
   _defaultWeapon: {fileID: 6449318882780059414, guid: 91e8400b75b38e54daefee673186d7dc, type: 3}
-  _maxSensitivity: 200
+  _maxSensitivity: 20
   _baseFieldOfView: 50
   _scopeFieldOfView: 15
   _scopeSpeed: 0.1
-  _defaultPCBaseSensitivity: 25
-  _defaultMobileBaseSensitivity: 100
-  _defaultScopeRelativeSensitivity: 0.5
+  _pcSensitivityModifier: 2
+  _defaultBaseSensitivity: 10
+  _defaultScopeRelativeSensitivity: 0.25

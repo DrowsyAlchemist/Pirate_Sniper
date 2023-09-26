@@ -16,9 +16,9 @@ public class Sensitivity : MonoBehaviour
         _baseSensitivity = _saver.BaseSensitivity;
         _scopeRelativeSensitivity = _saver.ScopeRelativeSensitivity;
 
-        if (_baseSensitivity < Settings.Epsilon)
+        if (_baseSensitivity < Settings.Epsilon || _baseSensitivity > Settings.Shooting.MaxSensitivity)
         {
-            _baseSensitivity = isMobile ? Settings.Shooting.DefaultMobileBaseSensitivity : Settings.Shooting.DefaultPCBaseSensitivity;
+            _baseSensitivity = Settings.Shooting.DefaultBaseSensitivity;
             _scopeRelativeSensitivity = Settings.Shooting.DefaultScopeRelativeSensitivity;
             saver.SetSensitivity(_baseSensitivity, _scopeRelativeSensitivity);
         }

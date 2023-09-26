@@ -150,9 +150,16 @@ public class Level : MonoBehaviour
     {
 #if UNITY_EDITOR
         _player.Wallet.Add(LevelObserver.Money);
+        _levelOverWindow.Rerender(2 * LevelObserver.Money);
         return;
 #endif
-        Advertising.RewardForVideo(() => _player.Wallet.Add(LevelObserver.Money), _sound.BackgroundMusic);
+        Advertising.RewardForVideo(
+            reward: () =>
+            {
+                _player.Wallet.Add(LevelObserver.Money);
+                _levelOverWindow.Rerender(2 * LevelObserver.Money);
+            },
+            _sound.BackgroundMusic);
     }
 
     private void OnSettingsButtonClick()

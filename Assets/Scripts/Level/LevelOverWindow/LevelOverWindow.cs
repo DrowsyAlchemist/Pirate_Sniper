@@ -26,6 +26,11 @@ public class LevelOverWindow : AnimatedWindow
         base.Appear();
     }
 
+    public void Rerender(int newMoneyValue)
+    {
+        _winPanel.Rerender(newMoneyValue);
+    }
+
     private void InitLevelOverPanel(LevelOverPanel panel, LocationsStorage locationsStorage)
     {
         panel.Init(locationsStorage);

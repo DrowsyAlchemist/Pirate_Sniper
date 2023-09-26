@@ -47,7 +47,9 @@ public class Sound : MonoBehaviour
     public void SetBackgroundMusic(AudioClip clip)
     {
         _backgroundMusic.clip = clip;
-        _backgroundMusic.Play();
+
+        if (Advertising.IsRunning == false)
+            _backgroundMusic.Play();
     }
 
     public void SetGeneralVolume(float normalizedValue)

@@ -2,12 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler
+public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler, IPointerDownHandler, IPointerUpHandler
 {
+    private const float MaxInputDelta = 60;
     private InputHandler _inputHandler;
-    private Vector2 _previousPosition;
+    private bool _isMoveAllowed;
 
-    public event Action PointerMove;
+    public event Action<Vector2> PointerMove;
 
     private void Awake()
     {
@@ -19,28 +20,40 @@ public class PointerMoveArea : MonoBehaviour, IPointerMoveHandler
         _inputHandler = inputHandler;
     }
 
-    private void OnEnable()
-    {
-        _previousPosition = Input.mousePosition;
-    }
-
     private void Update()
     {
         if (_inputHandler.IsMobile == false)
-            PointerMove?.Invoke();
+        {
+            Vector2 inputDelta = new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            PointerMove?.Invoke(inputDelta * Settings.Shooting.PCSensitivityModifier);
+        }
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
         if (_inputHandler.IsMobile)
         {
-            if (Vector2.Distance(eventData.position, _previousPosition) > 60)
+            if (_isMoveAllowed)
             {
-                _previousPosition = eventData.position;
-                return;
+                if (eventData.delta.magnitude > MaxInputDelta)
+                    return;
+
+                PointerMove?.Invoke(eventData.delta);
             }
-            _previousPosition = eventData.position;
-            PointerMove?.Invoke();
+            else
+            {
+                _isMoveAllowed = true;
+            }
         }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        _isMoveAllowed = false;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        _isMoveAllowed = false;
     }
 }

@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelOverPanel : Window
 {
     [SerializeField] private UIButton _nextLevelButton;
     [SerializeField] private UIButton _restartButton;
     [SerializeField] private UIButton _menuButton;
+    [SerializeField] private Image _adImage;
 
     [SerializeField] private AudioSource _openSound;
 
@@ -27,6 +29,7 @@ public class LevelOverPanel : Window
     {
         bool hasNextLevel = _locationStorage.GetNextLevel(levelObserver.LevelInstance) != null;
         _nextLevelButton.SetInteractable(hasNextLevel);
+        _adImage.gameObject.SetActive(levelObserver.LevelInstance.Score == 0);
         _openSound.Play();
         base.Open();
     }

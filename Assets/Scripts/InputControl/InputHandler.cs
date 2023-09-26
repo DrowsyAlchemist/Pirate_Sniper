@@ -18,7 +18,6 @@ public class InputHandler : MonoBehaviour
 
     private const float DefaultZRotation = 0;
     private const float AngleEpsilon = 70;
-    private const float CameraSpeedTrashhold = 5000;
     private Sensitivity _sensitivity;
     private bool _isScopeMode;
     private Coroutine _coroutine;
@@ -92,22 +91,17 @@ public class InputHandler : MonoBehaviour
             _level.PauseGame();
     }
 
-    public void OnPointerMove()
+    public void OnPointerMove(Vector2 delta)
     {
         Vector3 cameraAngles = _camera.transform.localRotation.eulerAngles;
-        float targetXAngle = CalculateXAngle(cameraAngles.x);
-        float targetYAngle = CalculateYAngle(cameraAngles.y);
+        float targetXAngle = CalculateXAngle(cameraAngles.x, delta.y);
+        float targetYAngle = CalculateYAngle(cameraAngles.y, delta.x);
         _camera.transform.SetPositionAndRotation(_camera.transform.position, Quaternion.Euler(targetXAngle, targetYAngle, DefaultZRotation));
     }
 
-    private float CalculateXAngle(float currentXAngle)
+    private float CalculateXAngle(float currentXAngle, float inputX)
     {
-        float inputX = Input.GetAxis("Mouse Y");
         float cameraXSpeed = -1 * CurrentSensitivity * inputX;
-
-        if (IsMobile && Mathf.Abs(cameraXSpeed) > CameraSpeedTrashhold)
-            cameraXSpeed = 0;
-
         float targetXAngle = currentXAngle + cameraXSpeed * Time.deltaTime;
         float xAngleToCheck = targetXAngle % 360;
 
@@ -118,14 +112,9 @@ public class InputHandler : MonoBehaviour
         return targetXAngle;
     }
 
-    private float CalculateYAngle(float currentYAngle)
+    private float CalculateYAngle(float currentYAngle, float inputY)
     {
-        float inputY = Input.GetAxis("Mouse X");
         float cameraYSpeed = CurrentSensitivity * inputY;
-
-        if (IsMobile && Mathf.Abs(cameraYSpeed) > CameraSpeedTrashhold)
-            cameraYSpeed = 0;
-
         float targetYAngle = currentYAngle + cameraYSpeed * Time.deltaTime;
         float yAngleToCheck = targetYAngle % 360;
 
