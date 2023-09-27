@@ -17,9 +17,10 @@ public static class Advertising
         IsRunning = false;
     }
 
-    public static void ShowInter(Sound sound)
+    public static void ShowInter(Sound sound, Action onClose = null)
     {
 #if UNITY_EDITOR
+        onClose?.Invoke();
         return;
 #endif
         if (IsInterReady && IsRunning == false)
@@ -35,14 +36,20 @@ public static class Advertising
                 {
                     IsRunning = false;
                     sound.PlayBackgroundMusic();
+                    onClose?.Invoke();
                 });
+        }
+        else
+        {
+            onClose?.Invoke();
         }
     }
 
-    public static void RewardForVideo(Action reward, Sound sound)
+    public static void RewardForVideo(Action reward, Sound sound, Action onClose = null)
     {
 #if UNITY_EDITOR
         reward();
+        onClose?.Invoke();
         return;
 #endif
         VideoAd.Show(
@@ -55,8 +62,13 @@ public static class Advertising
             {
                 IsRunning = false;
                 sound.PlayBackgroundMusic();
+                onClose.Invoke();
             },
             onRewardedCallback: reward,
-            onErrorCallback: (_) => reward());
+            onErrorCallback: (_) =>
+            {
+                reward();
+                onClose.Invoke();
+            });
     }
 }

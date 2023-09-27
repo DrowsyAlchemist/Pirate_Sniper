@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -27,7 +26,7 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
-        _levelsMenu.LevelClicked -= LoadLevel;
+        _levelsMenu.LevelClicked -= OnLevelIconClick;
 
         _levelOverWindow.NextLevelButtonClicked -= OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked -= OnRestartButtonClick;
@@ -53,7 +52,7 @@ public class Level : MonoBehaviour
         _levelOverWindow.Init(_locationStorage);
         _pauseWindow.Init();
 
-        _levelsMenu.LevelClicked += LoadLevel;
+        _levelsMenu.LevelClicked += OnLevelIconClick;
         _levelOverWindow.NextLevelButtonClicked += OnNextLevelButtonClick;
         _levelOverWindow.RestartButtonClicked += OnRestartButtonClick;
         _levelOverWindow.MenuButtonClicked += OnBackToMenuButtonClick;
@@ -81,6 +80,12 @@ public class Level : MonoBehaviour
         return _saver.GetLevelScore(levelPreset);
     }
 
+    private void OnLevelIconClick(LevelPreset levelTemplate)
+    {
+        LoadLevel(levelTemplate);
+        Advertising.ShowInter(_sound, onClose: () => StartLevel());
+    }
+
     private void LoadLevel(LevelPreset levelTemplate)
     {
         if (LevelObserver.LevelInstance != null)
@@ -91,19 +96,13 @@ public class Level : MonoBehaviour
         _currentLevel = levelTemplate;
         LevelPreset levelInstance = Instantiate(levelTemplate);
         levelInstance.Init(this);
-
-        Advertising.ShowInter(_sound);
-        Settings.CoroutineObject.StartCoroutine(StartLevel(levelInstance));
-    }
-
-    private IEnumerator StartLevel(LevelPreset levelInstance)
-    {
-        while (Advertising.IsRunning)
-            yield return null;
-
         LevelObserver.SetLevel(levelInstance);
         LevelObserver.Start();
         _levelInfoRenderer.ResetInfo();
+    }
+
+    private void StartLevel()
+    {
         _mainMenu.Close();
         _sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
         _inputHandler.SetGameMode();
@@ -131,14 +130,14 @@ public class Level : MonoBehaviour
             throw new InvalidOperationException();
 
         if (_currentLevel.Score > 0)
-            LoadLevel(nextLevel);
+            OnLevelIconClick(nextLevel);
         else
-            Advertising.RewardForVideo(() => LoadLevel(nextLevel), _sound);
+            Advertising.RewardForVideo(reward: () => LoadLevel(nextLevel), _sound, onClose: () => StartLevel());
     }
 
     private void OnRestartButtonClick()
     {
-        LoadLevel(_currentLevel);
+        OnLevelIconClick(_currentLevel);
     }
 
     private void OnBackToMenuButtonClick()
