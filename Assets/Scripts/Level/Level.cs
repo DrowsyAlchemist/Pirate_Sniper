@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -90,18 +91,23 @@ public class Level : MonoBehaviour
         _currentLevel = levelTemplate;
         LevelPreset levelInstance = Instantiate(levelTemplate);
         levelInstance.Init(this);
+
+        Advertising.ShowInter(_sound);
+        Settings.CoroutineObject.StartCoroutine(StartLevel(levelInstance));
+    }
+
+    private IEnumerator StartLevel(LevelPreset levelInstance)
+    {
+        while (Advertising.IsRunning)
+            yield return null;
+
         LevelObserver.SetLevel(levelInstance);
         LevelObserver.Start();
-        _mainMenu.Close();
         _levelInfoRenderer.ResetInfo();
+        _mainMenu.Close();
         _sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
         _inputHandler.SetGameMode();
         LevelLoaded?.Invoke();
-
-#if UNITY_EDITOR
-        return;
-#endif
-        Advertising.ShowInter(_sound);
     }
 
     private void OnLevelCompleted(bool isWon)
