@@ -3,6 +3,7 @@ using Agava.YandexGames;
 using Lean.Localization;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameInitialization : MonoBehaviour

@@ -10,6 +10,7 @@ public class Saver
     private const string DefaultScore = "0";
     private const char Devider = ' ';
     private const int MaxLevelsCount = 10;
+    private const string DefaultString = "0 0 0 0 0 0 0 0 0 0";
     private const string UnlockString = "1000 1000 1000 1000 1000 1000 1000 1000 1000 1000";
 
     private readonly StringBuilder _stringBuilder;
@@ -28,7 +29,6 @@ public class Saver
         IsReady = false;
         _locationsStorage = locationsStorage;
         _stringBuilder = new();
-        ResetStringBuilder();
         LoadSaves();
     }
 
@@ -59,8 +59,7 @@ public class Saver
 
     public void RemoveSaves()
     {
-        ResetStringBuilder();
-        _saves = new(_stringBuilder.ToString());
+        _saves = new(DefaultString);
         Save();
     }
 
@@ -208,14 +207,6 @@ public class Saver
         Save();
     }
 
-    private void ResetStringBuilder()
-    {
-        _stringBuilder.Clear();
-
-        for (int i = 0; i < MaxLevelsCount; i++)
-            _stringBuilder.Append(DefaultScore + Devider);
-    }
-
     private void Save()
     {
 #if UNITY_EDITOR
@@ -228,9 +219,17 @@ public class Saver
     private void SetSaves(string jsonData)
     {
         if (string.IsNullOrEmpty(jsonData))
-            _saves = new(_stringBuilder.ToString());
+            _saves = new(DefaultString);
         else
             _saves = JsonUtility.FromJson<SaveData>(jsonData);
+
+        if (IsSavesCorrect(_saves) == false)
+            _saves = new SaveData(DefaultString);
+    }
+
+    private bool IsSavesCorrect(SaveData saveData)
+    {
+        return saveData.PlayerMaxHealth > 0;
     }
 
     private string ReplaceScore(string locationString, int levelIndex, int score)
@@ -244,8 +243,8 @@ public class Saver
     {
         _stringBuilder.Clear();
 
-        foreach (string str in levelScores)
-            _stringBuilder.Append(str + Devider);
+        foreach (string score in levelScores)
+            _stringBuilder.Append(score + Devider);
 
         return _stringBuilder.ToString();
     }
