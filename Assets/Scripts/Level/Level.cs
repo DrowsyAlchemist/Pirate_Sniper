@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -82,7 +83,17 @@ public class Level : MonoBehaviour
 
     private void OnLevelIconClick(LevelPreset levelTemplate)
     {
+        StartCoroutine(LoadLevelAfterInter(levelTemplate));
+    }
+
+    private IEnumerator LoadLevelAfterInter(LevelPreset levelTemplate)
+    {
         LoadLevel(levelTemplate);
+        _mainMenu.Close();
+
+        while (_additionalMenu.IsPlaying)
+            yield return null;
+
         Advertising.ShowInter(_sound, onClose: () => StartLevel());
     }
 
@@ -103,7 +114,6 @@ public class Level : MonoBehaviour
 
     private void StartLevel()
     {
-        _mainMenu.Close();
         _sound.SetBackgroundMusic(Settings.Sound.ButtleMusic);
         _inputHandler.SetGameMode();
         LevelLoaded?.Invoke();
