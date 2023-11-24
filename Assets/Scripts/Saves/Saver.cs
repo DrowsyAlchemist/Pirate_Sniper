@@ -211,9 +211,18 @@ public class Saver
     {
 #if UNITY_EDITOR
         PlayerPrefs.SetString(SavesName, JsonUtility.ToJson(_saves));
+        PlayerPrefs.Save();
         return;
 #endif
-        PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(_saves));
+        if (PlayerAccount.IsAuthorized)
+        {
+            PlayerAccount.SetCloudSaveData(JsonUtility.ToJson(_saves));
+        }
+        else
+        {
+            PlayerPrefs.SetString(SavesName, JsonUtility.ToJson(_saves));
+            PlayerPrefs.Save();
+        }
     }
 
     private void SetSaves(string jsonData)
