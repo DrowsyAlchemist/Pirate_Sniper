@@ -64,6 +64,11 @@ public class GameInitialization : MonoBehaviour
         _saver.UnlockAllLevels();
     }
 
+    public void InBgChanged()
+    {
+        _sound.TestOnBackgroundChanged(true);
+    }
+
     private void SetLanguage()
     {
 #if !UNITY_EDITOR

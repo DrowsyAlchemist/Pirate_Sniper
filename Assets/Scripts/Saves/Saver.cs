@@ -149,7 +149,7 @@ public class Saver
 
         string[] zeroLocation = _saves.ZeroLocation.Split(Devider);
         string[] shipLocation0 = _saves.ShipLocation0.Split(Devider);
-        string[] firstLocation = _saves.ZeroLocation.Split(Devider);
+        string[] firstLocation = _saves.FirstLocation.Split(Devider);
         string[] shipLocation1 = _saves.ShipLocation1.Split(Devider);
         string[] secondLocation = _saves.SecondLocation.Split(Devider);
 
@@ -175,6 +175,7 @@ public class Saver
     {
         SaveLevel(_locationsStorage.GetLocationIndex(level), _locationsStorage.GetIndexInLocation(level), score);
         Save();
+        int bestScore = GetScore();
 #if UNITY_EDITOR
         return;
 #endif

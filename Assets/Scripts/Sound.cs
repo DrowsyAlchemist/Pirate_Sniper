@@ -1,6 +1,7 @@
 using UnityEngine;
 using Agava.WebUtility;
 using System;
+using UnityEngine.UIElements;
 
 public class Sound : MonoBehaviour
 {
@@ -90,12 +91,15 @@ public class Sound : MonoBehaviour
         _buySound.Play();
     }
 
-    private void OnBackgroundChanged(bool isOut)
+    public void TestOnBackgroundChanged(bool hasFocus)
     {
-        if (isOut)
-            TurnSoundOff();
-        else if (IsOn)
-            TurnSoundOn();
+        OnBackgroundChanged(hasFocus);
+    }
+
+    private void OnBackgroundChanged(bool inBackground)
+    {
+        AudioListener.pause = inBackground;
+        AudioListener.volume = inBackground ? 0f : 1f;
     }
 
     private void TurnSoundOn()
